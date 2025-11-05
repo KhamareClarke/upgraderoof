@@ -1,0 +1,206 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Free Roof Inspection | Upgrade Roofing Solutions Cheshire & Staffordshire',
+  description: 'Claim your free roof inspection from Upgrade Roofing Solutions. Trusted roofers serving Stoke-on-Trent, Cheshire & Staffordshire. No obligation. Limited time offer.',
+  keywords: [
+    'free roof inspection Stoke-on-Trent',
+    'roof repairs near me',
+    'roofing contractors Staffordshire', 
+    'local roofers Stoke-on-Trent',
+    'roof inspection Cheshire',
+    'emergency roof repairs',
+    'roofing company near me',
+    'roof survey Staffordshire'
+  ],
+  authors: [{ name: 'Upgrade Roofing Solutions' }],
+  creator: 'Upgrade Roofing Solutions',
+  publisher: 'Upgrade Roofing Solutions',
+  metadataBase: new URL('https://upgrade-main.vercel.app'),
+  alternates: {
+    canonical: '/special-offer',
+  },
+  openGraph: {
+    title: 'Free Roof Inspection | Limited Time Offer - Upgrade Roofing',
+    description: 'Get a FREE professional roof inspection from experienced roofers. Serving Stoke-on-Trent & Staffordshire. No obligation, no hidden fees.',
+    url: 'https://upgrade-main.vercel.app/special-offer',
+    siteName: 'Upgrade Roofing Solutions',
+    images: [
+      {
+        url: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1200',
+        width: 1200,
+        height: 630,
+        alt: 'Free Roof Inspection Offer - Professional Roofers Stoke-on-Trent',
+      },
+    ],
+    locale: 'en_GB',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Roof Inspection | Limited Time Offer - Upgrade Roofing',
+    description: 'Get a FREE professional roof inspection. No obligation, no hidden fees. Trusted roofers in Staffordshire.',
+    images: ['https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1200'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  other: {
+    'google-ads-conversion': 'AW-XXXXXXXXX/XXXXXXXXX', // Replace with actual conversion ID
+    'facebook-domain-verification': 'XXXXXXXXXXXXXXXXXXXXXXX', // Replace with actual verification code
+  },
+};
+
+import { Poppins } from 'next/font/google';
+import { StructuredData } from '../structured-data';
+import { Analytics } from '@/components/Analytics';
+import { PerformanceOptimizations } from '@/components/PerformanceOptimizations';
+import '../globals.css';
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-poppins',
+});
+
+export default function SpecialOfferLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={poppins.variable}>
+      <head>
+        {/* Structured Data for Special Offer */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Offer',
+              name: 'Free Roof Inspection',
+              description: 'Professional roof inspection with no obligation and no hidden fees',
+              price: '0',
+              priceCurrency: 'GBP',
+              availability: 'https://schema.org/LimitedAvailability',
+              validThrough: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+              seller: {
+                '@type': 'LocalBusiness',
+                name: 'Upgrade Roofing Solutions',
+                address: {
+                  '@type': 'PostalAddress',
+                  streetAddress: '1 Laureate Way',
+                  addressLocality: 'Haslington',
+                  addressRegion: 'Cheshire',
+                  postalCode: 'CW1 0LX',
+                  addressCountry: 'GB'
+                },
+                telephone: '01270897606',
+                url: 'https://upgrade-main.vercel.app'
+              },
+              areaServed: [
+                {
+                  '@type': 'City',
+                  name: 'Cheshire'
+                },
+                {
+                  '@type': 'City',
+                  name: 'Staffordshire'
+                },
+                {
+                  '@type': 'City',
+                  name: 'Crewe'
+                },
+                {
+                  '@type': 'City',
+                  name: 'Macclesfield'
+                }
+              ]
+            })
+          }}
+        />
+        
+        {/* LocalBusiness Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': ['LocalBusiness', 'RoofingContractor'],
+              name: 'Upgrade Roofing Solutions',
+              image: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1200',
+              '@id': 'https://upgrade-main.vercel.app/#organization',
+              url: 'https://upgrade-main.vercel.app/special-offer',
+              telephone: '01270897606',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: '1 Laureate Way',
+                addressLocality: 'Haslington',
+                addressRegion: 'Cheshire',
+                postalCode: 'CW1 0LX',
+                addressCountry: 'GB'
+              },
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: 53.0273,
+                longitude: -2.1813
+              },
+              openingHoursSpecification: [
+                {
+                  '@type': 'OpeningHoursSpecification',
+                  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                  opens: '08:00',
+                  closes: '18:00'
+                }
+              ],
+              priceRange: '££',
+              aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: '5',
+                reviewCount: '127'
+              }
+            })
+          }}
+        />
+
+        {/* Google Ads Conversion Tracking */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Google Ads Conversion Tracking
+              gtag('config', 'AW-XXXXXXXXX'); // Replace with actual conversion ID
+              
+              // Facebook Pixel Conversion Tracking
+              fbq('track', 'ViewContent', {
+                content_type: 'product',
+                content_ids: ['roof-inspection-offer'],
+                content_name: 'Free Roof Inspection Offer',
+                content_category: 'Roofing Services',
+                value: 150,
+                currency: 'GBP'
+              });
+            `
+          }}
+        />
+      </head>
+      <body className="font-sans antialiased">
+        <Analytics />
+        <PerformanceOptimizations />
+        <StructuredData />
+        
+        {/* NO HEADER - Direct to landing page content */}
+        {children}
+        
+        {/* NO FOOTER - Keep focus on conversion */}
+      </body>
+    </html>
+  );
+}

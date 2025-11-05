@@ -1,0 +1,29 @@
+{
+  "name": "Upgrade Roofing Solutions - Cheshire Roofing Specialists",
+  "short_name": "Upgrade Roofing",
+  "description": "Professional roofing services in Cheshire. 25+ years experience in roof repairs, installations & replacements.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#F45B2E",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["business", "utilities"],
+  "lang": "en-GB",
+  "dir": "ltr",
+  "scope": "/",
+  "prefer_related_applications": false
+}
