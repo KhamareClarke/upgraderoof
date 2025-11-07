@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Chrome as HomeIcon, Mail, Phone, Clock, MapPin } from 'lucide-react';
+import Image from 'next/image';
+import { Mail, Phone, Clock, MapPin } from 'lucide-react';
 
 export function Footer() {
   const quickLinks = [
@@ -33,14 +34,14 @@ export function Footer() {
       <div className="container-custom py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           <div>
-            <Link href="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center">
-                <HomeIcon className="w-6 h-6 text-white" strokeWidth={2.5} />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold leading-tight">Upgrade Roofing</span>
-                <span className="text-xs text-brand-orange font-medium leading-tight">Solutions</span>
-              </div>
+            <Link href="/" className="flex items-center mb-4">
+              <Image
+                src="/images/upgrade_logo.jpeg"
+                alt="Upgrade Roofing Solutions"
+                width={96}
+                height={96}
+                className="w-24 h-24 object-contain"
+              />
             </Link>
             <p className="text-white/80 leading-relaxed">
               Upgrade Roofing Solutions offers expert roof repair, replacement, and installation across

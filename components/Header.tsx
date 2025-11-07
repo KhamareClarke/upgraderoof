@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { Menu, X, ChevronDown, Chrome as HomeIcon } from 'lucide-react';
+import Image from 'next/image';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 
@@ -12,6 +13,7 @@ export function Header() {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const ignoreHoverRef = useRef(false);
   const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const clickOutsideEnabledRef = useRef(false);
@@ -46,6 +48,11 @@ export function Header() {
     }
   }, [servicesOpen]);
 
+  // Set mounted state to prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Cleanup timeouts on unmount
   useEffect(() => {
     return () => {
@@ -57,6 +64,8 @@ export function Header() {
 
   // Scroll spy functionality
   useEffect(() => {
+    if (!mounted) return;
+
     const handleScroll = () => {
       const scrollY = window.scrollY;
       setIsScrolled(scrollY > 50);
@@ -86,7 +95,7 @@ export function Header() {
     handleScroll(); // Check initial state
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mounted]);
 
   const services = [
     { name: 'All Services', href: '/services' },
@@ -106,14 +115,15 @@ export function Header() {
     }`}>
       <nav className="container-custom">
         <div className="flex items-center justify-between h-20">
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-brand-orange rounded-lg flex items-center justify-center">
-              <HomeIcon className="w-6 h-6 text-white" strokeWidth={2.5} />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-brand-navy leading-tight">Upgrade Roofing</span>
-              <span className="text-xs text-brand-orange font-medium leading-tight">Solutions</span>
-            </div>
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/upgrade_logo.jpeg"
+              alt="Upgrade Roofing Solutions"
+              width={80}
+              height={80}
+              className="w-20 h-20 object-contain"
+              priority
+            />
           </Link>
 
           <div className="hidden lg:flex items-center space-x-8">
