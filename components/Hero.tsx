@@ -77,7 +77,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-start sm:items-center justify-center overflow-hidden pt-8 sm:pt-0">
+    <section className="relative min-h-[60vh] sm:min-h-screen flex items-start sm:items-center justify-center overflow-hidden pt-8 sm:pt-0">
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -100,34 +100,34 @@ export function Hero() {
 
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
 
-      <div className="container-custom relative z-10 pt-4 pb-4 sm:pt-12 sm:pb-12 md:py-16 lg:py-20">
+      <div className="container-custom relative z-10 pt-2 pb-3 sm:pt-12 sm:pb-12 md:py-16 lg:py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-2 mb-0.5 sm:mb-2 md:mb-4 lg:mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium fade-in-up">
-            <Award className="w-3 h-3 sm:w-4 sm:h-4 text-brand-orange" />
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-0.5 sm:py-2 mb-0.5 sm:mb-2 md:mb-4 lg:mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-[10px] sm:text-xs md:text-sm font-medium fade-in-up">
+            <Award className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-4 md:h-4 text-brand-orange" />
             <span className="whitespace-nowrap">Award-Winning Roofing Company 2024</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-1 sm:mb-3 md:mb-4 lg:mb-6 text-balance leading-[1.1] fade-in-up px-4 sm:px-0">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold text-white mb-1 sm:mb-2 md:mb-3 lg:mb-4 xl:mb-6 text-balance leading-tight sm:leading-[1.1] fade-in-up px-4 sm:px-0">
             {slides[currentSlide].title}{' '}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
                 {slides[currentSlide].highlight}
               </span>
-              <span className="absolute bottom-2 left-0 w-full h-3 bg-brand-orange/30 blur-lg"></span>
+              <span className="absolute bottom-1 sm:bottom-2 left-0 w-full h-2 sm:h-3 bg-brand-orange/30 blur-lg"></span>
             </span>
             <br />
             {slides[currentSlide].subtitle}
           </h1>
 
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 mb-2 sm:mb-4 md:mb-6 lg:mb-8 xl:mb-10 max-w-2xl mx-auto leading-relaxed slide-in-right px-4 sm:px-0">
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-white/90 mb-2 sm:mb-3 md:mb-4 lg:mb-6 xl:mb-8 max-w-2xl mx-auto leading-snug sm:leading-relaxed slide-in-right px-4 sm:px-0">
             {slides[currentSlide].description}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-6 md:mb-8 lg:mb-12 scale-in justify-center max-w-md sm:max-w-none mx-auto sm:mx-0">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-4 md:mb-6 lg:mb-8 xl:mb-12 scale-in justify-center max-w-md sm:max-w-none mx-auto sm:mx-0">
             <QuoteForm trigger={
               <Button
                 size="lg"
-                className="group relative bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-6 md:px-8 lg:px-10 text-base sm:text-base md:text-lg h-12 sm:h-12 md:h-14 lg:h-16 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-brand-orange/50 w-full sm:w-auto rounded-lg sm:rounded-md shadow-lg sm:shadow-xl active:scale-95"
+                className="group relative bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-4 sm:px-6 md:px-8 lg:px-10 text-sm sm:text-base md:text-lg h-10 sm:h-12 md:h-14 lg:h-16 overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-brand-orange/50 w-full sm:w-auto rounded-lg sm:rounded-md shadow-lg sm:shadow-xl active:scale-95"
               >
                 <span className="relative z-10">Get Free Quote</span>
                 <div className="absolute inset-0 bg-gradient-to-r from-orange-600 to-brand-orange opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -136,11 +136,11 @@ export function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="group border-2 border-white/40 text-white hover:bg-white hover:text-brand-navy font-semibold px-6 sm:px-6 md:px-8 lg:px-10 text-base sm:text-base md:text-lg h-12 sm:h-12 md:h-14 lg:h-16 backdrop-blur-sm bg-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-105 hover:shadow-xl w-full sm:w-auto rounded-lg sm:rounded-md shadow-lg sm:shadow-md active:scale-95"
+              className="group border-2 border-white/40 text-white hover:bg-white hover:text-brand-navy font-semibold px-4 sm:px-6 md:px-8 lg:px-10 text-sm sm:text-base md:text-lg h-10 sm:h-12 md:h-14 lg:h-16 backdrop-blur-sm bg-white/10 hover:bg-white/20 transition-all duration-300 hover:scale-105 hover:shadow-xl w-full sm:w-auto rounded-lg sm:rounded-md shadow-lg sm:shadow-md active:scale-95"
               asChild
             >
               <Link href="/contact" className="flex items-center justify-center">
-                <Video className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:animate-pulse flex-shrink-0" />
+                <Video className="w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-1.5 sm:mr-2 group-hover:animate-pulse flex-shrink-0" />
                 <span>Drone Inspection</span>
               </Link>
             </Button>
