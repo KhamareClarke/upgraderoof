@@ -100,14 +100,14 @@ export function Hero() {
 
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
 
-      <div className="container-custom relative z-10 py-12 sm:py-16 md:py-20">
+      <div className="container-custom relative z-10 pt-0 pb-4 sm:pt-12 sm:pb-12 md:py-16 lg:py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 mb-4 sm:mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium fade-in-up">
+          <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-2 mb-0.5 sm:mb-2 md:mb-4 lg:mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium fade-in-up">
             <Award className="w-3 h-3 sm:w-4 sm:h-4 text-brand-orange" />
             <span className="whitespace-nowrap">Award-Winning Roofing Company 2024</span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-4 sm:mb-6 text-balance leading-[1.1] fade-in-up">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-1 sm:mb-3 md:mb-4 lg:mb-6 text-balance leading-[1.1] fade-in-up px-4 sm:px-0">
             {slides[currentSlide].title}{' '}
             <span className="relative inline-block">
               <span className="relative z-10 bg-gradient-to-r from-brand-orange to-orange-400 bg-clip-text text-transparent">
@@ -119,11 +119,11 @@ export function Hero() {
             {slides[currentSlide].subtitle}
           </h1>
 
-          <p className="hidden sm:block text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-6 sm:mb-8 md:mb-10 max-w-2xl mx-auto leading-relaxed slide-in-right">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 mb-2 sm:mb-4 md:mb-6 lg:mb-8 xl:mb-10 max-w-2xl mx-auto leading-relaxed slide-in-right px-4 sm:px-0">
             {slides[currentSlide].description}
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-3 md:gap-4 mb-8 sm:mb-12 scale-in justify-center max-w-md sm:max-w-none mx-auto sm:mx-0">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 mb-2 sm:mb-6 md:mb-8 lg:mb-12 scale-in justify-center max-w-md sm:max-w-none mx-auto sm:mx-0">
             <QuoteForm trigger={
               <Button
                 size="lg"
