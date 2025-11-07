@@ -77,7 +77,7 @@ export function Hero() {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-start sm:items-center justify-center overflow-hidden pt-8 sm:pt-0">
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -100,7 +100,7 @@ export function Hero() {
 
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
 
-      <div className="container-custom relative z-10 pt-0 pb-4 sm:pt-12 sm:pb-12 md:py-16 lg:py-20">
+      <div className="container-custom relative z-10 pt-4 pb-4 sm:pt-12 sm:pb-12 md:py-16 lg:py-20">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-2 mb-0.5 sm:mb-2 md:mb-4 lg:mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium fade-in-up">
             <Award className="w-3 h-3 sm:w-4 sm:h-4 text-brand-orange" />
