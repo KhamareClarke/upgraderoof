@@ -81,12 +81,30 @@ export function EnhancedContactSection() {
     setError(null);
 
     try {
-      // Simulate form submission - replace with actual API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // For now, just simulate success
-      // TODO: Replace with actual Supabase integration
-      console.log('Form submitted:', formData);
+      // Call the API route to send email
+      const response = await fetch('/api/send-contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send email');
+      }
+
+      // Also save to Supabase for backup (optional, won't fail if Supabase is down)
+      try {
+        const { supabase } = await import('@/lib/supabase');
+        await supabase
+          .from('contact_messages')
+          .insert([formData]);
+      } catch (supabaseError) {
+        console.warn('Failed to save to Supabase, but email was sent:', supabaseError);
+      }
 
       setSuccess(true);
       setFormData({
@@ -101,8 +119,8 @@ export function EnhancedContactSection() {
       setTimeout(() => {
         setSuccess(false);
       }, 8000);
-    } catch (err) {
-      setError('Failed to send message. Please try again or call us directly.');
+    } catch (err: any) {
+      setError(err.message || 'Failed to send message. Please try again or call us directly at 01270 897606');
       console.error('Error submitting contact message:', err);
     } finally {
       setLoading(false);

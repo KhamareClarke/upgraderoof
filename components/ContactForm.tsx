@@ -27,11 +27,29 @@ export function ContactForm() {
     setError(null);
 
     try {
-      const { error: submitError } = await supabase
-        .from('contact_messages')
-        .insert([formData]);
+      // Call the API route to send email
+      const response = await fetch('/api/send-contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      if (submitError) throw submitError;
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send email');
+      }
+
+      // Also save to Supabase for backup (optional, won't fail if Supabase is down)
+      try {
+        await supabase
+          .from('contact_messages')
+          .insert([formData]);
+      } catch (supabaseError) {
+        console.warn('Failed to save to Supabase, but email was sent:', supabaseError);
+      }
 
       setSuccess(true);
       setFormData({
@@ -45,8 +63,8 @@ export function ContactForm() {
       setTimeout(() => {
         setSuccess(false);
       }, 5000);
-    } catch (err) {
-      setError('Failed to send message. Please try again or call us directly.');
+    } catch (err: any) {
+      setError(err.message || 'Failed to send message. Please try again or call us directly at 01270 897606');
       console.error('Error submitting contact message:', err);
     } finally {
       setLoading(false);
@@ -62,7 +80,7 @@ export function ContactForm() {
       <CardHeader>
         <CardTitle className="text-xl sm:text-2xl">Send Us a Message</CardTitle>
         <CardDescription className="text-sm sm:text-base">
-          Fill out the form below and we'll get back to you as soon as possible.
+          Fill out the form below and we'll get back to you within 24 hours.
         </CardDescription>
       </CardHeader>
       <CardContent className="px-4 sm:px-6">
@@ -134,7 +152,7 @@ export function ContactForm() {
                         value={formData.message}
                         onChange={(e) => handleChange('message', e.target.value)}
                         required
-                        placeholder="Tell us about your enquiry..."
+                        placeholder="Tell us about your roofing project, including property type, approximate size, and any specific requirements..."
                         rows={5}
                         className="text-sm sm:text-base resize-none"
                       />
