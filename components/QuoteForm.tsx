@@ -48,31 +48,28 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
         return;
       }
 
-      const { data, error: submitError } = await supabase
-        .from('quote_requests')
-        .insert([formData])
-        .select();
+      // Call the API route to send email
+      const response = await fetch('/api/send-quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      if (submitError) {
-        console.error('Supabase error details:', {
-          message: submitError.message,
-          code: submitError.code,
-          details: submitError.details,
-          hint: submitError.hint
-        });
-        
-        // Provide more specific error messages
-        if (submitError.code === 'PGRST116') {
-          setError('Database table not found. Please check your Supabase configuration.');
-        } else if (submitError.code === '23505') {
-          setError('This request may have already been submitted. Please contact us directly if you need help.');
-        } else if (submitError.message) {
-          setError(`Submission failed: ${submitError.message}`);
-        } else {
-          setError('Failed to submit request. Please check your internet connection and try again.');
-        }
-        setLoading(false);
-        return;
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send email');
+      }
+
+      // Also save to Supabase for backup (optional, won't fail if Supabase is down)
+      try {
+        await supabase
+          .from('quote_requests')
+          .insert([formData]);
+      } catch (supabaseError) {
+        console.warn('Failed to save to Supabase, but email was sent:', supabaseError);
       }
 
       setSuccess(true);
@@ -91,8 +88,8 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
       }, 3000);
     } catch (err: any) {
       // Catch any unexpected errors
-      console.error('Unexpected error submitting quote request:', err);
-      setError('An unexpected error occurred. Please try again or call us directly at 07379 440583.');
+      console.error('Error submitting quote request:', err);
+      setError(err.message || 'An unexpected error occurred. Please try again or call us directly at 07379 440583.');
       setLoading(false);
     }
   };
