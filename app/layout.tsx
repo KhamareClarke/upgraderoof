@@ -6,7 +6,6 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { ScrollToTop } from '@/components/ScrollToTop';
-import { FloatingCallButton } from '@/components/FloatingCallButton';
 import { MobileContactBar } from '@/components/MobileContactBar';
 import { PerformanceOptimizations } from '@/components/PerformanceOptimizations';
 import { Analytics } from '@/components/Analytics';
@@ -110,7 +109,6 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <WhatsAppButton />
-        <FloatingCallButton />
         <MobileContactBar />
         <ScrollToTop />
       </body>
