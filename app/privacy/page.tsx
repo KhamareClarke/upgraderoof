@@ -161,7 +161,7 @@ export default function PrivacyPage() {
                 <p>If you have any questions about this Privacy Policy or wish to exercise your rights, please contact us:</p>
                 <div className="flex items-center gap-2">
                   <Mail className="w-5 h-5 text-brand-orange" />
-                  <span>Email: privacy@eliteroofingcheshire.co.uk</span>
+                  <span>Email: upgradehomeimp@yahoo.com</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Phone className="w-5 h-5 text-brand-orange" />

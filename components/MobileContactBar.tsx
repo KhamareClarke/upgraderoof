@@ -1,8 +1,16 @@
 'use client';
 
 import { Phone, Mail } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 export function MobileContactBar() {
+  const pathname = usePathname();
+  
+  // Hide on special-offer page as it has its own mobile CTA
+  if (pathname === '/special-offer') {
+    return null;
+  }
+  
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-lg md:hidden">
       <div className="flex items-center justify-around py-3 px-4">
@@ -33,7 +41,7 @@ export function MobileContactBar() {
         </a>
         
         <a
-          href="mailto:info@upgraderoofing.co.uk"
+          href="mailto:upgradehomeimp@yahoo.com"
           className="flex flex-col items-center gap-1 text-brand-navy hover:text-blue-500 transition-colors group"
           aria-label="Email us"
         >

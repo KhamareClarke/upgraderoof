@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star, Quote } from 'lucide-react';
@@ -38,18 +40,33 @@ export function VideoTestimonials() {
         </div>
 
         <div className="max-w-4xl mx-auto mb-10 sm:mb-12 md:mb-16 px-2">
-          <div className="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl bg-gray-900">
+          <div className="relative aspect-video rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl bg-gray-900 cursor-pointer group">
             <img
               src="/images/7.jpeg"
-              alt="Roofing video testimonial"
+              alt="Watch our roofing video"
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-brand-orange rounded-full flex items-center justify-center cursor-pointer hover:bg-brand-orange/90 transition-colors">
+            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+              <a
+                href="https://www.youtube.com/watch?time_continue=12&v=UGOVxAZTwxA&embeds_referring_euri=https%3A%2F%2Fwww.upgraderoofs.co.uk%2F&source_ve_path=MjM4NTE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-brand-orange rounded-full flex items-center justify-center cursor-pointer hover:bg-brand-orange/90 transition-colors shadow-2xl"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
                 <div className="w-0 h-0 border-t-[8px] sm:border-t-[10px] md:border-t-[12px] border-t-transparent border-l-[14px] sm:border-l-[16px] md:border-l-[20px] border-l-white border-b-[8px] sm:border-b-[10px] md:border-b-[12px] border-b-transparent ml-0.5 sm:ml-1" />
-              </div>
+              </a>
             </div>
+            <a
+              href="https://www.youtube.com/watch?time_continue=12&v=UGOVxAZTwxA&embeds_referring_euri=https%3A%2F%2Fwww.upgraderoofs.co.uk%2F&source_ve_path=MjM4NTE"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="absolute inset-0"
+              aria-label="Watch our roofing video on YouTube"
+            />
           </div>
         </div>
 

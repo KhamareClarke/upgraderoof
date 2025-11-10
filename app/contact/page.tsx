@@ -70,8 +70,8 @@ export default function ContactPage() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <h4 className="font-semibold text-sm sm:text-base text-brand-navy mb-1 sm:mb-2">Email</h4>
-                      <a href="mailto:info@eliteroofingcheshire.co.uk" className="text-sm sm:text-base text-gray-600 hover:text-brand-orange break-all sm:break-normal">
-                        info@eliteroofingcheshire.co.uk
+                      <a href="mailto:upgradehomeimp@yahoo.com" className="text-sm sm:text-base text-gray-600 hover:text-brand-orange break-all sm:break-normal">
+                        upgradehomeimp@yahoo.com
                       </a>
                     </div>
                   </div>
@@ -83,9 +83,9 @@ export default function ContactPage() {
                     <div className="flex-1 min-w-0">
                       <h4 className="font-semibold text-sm sm:text-base text-brand-navy mb-1 sm:mb-2">Address</h4>
                       <p className="text-sm sm:text-base text-gray-600">
-                        1 Laureate Way<br />
-                        Haslington, Cheshire<br />
-                        CW1 0LX<br />
+                        1 Hutchins Close<br />
+                        Middlewich, Cheshire<br />
+                        CW10 0EX<br />
                         United Kingdom
                       </p>
                     </div>

@@ -97,10 +97,10 @@ export default function SpecialOfferLayout({
                 name: 'Upgrade Roofing Solutions',
                 address: {
                   '@type': 'PostalAddress',
-                  streetAddress: '1 Laureate Way',
-                  addressLocality: 'Haslington',
+                  streetAddress: '1 Hutchins Close',
+                  addressLocality: 'Middlewich',
                   addressRegion: 'Cheshire',
-                  postalCode: 'CW1 0LX',
+                  postalCode: 'CW10 0EX',
                   addressCountry: 'GB'
                 },
                 telephone: '01270897606',

@@ -20,6 +20,7 @@ import { trackConversion, trackEvent } from '@/components/Analytics';
 import Image from 'next/image';
 
 export default function SpecialOfferPage() {
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -37,8 +38,15 @@ export default function SpecialOfferPage() {
     seconds: 0
   });
 
+  // Set mounted state after component mounts
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   // Countdown timer
   useEffect(() => {
+    if (!mounted) return;
+    
     const targetDate = new Date();
     targetDate.setDate(targetDate.getDate() + 7);
     
@@ -55,16 +63,18 @@ export default function SpecialOfferPage() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [mounted]);
 
   // Scroll functionality
   useEffect(() => {
+    if (!mounted) return;
+    
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mounted]);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -77,8 +87,29 @@ export default function SpecialOfferPage() {
     trackConversion('quote_request', 150);
     trackEvent('special_offer_form_submitted');
     
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    window.location.href = '/thank-you';
+    try {
+      // Call the API route to send email
+      const response = await fetch('/api/send-special-offer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit form');
+      }
+
+      // Redirect to thank you page on success
+      window.location.href = '/thank-you';
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('Failed to submit form. Please try again or call us directly at 01270 897606');
+      setIsSubmitting(false);
+    }
   };
 
   const handlePhoneClick = () => {
@@ -144,39 +175,32 @@ export default function SpecialOfferPage() {
 
               {/* Call-First CTAs */}
               <div className="space-y-3 pt-2">
-                <Button 
-                  size="lg" 
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white font-bold px-8 py-6 text-2xl rounded-xl shadow-2xl"
+                <a
+                  href="tel:01270897606"
                   onClick={handlePhoneClick}
-                  asChild
+                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-6 text-2xl rounded-xl shadow-2xl flex items-center justify-center gap-3 transition-colors"
                 >
-                  <a href="tel:01270897606" className="flex items-center justify-center gap-3">
-                    <Phone className="w-8 h-8" />
-                    CALL NOW: 01270 897606
-                  </a>
-                </Button>
+                  <Phone className="w-8 h-8" />
+                  <span className="!text-white">CALL NOW: 01270 897606</span>
+                </a>
                 
                 <div className="grid grid-cols-2 gap-4">
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-2 border-white text-white hover:bg-white hover:text-brand-navy font-bold py-4 rounded-xl"
+                  <a
+                    href="https://wa.me/447379440583"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={handleWhatsAppClick}
-                    asChild
+                    className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors"
                   >
-                    <a href="https://wa.me/447379440583" target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                      <MessageCircle className="w-5 h-5" />
-                      WhatsApp
-                    </a>
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-2 border-white text-white hover:bg-white hover:text-brand-navy font-bold py-4 rounded-xl"
+                    <MessageCircle className="w-5 h-5" />
+                    <span className="!text-white">WhatsApp</span>
+                  </a>
+                  <button
                     onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold py-4 rounded-xl transition-colors"
                   >
-                    📝 Quick Form
-                  </Button>
+                    <span className="!text-white">📝 Quick Form</span>
+                  </button>
                 </div>
               </div>
 
@@ -305,9 +329,9 @@ export default function SpecialOfferPage() {
                 <Button 
                   type="submit" 
                   disabled={isSubmitting}
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white font-bold py-4 text-xl h-16 rounded-xl shadow-lg"
+                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold py-4 text-xl h-16 rounded-xl shadow-lg"
                 >
-                  {isSubmitting ? 'Submitting...' : 'Request Callback'}
+                  <span className="!text-white">{isSubmitting ? 'Submitting...' : 'Request Callback'}</span>
                 </Button>
 
                 <p className="text-xs text-gray-500 text-center leading-relaxed">
@@ -383,10 +407,10 @@ export default function SpecialOfferPage() {
             </p>
             <Button 
               size="lg" 
-              className="bg-brand-orange hover:bg-brand-orange/90 text-white font-bold px-8 py-4"
+              className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4"
               onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Book My Free Roof Check
+              <span className="!text-white">Book My Free Roof Check</span>
             </Button>
           </div>
         </div>
@@ -414,10 +438,10 @@ export default function SpecialOfferPage() {
 
           <Button 
             size="lg" 
-            className="bg-white text-brand-orange hover:bg-gray-100 font-bold px-8 py-4 text-lg"
+            className="bg-white !text-brand-orange hover:bg-gray-100 font-bold px-8 py-4 text-lg"
             onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
           >
-            Claim Your Spot Now
+            <span className="!text-brand-orange">Claim Your Spot Now</span>
           </Button>
         </div>
       </section>
@@ -438,23 +462,19 @@ export default function SpecialOfferPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="bg-brand-orange hover:bg-brand-orange/90 text-white font-bold px-8 py-4 text-lg"
+              className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4 text-lg"
               onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Book My Free Inspection
+              <span className="!text-white">Book My Free Inspection</span>
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-2 border-white text-white hover:bg-white hover:text-brand-navy font-bold px-8 py-4 text-lg"
+            <a
+              href="tel:01270897606"
               onClick={handlePhoneClick}
-              asChild
+              className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 py-4 text-lg rounded-md flex items-center justify-center gap-2 transition-colors"
             >
-              <a href="tel:01270897606">
-                <Phone className="w-5 h-5 mr-2" />
-                Call Now
-              </a>
-            </Button>
+              <Phone className="w-5 h-5" />
+              <span className="!text-white">Call Now</span>
+            </a>
           </div>
         </div>
       </section>
@@ -462,27 +482,29 @@ export default function SpecialOfferPage() {
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t shadow-lg p-3">
         <div className="flex gap-2">
-          <Button 
-            className="flex-1 bg-brand-orange hover:bg-brand-orange/90 text-white font-bold text-lg py-4 animate-pulse"
+          <a
+            href="tel:01270897606"
             onClick={handlePhoneClick}
-            asChild
+            className="flex-1 bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold text-sm py-4 px-3 rounded-md text-center animate-pulse flex items-center justify-center"
           >
-            <a href="tel:01270897606">
-              📞 CALL NOW
-            </a>
-          </Button>
-          <Button 
-            className="bg-green-500 hover:bg-green-600 text-white font-bold px-4 py-4"
-            asChild
+            📞 CALL NOW
+          </a>
+          <a
+            href="https://wa.me/447379440583"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-green-500 hover:bg-green-600 !text-white font-bold px-3 py-4 text-xs whitespace-nowrap rounded-md flex items-center justify-center gap-1"
           >
-            <a href="https://wa.me/447379440583">💬</a>
-          </Button>
-          <Button 
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold px-4 py-4"
+            <span>💬</span>
+            <span className="!text-white">WhatsApp</span>
+          </a>
+          <button
             onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-blue-500 hover:bg-blue-600 !text-white font-bold px-3 py-4 text-xs whitespace-nowrap rounded-md flex items-center justify-center gap-1"
           >
-            📝
-          </Button>
+            <span>📝</span>
+            <span className="!text-white">Quick Form</span>
+          </button>
         </div>
       </div>
 

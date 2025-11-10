@@ -19,6 +19,11 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'Professional Roofing Company Stoke-on-Trent | Upgrade Roofing',
   description: 'Expert roofing services in Stoke-on-Trent & Staffordshire. Roof repairs, installations & replacements. 25+ years experience. Free quotes. Call 01782 123456',
+  icons: {
+    icon: '/images/upgrade_logo.jpeg',
+    shortcut: '/images/upgrade_logo.jpeg',
+    apple: '/images/upgrade_logo.jpeg',
+  },
   keywords: [
     'roofing company Stoke-on-Trent',
     'roof repairs Staffordshire', 
@@ -91,6 +96,9 @@ export default function RootLayout({
     <html lang="en-GB" className={poppins.variable}>
       <head>
         <StructuredData />
+        <link rel="icon" href="/images/upgrade_logo.jpeg" type="image/jpeg" />
+        <link rel="shortcut icon" href="/images/upgrade_logo.jpeg" type="image/jpeg" />
+        <link rel="apple-touch-icon" href="/images/upgrade_logo.jpeg" />
         <link
           rel="preload"
           as="image"

@@ -12,7 +12,7 @@ export function StructuredData() {
     url: 'https://upgrade-main.vercel.app',
     telephone: '01782 123456',
     alternativeTelephone: '07379 440583',
-    email: 'info@upgraderoofing.co.uk',
+    email: 'upgradehomeimp@yahoo.com',
     priceRange: '££-£££',
     description: 'Professional roofing company serving Stoke-on-Trent and Staffordshire with 25+ years experience. Specializing in roof repairs, installations, flat roofing, tile roofs, guttering, and emergency roofing services.',
     foundingDate: '1999',
@@ -34,10 +34,10 @@ export function StructuredData() {
     ],
     address: {
       '@type': 'PostalAddress',
-      streetAddress: '123 High Street',
-      addressLocality: 'Stoke-on-Trent',
-      addressRegion: 'Staffordshire',
-      postalCode: 'ST1 1AA',
+      streetAddress: '1 Hutchins Close',
+      addressLocality: 'Middlewich',
+      addressRegion: 'Cheshire',
+      postalCode: 'CW10 0EX',
       addressCountry: 'GB'
     },
     geo: {

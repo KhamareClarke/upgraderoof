@@ -363,10 +363,10 @@ export function EnhancedContactSection() {
                       <h3 className="font-semibold text-brand-navy mb-2">Email</h3>
                       <p className="text-gray-600 mb-2">Send us an email</p>
                       <a 
-                        href="mailto:info@upgraderoofing.co.uk" 
+                        href="mailto:upgradehomeimp@yahoo.com" 
                         className="text-blue-500 font-semibold hover:underline"
                       >
-                        info@upgraderoofing.co.uk
+                        upgradehomeimp@yahoo.com
                       </a>
                     </div>
                   </div>

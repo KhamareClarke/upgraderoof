@@ -16,18 +16,18 @@ export async function POST(request: NextRequest) {
 
     // Format email content
     const emailHtml = `
-      <h2>New Quote Request</h2>
+      <h2>New Special Offer Form Submission</h2>
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
         <p><strong>Name:</strong> ${formData.name}</p>
-        <p><strong>Email:</strong> ${formData.email}</p>
         <p><strong>Phone:</strong> ${formData.phone}</p>
         <p><strong>Postcode:</strong> ${formData.postcode}</p>
-        <p><strong>Service Type:</strong> ${formData.service_type}</p>
-        ${formData.message ? `<p><strong>Additional Details:</strong></p><p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; white-space: pre-wrap;">${formData.message}</p>` : ''}
+        ${formData.roofType ? `<p><strong>Roof Type:</strong> ${formData.roofType}</p>` : ''}
+        ${formData.serviceNeeded ? `<p><strong>Service Needed:</strong> ${formData.serviceNeeded}</p>` : ''}
+        <p><strong>Same Day Callback Requested:</strong> ${formData.sameDayCallback ? 'Yes' : 'No'}</p>
       </div>
       <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
       <p style="color: #666; font-size: 12px;">
-        This quote request was submitted from the website.
+        This form was submitted from the Special Offer page.
       </p>
     `;
 
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     const mailOptions = {
       from: 'khamareclarke@gmail.com',
       to: 'Upgradehomeimp@yahoo.com',
-      subject: `New Quote Request - ${formData.service_type} (${formData.name})`,
+      subject: `New Special Offer Form Submission - ${formData.name}`,
       html: emailHtml,
     };
 
@@ -53,5 +53,4 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
 

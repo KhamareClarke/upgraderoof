@@ -87,9 +87,9 @@ export function Footer() {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-brand-orange flex-shrink-0 mt-1" />
                 <div>
-                  <p className="text-white/80">1 Laureate Way</p>
-                  <p className="text-white/80">Haslington, United Kingdom</p>
-                  <p className="text-white/80">CW1 0LX</p>
+                  <p className="text-white/80">1 Hutchins Close</p>
+                  <p className="text-white/80">Middlewich, United Kingdom</p>
+                  <p className="text-white/80">CW10 0EX</p>
                 </div>
               </div>
 
@@ -114,10 +114,10 @@ export function Footer() {
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-brand-orange flex-shrink-0" />
                 <a
-                  href="mailto:info@upgraderoofing.co.uk"
+                  href="mailto:upgradehomeimp@yahoo.com"
                   className="text-white/80 hover:text-brand-orange transition-colors"
                 >
-                  info@upgraderoofing.co.uk
+                  upgradehomeimp@yahoo.com
                 </a>
               </div>
 

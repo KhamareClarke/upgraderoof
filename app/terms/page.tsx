@@ -208,7 +208,7 @@ export default function TermsPage() {
 
             <section className="pt-6 border-t border-gray-200">
               <p className="text-sm text-gray-600 leading-relaxed">
-                For questions about these Terms and Conditions, please contact us at info@eliteroofingcheshire.co.uk or call +44 7379 440583.
+                For questions about these Terms and Conditions, please contact us at upgradehomeimp@yahoo.com or call +44 7379 440583.
               </p>
             </section>
           </div>
