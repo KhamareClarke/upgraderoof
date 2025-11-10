@@ -14,7 +14,7 @@ export function WhatsAppButton() {
   return (
     <button
       onClick={handleClick}
-      className="fixed bottom-20 right-4 z-50 group md:bottom-6 md:right-6"
+      className="hidden md:flex fixed bottom-6 right-6 z-50 group"
       aria-label="Contact us on WhatsApp"
     >
       <div className="relative">
