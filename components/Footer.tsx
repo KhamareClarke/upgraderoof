@@ -57,6 +57,7 @@ export function Footer() {
                   <Link
                     href={link.href}
                     className="text-white/80 hover:text-brand-orange transition-colors"
+                    scroll={true}
                   >
                     {link.name}
                   </Link>
