@@ -2,8 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import { StructuredData } from './structured-data';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
+import { ConditionalLayout } from '@/components/ConditionalLayout';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { MobileContactBar } from '@/components/MobileContactBar';
@@ -113,9 +112,7 @@ export default function RootLayout({
       <body className="font-sans antialiased">
         <Analytics />
         <PerformanceOptimizations />
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <ConditionalLayout>{children}</ConditionalLayout>
         <WhatsAppButton />
         <MobileContactBar />
         <ScrollToTop />

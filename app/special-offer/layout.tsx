@@ -59,17 +59,7 @@ export const metadata: Metadata = {
   },
 };
 
-import { Poppins } from 'next/font/google';
-import { StructuredData } from '../structured-data';
-import { Analytics } from '@/components/Analytics';
-import { PerformanceOptimizations } from '@/components/PerformanceOptimizations';
-import '../globals.css';
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-poppins',
-});
+import Script from 'next/script';
 
 export default function SpecialOfferLayout({
   children,
@@ -77,108 +67,110 @@ export default function SpecialOfferLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={poppins.variable}>
-      <head>
-        {/* Structured Data for Special Offer */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Offer',
-              name: 'Free Roof Inspection',
-              description: 'Professional roof inspection with no obligation and no hidden fees',
-              price: '0',
-              priceCurrency: 'GBP',
-              availability: 'https://schema.org/LimitedAvailability',
-              validThrough: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-              seller: {
-                '@type': 'LocalBusiness',
-                name: 'Upgrade Roofing Solutions',
-                address: {
-                  '@type': 'PostalAddress',
-                  streetAddress: '1 Hutchins Close',
-                  addressLocality: 'Middlewich',
-                  addressRegion: 'Cheshire',
-                  postalCode: 'CW10 0EX',
-                  addressCountry: 'GB'
-                },
-                telephone: '01270897606',
-                url: 'https://upgrade-main.vercel.app'
-              },
-              areaServed: [
-                {
-                  '@type': 'City',
-                  name: 'Cheshire'
-                },
-                {
-                  '@type': 'City',
-                  name: 'Staffordshire'
-                },
-                {
-                  '@type': 'City',
-                  name: 'Crewe'
-                },
-                {
-                  '@type': 'City',
-                  name: 'Macclesfield'
-                }
-              ]
-            })
-          }}
-        />
-        
-        {/* LocalBusiness Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': ['LocalBusiness', 'RoofingContractor'],
+    <>
+      {/* Structured Data for Special Offer */}
+      <Script
+        id="special-offer-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Offer',
+            name: 'Free Roof Inspection',
+            description: 'Professional roof inspection with no obligation and no hidden fees',
+            price: '0',
+            priceCurrency: 'GBP',
+            availability: 'https://schema.org/LimitedAvailability',
+            validThrough: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+            seller: {
+              '@type': 'LocalBusiness',
               name: 'Upgrade Roofing Solutions',
-              image: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1200',
-              '@id': 'https://upgrade-main.vercel.app/#organization',
-              url: 'https://upgrade-main.vercel.app/special-offer',
-              telephone: '01270897606',
               address: {
                 '@type': 'PostalAddress',
-                streetAddress: '1 Laureate Way',
-                addressLocality: 'Haslington',
+                streetAddress: '1 Hutchins Close',
+                addressLocality: 'Middlewich',
                 addressRegion: 'Cheshire',
-                postalCode: 'CW1 0LX',
+                postalCode: 'CW10 0EX',
                 addressCountry: 'GB'
               },
-              geo: {
-                '@type': 'GeoCoordinates',
-                latitude: 53.0273,
-                longitude: -2.1813
+              telephone: '01270897606',
+              url: 'https://upgrade-main.vercel.app'
+            },
+            areaServed: [
+              {
+                '@type': 'City',
+                name: 'Cheshire'
               },
-              openingHoursSpecification: [
-                {
-                  '@type': 'OpeningHoursSpecification',
-                  dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-                  opens: '08:00',
-                  closes: '18:00'
-                }
-              ],
-              priceRange: '££',
-              aggregateRating: {
-                '@type': 'AggregateRating',
-                ratingValue: '5',
-                reviewCount: '127'
+              {
+                '@type': 'City',
+                name: 'Staffordshire'
+              },
+              {
+                '@type': 'City',
+                name: 'Crewe'
+              },
+              {
+                '@type': 'City',
+                name: 'Macclesfield'
               }
-            })
-          }}
-        />
+            ]
+          })
+        }}
+      />
+      
+      {/* LocalBusiness Schema */}
+      <Script
+        id="local-business-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': ['LocalBusiness', 'RoofingContractor'],
+            name: 'Upgrade Roofing Solutions',
+            image: 'https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1200',
+            '@id': 'https://upgrade-main.vercel.app/#organization',
+            url: 'https://upgrade-main.vercel.app/special-offer',
+            telephone: '01270897606',
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: '1 Laureate Way',
+              addressLocality: 'Haslington',
+              addressRegion: 'Cheshire',
+              postalCode: 'CW1 0LX',
+              addressCountry: 'GB'
+            },
+            geo: {
+              '@type': 'GeoCoordinates',
+              latitude: 53.0273,
+              longitude: -2.1813
+            },
+            openingHoursSpecification: [
+              {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                opens: '08:00',
+                closes: '18:00'
+              }
+            ],
+            priceRange: '££',
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: '5',
+              reviewCount: '127'
+            }
+          })
+        }}
+      />
 
-        {/* Google Ads Conversion Tracking */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Google Ads Conversion Tracking
-              gtag('config', 'AW-XXXXXXXXX'); // Replace with actual conversion ID
-              
-              // Facebook Pixel Conversion Tracking
+      {/* Google Ads Conversion Tracking */}
+      <Script
+        id="conversion-tracking"
+        dangerouslySetInnerHTML={{
+          __html: `
+            if (typeof gtag !== 'undefined') {
+              gtag('config', 'AW-XXXXXXXXX');
+            }
+            if (typeof fbq !== 'undefined') {
               fbq('track', 'ViewContent', {
                 content_type: 'product',
                 content_ids: ['roof-inspection-offer'],
@@ -187,20 +179,11 @@ export default function SpecialOfferLayout({
                 value: 150,
                 currency: 'GBP'
               });
-            `
-          }}
-        />
-      </head>
-      <body className="font-sans antialiased">
-        <Analytics />
-        <PerformanceOptimizations />
-        <StructuredData />
-        
-        {/* NO HEADER - Direct to landing page content */}
-        {children}
-        
-        {/* NO FOOTER - Keep focus on conversion */}
-      </body>
-    </html>
+            }
+          `
+        }}
+      />
+      {children}
+    </>
   );
 }
