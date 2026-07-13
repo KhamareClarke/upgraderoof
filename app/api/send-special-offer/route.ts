@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 
 export async function POST(request: NextRequest) {
@@ -29,6 +30,19 @@ export async function POST(request: NextRequest) {
       to,
       subject: `New Special Offer Form Submission - ${formData.name}`,
       html: emailHtml,
+    });
+
+    void emitFleetIngest({
+      event_type: 'lead',
+      summary: `Special offer: ${formData.name} (${formData.phone}) — ${formData.postcode}`,
+      payload: {
+        name: formData.name,
+        phone: formData.phone,
+        postcode: formData.postcode,
+        roofType: formData.roofType,
+        serviceNeeded: formData.serviceNeeded,
+        sameDayCallback: formData.sameDayCallback,
+      },
     });
 
     return NextResponse.json(

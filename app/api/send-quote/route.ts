@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 
 export async function POST(request: NextRequest) {
@@ -29,6 +30,18 @@ export async function POST(request: NextRequest) {
       to,
       subject: `New Quote Request - ${formData.service_type} (${formData.name})`,
       html: emailHtml,
+    });
+
+    void emitFleetIngest({
+      event_type: 'lead',
+      summary: `Quote request: ${formData.name} (${formData.email}) — ${formData.service_type} (${formData.postcode})`,
+      payload: {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        postcode: formData.postcode,
+        service_type: formData.service_type,
+      },
     });
 
     return NextResponse.json(

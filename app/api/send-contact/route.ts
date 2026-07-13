@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 
 export async function POST(request: NextRequest) {
@@ -29,6 +30,12 @@ export async function POST(request: NextRequest) {
       to,
       subject: `New Contact Form Submission - ${formData.subject} (${formData.name})`,
       html: emailHtml,
+    });
+
+    void emitFleetIngest({
+      event_type: 'lead',
+      summary: `Contact form: ${formData.name} (${formData.email}) — ${formData.subject}`,
+      payload: { name: formData.name, email: formData.email, subject: formData.subject },
     });
 
     return NextResponse.json(
