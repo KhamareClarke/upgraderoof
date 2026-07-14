@@ -6,10 +6,30 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
 
-    const { transporter, from, to } = getMailConfig();
+    if (!formData?.name || !formData?.email) {
+      return NextResponse.json(
+        { success: false, error: 'Name and email are required.' },
+        { status: 400 }
+      );
+    }
 
-    // Format email content
-    const emailHtml = `
+    // Await so Vercel does not kill the fetch before JARVIS receives it.
+    await emitFleetIngest({
+      event_type: 'lead',
+      summary: `Quote request: ${formData.name} (${formData.email}) — ${formData.service_type || 'n/a'} (${formData.postcode || 'n/a'})`,
+      payload: {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        postcode: formData.postcode,
+        service_type: formData.service_type,
+      },
+    });
+
+    try {
+      const { transporter, from, to } = getMailConfig();
+
+      const emailHtml = `
       <h2>New Quote Request</h2>
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
         <p><strong>Name:</strong> ${formData.name}</p>
@@ -25,36 +45,34 @@ export async function POST(request: NextRequest) {
       </p>
     `;
 
-    await transporter.sendMail({
-      from,
-      to,
-      subject: `New Quote Request - ${formData.service_type} (${formData.name})`,
-      html: emailHtml,
-    });
-
-    void emitFleetIngest({
-      event_type: 'lead',
-      summary: `Quote request: ${formData.name} (${formData.email}) — ${formData.service_type} (${formData.postcode})`,
-      payload: {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        postcode: formData.postcode,
-        service_type: formData.service_type,
-      },
-    });
+      await transporter.sendMail({
+        from,
+        to,
+        subject: `New Quote Request - ${formData.service_type} (${formData.name})`,
+        html: emailHtml,
+      });
+    } catch (mailErr: unknown) {
+      // JARVIS already notified — still return success so the lead is not lost in-app.
+      console.error('Quote mail failed after JARVIS notify:', mailErr);
+      return NextResponse.json(
+        {
+          success: true,
+          message: 'Quote received (email delivery pending)',
+          email_error: mailErrorResponseMessage(mailErr),
+        },
+        { status: 200 }
+      );
+    }
 
     return NextResponse.json(
       { success: true, message: 'Email sent successfully' },
       { status: 200 }
     );
   } catch (error: unknown) {
-    console.error('Error sending email:', error);
+    console.error('Error sending quote:', error);
     return NextResponse.json(
       { success: false, error: mailErrorResponseMessage(error) },
       { status: 500 }
     );
   }
 }
-
-

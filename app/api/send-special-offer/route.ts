@@ -6,10 +6,30 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
 
-    const { transporter, from, to } = getMailConfig();
+    if (!formData?.name || !formData?.phone) {
+      return NextResponse.json(
+        { success: false, error: 'Name and phone are required.' },
+        { status: 400 }
+      );
+    }
 
-    // Format email content
-    const emailHtml = `
+    await emitFleetIngest({
+      event_type: 'lead',
+      summary: `Special offer: ${formData.name} (${formData.phone}) — ${formData.postcode || 'n/a'}`,
+      payload: {
+        name: formData.name,
+        phone: formData.phone,
+        postcode: formData.postcode,
+        roofType: formData.roofType,
+        serviceNeeded: formData.serviceNeeded,
+        sameDayCallback: formData.sameDayCallback,
+      },
+    });
+
+    try {
+      const { transporter, from, to } = getMailConfig();
+
+      const emailHtml = `
       <h2>New Special Offer Form Submission</h2>
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
         <p><strong>Name:</strong> ${formData.name}</p>
@@ -25,36 +45,33 @@ export async function POST(request: NextRequest) {
       </p>
     `;
 
-    await transporter.sendMail({
-      from,
-      to,
-      subject: `New Special Offer Form Submission - ${formData.name}`,
-      html: emailHtml,
-    });
-
-    void emitFleetIngest({
-      event_type: 'lead',
-      summary: `Special offer: ${formData.name} (${formData.phone}) — ${formData.postcode}`,
-      payload: {
-        name: formData.name,
-        phone: formData.phone,
-        postcode: formData.postcode,
-        roofType: formData.roofType,
-        serviceNeeded: formData.serviceNeeded,
-        sameDayCallback: formData.sameDayCallback,
-      },
-    });
+      await transporter.sendMail({
+        from,
+        to,
+        subject: `New Special Offer Form Submission - ${formData.name}`,
+        html: emailHtml,
+      });
+    } catch (mailErr: unknown) {
+      console.error('Special-offer mail failed after JARVIS notify:', mailErr);
+      return NextResponse.json(
+        {
+          success: true,
+          message: 'Lead received (email delivery pending)',
+          email_error: mailErrorResponseMessage(mailErr),
+        },
+        { status: 200 }
+      );
+    }
 
     return NextResponse.json(
       { success: true, message: 'Email sent successfully' },
       { status: 200 }
     );
   } catch (error: unknown) {
-    console.error('Error sending email:', error);
+    console.error('Error sending special offer:', error);
     return NextResponse.json(
       { success: false, error: mailErrorResponseMessage(error) },
       { status: 500 }
     );
   }
 }
-
