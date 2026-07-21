@@ -5,6 +5,7 @@ import { StructuredData } from './structured-data';
 import { ConditionalLayout } from '@/components/ConditionalLayout';
 import { Analytics } from '@/components/Analytics';
 import { ClientWidgets } from '@/components/ClientWidgets';
+import { CookieBanner } from '@/components/CookieBanner';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -92,6 +93,7 @@ export default function RootLayout({
         <Analytics />
         <ConditionalLayout>{children}</ConditionalLayout>
         <ClientWidgets />
+        <CookieBanner />
       </body>
     </html>
   );

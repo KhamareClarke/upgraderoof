@@ -28,6 +28,9 @@ yarn-error.log*
 .env
 .env*.local
 
+# Google service account credentials (private key — never commit)
+google-service-account.json
+
 # vercel
 .vercel
 
