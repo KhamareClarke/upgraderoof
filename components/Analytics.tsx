@@ -6,7 +6,7 @@
  * Loads: Google Consent Mode V2 → GTM → GA4 (direct) → Google Ads global site tag
  *
  * GTM  : GTM-5LMDG3F7
- * GA4  : G-8RLZRSYD5G
+ * GA4  : G-7V452FMYFY
  * Ads  : AW-8479028400
  *
  * Conversion events are pushed to window.dataLayer from lib/tracking.ts.
@@ -17,7 +17,7 @@ import React from 'react';
 import Script from 'next/script';
 
 const GTM_ID         = process.env.NEXT_PUBLIC_GTM_ID         || 'GTM-5LMDG3F7';
-const GA4_ID         = process.env.NEXT_PUBLIC_GA4_ID         || 'G-8RLZRSYD5G';
+const GA4_ID         = process.env.NEXT_PUBLIC_GA4_ID         || 'G-7V452FMYFY';
 const GADS_ID        = process.env.NEXT_PUBLIC_GADS_ID        || 'AW-8479028400';
 const GADS_CONV_ID   = process.env.NEXT_PUBLIC_GADS_CONV_ID   || 'AW-17763560213';
 
