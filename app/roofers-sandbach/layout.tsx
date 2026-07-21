@@ -3,12 +3,12 @@ import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { TownLocalBusinessSchema } from '@/components/TownLocalBusinessSchema';
 
 export const metadata: Metadata = {
-  title: 'Roofers Sandbach | Based in CW11 | 01270 897606 | Upgrade Roofs',
-  description: 'Your local roofers based on Crewe Road, Sandbach. 25+ years experience. Roof repairs, new roofs, flat roofing, 24/7 emergency call-outs. CORC certified, £10M insured. Free quotes.',
-  keywords: 'roofers sandbach, roofing company sandbach, roof repair sandbach, roofer near me sandbach, new roofs sandbach, emergency roofer sandbach, flat roofing sandbach, tile roofing sandbach',
+  title: 'Roofers Sandbach | 5★ Rated | Free Quotes in 24hrs | Upgrade Roofs',
+  description: 'Trusted roofers in Sandbach (CW11) with 127 five-star reviews. Roof repairs, new roofs & flat roofing from a local team based on Crewe Road. 25+ yrs, £10M insured. Call 01270 897606 for a free no-obligation quote.',
+  keywords: 'roofers sandbach, roofer sandbach, roofing sandbach, roofing company sandbach, roof repair sandbach, roofer near me sandbach, new roofs sandbach, emergency roofer sandbach, flat roofing sandbach, tile roofing sandbach',
   openGraph: {
-    title: 'Roofers Sandbach | Local Roofing Experts | Upgrade Roofs',
-    description: 'Sandbach\'s trusted roofers. 25+ years experience, CORC certified, £10M insured. Free quotes.',
+    title: 'Roofers Sandbach | 5★ Rated Local Roofers | Upgrade Roofs',
+    description: 'Sandbach\'s trusted roofers. 127 five-star reviews, 25+ years, CORC certified, £10M insured. Free quotes.',
     url: 'https://www.upgraderoofs.co.uk/roofers-sandbach',
     siteName: 'Upgrade Roofs',
     images: [
@@ -24,8 +24,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Roofers Sandbach | Upgrade Roofs | 01270 897606',
-    description: 'Local roofers in Sandbach. 25+ years experience. Free quotes.',
+    title: 'Roofers Sandbach | 5★ Rated | Upgrade Roofs',
+    description: 'Trusted roofers in Sandbach. 127 five-star reviews, 25+ years. Free quotes — 01270 897606.',
     images: ['https://www.upgraderoofs.co.uk/images/6.jpeg'],
   },
   alternates: {
