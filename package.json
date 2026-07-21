@@ -71,9 +71,12 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@google-analytics/data": "^6.1.0",
     "@types/node": "24.10.2",
     "@types/nodemailer": "^7.0.3",
     "@types/react": "18.3.27",
+    "dotenv": "^17.4.2",
+    "googleapis": "^173.0.0",
     "typescript": "5.9.3"
   }
 }
