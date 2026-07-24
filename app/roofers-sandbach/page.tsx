@@ -65,6 +65,10 @@ export default function RoofersSandbachPage() {
               <span className="font-semibold">CORC Certified</span>
             </div>
             <div className="flex items-center gap-2">
+              <Shield className="w-5 h-5 text-brand-orange" />
+              <span className="font-semibold">10-Year Workmanship Guarantee</span>
+            </div>
+            <div className="flex items-center gap-2">
               <Star className="w-5 h-5 text-brand-orange" />
               <span className="font-semibold">5-Star Google Reviews</span>
             </div>

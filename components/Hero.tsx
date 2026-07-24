@@ -2,8 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { Video, Shield, Award, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Video, Shield, Award, Clock, ChevronLeft, ChevronRight, Phone } from 'lucide-react';
 import { QuoteForm } from '@/components/QuoteForm';
+import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -145,6 +146,17 @@ export function Hero() {
                 <Video className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
                 <span>Book a Drone Inspection</span>
               </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="group border border-white/20 text-white hover:bg-white/10 hover:border-white/30 font-semibold px-8 sm:px-10 md:px-12 text-sm sm:text-base tracking-wide h-12 sm:h-14 md:h-16 bg-white/10 transition-all duration-500 hover:scale-[1.02] w-full sm:w-auto rounded-lg active:scale-95"
+              asChild
+            >
+              <TrackedPhoneLink href="tel:01270897606" placement="homepage_hero" className="flex items-center justify-center">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
+                <span>Call 01270 897 606</span>
+              </TrackedPhoneLink>
             </Button>
           </div>
 

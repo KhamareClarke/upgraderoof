@@ -138,6 +138,17 @@ export function StructuredData() {
         name: 'Cheshire',
         sameAs: 'https://en.wikipedia.org/wiki/Cheshire'
       },
+      { '@type': 'PostalCode', postalCode: 'CW1' },
+      { '@type': 'PostalCode', postalCode: 'CW2' },
+      { '@type': 'PostalCode', postalCode: 'CW4' },
+      { '@type': 'PostalCode', postalCode: 'CW5' },
+      { '@type': 'PostalCode', postalCode: 'CW10' },
+      { '@type': 'PostalCode', postalCode: 'CW11' },
+      { '@type': 'PostalCode', postalCode: 'CW12' },
+      { '@type': 'PostalCode', postalCode: 'SK10' },
+      { '@type': 'PostalCode', postalCode: 'SK11' },
+      { '@type': 'PostalCode', postalCode: 'ST7' },
+      { '@type': 'PostalCode', postalCode: 'WA16' },
     ],
     serviceArea: {
       '@type': 'GeoCircle',
