@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Hero } from '@/components/Hero';
+import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { Services } from '@/components/Services';
 import { WhyChooseUs } from '@/components/WhyChooseUs';
 import { VideoTestimonials } from '@/components/VideoTestimonials';
@@ -46,7 +47,10 @@ export default function Home() {
       <section id="hero">
         <Hero />
       </section>
-      
+
+      {/* GEO Entity Citation — dense, quotable business entity for AI answer engines */}
+      <GeoEntityCitation />
+
       {/* Trust Badges Section */}
       <section className="section-padding bg-gradient-to-b from-white to-gray-50">
         <div className="container-custom">
@@ -264,7 +268,7 @@ export default function Home() {
             name: 'Trusted Roofers in Sandbach & Cheshire | Upgrade Roofs',
             speakable: {
               '@type': 'SpeakableSpecification',
-              cssSelector: ['#hero', '#services', '#about']
+              cssSelector: ['#entity-citation', '#hero', '#services', '#about']
             },
             isPartOf: { '@id': 'https://www.upgraderoofs.co.uk/#website' }
           })
