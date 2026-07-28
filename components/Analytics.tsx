@@ -15,6 +15,7 @@
 
 import React from 'react';
 import Script from 'next/script';
+import { captureClickIds } from '@/lib/tracking';
 
 const GTM_ID         = process.env.NEXT_PUBLIC_GTM_ID         || 'GTM-5LMDG3F7';
 const GA4_ID         = process.env.NEXT_PUBLIC_GA4_ID         || 'G-7V452FMYFY';
@@ -22,6 +23,12 @@ const GADS_ID        = process.env.NEXT_PUBLIC_GADS_ID        || 'AW-8479028400'
 const GADS_CONV_ID   = process.env.NEXT_PUBLIC_GADS_CONV_ID   || 'AW-17763560213';
 
 export function Analytics() {
+  // Capture gclid/gbraid/wbraid from the landing URL into localStorage so
+  // form submissions can attach it for Google Ads offline conversions.
+  React.useEffect(() => {
+    captureClickIds();
+  }, []);
+
   return (
     <>
       {/* ── 1. Google Consent Mode V2 ─────────────────────────────────────

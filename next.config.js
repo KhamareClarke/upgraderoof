@@ -15,6 +15,19 @@ const nextConfig = {
   },
   swcMinify: true,
   reactStrictMode: true,
+  async redirects() {
+    // GSC 404 fixes — legacy URLs 301 to their canonical destinations.
+    // Next.js first 308-normalizes a trailing slash (/home/ → /home), so each
+    // rule must match BOTH the slash and non-slash source to catch every variant.
+    return [
+      { source: '/home', destination: '/', permanent: true },
+      { source: '/home/', destination: '/', permanent: true },
+      { source: '/thank-you-contact-us', destination: '/', permanent: true },
+      { source: '/thank-you-contact-us/', destination: '/', permanent: true },
+      { source: '/flat-roofs', destination: '/services/flat-roofing', permanent: true },
+      { source: '/flat-roofs/', destination: '/services/flat-roofing', permanent: true },
+    ];
+  },
 };
 
 module.exports = nextConfig;

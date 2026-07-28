@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
+import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 
 export async function POST(request: NextRequest) {
@@ -24,6 +25,21 @@ export async function POST(request: NextRequest) {
         postcode: formData.postcode,
         service_type: formData.service_type,
       },
+    });
+
+    // Push the lead into GHL. Awaited so the serverless runtime doesn't freeze
+    // the in-flight request — pushLeadToGhl never throws, so a GHL outage
+    // still can't lose the lead.
+    await pushLeadToGhl({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      postcode: formData.postcode,
+      gclid: formData.gclid,
+      tags: ['website-lead', 'cheshire-roof-quote', ...(formData.gclid ? ['google-ads-lead'] : [])],
+      source: 'quote_form',
+      notes: `Service: ${formData.service_type || 'n/a'}\n\n${formData.message || ''}`,
+      customFields: formData.service_type ? { service_type: formData.service_type } : undefined,
     });
 
     try {

@@ -1,6 +1,37 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
+import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
+
+const ghlOpps = require('@/lib/ghl/opportunities.js');
+
+/**
+ * After the contact lands in GHL, open a sales-pipeline opportunity for it
+ * (first pipeline + first stage) so the lead is tracked through the funnel.
+ * Non-blocking — failures are logged, never fatal to the lead.
+ */
+async function createOpportunityForContact(contactId: string | null, name: string) {
+  if (!contactId) return;
+  try {
+    const { pipelines } = await ghlOpps.listPipelines();
+    const first = pipelines[0];
+    const firstStage = first && first.stages && first.stages[0];
+    if (!first || !firstStage) return; // no pipeline configured yet
+    await ghlOpps.createOpportunity({
+      contactId,
+      name: `${name} — Website Lead`,
+      pipelineId: first.id,
+      stageId: firstStage.id,
+      status: 'open',
+    });
+  } catch (err) {
+    console.warn('[ghl] opportunity create error:', err);
+  }
+  // Fire speed-to-lead (instant SMS/call) for the new lead. Non-blocking.
+  ghlOpps.triggerSpeedToLead(contactId, { source: 'contact_form' })
+    .then((r: any) => { if (!r.triggered) console.log('[ghl] speed-to-lead not triggered:', r.reason); })
+    .catch((err: any) => console.warn('[ghl] speed-to-lead error:', err));
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,6 +49,21 @@ export async function POST(request: NextRequest) {
       summary: `Contact form: ${formData.name} (${formData.email}) — ${formData.subject || 'no subject'}`,
       payload: { name: formData.name, email: formData.email, subject: formData.subject },
     });
+
+    // Push the lead into GHL. Awaited so the serverless runtime doesn't freeze
+    // the in-flight request when the response returns — pushLeadToGhl never
+    // throws, so a GHL outage still can't lose the lead.
+    const ghlContactId = await pushLeadToGhl({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      gclid: formData.gclid,
+      tags: ['website-lead', 'contact-form', ...(formData.gclid ? ['google-ads-lead'] : [])],
+      source: 'contact_form',
+      notes: `Subject: ${formData.subject || 'n/a'}\n\n${formData.message || ''}`,
+    });
+    createOpportunityForContact(ghlContactId, formData.name)
+      .catch(err => console.warn('[ghl] contact follow-up error:', err));
 
     try {
       const { transporter, from, to } = getMailConfig();

@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { supabase, type QuoteRequest } from '@/lib/supabase';
-import { trackQuoteRequest, trackQuoteFormOpen } from '@/lib/tracking';
+import { trackQuoteRequest, trackQuoteFormOpen, getGclid } from '@/lib/tracking';
 import { Loader as Loader2, CircleCheck as CheckCircle2, CircleAlert as AlertCircle, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
@@ -77,7 +77,7 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
       const response = await fetch('/api/send-quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, gclid: getGclid() }),
       });
 
       const result = await response.json();

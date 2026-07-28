@@ -1,6 +1,36 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
+import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
+
+const ghlOpps = require('@/lib/ghl/opportunities.js');
+
+/**
+ * After the contact lands in GHL: open a pipeline opportunity and fire the
+ * speed-to-lead workflow (instant SMS/call). Non-blocking — never fatal.
+ */
+async function postLeadFollowUp(contactId: string | null, name: string) {
+  if (!contactId) return;
+  try {
+    const { pipelines } = await ghlOpps.listPipelines();
+    const first = pipelines[0];
+    const firstStage = first && first.stages && first.stages[0];
+    if (first && firstStage) {
+      await ghlOpps.createOpportunity({
+        contactId,
+        name: `${name} — Special Offer`,
+        pipelineId: first.id,
+        stageId: firstStage.id,
+        status: 'open',
+      });
+    }
+  } catch (err) {
+    console.warn('[ghl] opportunity create error:', err);
+  }
+  ghlOpps.triggerSpeedToLead(contactId, { source: 'special_offer' })
+    .then((r: any) => { if (!r.triggered) console.log('[ghl] speed-to-lead not triggered:', r.reason); })
+    .catch((err: any) => console.warn('[ghl] speed-to-lead error:', err));
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,6 +55,27 @@ export async function POST(request: NextRequest) {
         sameDayCallback: formData.sameDayCallback,
       },
     });
+
+    // Push the lead into GHL. Awaited so the serverless runtime doesn't freeze
+    // the in-flight request when the response returns — pushLeadToGhl never
+    // throws, so a GHL outage still can't lose the lead. The opportunity +
+    // speed-to-lead follow-up stays fire-and-forget (secondary).
+    const ghlContactId = await pushLeadToGhl({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      postcode: formData.postcode,
+      gclid: formData.gclid,
+      tags: ['website-lead', 'special-offer', ...(formData.gclid ? ['google-ads-lead'] : [])],
+      source: 'special_offer',
+      notes: `Service needed: ${formData.serviceNeeded || 'n/a'}\nRoof type: ${formData.roofType || 'n/a'}\nSame-day callback: ${formData.sameDayCallback ? 'Yes' : 'No'}`,
+      customFields: {
+        ...(formData.roofType ? { roof_type: formData.roofType } : {}),
+        ...(formData.serviceNeeded ? { service_needed: formData.serviceNeeded } : {}),
+      },
+    });
+    postLeadFollowUp(ghlContactId, formData.name)
+      .catch(err => console.warn('[ghl] special-offer follow-up error:', err));
 
     try {
       const { transporter, from, to } = getMailConfig();

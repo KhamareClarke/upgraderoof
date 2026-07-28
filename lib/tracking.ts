@@ -29,6 +29,55 @@ declare global {
 
 const GADS_CONV_ID = process.env.NEXT_PUBLIC_GADS_CONV_ID || 'AW-17763560213';
 
+// --------------- click-id capture (Google Ads offline conversions) ---------------
+
+const GCLID_STORAGE_KEY = 'ur_gclid';
+const GCLID_TS_KEY = 'ur_gclid_ts';
+// Google Ads click ids are valid for offline-conversion upload for 90 days.
+const GCLID_TTL_MS = 90 * 24 * 60 * 60 * 1000;
+
+/**
+ * Capture the `gclid` (and `gbraid`/`wbraid` for iOS) from the landing URL
+ * into localStorage on first touch. Call once on app mount. Subsequent
+ * form submissions read it back via getGclid() so the click that drove the
+ * lead can be credited when the deal closes offline.
+ */
+export function captureClickIds() {
+  if (typeof window === 'undefined') return;
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const gclid = params.get('gclid') || params.get('gbraid') || params.get('wbraid');
+    if (gclid) {
+      window.localStorage.setItem(GCLID_STORAGE_KEY, gclid);
+      window.localStorage.setItem(GCLID_TS_KEY, String(Date.now()));
+    }
+  } catch {
+    /* storage unavailable — non-fatal */
+  }
+}
+
+/**
+ * Return the stored gclid if it's still within the 90-day attribution
+ * window, else null. Read at form-submit time and sent to the API so it
+ * can be attached to the GHL contact's custom fields.
+ */
+export function getGclid(): string | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const value = window.localStorage.getItem(GCLID_STORAGE_KEY);
+    const ts = Number(window.localStorage.getItem(GCLID_TS_KEY) || 0);
+    if (!value) return null;
+    if (ts && Date.now() - ts > GCLID_TTL_MS) {
+      window.localStorage.removeItem(GCLID_STORAGE_KEY);
+      window.localStorage.removeItem(GCLID_TS_KEY);
+      return null;
+    }
+    return value;
+  } catch {
+    return null;
+  }
+}
+
 // --------------- low-level dispatcher ---------------
 
 /**
