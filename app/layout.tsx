@@ -27,9 +27,12 @@ export const metadata: Metadata = {
     maximumScale: 5,
   },
   icons: {
+    // app/icon.png + app/apple-icon.png are auto-served by Next's file
+    // convention; /favicon.ico covers legacy browsers. All built from
+    // public/images/upgrade_logo.png.
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
+    apple: '/apple-icon.png',
   },
   authors: [{ name: 'Upgrade Roofs' }],
   creator: 'Upgrade Roofs',

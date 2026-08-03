@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
+import { validateLead } from '@/lib/lead-validation';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 
 const ghlOpps = require('@/lib/ghl/opportunities.js');
 
@@ -36,10 +38,42 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
 
+    // Honeypot check — if filled, silently return success to trick bots
+    if (formData.website) {
+      console.log('[spam] Honeypot triggered for special offer form');
+      return NextResponse.json(
+        { success: true, message: 'Special offer request received' },
+        { status: 200 }
+      );
+    }
+
+    // Rate limiting — max 3 submissions per IP per hour
+    const clientIp = getClientIp(request);
+    const rateLimit = checkRateLimit(clientIp, 3, 60 * 60 * 1000);
+    if (!rateLimit.allowed) {
+      console.log(`[spam] Rate limit exceeded for IP: ${clientIp}`);
+      return NextResponse.json(
+        { success: false, error: 'Too many submissions. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
     if (!formData?.name || !formData?.phone) {
       return NextResponse.json(
         { success: false, error: 'Name and phone are required.' },
         { status: 400 }
+      );
+    }
+
+    // Content validation — reject junk leads (gibberish names, non-UK phones,
+    // invalid postcodes) that the honeypot and IP rate limit let through.
+    // Return a fake success so bots can't tell they've been filtered.
+    const spamReasons = validateLead(formData);
+    if (spamReasons.length > 0) {
+      console.log(`[spam] special-offer lead rejected (${spamReasons.join('; ')}) — name="${formData.name}" phone="${formData.phone}" postcode="${formData.postcode || ''}"`);
+      return NextResponse.json(
+        { success: true, message: 'Special offer request received' },
+        { status: 200 }
       );
     }
 

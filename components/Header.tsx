@@ -113,7 +113,7 @@ export function Header() {
         <div className="flex items-center justify-between h-20 lg:h-22">
           <Link href="/" className="flex items-center">
             <Image
-              src="/images/upgrade_logo.jpeg"
+              src="/images/upgrade_logo.png"
               alt="Upgrade Roofs - Professional Roofers Cheshire"
               width={72}
               height={72}

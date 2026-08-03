@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
+import { InlineLeadForm } from '@/components/InlineLeadForm';
+import { StickyMobileCta } from '@/components/StickyMobileCta';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { CheckCircle, Phone, MapPin, Shield, Award, Clock, Star, ArrowRight, Home, Layers, Flame, Droplets, Zap, Wrench } from 'lucide-react';
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
@@ -44,31 +46,62 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/7.jpeg)' }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/95 to-brand-navy/80" />
+      {/* Hero — two-column, inline lead form (matches special-offer design) */}
+      <section className="relative py-10 sm:py-14 md:py-16 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/6.jpeg)' }}>
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/90 via-brand-navy/80 to-brand-navy/70" />
         </div>
         <div className="container-custom relative z-10">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
-              <MapPin className="w-4 h-4 text-brand-orange" />
-              <span>{town}, Cheshire</span>
-            </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-              Roofers in <span className="text-brand-orange">{town}</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">{intro}</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-8 h-14 text-base">
-                  Get a Free Quote
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left column — headlines & trust */}
+            <div className="text-white space-y-5">
+              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-orange text-white font-bold">
+                <MapPin className="w-4 h-4" />
+                <span className="text-sm tracking-wide">FREE ROOF INSPECTION — {town.toUpperCase()}</span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
+                Roofers in <span className="text-brand-orange">{town}</span>
+              </h1>
+              <p className="text-lg sm:text-xl text-white/90 leading-relaxed">{intro}</p>
+
+              {/* Call-first highlight box */}
+              <div className="bg-white/10 backdrop-blur-sm border-2 border-brand-orange rounded-2xl p-6 text-center max-w-md">
+                <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">📞 01270 897606</div>
+                <div className="text-lg font-semibold">We Answer in 30 Seconds!</div>
+              </div>
+
+              <ul className="text-base text-white/90 space-y-1">
+                <li>✓ CORC certified — properly qualified roofers</li>
+                <li>✓ £10M public liability insurance</li>
+                <li>✓ 10-year workmanship guarantee on all work</li>
+                <li>✓ Free written quote — no obligation, no pressure</li>
+              </ul>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14 text-lg rounded-xl transition-colors" asChild>
+                  <TrackedPhoneLink href="tel:01270897606" placement="area_page_hero"><Phone className="w-5 h-5 mr-2" /><span className="!text-white">01270 897 606</span></TrackedPhoneLink>
                 </Button>
-              } />
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 h-14 text-base" asChild>
-                <TrackedPhoneLink href="tel:01270897606" placement="area_page_hero"><Phone className="w-5 h-5 mr-2" />01270 897 606</TrackedPhoneLink>
-              </Button>
+              </div>
+
+              {/* Trust indicators */}
+              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20 max-w-md">
+                <div className="text-center">
+                  <Shield className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
+                  <div className="text-xs font-semibold">Fully Insured</div>
+                </div>
+                <div className="text-center">
+                  <Star className="w-7 h-7 text-yellow-400 fill-current mx-auto mb-1.5" />
+                  <div className="text-xs font-semibold">5★ Google Rating</div>
+                </div>
+                <div className="text-center">
+                  <Clock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
+                  <div className="text-xs font-semibold">Same Day Response</div>
+                </div>
+              </div>
             </div>
+
+            {/* Right column — inline lead form */}
+            <InlineLeadForm town={town} />
           </div>
         </div>
       </section>
@@ -306,20 +339,23 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-brand-navy text-white">
+      <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Need a Roofer in {town}?</h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl mb-2 max-w-2xl mx-auto">
             {ctaLine || 'Get a free, no-obligation quote. We\'ll inspect your roof and provide a clear, written price.'}
+          </p>
+          <p className="text-lg mb-8 max-w-2xl mx-auto text-white/80">
+            We'll call you within 10 minutes to confirm your booking.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <QuoteForm trigger={
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-10 h-14 text-base">
-                Get Your Free Quote
+              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-xl shadow-lg">
+                <span className="!text-white">Get Your Free Inspection</span>
               </Button>
             } />
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-10 h-14 text-base" asChild>
-              <TrackedPhoneLink href="tel:01270897606" placement="area_page_cta"><Phone className="w-5 h-5 mr-2" />01270 897 606</TrackedPhoneLink>
+            <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14 text-lg rounded-xl transition-colors" asChild>
+              <TrackedPhoneLink href="tel:01270897606" placement="area_page_cta"><Phone className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span></TrackedPhoneLink>
             </Button>
           </div>
           <p className="text-white/60 text-sm mt-6">
@@ -390,6 +426,9 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
           })
         }}
       />
+
+      {/* Sticky mobile CTA — Call / WhatsApp / Quick Form */}
+      <StickyMobileCta placement={`area_page_${town.toLowerCase().replace(/\s+/g, '_')}`} />
     </div>
   );
 }

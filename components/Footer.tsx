@@ -38,7 +38,7 @@ export function Footer() {
           <div>
             <Link href="/" className="flex items-center mb-6">
               <Image
-                src="/images/upgrade_logo.jpeg"
+                src="/images/upgrade_logo.png"
                 alt="Upgrade Roofs"
                 width={96}
                 height={96}

@@ -184,7 +184,7 @@ export default function ServicesPage() {
             Contact us for a free consultation and quote tailored to your specific requirements
           </p>
           <QuoteForm trigger={
-            <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
+            <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
               Get Free Quote
             </Button>
           } />

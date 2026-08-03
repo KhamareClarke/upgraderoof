@@ -34,7 +34,7 @@ export function BlogArticleSchema({ title, description, url, datePublished, date
       '@id': 'https://www.upgraderoofs.co.uk/#organization',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://www.upgraderoofs.co.uk/images/upgrade_logo.jpeg',
+        url: 'https://www.upgraderoofs.co.uk/images/upgrade_logo.png',
         width: 112,
         height: 112,
       },

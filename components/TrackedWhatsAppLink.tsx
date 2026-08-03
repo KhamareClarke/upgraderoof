@@ -1,9 +1,11 @@
 'use client';
 
 import { trackWhatsAppClick } from '@/lib/tracking';
+import { WHATSAPP_WA } from '@/lib/contact';
 
 interface TrackedWhatsAppLinkProps {
-  href: string;
+  /** Defaults to the central WhatsApp number (lib/contact WHATSAPP_WA). */
+  href?: string;
   placement: string;
   children: React.ReactNode;
   className?: string;
@@ -11,7 +13,7 @@ interface TrackedWhatsAppLinkProps {
   rel?: string;
 }
 
-export function TrackedWhatsAppLink({ href, placement, children, className, target, rel }: TrackedWhatsAppLinkProps) {
+export function TrackedWhatsAppLink({ href = WHATSAPP_WA, placement, children, className, target, rel }: TrackedWhatsAppLinkProps) {
   return (
     <a
       href={href}

@@ -32,6 +32,7 @@ export default function OfferSandbachPage() {
     sameDayCallback: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [honeypot, setHoneypot] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -88,7 +89,7 @@ export default function OfferSandbachPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, location: 'Sandbach', gclid: getGclid() }),
+        body: JSON.stringify({ ...formData, location: 'Sandbach', gclid: getGclid(), website: honeypot }),
       });
 
       const result = await response.json();
@@ -317,8 +318,21 @@ export default function OfferSandbachPage() {
                   </Label>
                 </div>
 
-                <Button 
-                  type="submit" 
+                {/* Honeypot field — hidden from humans, visible to bots */}
+                <div className="hidden" aria-hidden="true">
+                  <Label htmlFor="sandbach-website">Website</Label>
+                  <Input
+                    id="sandbach-website"
+                    type="text"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
                   disabled={isSubmitting}
                   className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold py-4 text-xl h-16 rounded-xl shadow-lg"
                 >

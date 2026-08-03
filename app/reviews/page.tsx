@@ -114,7 +114,7 @@ export default function ReviewsPage() {
             Experience the quality and service that earns us 5-star reviews
           </p>
           <a href="/#contact" className="inline-block w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
-            <button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg rounded-md transition-colors w-full sm:w-auto">
+            <button className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg rounded-md transition-colors w-full sm:w-auto">
               Get Free Quote
             </button>
           </a>

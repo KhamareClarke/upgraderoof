@@ -105,12 +105,17 @@ export function Hero() {
           </div>
 
           {/* STATIC H1 - CRITICAL FOR SEO */}
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-5 sm:mb-6 md:mb-8 text-balance leading-[1.1] tracking-tight px-4 sm:px-0 drop-shadow-2xl">
-            Your Trusted{' '}
-            <span className="text-brand-orange">Roofers</span>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-4 sm:mb-5 md:mb-6 text-balance leading-[1.1] tracking-tight px-4 sm:px-0 drop-shadow-2xl">
+            Get Your{' '}
+            <span className="text-brand-orange">Free Roof Inspection</span>
             <br />
-            in Sandbach & Cheshire
+            in Cheshire
           </h1>
+
+          {/* High-urgency subheadline */}
+          <p className="text-lg sm:text-xl md:text-2xl font-semibold text-brand-orange mb-6 sm:mb-8 md:mb-10 px-4 sm:px-0 drop-shadow-lg tracking-wide">
+            We call you back within 10 minutes — guaranteed
+          </p>
 
           {/* Dynamic Subheading Rotator */}
           <div className="relative h-24 sm:h-20 text-lg sm:text-xl text-white/90 mb-6 sm:mb-8 md:mb-10 max-w-3xl mx-auto leading-relaxed tracking-wide px-4 sm:px-0 drop-shadow-lg">
@@ -158,6 +163,13 @@ export function Hero() {
                 <span>Call 01270 897 606</span>
               </TrackedPhoneLink>
             </Button>
+          </div>
+
+          {/* Above-the-fold trust bar */}
+          <div className="mb-8 sm:mb-10 md:mb-12 px-4 sm:px-0">
+            <p className="inline-block text-white text-xs sm:text-sm font-semibold tracking-wide bg-white/10 border border-white/20 rounded-full px-4 sm:px-6 py-2 sm:py-2.5 backdrop-blur-sm">
+              CORC Certified <span className="text-brand-orange mx-1">·</span> £10M Insured <span className="text-brand-orange mx-1">·</span> 10-Year Guarantee <span className="text-brand-orange mx-1">·</span> 5-Star Rated
+            </p>
           </div>
 
           <div className="hidden sm:grid sm:grid-cols-3 gap-6 lg:gap-8 fade-in-up max-w-4xl mx-auto" style={{ animationDelay: '0.3s' }}>

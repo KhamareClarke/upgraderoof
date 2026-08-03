@@ -284,7 +284,7 @@ export default function BlogPage() {
           <div className="text-center mt-8">
             <p className="text-sm text-gray-500 mb-4">Showing 43 completed projects across Sandbach, Crewe, Middlewich, Congleton, Nantwich, Holmes Chapel, Alsager & Cheshire</p>
             <Link href="/gallery">
-              <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 py-3">
+              <Button className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 py-3">
                 View Full Gallery
               </Button>
             </Link>
@@ -299,7 +299,7 @@ export default function BlogPage() {
             Our team is here to help with all your roofing questions
           </p>
           <Link href="/contact">
-            <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
+            <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
               Contact Us Today
             </Button>
           </Link>

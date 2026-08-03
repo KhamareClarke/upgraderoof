@@ -28,6 +28,11 @@ declare global {
 }
 
 const GADS_CONV_ID = process.env.NEXT_PUBLIC_GADS_CONV_ID || 'AW-17763560213';
+// Separate conversion action for low-value engagement clicks (phone/WhatsApp
+// taps) so they don't pollute the lead-form conversion data. Create the action
+// in Google Ads (Tools → Conversions → "Phone/WhatsApp click") and set its ID
+// here / via env. Falls back to the lead-form ID if unset.
+const GADS_CLICK_CONV_ID = process.env.NEXT_PUBLIC_GADS_CLICK_CONV_ID || GADS_CONV_ID;
 
 // --------------- click-id capture (Google Ads offline conversions) ---------------
 
@@ -115,10 +120,10 @@ function sendDataLayerEvent(eventName: string, params: Record<string, any>) {
  * registers the lead regardless of GTM tag firing order or
  * consent-mode delays.
  */
-function fireGadsConversion(value: number) {
+function fireGadsConversion(value: number, conversionId: string = GADS_CONV_ID) {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
   window.gtag('event', 'conversion', {
-    send_to: GADS_CONV_ID,
+    send_to: conversionId,
     value,
     currency: 'GBP',
   });
@@ -171,6 +176,7 @@ export function trackPhoneClick(placement: string) {
     value: 5.0,
     currency: 'GBP',
   });
+  fireGadsConversion(5.0, GADS_CLICK_CONV_ID);
 }
 
 /**
@@ -184,6 +190,7 @@ export function trackWhatsAppClick(placement: string) {
     value: 5.0,
     currency: 'GBP',
   });
+  fireGadsConversion(5.0, GADS_CLICK_CONV_ID);
 }
 
 /**

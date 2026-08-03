@@ -61,10 +61,10 @@ export type Testimonial = {
 export type QuoteRequest = {
   id?: string;
   name: string;
-  email: string;
+  email?: string;
   phone: string;
   postcode: string;
-  service_type: string;
+  service_type?: string;
   message?: string;
   status?: string;
   created_at?: string;

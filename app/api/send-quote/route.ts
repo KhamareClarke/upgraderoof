@@ -2,14 +2,35 @@ import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
 
-    if (!formData?.name || !formData?.email) {
+    // Honeypot check — if filled, silently return success to trick bots
+    if (formData.website) {
+      console.log('[spam] Honeypot triggered for quote form');
       return NextResponse.json(
-        { success: false, error: 'Name and email are required.' },
+        { success: true, message: 'Quote request received' },
+        { status: 200 }
+      );
+    }
+
+    // Rate limiting — max 3 submissions per IP per hour
+    const clientIp = getClientIp(request);
+    const rateLimit = checkRateLimit(clientIp, 3, 60 * 60 * 1000);
+    if (!rateLimit.allowed) {
+      console.log(`[spam] Rate limit exceeded for IP: ${clientIp}`);
+      return NextResponse.json(
+        { success: false, error: 'Too many submissions. Please try again later.' },
+        { status: 429 }
+      );
+    }
+
+    if (!formData?.name || !formData?.phone || !formData?.postcode) {
+      return NextResponse.json(
+        { success: false, error: 'Name, phone and postcode are required.' },
         { status: 400 }
       );
     }
@@ -49,10 +70,10 @@ export async function POST(request: NextRequest) {
       <h2>New Quote Request</h2>
       <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
         <p><strong>Name:</strong> ${formData.name}</p>
-        <p><strong>Email:</strong> ${formData.email}</p>
+        ${formData.email ? `<p><strong>Email:</strong> ${formData.email}</p>` : ''}
         <p><strong>Phone:</strong> ${formData.phone}</p>
         <p><strong>Postcode:</strong> ${formData.postcode}</p>
-        <p><strong>Service Type:</strong> ${formData.service_type}</p>
+        ${formData.service_type ? `<p><strong>Service Type:</strong> ${formData.service_type}</p>` : ''}
         ${formData.message ? `<p><strong>Additional Details:</strong></p><p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; white-space: pre-wrap;">${formData.message}</p>` : ''}
       </div>
       <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
@@ -64,7 +85,7 @@ export async function POST(request: NextRequest) {
       await transporter.sendMail({
         from,
         to,
-        subject: `New Quote Request - ${formData.service_type} (${formData.name})`,
+        subject: `New Quote Request - ${formData.service_type || 'Free Inspection'} (${formData.name})`,
         html: emailHtml,
       });
     } catch (mailErr: unknown) {

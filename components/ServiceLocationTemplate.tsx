@@ -76,31 +76,54 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
       {/* Hero */}
       <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/6.jpeg)' }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/95 to-brand-navy/80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/90 via-brand-navy/80 to-brand-navy/70" />
         </div>
         <div className="container-custom relative z-10">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
-              <MapPin className="w-4 h-4 text-brand-orange" />
-              <span>{town.town}, Cheshire</span>
+          <div className="max-w-3xl text-white space-y-5">
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-orange text-white font-bold">
+              <MapPin className="w-4 h-4" />
+              <span className="text-sm tracking-wide">FREE ROOF INSPECTION — {town.town.toUpperCase()}</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
               {service.name} in <span className="text-brand-orange">{town.town}</span>
             </h1>
-            <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl leading-relaxed">
+            <p className="text-lg sm:text-xl text-white/90 max-w-2xl leading-relaxed">
               Expert {service.name.toLowerCase()} from your local Cheshire roofers. {town.distanceFromBase} — fast response, free quotes, 10-year guarantee.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+
+            {/* Call-first highlight box */}
+            <div className="bg-white/10 backdrop-blur-sm border-2 border-brand-orange rounded-2xl p-6 text-center max-w-md">
+              <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">📞 01270 897606</div>
+              <div className="text-lg font-semibold">We Answer in 30 Seconds!</div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 pt-2">
               <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-8 h-14 text-base">
-                  Get a Free Quote
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14 text-lg rounded-xl shadow-lg">
+                  <span className="!text-white">Get Your Free Inspection</span>
                 </Button>
               } />
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 h-14 text-base" asChild>
+              <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14 text-lg rounded-xl transition-colors" asChild>
                 <TrackedPhoneLink href="tel:01270897606" placement="service_location_hero">
-                  <Phone className="w-5 h-5 mr-2" />01270 897 606
+                  <Phone className="w-5 h-5 mr-2" /><span className="!text-white">01270 897 606</span>
                 </TrackedPhoneLink>
               </Button>
+            </div>
+
+            {/* Trust indicators */}
+            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20 max-w-md">
+              <div className="text-center">
+                <Shield className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
+                <div className="text-xs font-semibold">Fully Insured</div>
+              </div>
+              <div className="text-center">
+                <Star className="w-7 h-7 text-yellow-400 fill-current mx-auto mb-1.5" />
+                <div className="text-xs font-semibold">5★ Google Rating</div>
+              </div>
+              <div className="text-center">
+                <Clock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
+                <div className="text-xs font-semibold">Same Day Response</div>
+              </div>
             </div>
           </div>
         </div>
@@ -182,8 +205,8 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
               </ul>
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <QuoteForm trigger={
-                  <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold h-12">
-                    Get Free {service.name} Quote
+                  <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold h-12 text-base rounded-xl shadow-lg">
+                    <span className="!text-white">Get Free {service.name} Quote</span>
                   </Button>
                 } />
               </div>
@@ -262,23 +285,26 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
       </section>
 
       {/* CTA */}
-      <section className="section-padding bg-brand-navy text-white">
+      <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Need {service.name} in {town.town}?
           </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl mb-2 max-w-2xl mx-auto">
             {town.ctaLine || `Get a free, no-obligation quote. We'll inspect and provide a clear written price.`}
+          </p>
+          <p className="text-lg mb-8 max-w-2xl mx-auto text-white/80">
+            We'll call you within 10 minutes to confirm your booking.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <QuoteForm trigger={
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-10 h-14 text-base">
-                Get Your Free Quote
+              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-xl shadow-lg">
+                <span className="!text-white">Get Your Free Inspection</span>
               </Button>
             } />
-            <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-10 h-14 text-base" asChild>
+            <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14 text-lg rounded-xl transition-colors" asChild>
               <TrackedPhoneLink href="tel:01270897606" placement="service_location_cta">
-                <Phone className="w-5 h-5 mr-2" />01270 897 606
+                <Phone className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span>
               </TrackedPhoneLink>
             </Button>
           </div>

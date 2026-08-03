@@ -21,6 +21,9 @@ const GTM_ID         = process.env.NEXT_PUBLIC_GTM_ID         || 'GTM-5LMDG3F7';
 const GA4_ID         = process.env.NEXT_PUBLIC_GA4_ID         || 'G-7V452FMYFY';
 const GADS_ID        = process.env.NEXT_PUBLIC_GADS_ID        || 'AW-8479028400';
 const GADS_CONV_ID   = process.env.NEXT_PUBLIC_GADS_CONV_ID   || 'AW-17763560213';
+// Low-value engagement-click conversion action (phone/WhatsApp taps). Falls
+// back to the lead-form ID until a dedicated action exists in Google Ads.
+const GADS_CLICK_CONV_ID = process.env.NEXT_PUBLIC_GADS_CLICK_CONV_ID || GADS_CONV_ID;
 
 export function Analytics() {
   // Capture gclid/gbraid/wbraid from the landing URL into localStorage so
@@ -100,6 +103,7 @@ export function Analytics() {
         {`
           gtag('config', '${GADS_ID}');
           gtag('config', '${GADS_CONV_ID}');
+          gtag('config', '${GADS_CLICK_CONV_ID}');
         `}
       </Script>
     </>

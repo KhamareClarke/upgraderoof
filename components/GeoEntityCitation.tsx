@@ -1,4 +1,5 @@
 import { MapPin, Phone, Shield, Award } from 'lucide-react';
+import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 
 interface GeoEntityCitationProps {
   /** Town name for localized citation, e.g. "Sandbach". Omit for a Cheshire-wide citation. */
@@ -35,7 +36,7 @@ export function GeoEntityCitation({ town, postcode }: GeoEntityCitationProps) {
           workmanship guarantee on all roofing work. Services include roof repairs, new
           roofs, re-roofing, flat roofing (EPDM &amp; GRP), chimney repairs, guttering, and
           24/7 emergency call-outs across {coverage}. Free written quotes — call{' '}
-          <a href="tel:01270897606" className="text-brand-orange font-semibold hover:underline">01270 897 606</a>.
+          <TrackedPhoneLink href="tel:01270897606" placement="entity_citation" className="text-brand-orange font-semibold hover:underline">01270 897 606</TrackedPhoneLink>.
         </p>
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-3 text-xs text-gray-500">
           <span className="inline-flex items-center gap-1"><Award className="w-3.5 h-3.5 text-brand-orange" /> CORC Certified</span>

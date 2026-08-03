@@ -29,6 +29,7 @@ export default function SpecialOfferPage() {
     serviceNeeded: '',
     sameDayCallback: false
   });
+  const [honeypot, setHoneypot] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
@@ -90,7 +91,7 @@ export default function SpecialOfferPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, gclid: getGclid() }),
+        body: JSON.stringify({ ...formData, gclid: getGclid(), website: honeypot }),
       });
 
       const result = await response.json();
@@ -321,7 +322,7 @@ export default function SpecialOfferPage() {
                 </div>
 
                 <div className="flex items-center space-x-3 p-4 bg-blue-50 rounded-xl">
-                  <Checkbox 
+                  <Checkbox
                     id="callback"
                     checked={formData.sameDayCallback}
                     onCheckedChange={(checked) => setFormData({...formData, sameDayCallback: !!checked})}
@@ -331,8 +332,21 @@ export default function SpecialOfferPage() {
                   </Label>
                 </div>
 
-                <Button 
-                  type="submit" 
+                {/* Honeypot field — hidden from humans, visible to bots */}
+                <div className="hidden" aria-hidden="true">
+                  <Label htmlFor="offer-website">Website</Label>
+                  <Input
+                    id="offer-website"
+                    type="text"
+                    value={honeypot}
+                    onChange={(e) => setHoneypot(e.target.value)}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
+
+                <Button
+                  type="submit"
                   disabled={isSubmitting}
                   className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold py-4 text-xl h-16 rounded-xl shadow-lg"
                 >

@@ -69,11 +69,11 @@ export default function NewRoofsPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-8 h-14">
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
                   Get Free Quote
                 </Button>
               } />
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 h-14" asChild>
+              <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14" asChild>
                 <TrackedPhoneLink href="tel:01270897606" placement="new_roofs_hero">
                   <Phone className="w-5 h-5 mr-2" />
                   01270 897 606
@@ -245,14 +245,14 @@ export default function NewRoofsPage() {
             Get a free, no-obligation quote for your complete roof replacement in Sandbach or across Cheshire
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-10 h-14" asChild>
+            <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14" asChild>
               <TrackedPhoneLink href="tel:01270897606" placement="new_roofs_bottom_cta">
                 <Phone className="w-5 h-5 mr-2" />
                 Call 01270 897 606
               </TrackedPhoneLink>
             </Button>
             <QuoteForm trigger={
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-10 h-14">
+              <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14">
                 Get Free Quote
               </Button>
             } />

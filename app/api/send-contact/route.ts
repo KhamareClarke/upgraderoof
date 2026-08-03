@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
+import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 
 const ghlOpps = require('@/lib/ghl/opportunities.js');
 
@@ -36,6 +37,26 @@ async function createOpportunityForContact(contactId: string | null, name: strin
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.json();
+
+    // Honeypot check — if filled, silently return success to trick bots
+    if (formData.website) {
+      console.log('[spam] Honeypot triggered for contact form');
+      return NextResponse.json(
+        { success: true, message: 'Message received' },
+        { status: 200 }
+      );
+    }
+
+    // Rate limiting — max 3 submissions per IP per hour
+    const clientIp = getClientIp(request);
+    const rateLimit = checkRateLimit(clientIp, 3, 60 * 60 * 1000);
+    if (!rateLimit.allowed) {
+      console.log(`[spam] Rate limit exceeded for IP: ${clientIp}`);
+      return NextResponse.json(
+        { success: false, error: 'Too many submissions. Please try again later.' },
+        { status: 429 }
+      );
+    }
 
     if (!formData?.name || !formData?.email) {
       return NextResponse.json(

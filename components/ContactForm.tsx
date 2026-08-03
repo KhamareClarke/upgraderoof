@@ -21,6 +21,7 @@ export function ContactForm() {
     subject: '',
     message: '',
   });
+  const [honeypot, setHoneypot] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +35,7 @@ export function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, gclid: getGclid() }),
+        body: JSON.stringify({ ...formData, gclid: getGclid(), website: honeypot }),
       });
 
       const result = await response.json();
@@ -159,6 +160,19 @@ export function ContactForm() {
                         placeholder="Tell us about your roofing project, including property type, approximate size, and any specific requirements..."
                         rows={5}
                         className="text-sm sm:text-base resize-none"
+                      />
+                    </div>
+
+                    {/* Honeypot field — hidden from humans, visible to bots */}
+                    <div className="hidden" aria-hidden="true">
+                      <Label htmlFor="contact-website">Website</Label>
+                      <Input
+                        id="contact-website"
+                        type="text"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                        tabIndex={-1}
+                        autoComplete="off"
                       />
                     </div>
 

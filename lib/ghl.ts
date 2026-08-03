@@ -128,7 +128,17 @@ export async function pushLeadToGhl(input: GhlLeadInput): Promise<string | null>
   try {
     const res = await ghlFetch('/contacts/upsert', 'POST', c.token, payload);
     if (res.status !== 200 && res.status !== 201) {
-      console.warn(`[ghl] upsert returned ${res.status}: ${JSON.stringify(res.body).slice(0, 300)}`);
+      // Detailed diagnostics — a rejected upsert (401/422/etc.) must be loud in
+      // the terminal so a lead-capture break is visible during form testing.
+      console.error(`[ghl] ❌ CONTACT UPSERT REJECTED — HTTP ${res.status}`);
+      console.error(`[ghl]    locationId : ${c.locationId}`);
+      console.error(`[ghl]    lead       : name="${input.name}" phone="${input.phone || ''}" email="${input.email || ''}" postcode="${input.postcode || ''}"`);
+      console.error(`[ghl]    response   : ${JSON.stringify(res.body)}`);
+      if (res.status === 401 || res.status === 403) {
+        console.error('[ghl]    hint       : auth failed — check GHL_API_KEY (Private Integration token) and that it is scoped to this location.');
+      } else if (res.status === 422) {
+        console.error('[ghl]    hint       : validation failed — a field in the payload is malformed (often a customFields id or an unexpected property).');
+      }
       return null;
     }
     const contact = res.body.contact || res.body;
@@ -144,7 +154,12 @@ export async function pushLeadToGhl(input: GhlLeadInput): Promise<string | null>
     }
     return id;
   } catch (err) {
-    console.warn('[ghl] upsert failed:', err instanceof Error ? err.message : err);
+    // Network/transport failure (DNS, timeout, fetch threw) — distinct from an
+    // HTTP rejection above. Log the full error so the cause is diagnosable.
+    console.error('[ghl] ❌ CONTACT UPSERT FAILED (exception)');
+    console.error(`[ghl]    locationId : ${c.locationId}`);
+    console.error(`[ghl]    lead       : name="${input.name}" phone="${input.phone || ''}" email="${input.email || ''}"`);
+    console.error('[ghl]    error      :', err instanceof Error ? (err.stack || err.message) : err);
     return null;
   }
 }

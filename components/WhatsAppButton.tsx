@@ -1,6 +1,6 @@
 'use client';
 
-import { MessageCircle } from 'lucide-react';
+import { WhatsAppIcon } from '@/components/WhatsAppIcon';
 import { trackWhatsAppClick } from '@/lib/tracking';
 
 export function WhatsAppButton() {
@@ -21,7 +21,7 @@ export function WhatsAppButton() {
     >
       <div className="relative">
         <div className="relative w-12 h-12 md:w-14 md:h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-green-500/50 transition-all duration-300 hover:scale-110">
-          <MessageCircle className="w-6 h-6 md:w-7 md:h-7 text-white" strokeWidth={2} />
+          <WhatsAppIcon className="w-6 h-6 md:w-7 md:h-7 text-white" />
         </div>
         <div className="absolute -top-1 -right-1 w-4 h-4 md:w-5 md:h-5 bg-red-500 rounded-full border-2 border-white flex items-center justify-center animate-pulse">
           <span className="text-[8px] md:text-[10px] font-bold text-white">1</span>

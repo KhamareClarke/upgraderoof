@@ -247,7 +247,7 @@ export default function ContactPage() {
               Storm damage? Leak? We offer 24/7 emergency roofing services across Cheshire. Our emergency team can be with you within hours to secure your property and prevent further damage. Don't wait - water damage can quickly escalate and cause structural issues.
             </p>
             <TrackedPhoneLink href="tel:01270897606" placement="contact_emergency_cta" className="inline-block w-full sm:w-auto">
-              <button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg rounded-md transition-colors w-full sm:w-auto">
+              <button className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg rounded-md transition-colors w-full sm:w-auto">
                 <span className="hidden sm:inline">Call Now: </span>01270 897 606
               </button>
             </TrackedPhoneLink>
