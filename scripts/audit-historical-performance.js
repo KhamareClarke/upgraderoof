@@ -20,12 +20,13 @@ const https = require('https');
 const API_VERSION = 'v22';
 const CUSTOMER_ID = (process.env.GOOGLE_ADS_CUSTOMER_ID || '').replace(/\D/g, '');
 
-const START = '2026-02-01';
-const END = '2026-07-31'; // July is partial (today is 2026-07-24) — flagged in output
-const MONTHS = ['2026-02', '2026-03', '2026-04', '2026-05', '2026-06', '2026-07'];
+const START = '2025-12-01';
+const END = '2026-08-31'; // current partial month — flagged in output
+const MONTHS = ['2025-12', '2026-01', '2026-02', '2026-03', '2026-04', '2026-05', '2026-06', '2026-07', '2026-08'];
 const MONTH_LABELS = {
-  '2026-02': 'Feb 2026', '2026-03': 'Mar 2026', '2026-04': 'Apr 2026',
-  '2026-05': 'May 2026', '2026-06': 'Jun 2026', '2026-07': 'Jul 2026*',
+  '2025-12': 'Dec 2025', '2026-01': 'Jan 2026', '2026-02': 'Feb 2026',
+  '2026-03': 'Mar 2026', '2026-04': 'Apr 2026', '2026-05': 'May 2026',
+  '2026-06': 'Jun 2026', '2026-07': 'Jul 2026', '2026-08': 'Aug 2026*',
 };
 
 function banner(t) {
