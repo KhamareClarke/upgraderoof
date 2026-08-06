@@ -27,13 +27,28 @@ const APPLY = process.argv.includes('--apply');
 const BROAD_NEGATIVES = [
   'how to', 'diy', 'surveyor', 'calculator', 'reviews', 'supplies',
   'damp', 'sealant', 'sealer', 'sweep', 'kit', 'thatcher',
+  // Non-intent / informational classes that drain spend (search-terms audit).
+  'cost', 'price', 'how much', 'average',
 ];
 const PHRASE_NEGATIVES = [
   'flat roof leak repair kit', 'damp proof', 'roof surveyor',
   'independent roofing surveyor', 'chimney sweep', 'roofing supplies',
+  // High-cost, zero-conversion queries from the search-terms audit (£249/30d).
+  'roof repairs near me', 'roofers near me', 'local roofing',
+  'ridge tile repairs near me', 'roofing contractors near me',
+  'roof installation near me', 'roofers in sandbach',
+  'roofer crewe', 'roofers congleton', 'crewe roofing',
+  'cost of repointing chimney', 'chimney lining near me',
+  'home seal roofing contractors', 're roofing stables',
 ];
 const COMPETITOR_NEGATIVES = [
   'lj symonds', 'cheshire roof care', 'emerton roofing', 'just roofs',
+  // Competitor / misdirected brands shown in search terms.
+  'sig roofing', 'sigroofing', 'keith rowley', 'coopers roofing',
+  'ultimate roofing', 'b&m roofing', 'j russell roofing', 'd l evans roofing',
+  'ar roofing', 'homeseal', 'low cost roofing', 'wrexham upvc',
+  // Out-of-area / wrong-geo intents.
+  'stoke on trent', 'warrington', 'wrexham', 'arnold roofing',
 ];
 
 // Core commercial terms that should be (or stay) phrase match
@@ -155,7 +170,8 @@ async function main() {
   // ---------------------------------------------------------------------------
   banner('2. KEYWORD MATCH-TYPE AUDIT');
   const kwRows = await gaql(headers,
-    `SELECT ad_group_criterion.keyword.text, ad_group_criterion.keyword.match_type,
+    `SELECT ad_group_criterion.resource_name, ad_group_criterion.keyword.text,
+            ad_group_criterion.keyword.match_type,
             ad_group_criterion.status, ad_group.name
      FROM ad_group_criterion
      WHERE campaign.resource_name = '${campaignRN}'
@@ -186,6 +202,46 @@ async function main() {
   for (const t of CORE_PHRASE_TERMS) {
     const present = activeTexts.has(t.toLowerCase());
     console.log(`    ${present ? 'OK     ' : 'MISSING'}  "${t}"${present ? '' : '  — consider adding as PHRASE'}`);
+  }
+
+  // Convert every BROAD keyword to PHRASE match so we stop pulling semantically
+  // unrelated junk (search-terms audit). Google Ads has no "update match type";
+  // we remove the broad keyword and create its phrase-match twin.
+  const broadRows = kwRows.filter(r => r.adGroupCriterion.keyword.matchType === 'BROAD');
+  let converted = 0;
+  let mtFailed = '';
+  if (broadRows.length) {
+    if (APPLY) {
+      const operations = [];
+      for (const r of broadRows) {
+        const adGroupRN = r.adGroupCriterion.resourceName.split('/').slice(0, -2).join('/');
+        operations.push({
+          remove: {
+            resourceName: r.adGroupCriterion.resourceName,
+          },
+        });
+        operations.push({
+          create: {
+            adGroup: adGroupRN,
+            keyword: { text: r.adGroupCriterion.keyword.text, matchType: 'PHRASE' },
+          },
+        });
+      }
+      const res = await request('POST',
+        `/${API_VERSION}/customers/${CUSTOMER_ID}/adGroupCriteria:mutate`, headers,
+        { operations, partialFailure: true });
+      if (res.status !== 200) {
+        mtFailed = JSON.stringify(res.body).slice(0, 800);
+      } else {
+        const failures = (res.body.partialFailureError ? [res.body.partialFailureError.message] : []);
+        if (failures.length) mtFailed = failures.join(' | ');
+        // Each broad keyword produces a remove + a create; count only successes.
+        const ok = (res.body.results || []).filter(x => x.resourceName && !x.operation).length;
+        converted = Math.floor(ok / 2);
+      }
+    } else {
+      console.log('\n(dry run — would convert ' + broadRows.length + ' BROAD keywords to PHRASE)');
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -262,6 +318,7 @@ async function main() {
   console.log(`Negatives already there: ${skipped.length}`);
   console.log(`Negatives applied:       ${APPLY ? appliedNegatives : 0}`);
   console.log(`Broad keywords found:    ${(byMatch.BROAD || []).length}`);
+  console.log(`Broad → phrase:          ${APPLY ? `${converted} converted` : (mtFailed ? `FAILED: ${mtFailed}` : `would convert ${(byMatch.BROAD || []).length}`)}`);
   if (!APPLY && toCreate.length) {
     console.log('\nRe-run with --apply to execute the mutations:');
     console.log('  node scripts/apply-ads-optimizations.js --apply\n');

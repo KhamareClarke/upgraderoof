@@ -60,6 +60,7 @@ NEXT_PUBLIC_GTM_ID=GTM-XXXXXXXX           # Google Tag Manager container ID
 NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX            # GA4 measurement ID
 NEXT_PUBLIC_GOOGLE_ADS_ID=AW-XXXXXXXXXX   # Google Ads account ID
 NEXT_PUBLIC_GA_CONVERSION_SEND_TO=AW-XXXXXXXXXX/YYYYYYYYY  # Google Ads conversion label
+NEXT_PUBLIC_GADS_CLICK_CONV_ID=AW-XXX/YYY # Dedicated phone/WhatsApp-tap conversion action (NOT the lead-form ID)
 NEXT_PUBLIC_FB_PIXEL_ID=XXXXXXXXXXXXXXX   # Meta Pixel ID
 ```
 
