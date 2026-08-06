@@ -1,0 +1,24 @@
+# robots.txt for upgraderoof.co.uk
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /thank-you/
+
+# Sitemaps
+Sitemap: https://upgraderoof.co.uk/sitemap.xml
+Sitemap: https://upgraderoof.co.uk/sitemap-0.xml
+
+# Crawl-delay
+Crawl-delay: 0
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
