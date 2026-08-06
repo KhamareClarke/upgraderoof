@@ -2,8 +2,7 @@ import type { Metadata } from 'next';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { trackPhoneClick } from '@/lib/tracking';
-import { 
+import {
   Home, 
   Info, 
   Wrench, 
@@ -148,17 +147,17 @@ export default function SitemapPage() {
                   <h3 className="font-bold text-brand-navy mb-2">{action.title}</h3>
                   <p className="text-sm text-gray-600 mb-4">{action.description}</p>
                   <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white" asChild>
-                    <Link
-                      href={action.url}
-                      onClick={
-                        action.url.startsWith('tel:')
-                          ? () => trackPhoneClick('sitemap_page')
-                          : undefined
-                      }
-                    >
-                      Access Now
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Link>
+                    {action.url.startsWith('tel:') ? (
+                      <TrackedPhoneLink href={action.url} placement="sitemap_page">
+                        Access Now
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </TrackedPhoneLink>
+                    ) : (
+                      <Link href={action.url}>
+                        Access Now
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Link>
+                    )}
                   </Button>
                 </CardContent>
               </Card>
