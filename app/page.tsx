@@ -5,9 +5,9 @@ import { Services } from '@/components/Services';
 import { WhyChooseUs } from '@/components/WhyChooseUs';
 import { VideoTestimonials } from '@/components/VideoTestimonials';
 import { CTABanner } from '@/components/CTABanner';
-import { ReviewsBlock, GalleryBlock, FAQBlock, ContactBlock, SEOBlock } from '@/components/HomepageSections';
+import { GalleryBlock, FAQBlock, ContactBlock, SEOBlock } from '@/components/HomepageSections';
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
-import { CheckCircle, Star, Award, Shield, Home as HomeIcon, Layers, MapPin, ArrowRight } from 'lucide-react';
+import { Star, Award, Shield, MapPin, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -64,16 +64,26 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
             {/* MyApproved */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-3">
-                <CheckCircle className="w-8 h-8 text-green-600" />
+            <a
+              href="https://myapproved.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
+            >
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-3 overflow-hidden">
+                {/* MyApproved logo */}
+                <img
+                  src="https://myapproved.com/logo-icon.svg"
+                  alt="MyApproved logo"
+                  className="w-10 h-10 object-contain"
+                />
               </div>
               <p className="text-sm font-semibold text-gray-800">MyApproved</p>
               <p className="text-xs text-gray-600 mt-1">Vetted & Verified</p>
-            </div>
-            
+            </a>
+
             {/* Google Reviews */}
             <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-3">
@@ -82,7 +92,7 @@ export default function Home() {
               <p className="text-sm font-semibold text-gray-800">Google Reviews</p>
               <p className="text-xs text-gray-600 mt-1">5 Star Rated</p>
             </div>
-            
+
             {/* CORC */}
             <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-3">
@@ -91,7 +101,7 @@ export default function Home() {
               <p className="text-sm font-semibold text-gray-800">CORC</p>
               <p className="text-xs text-gray-600 mt-1">Approved Member</p>
             </div>
-            
+
             {/* IBG */}
             <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
               <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-3">
@@ -99,33 +109,6 @@ export default function Home() {
               </div>
               <p className="text-sm font-semibold text-gray-800">IBG</p>
               <p className="text-xs text-gray-600 mt-1">Insurance Backed Guarantee</p>
-            </div>
-            
-            {/* IBG Protected */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-3">
-                <Shield className="w-8 h-8 text-red-600" />
-              </div>
-              <p className="text-sm font-semibold text-gray-800">IBG Protected</p>
-              <p className="text-xs text-gray-600 mt-1">10 Year Guarantee</p>
-            </div>
-            
-            {/* Freefoam */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-3">
-                <HomeIcon className="w-8 h-8 text-cyan-600" />
-              </div>
-              <p className="text-sm font-semibold text-gray-800">Freefoam</p>
-              <p className="text-xs text-gray-600 mt-1">Approved Installer</p>
-            </div>
-            
-            {/* Marley */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mb-3">
-                <Layers className="w-8 h-8 text-indigo-600" />
-              </div>
-              <p className="text-sm font-semibold text-gray-800">Marley</p>
-              <p className="text-xs text-gray-600 mt-1">Registered Installer</p>
             </div>
           </div>
         </div>
@@ -137,10 +120,7 @@ export default function Home() {
       <section id="about">
         <WhyChooseUs />
       </section>
-      <div className="bg-gradient-to-b from-gray-100 via-gray-50 to-white">
-        <ReviewsBlock />
-        <VideoTestimonials />
-      </div>
+      <VideoTestimonials />
 
       {/* Live Google Reviews — real customer reviews via GHL */}
       <section className="section-padding bg-gray-50">
