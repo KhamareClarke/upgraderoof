@@ -3,16 +3,18 @@
  *
  * End-to-end test for /api/ghl-webhook. Verifies that an incoming GHL POST
  * containing a contact email + gclid is correctly parsed and forwarded to
- * the Google Ads conversion tracker — WITHOUT touching real Google Ads.
+ * the Google Ads Data Manager API (events:ingest) — WITHOUT touching the real
+ * Google Ads / Data Manager API.
  *
  * How it works:
- *   1. Starts a local MOCK Google Ads server (OAuth token + searchStream +
- *      uploadClickConversions) on a random port, and records what it receives.
- *   2. Starts the Next.js dev server with GADS_API_HOST / GADS_OAUTH_TOKEN_URL
- *      pointed at the mock.
+ *   1. Starts a local MOCK Data Manager server (OAuth token + /v1/events:ingest)
+ *      on a random port, and records what it receives.
+ *   2. Starts the Next.js dev server with DM_API_HOST / DM_API_PROTOCOL /
+ *      GADS_OAUTH_TOKEN_URL pointed at the mock.
  *   3. Fires a series of GHL-shaped POSTs at /api/ghl-webhook.
- *   4. Asserts on the HTTP responses AND on the exact conversion payload the
- *      mock Ads server received (gclid, value, conversion action, dateTime).
+ *   4. Asserts on the HTTP responses (202 acknowledged) AND on the exact Data
+ *      Manager ingest payload the mock received (gclid, value, conversion
+ *      action productDestinationId, eventTimestamp).
  *
  * Run:  node scripts/test-ghl-webhook.js
  * (spins up its own servers; no manual `next dev` needed)
@@ -23,15 +25,14 @@ const http = require('http');
 const { spawn } = require('child_process');
 const path = require('path');
 
-const MOCK_ADS_PORT = 43197;
+const MOCK_DM_PORT = 43197;
 const NEXT_PORT = 43198;
 const WEBHOOK_URL = `http://127.0.0.1:${NEXT_PORT}/api/ghl-webhook`;
 
 // --- captured state -----------------------------------------------------------
 const received = {
   tokenCalls: 0,
-  searchStreamQueries: [],
-  uploadedConversions: [],
+  ingests: [], // { url, body, headers }
 };
 
 let passed = 0, failed = 0;
@@ -40,8 +41,8 @@ function check(name, cond, detail) {
   else { failed++; console.error(`  ✗ ${name}${detail ? ' — ' + detail : ''}`); }
 }
 
-// --- mock Google Ads server ----------------------------------------------------
-function startMockAdsServer() {
+// --- mock Data Manager server --------------------------------------------------
+function startMockDmServer() {
   return new Promise((resolve) => {
     const server = http.createServer((req, res) => {
       let body = '';
@@ -52,32 +53,23 @@ function startMockAdsServer() {
         if (url === '/token' && req.method === 'POST') {
           received.tokenCalls++;
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ access_token: 'mock-access-token', token_type: 'Bearer', expires_in: 3600 }));
+          res.end(JSON.stringify({ access_token: 'mock-access-token', token_type: 'Bearer', expires_in: 3600, scope: 'openid https://www.googleapis.com/auth/datamanager' }));
           return;
         }
-        // GAQL searchStream (conversion action lookup)
-        if (url.includes('/googleAds:searchStream')) {
-          let q = '';
-          try { q = JSON.parse(body).query || ''; } catch {}
-          received.searchStreamQueries.push(q);
-          res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify([{ results: [{ conversionAction: { resourceName: 'customers/8479028400/conversionActions/123456789', name: 'Calls from ads' } }] }]));
-          return;
-        }
-        // Offline conversion upload
-        if (url.includes('/conversionUploads:uploadClickConversions')) {
+        // Data Manager events:ingest (async fast-fail — 200 means accepted)
+        if (url === '/v1/events:ingest' && req.method === 'POST') {
           let parsed = {};
           try { parsed = JSON.parse(body); } catch {}
-          received.uploadedConversions.push({ url, body: parsed, headers: req.headers });
+          received.ingests.push({ url, body: parsed, headers: req.headers });
           res.writeHead(200, { 'Content-Type': 'application/json' });
-          res.end(JSON.stringify({ results: [{ gclid: parsed.conversions && parsed.conversions[0] && parsed.conversions[0].gclid }] }));
+          res.end(JSON.stringify({ requestId: 'mock-request-id-001' }));
           return;
         }
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.end(JSON.stringify({ error: 'not found', url }));
       });
     });
-    server.listen(MOCK_ADS_PORT, '127.0.0.1', () => resolve(server));
+    server.listen(MOCK_DM_PORT, '127.0.0.1', () => resolve(server));
   });
 }
 
@@ -87,15 +79,14 @@ function startNextDev() {
     const env = {
       ...process.env,
       PORT: String(NEXT_PORT),
-      GADS_API_HOST: `127.0.0.1:${MOCK_ADS_PORT}`,
-      GADS_API_PROTOCOL: 'http',
-      GADS_OAUTH_TOKEN_URL: `http://127.0.0.1:${MOCK_ADS_PORT}/token`,
-      // Ensure required Ads env present (use existing or dummy for the test)
+      DM_API_HOST: `127.0.0.1:${MOCK_DM_PORT}`,
+      DM_API_PROTOCOL: 'http',
+      GADS_OAUTH_TOKEN_URL: `http://127.0.0.1:${MOCK_DM_PORT}/token`,
+      // Ensure required Data Manager env present (use existing or dummy for the test)
       GOOGLE_ADS_CUSTOMER_ID: process.env.GOOGLE_ADS_CUSTOMER_ID || '8479028400',
-      GOOGLE_ADS_DEVELOPER_TOKEN: process.env.GOOGLE_ADS_DEVELOPER_TOKEN || 'test-dev-token',
-      GOOGLE_ADS_CLIENT_ID: process.env.GOOGLE_ADS_CLIENT_ID || 'test-client-id',
-      GOOGLE_ADS_CLIENT_SECRET: process.env.GOOGLE_ADS_CLIENT_SECRET || 'test-secret',
-      GOOGLE_ADS_REFRESH_TOKEN: process.env.GOOGLE_ADS_REFRESH_TOKEN || 'test-refresh',
+      GOOGLE_DM_CLIENT_ID: process.env.GOOGLE_DM_CLIENT_ID || 'test-dm-client-id',
+      GOOGLE_DM_CLIENT_SECRET: process.env.GOOGLE_DM_CLIENT_SECRET || 'test-dm-secret',
+      GOOGLE_DM_REFRESH_TOKEN: process.env.GOOGLE_DM_REFRESH_TOKEN || 'test-dm-refresh',
       // No GHL_WEBHOOK_SECRET in test → endpoint open
       GHL_WEBHOOK_SECRET: '',
     };
@@ -127,9 +118,9 @@ function startNextDev() {
   });
 }
 
-function cleanup(next, mockAds) {
+function cleanup(next, mockDm) {
   try { next.kill(); } catch {}
-  try { mockAds.close(); } catch {}
+  try { mockDm.close(); } catch {}
   if (process.platform === 'win32' && next && next.pid) {
     try { require('child_process').execSync(`taskkill /PID ${next.pid} /T /F`, { stdio: 'ignore' }); } catch {}
   }
@@ -146,13 +137,16 @@ async function post(payload) {
   return { status: res.status, json };
 }
 
+// Small helper to let fire-and-forget ingests land in the mock before asserting.
+const settle = () => new Promise(r => setTimeout(r, 1200));
+
 async function main() {
   console.log('='.repeat(70));
-  console.log('  /api/ghl-webhook — END-TO-END TEST (mock Google Ads)');
+  console.log('  /api/ghl-webhook — END-TO-END TEST (mock Data Manager)');
   console.log('='.repeat(70));
 
-  const mockAds = await startMockAdsServer();
-  console.log(`\n[setup] Mock Google Ads server on 127.0.0.1:${MOCK_ADS_PORT}`);
+  const mockDm = await startMockDmServer();
+  console.log(`\n[setup] Mock Data Manager server on 127.0.0.1:${MOCK_DM_PORT}`);
   console.log('[setup] Starting Next dev server (this can take ~20-40s)...');
   const next = await startNextDev();
   console.log(`[setup] Next dev server ready on 127.0.0.1:${NEXT_PORT}`);
@@ -167,7 +161,7 @@ async function main() {
     } catch {}
     await new Promise(r => setTimeout(r, 1500));
   }
-  if (!warm) { console.error('FATAL: webhook route did not respond after warm-up'); cleanup(next, mockAds); process.exit(1); }
+  if (!warm) { console.error('FATAL: webhook route did not respond after warm-up'); cleanup(next, mockDm); process.exit(1); }
   console.log('[setup] Route is live.\n');
 
   try {
@@ -177,33 +171,41 @@ async function main() {
     check('GET returns self-description', getRes.ok && getJson.ok === true);
     check('GET lists conversion stages', Array.isArray(getJson.convertsOnStages) && getJson.convertsOnStages.length === 2);
 
-    // --- Case 1: Job Won with email + gclid + value → should upload £value ---
+    // --- Case 1: Job Won with email + gclid + value → should ingest £value ---
     console.log('\nCase 1: "Job Won" with email + gclid + explicit value');
     let r = await post({ stage: 'Job Won', gclid: 'Cj0KCQjw_testGCLID_jobwon', email: 'lead@example.com', value: 4500, contact_id: 'cnt_1' });
-    check('responds 200 success', r.status === 200 && r.json.success === true, JSON.stringify(r.json));
+    check('responds 202 acknowledged', r.status === 202 && r.json.success === true && r.json.acknowledged === true, JSON.stringify(r.json));
+    check('flags async fire-and-forget', r.json.async === true, JSON.stringify(r.json));
     check('flags conversion stage = Job Won', r.json.conversion && r.json.conversion.stage === 'Job Won');
 
     // --- Case 2: Site Visit Booked, no value → default £50 ---
     console.log('\nCase 2: "Site Visit Booked" with gclid, no value (default £50)');
     r = await post({ stage: 'Site Visit Booked', gclid: 'Cj0KCQjw_testGCLID_visit', email: 'lead2@example.com' });
-    check('responds 200 success', r.status === 200 && r.json.success === true, JSON.stringify(r.json));
+    check('responds 202 acknowledged', r.status === 202 && r.json.success === true && r.json.acknowledged === true, JSON.stringify(r.json));
     check('uses default value 50', r.json.conversion && r.json.conversion.value === 50, JSON.stringify(r.json.conversion));
 
     // --- Case 3: nested GHL opportunity payload shape ---
     console.log('\nCase 3: nested opportunity.stage.name + contact.customField.gclid');
     r = await post({ opportunity: { stage: { name: 'Job Won' } }, contact: { customField: { gclid: 'Cj0KCQjw_nested' }, email: 'n@example.com' }, value: 1200 });
-    check('nested payload parsed + uploaded', r.status === 200 && r.json.success === true, JSON.stringify(r.json));
+    check('nested payload parsed + acknowledged', r.status === 202 && r.json.success === true && r.json.acknowledged === true, JSON.stringify(r.json));
 
-    // --- Case 4: conversion stage but NO gclid → ignored, no upload ---
-    console.log('\nCase 4: "Job Won" WITHOUT gclid → ignored, nothing uploaded');
-    const before = received.uploadedConversions.length;
+    // --- Case 4: conversion stage but NO gclid → ignored, no ingest ---
+    console.log('\nCase 4: "Job Won" WITHOUT gclid → ignored, nothing ingested');
+    // First let any in-flight fire-and-forget from cases 1-3 fully land so the
+    // "before" baseline is stable, then assert NO additional ingest is produced.
+    await settle();
+    const before = received.ingests.length;
+    const beforeIds = new Set(received.ingests.map(i => i.body.events[0].adIdentifiers.gclid));
     r = await post({ stage: 'Job Won', email: 'nogclid@example.com' });
+    await settle();
+    const newIngests = received.ingests.filter(i => !beforeIds.has(i.body.events[0].adIdentifiers.gclid));
     check('responds success but ignored=true', r.status === 200 && r.json.ignored === true, JSON.stringify(r.json));
-    check('no new Ads upload for missing gclid', received.uploadedConversions.length === before);
+    check('no new ingest for missing gclid', newIngests.length === 0 && received.ingests.length === before, `before=${before} now=${received.ingests.length}`);
 
     // --- Case 5: non-conversion stage → ignored ---
     console.log('\nCase 5: non-conversion stage ("New Lead") → ignored');
     r = await post({ stage: 'New Lead', gclid: 'Cj0KCQjw_newlead' });
+    await settle();
     check('ignored=true for non-conversion stage', r.status === 200 && r.json.ignored === true);
 
     // --- Case 6: missing stage entirely → 422 ---
@@ -211,29 +213,44 @@ async function main() {
     r = await post({ gclid: 'Cj0KCQjw_nostage', email: 'x@example.com' });
     check('responds 422', r.status === 422, `got ${r.status}`);
 
-    // --- Assertions on what the MOCK Ads server actually received ---
-    console.log('\nForwarding assertions (what Google Ads received):');
+    // Let the async fire-and-forget ingests from cases 1-3 land before asserting.
+    await settle();
+
+    // --- Assertions on what the MOCK Data Manager server actually received ---
+    console.log('\nForwarding assertions (what Data Manager received):');
     check('OAuth token was exchanged', received.tokenCalls >= 1, `tokenCalls=${received.tokenCalls}`);
-    check('conversion action looked up via GAQL', received.searchStreamQueries.some(q => /conversion_action/.test(q) && /Calls from ads/.test(q)));
-    check('exactly 3 conversions uploaded (cases 1-3)', received.uploadedConversions.length === 3, `got ${received.uploadedConversions.length}`);
+    check('exactly 3 ingests received (cases 1-3)', received.ingests.length === 3, `got ${received.ingests.length}`);
 
-    const up1 = received.uploadedConversions[0];
-    check('case1 gclid forwarded correctly', up1 && up1.body.conversions[0].gclid === 'Cj0KCQjw_testGCLID_jobwon');
-    check('case1 value forwarded = 4500', up1 && up1.body.conversions[0].conversionValue === 4500);
-    check('case1 currency = GBP', up1 && up1.body.conversions[0].currencyCode === 'GBP');
-    check('case1 conversion action = Calls from ads resource', up1 && /conversionActions\/123456789/.test(up1.body.conversions[0].conversionAction));
-    check('case1 has conversionDateTime', up1 && /^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\+00:00$/.test(up1.body.conversions[0].conversionDateTime), up1 && up1.body.conversions[0].conversionDateTime);
-    check('case1 sent developer-token header', up1 && !!up1.headers['developer-token']);
-    check('case1 sent Authorization Bearer', up1 && /^Bearer mock-access-token$/.test(up1.headers.authorization || ''));
+    // Fire-and-forget means ingests may ARRIVE out of order — find each case by
+    // its gclid rather than assuming array index order.
+    const find = (gclid) => received.ingests.find(i => i.body.events[0].adIdentifiers.gclid === gclid);
+    const ev = (i) => i && i.body.events[0];
+    const dst = (i) => i && i.body.destinations[0];
 
-    const up2 = received.uploadedConversions[1];
-    check('case2 default value 50 forwarded', up2 && up2.body.conversions[0].conversionValue === 50);
+    const case1 = find('Cj0KCQjw_testGCLID_jobwon');
+    check('case1 destination operatingAccount = 8479028400', case1 && dst(case1).operatingAccount.accountId === '8479028400', case1 && JSON.stringify(case1.body.destinations));
+    check('case1 operatingAccount type = GOOGLE_ADS', case1 && dst(case1).operatingAccount.accountType === 'GOOGLE_ADS');
+    check('case1 productDestinationId = 7700922855 (Job Won)', case1 && dst(case1).productDestinationId === '7700922855', case1 && dst(case1).productDestinationId);
+    check('case1 gclid forwarded via adIdentifiers', case1 && ev(case1).adIdentifiers.gclid === 'Cj0KCQjw_testGCLID_jobwon');
+    check('case1 has required transactionId', case1 && !!ev(case1).transactionId, case1 && ev(case1).transactionId);
+    check('case1 transactionId = contact id (stable dedupe)', case1 && ev(case1).transactionId === 'cnt_1', case1 && ev(case1).transactionId);
+    check('case1 value forwarded = 4500 (real currency)', case1 && ev(case1).conversionValue === 4500);
+    check('case1 currency = GBP', case1 && ev(case1).currency === 'GBP');
+    check('case1 has eventTimestamp (RFC3339 ISO)', case1 && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/.test(ev(case1).eventTimestamp), case1 && ev(case1).eventTimestamp);
+    check('case1 NO developer-token header (Data Manager)', case1 && !case1.headers['developer-token']);
+    check('case1 sent Authorization Bearer', case1 && /^Bearer mock-access-token$/.test(case1.headers.authorization || ''));
 
-    const up3 = received.uploadedConversions[2];
-    check('case3 nested gclid forwarded', up3 && up3.body.conversions[0].gclid === 'Cj0KCQjw_nested');
-    check('case3 value 1200 forwarded', up3 && up3.body.conversions[0].conversionValue === 1200);
+    const case2 = find('Cj0KCQjw_testGCLID_visit');
+    check('case2 default value 50 forwarded', case2 && ev(case2).conversionValue === 50);
+    check('case2 productDestinationId = 7700922852 (Site Visit Booked)', case2 && dst(case2).productDestinationId === '7700922852', case2 && dst(case2).productDestinationId);
+    check('case2 transactionId present (fallback, no contact_id)', case2 && !!ev(case2).transactionId);
+
+    const case3 = find('Cj0KCQjw_nested');
+    check('case3 nested gclid forwarded', case3 && ev(case3).adIdentifiers.gclid === 'Cj0KCQjw_nested');
+    check('case3 value 1200 forwarded', case3 && ev(case3).conversionValue === 1200);
+    check('case3 productDestinationId = 7700922855 (Job Won)', case3 && dst(case3).productDestinationId === '7700922855');
   } finally {
-    cleanup(next, mockAds);
+    cleanup(next, mockDm);
   }
 
   console.log('\n' + '='.repeat(70));

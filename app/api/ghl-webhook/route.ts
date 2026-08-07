@@ -8,9 +8,11 @@ const ghl = require('@/lib/ghl-client.js');
  *
  * Receives GoHighLevel workflow triggers fired when an opportunity's stage
  * changes (e.g. to "Site Visit Booked" or "Job Won"), and uploads an
- * OFFLINE CONVERSION back to Google Ads (API v22) against the existing
- * "Calls from ads" conversion action — so Google can attribute the closed
- * revenue to the original click (gclid).
+ * OFFLINE CONVERSION back to Google Ads via the DATA MANAGER API
+ * (datamanager.googleapis.com/v1/events:ingest) — the successor to the legacy
+ * ConversionUploadService.UploadClickConversions (restricted on this account).
+ * The stage maps to a fixed conversion action, so Google can attribute the
+ * closed revenue to the original click (gclid).
  *
  * GHL setup:
  *   Opportunities → Workflow → trigger "Opportunity Status Changed" /
@@ -28,22 +30,17 @@ const ghl = require('@/lib/ghl-client.js');
  *     "email": "...", "phone": "..."  // optional, for logging
  *   }
  *
- * Env required (server):
- *   GOOGLE_ADS_CUSTOMER_ID, GOOGLE_ADS_DEVELOPER_TOKEN,
- *   GOOGLE_ADS_CLIENT_ID, GOOGLE_ADS_CLIENT_SECRET, GOOGLE_ADS_REFRESH_TOKEN
- *   (optional) GOOGLE_ADS_LOGIN_CUSTOMER_ID  — MCC manager id
- *   (optional) GHL_WEBHOOK_SECRET            — shared secret to verify callers
- *   (optional) GADS_OFFLINE_CONV_ACTION      — conversion action resource/id
- *                                              (defaults to "Calls from ads")
+ * Env required (server, Data Manager — NOT the legacy Ads API):
+ *   GOOGLE_ADS_CUSTOMER_ID, GOOGLE_DM_CLIENT_ID, GOOGLE_DM_CLIENT_SECRET,
+ *   GOOGLE_DM_REFRESH_TOKEN  (refresh token scoped to `datamanager`)
+ *   (optional) GHL_WEBHOOK_SECRET        — shared secret to verify callers
+ *
+ * Response model: the route replies 202 { acknowledged } immediately and
+ * ingests into Data Manager FIRE-AND-FORGET in the background. Failures are
+ * logged via emitFleetIngest, never surfaced to GHL (so GHL doesn't retry).
  */
 
-const ADS_API_VERSION = 'v22';
-// Host is injectable so tests can point the upload at a local mock without
-// touching real Google Ads. Defaults to production (https). A mock over plain
-// HTTP can set GADS_API_PROTOCOL=http.
-const ADS_HOST = (process.env.GADS_API_HOST || 'googleads.googleapis.com').replace(/^https?:\/\//, '').replace(/\/$/, '');
-const ADS_PROTOCOL = (process.env.GADS_API_PROTOCOL || 'https').replace(/:\/\/$/, '');
-const ADS_BASE = `${ADS_PROTOCOL}://${ADS_HOST}`;
+// OAuth token URL is injectable so tests can point the token exchange at a mock.
 const OAUTH_TOKEN_URL = process.env.GADS_OAUTH_TOKEN_URL || 'https://oauth2.googleapis.com/token';
 
 // Stage names that trigger an offline conversion upload. Each maps to its own
@@ -85,120 +82,104 @@ function pick(body: any, ...paths: string[][]): string | undefined {
   return undefined;
 }
 
-// --- Google Ads auth + offline conversion upload -----------------------------
+// --- Data Manager (Google Ads offline conversions) ---------------------------
+// Migrated 2026-08-07 from the legacy ConversionUploadService.UploadClickConversions
+// (restricted on this account: "use the Data Manager API").
+// Docs: https://developers.google.com/data-manager/api/devguides/events/google-ads/offline
+//   Endpoint : POST datamanager.googleapis.com/v1/events:ingest
+//   Scope    : https://www.googleapis.com/auth/datamanager  (NOT adwords)
+//   NOTE     : NO developer-token header. Value is REAL currency (e.g. 50.0,
+//              not micros). gclid -> events[].adIdentifiers.gclid. Timestamp is
+//              RFC3339. Conversion action id -> destinations[].productDestinationId.
+//              Error model is FAST-FAIL (whole request rejected on bad event) and
+//              ASYNC (returns a requestId, not the upload result).
+// Creds: GOOGLE_DM_CLIENT_ID / GOOGLE_DM_CLIENT_SECRET / GOOGLE_DM_REFRESH_TOKEN.
 
-async function getAdsAccessToken(): Promise<string> {
-  const { GOOGLE_ADS_CLIENT_ID, GOOGLE_ADS_CLIENT_SECRET, GOOGLE_ADS_REFRESH_TOKEN } = process.env;
-  if (!GOOGLE_ADS_CLIENT_ID || !GOOGLE_ADS_CLIENT_SECRET || !GOOGLE_ADS_REFRESH_TOKEN) {
-    throw new Error('Google Ads OAuth env vars not configured');
+const DM_HOST = (process.env.DM_API_HOST || 'datamanager.googleapis.com').replace(/^https?:\/\//, '').replace(/\/$/, '');
+const DM_PROTOCOL = (process.env.DM_API_PROTOCOL || 'https').replace(/:\/\/$/, '');
+const DM_BASE = `${DM_PROTOCOL}://${DM_HOST}`;
+const DM_INGEST_PATH = '/v1/events:ingest';
+
+async function getDmAccessToken(): Promise<string> {
+  const { GOOGLE_DM_CLIENT_ID, GOOGLE_DM_CLIENT_SECRET, GOOGLE_DM_REFRESH_TOKEN } = process.env;
+  if (!GOOGLE_DM_CLIENT_ID || !GOOGLE_DM_CLIENT_SECRET || !GOOGLE_DM_REFRESH_TOKEN) {
+    throw new Error('Data Manager OAuth env vars (GOOGLE_DM_*) not configured');
   }
   const res = await fetch(OAUTH_TOKEN_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
-      client_id: GOOGLE_ADS_CLIENT_ID,
-      client_secret: GOOGLE_ADS_CLIENT_SECRET,
-      refresh_token: GOOGLE_ADS_REFRESH_TOKEN,
+      client_id: GOOGLE_DM_CLIENT_ID,
+      client_secret: GOOGLE_DM_CLIENT_SECRET,
+      refresh_token: GOOGLE_DM_REFRESH_TOKEN,
       grant_type: 'refresh_token',
     }),
   });
   const data = await res.json();
   if (!res.ok || !data.access_token) {
-    throw new Error(`Ads token exchange failed: ${JSON.stringify(data).slice(0, 200)}`);
+    throw new Error(`Data Manager token exchange failed: ${JSON.stringify(data).slice(0, 200)}`);
+  }
+  // Guard against a refresh token minted for the wrong scope.
+  const scope: string = data.scope || '';
+  if (scope && !scope.includes('datamanager')) {
+    throw new Error(`Data Manager refresh token has wrong scope: "${scope}" (need datamanager)`);
   }
   return data.access_token;
 }
 
-function adsHeaders(accessToken: string): Record<string, string> {
-  const h: Record<string, string> = {
-    Authorization: `Bearer ${accessToken}`,
-    'developer-token': process.env.GOOGLE_ADS_DEVELOPER_TOKEN || '',
-    'Content-Type': 'application/json',
-  };
-  if (process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID) {
-    h['login-customer-id'] = process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID.replace(/\D/g, '');
-  }
-  return h;
-}
-
 /**
- * Resolve the conversion action resource name for "Calls from ads" (or the
- * override in GADS_OFFLINE_CONV_ACTION) so we upload against the right action.
+ * Ingest EVENTs into the Data Manager API (async, fast-fail). Resolves with the
+ * { status, requestId, error } outcome WITHOUT throwing on an Ads-400/403 so the
+ * webhook caller is never surfaced the Ads error path.
  */
-async function resolveConversionAction(headers: Record<string, string>, customerId: string): Promise<string> {
-  const override = (process.env.GADS_OFFLINE_CONV_ACTION || '').trim();
-  if (override) {
-    // Accept either a bare numeric id or a full resource name.
-    return override.startsWith('customers/')
-      ? override
-      : `customers/${customerId}/conversionActions/${override.replace(/\D/g, '')}`;
-  }
-  const query = `
-    SELECT conversion_action.resource_name, conversion_action.name
-    FROM conversion_action
-    WHERE conversion_action.name = 'Calls from ads'
-    LIMIT 1`;
-  const res = await fetch(
-    `${ADS_BASE}/${ADS_API_VERSION}/customers/${customerId}/googleAds:searchStream`,
-    { method: 'POST', headers, body: JSON.stringify({ query }) }
-  );
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(`conversion_action lookup failed: ${JSON.stringify(data).slice(0, 300)}`);
-  }
-  const rows = (Array.isArray(data) ? data : [data]).flatMap((b: any) => b.results || []);
-  const rn = rows[0] && rows[0].conversionAction && rows[0].conversionAction.resourceName;
-  if (!rn) throw new Error('Conversion action "Calls from ads" not found in account');
-  return rn;
-}
-
-/**
- * Upload a click (offline) conversion to Google Ads v22.
- */
-async function uploadOfflineConversion(opts: {
+async function ingestEvents(opts: {
   gclid: string;
-  conversionAction: string;
-  conversionDateTime: string;
-  value: number;
+  transactionId: string;        // REQUIRED by Data Manager — stable id for dedupe
+  productDestinationId: string; // Ad units conversion action id
+  eventTimestamp: string;       // RFC3339
+  value: number;                // real currency, not micros
   currency?: string;
-}): Promise<void> {
-  const customerId = (process.env.GOOGLE_ADS_CUSTOMER_ID || '').replace(/\D/g, '');
+}): Promise<{ status: number; ok: boolean; requestId?: string; error?: string }> {
+  const customerId = CUSTOMER_ID_DIGITS;
   if (!customerId) throw new Error('GOOGLE_ADS_CUSTOMER_ID not set');
-  const accessToken = await getAdsAccessToken();
-  const headers = adsHeaders(accessToken);
-  const conversionAction = opts.conversionAction || await resolveConversionAction(headers, customerId);
 
-  const operation = {
-    create: {
-      gclid: opts.gclid,
-      conversionAction,
-      conversionDateTime: opts.conversionDateTime,
+  const accessToken = await getDmAccessToken();
+  const body = {
+    destinations: [{
+      operatingAccount: { accountId: customerId, accountType: 'GOOGLE_ADS' },
+      productDestinationId: opts.productDestinationId,
+    }],
+    events: [{
+      adIdentifiers: { gclid: opts.gclid },
+      transactionId: opts.transactionId,
+      eventTimestamp: opts.eventTimestamp,
       conversionValue: opts.value,
-      currencyCode: opts.currency || 'GBP',
-    },
+      currency: opts.currency || 'GBP',
+    }],
   };
-  const res = await fetch(
-    `${ADS_BASE}/${ADS_API_VERSION}/customers/${customerId}/conversionUploads:uploadClickConversions`,
-    {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ conversions: [operation.create], partialFailure: true }),
-    }
-  );
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(`uploadClickConversions failed: ${JSON.stringify(data).slice(0, 400)}`);
-  }
-  if (data.partialFailureError) {
-    throw new Error(`offline conversion rejected: ${data.partialFailureError.message || JSON.stringify(data.partialFailureError).slice(0, 300)}`);
-  }
-}
 
-/** Format "YYYY-MM-DD HH:mm:ss+00:00" as the Ads API expects. */
-function adsDateTime(d: Date): string {
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())} ` +
-    `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}+00:00`;
+  let res: Response;
+  try {
+    res = await fetch(`${DM_BASE}${DM_INGEST_PATH}`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+  } catch (e) {
+    return { status: 0, ok: false, error: e instanceof Error ? e.message : String(e) };
+  }
+
+  let data: any = {};
+  try { data = await res.json(); } catch { /* non-JSON body */ }
+
+  // fast-fail / auth errors -> capture and return (NOT throw) so the route can
+  // reply 202 + log, without 502ing the GHL webhook.
+  if (!res.ok) {
+    const msg = data?.error?.message || JSON.stringify(data).slice(0, 400);
+    return { status: res.status, ok: false, error: `events:ingest ${res.status}: ${msg}` };
+  }
+  // Async fast-fail model: success returns { requestId } (results return later).
+  return { status: res.status, ok: true, requestId: data?.request_id || data?.requestId };
 }
 
 /**
@@ -301,36 +282,52 @@ export async function POST(request: NextRequest) {
 
   const value = rawValue != null && !isNaN(Number(rawValue)) ? Number(rawValue) : conv.defaultValue;
 
-  try {
-    // Route each stage to its own conversion action (Site Visit Booked / Job Won).
-    const conversionAction = `customers/${CUSTOMER_ID_DIGITS}/conversionActions/${conv.conversionActionId}`;
-    await uploadOfflineConversion({
-      gclid,
-      conversionAction,
-      conversionDateTime: adsDateTime(new Date()),
-      value,
-    });
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    console.error('[ghl-webhook] offline conversion upload failed:', msg);
-    await emitFleetIngest({
-      event_type: 'ghl_offline_conversion_error',
-      summary: `Offline conversion upload FAILED for "${conv.label}" (gclid ${gclid.slice(0, 12)}…): ${msg}`,
-      payload: { stage, gclid, value, error: msg },
-    });
-    return jsonError(`Upload failed: ${msg}`, 502);
-  }
+  // FIRE-AND-FORGET (per decision 2026-08-07): reply 202 immediately and ingest
+  // into the Data Manager API in the background. Google cannot callback a
+  // suspended serverless response, so we must NOT eagerly await the Ads upload —
+  // doing so would hang/timeout the webhook reply. Failures are logged via
+  // emitFleetIngest instead of 502ing GHL (GHL would then retry and double-up).
+  const submittedAt = new Date().toISOString();
+  // transactionId is REQUIRED by Data Manager and used for dedupe/idempotency.
+  // Use the GHL contact id when available (stable per lead); else a unique id.
+  const transactionId = contactId || `ghlwebhook_${submittedAt.replace(/\D/g, '')}_${gclid.slice(0, 8)}`;
+  const q = { gclid, transactionId, productDestinationId: conv.conversionActionId, eventTimestamp: submittedAt, value };
 
-  await emitFleetIngest({
-    event_type: 'ghl_offline_conversion',
-    summary: `Offline conversion uploaded: "${conv.label}" — £${value} credited to gclid ${gclid.slice(0, 12)}…`,
-    payload: { stage: conv.label, gclid, value, contactId, email, phone },
-  });
+  ingestEvents(q)
+    .then(out => {
+      if (out.ok) {
+        console.log(`[ghl-webhook] DM events:ingest accepted (${conv.label}) requestId=${out.requestId || 'n/a'} gclid=${gclid.slice(0, 12)}…`);
+        return emitFleetIngest({
+          event_type: 'ghl_offline_conversion',
+          summary: `Offline conversion submitted to Data Manager: "${conv.label}" — £${value} (gclid ${gclid.slice(0, 12)}…, requestId ${out.requestId || 'n/a'})`,
+          payload: { stage: conv.label, gclid, value, currency: 'GBP', contactId, email, phone, requestId: out.requestId, submittedAt },
+        });
+      }
+      console.error('[ghl-webhook] DM events:ingest failed:', out.status, out.error);
+      return emitFleetIngest({
+        event_type: 'ghl_offline_conversion_error',
+        summary: `Offline conversion submit FAILED for "${conv.label}" (gclid ${gclid.slice(0, 12)}…): ${out.error}`,
+        payload: { stage, gclid, value, error: out.error, requestId: out.requestId, submittedAt },
+      });
+    })
+    .catch(err => {
+      // Token exchange or config errors. We swallow so the 202 is already sent.
+      const msg = err instanceof Error ? err.message : String(err);
+      console.error('[ghl-webhook] DM ingest threw:', msg);
+      emitFleetIngest({
+        event_type: 'ghl_offline_conversion_error',
+        summary: `Offline conversion submit threw for "${conv.label}": ${msg}`,
+        payload: { stage, gclid, value, error: msg, submittedAt },
+      }).catch(() => {});
+    });
 
   return NextResponse.json({
     success: true,
+    acknowledged: true,
+    async: true,
     conversion: { stage: conv.label, value, currency: 'GBP', gclid: gclid.slice(0, 12) + '…' },
-  }, { status: 200 });
+    note: 'Acknowledged — ingesting offline conversion asynchronously via Data Manager.',
+  }, { status: 202 });
 }
 
 // GHL workflow testers sometimes probe with GET — answer usefully.
