@@ -3,6 +3,7 @@ import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
+import { invalidEmailReason, invalidSubmissionTimingReason, validateLead } from '@/lib/lead-validation';
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,6 +33,20 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'Name, phone and postcode are required.' },
         { status: 400 }
+      );
+    }
+
+    // Content validation — reject junk/too-fast submissions silently so bots
+    // can't tell they've been filtered.
+    const spamReasons = validateLead(formData);
+    const emailReason = invalidEmailReason(formData.email);
+    const timingReason = invalidSubmissionTimingReason(formData);
+    const allReasons = [...spamReasons, ...[emailReason, timingReason].filter(Boolean)];
+    if (allReasons.length > 0) {
+      console.log(`[spam] quote lead rejected (${allReasons.join('; ')}) — name="${formData.name}" email="${formData.email}" phone="${formData.phone}" postcode="${formData.postcode}"`);
+      return NextResponse.json(
+        { success: true, message: 'Quote request received' },
+        { status: 200 }
       );
     }
 

@@ -19,7 +19,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { LocalAreaContent } from '@/components/LocalAreaContent';
-import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
+import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid, getSubmitStamp } from '@/lib/tracking';
 
 export default function OfferSandbachPage() {
   const [mounted, setMounted] = useState(false);
@@ -89,7 +89,7 @@ export default function OfferSandbachPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, location: 'Sandbach', gclid: getGclid(), website: honeypot }),
+        body: JSON.stringify({ ...formData, location: 'Sandbach', gclid: getGclid(), website: honeypot, _ts: getSubmitStamp() }),
       });
 
       const result = await response.json();

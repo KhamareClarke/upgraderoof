@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { CheckCircle, Star } from 'lucide-react';
-import { trackQuoteRequest, getGclid } from '@/lib/tracking';
+import { trackQuoteRequest, getGclid, getSubmitStamp } from '@/lib/tracking';
 
 /**
  * Inline lead-capture form styled on the special-offer page's right-column
@@ -47,6 +47,7 @@ export function InlineLeadForm({ town }: { town: string }) {
           ].filter(Boolean).join('\n'),
           gclid: getGclid(),
           website: honeypot,
+          _ts: getSubmitStamp(),
         }),
       });
 

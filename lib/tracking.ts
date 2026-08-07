@@ -27,6 +27,7 @@ declare global {
   }
 }
 
+const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID || 'G-7V452FMYFY';
 const GADS_CONV_ID = process.env.NEXT_PUBLIC_GADS_CONV_ID || 'AW-17763560213';
 // Separate conversion action for low-value engagement clicks (phone/WhatsApp
 // taps) so they don't pollute the lead-form conversion data. Create the action
@@ -44,6 +45,16 @@ const GCLID_STORAGE_KEY = 'ur_gclid';
 const GCLID_TS_KEY = 'ur_gclid_ts';
 // Google Ads click ids are valid for offline-conversion upload for 90 days.
 const GCLID_TTL_MS = 90 * 24 * 60 * 60 * 1000;
+
+// Anti-honeypot timestamp stamp. Stamped once when the page first renders (not
+// at submit), the server rejects any submission claiming to arrive in under
+// MIN_SUBMIT_MS (see lib/lead-validation) — bots fire instantly, humans don't.
+let _pageStamp: number | null = null;
+export function getSubmitStamp(): number | null {
+  if (typeof window === 'undefined') return null;
+  if (_pageStamp === null) _pageStamp = Date.now();
+  return _pageStamp;
+}
 
 /**
  * Capture the `gclid` (and `gbraid`/`wbraid` for iOS) from the landing URL
@@ -133,6 +144,27 @@ function fireGadsConversion(value: number, conversionId: string = GADS_CONV_ID) 
   });
 }
 
+/**
+ * Fires an event to GA4 directly via gtag, independent of GTM.
+ *
+ * GA4 page_views are handled by Analytics.tsx's config tag, but custom
+ * conversions (quote_request, contact_form_submit, clicks) previously ONLY
+ * reached GA4 through GTM container tags listening on dataLayer custom events.
+ * If those GTM tags/triggers are missing or misconfigured, events fire in the
+ * browser yet never transmit to GA4 ("events = 0 in GA4" while Google Ads
+ * offline conversions still show data, since Ads fires via gtag directly).
+ *
+ * `gtag('event', name, {...})` sends to every config already loaded — the GA4
+ * config (G-7V452FMYFY) is loaded by Analytics.tsx, so this reaches GA4 without
+ * any GTM dependency. If the GTM container is later fixed to also send these
+ * events, disable the duplicate tag in GTM (or drop this call) to avoid
+ * double-counting. The free GA4_ID const is defined for parity with the Ads path.
+ */
+function fireGa4Event(eventName: string, params: Record<string, unknown>) {
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') return;
+  window.gtag('event', eventName, params);
+}
+
 // --------------- public tracking API ---------------
 
 /**
@@ -143,13 +175,15 @@ export function trackQuoteRequest(extra: {
   service_type?: string;
   postcode?: string;
 }) {
-  sendDataLayerEvent('quote_request', {
+  const params = {
     form_name: 'quote_request',
     service_type: extra.service_type,
     postcode: extra.postcode,
     value: 50.0,
     currency: 'GBP',
-  });
+  };
+  sendDataLayerEvent('quote_request', params);
+  fireGa4Event('quote_request', params);
   fireGadsConversion(50.0);
 }
 
@@ -160,12 +194,14 @@ export function trackQuoteRequest(extra: {
 export function trackContactForm(extra?: {
   subject?: string;
 }) {
-  sendDataLayerEvent('contact_form_submit', {
+  const params = {
     form_name: 'contact_form',
     subject: extra?.subject,
     value: 25.0,
     currency: 'GBP',
-  });
+  };
+  sendDataLayerEvent('contact_form_submit', params);
+  fireGa4Event('contact_form_submit', params);
   fireGadsConversion(25.0);
 }
 
@@ -174,12 +210,14 @@ export function trackContactForm(extra?: {
  * Safe to call from onClick — does NOT prevent navigation.
  */
 export function trackPhoneClick(placement: string) {
-  sendDataLayerEvent('phone_click', {
+  const params = {
     contact_method: 'phone',
     placement,
     value: 5.0,
     currency: 'GBP',
-  });
+  };
+  sendDataLayerEvent('phone_click', params);
+  fireGa4Event('phone_click', params);
   // Only send the engagement tap to Google Ads if a dedicated click-conversion
   // action is configured; otherwise skip the gtag event so we don't miscount a
   // tap as a lead-form conversion.
@@ -191,12 +229,14 @@ export function trackPhoneClick(placement: string) {
  * Safe to call from onClick — does NOT prevent navigation.
  */
 export function trackWhatsAppClick(placement: string) {
-  sendDataLayerEvent('whatsapp_click', {
+  const params = {
     contact_method: 'whatsapp',
     placement,
     value: 5.0,
     currency: 'GBP',
-  });
+  };
+  sendDataLayerEvent('whatsapp_click', params);
+  fireGa4Event('whatsapp_click', params);
   // Only send the engagement tap to Google Ads if a dedicated click-conversion
   // action is configured; otherwise skip the gtag event so we don't miscount a
   // tap as a lead-form conversion.
@@ -208,12 +248,14 @@ export function trackWhatsAppClick(placement: string) {
  * Safe to call from onClick — does NOT prevent navigation.
  */
 export function trackEmailClick(placement: string) {
-  sendDataLayerEvent('email_click', {
+  const params = {
     contact_method: 'email',
     placement,
     value: 3.0,
     currency: 'GBP',
-  });
+  };
+  sendDataLayerEvent('email_click', params);
+  fireGa4Event('email_click', params);
 }
 
 /**

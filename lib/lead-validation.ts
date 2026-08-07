@@ -70,6 +70,38 @@ export function invalidNameReason(name: unknown): string | null {
   return null;
 }
 
+// --- UK email ----------------------------------------------------------------
+// Mirrors the client-side check in EnhancedContactSection so the server is the
+// source of truth. Accepts standard local@domain.tld addresses.
+const UK_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+export function invalidEmailReason(email: unknown): string | null {
+  if (typeof email !== 'string' || !email.trim()) return 'email missing';
+  const e = email.trim();
+  if (e.length > 254) return 'email too long';
+  if (!UK_EMAIL.test(e)) return 'email not a valid format';
+  return null;
+}
+
+// --- Submission timing (anti-honeypot speed check) ---------------------------
+// Bots fire submissions instantly; humans take >1.5s. The client stamps the
+// page-load time (window load / first render) into `_ts` and the server rejects
+// any request that claims to have arrived in under MIN_SUBMIT_MS.
+export const MIN_SUBMIT_MS = 1500;
+
+/** Returns a failure reason when the submission looks too fast, else null. */
+export function invalidSubmissionTimingReason(fields: { _ts?: unknown }): string | null {
+  const raw = fields?._ts;
+  if (typeof raw !== 'number' || !isFinite(raw as number)) {
+    // No timestamp means no client stamping — treat as suspect, but reject with
+    // a distinct reason so route logging can see the mode.
+    return 'no submission timestamp';
+  }
+  const elapsed = Date.now() - (raw as number);
+  if (elapsed < MIN_SUBMIT_MS) return 'submission too fast';
+  return null;
+}
+
 // --- Aggregate ---------------------------------------------------------------
 export interface LeadFields {
   name?: unknown;

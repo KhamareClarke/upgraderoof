@@ -16,7 +16,7 @@ import {
   Clock,
   ArrowUp
 } from 'lucide-react';
-import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
+import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid, getSubmitStamp } from '@/lib/tracking';
 import Image from 'next/image';
 
 export default function SpecialOfferPage() {
@@ -91,7 +91,7 @@ export default function SpecialOfferPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, gclid: getGclid(), website: honeypot }),
+        body: JSON.stringify({ ...formData, gclid: getGclid(), website: honeypot, _ts: getSubmitStamp() }),
       });
 
       const result = await response.json();

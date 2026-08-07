@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
-import { validateLead } from '@/lib/lead-validation';
+import { invalidSubmissionTimingReason, validateLead } from '@/lib/lead-validation';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 
@@ -69,8 +69,10 @@ export async function POST(request: NextRequest) {
     // invalid postcodes) that the honeypot and IP rate limit let through.
     // Return a fake success so bots can't tell they've been filtered.
     const spamReasons = validateLead(formData);
-    if (spamReasons.length > 0) {
-      console.log(`[spam] special-offer lead rejected (${spamReasons.join('; ')}) — name="${formData.name}" phone="${formData.phone}" postcode="${formData.postcode || ''}"`);
+    const timingReason = invalidSubmissionTimingReason(formData);
+    const allReasons = timingReason ? [...spamReasons, timingReason] : spamReasons;
+    if (allReasons.length > 0) {
+      console.log(`[spam] special-offer lead rejected (${allReasons.join('; ')}) — name="${formData.name}" phone="${formData.phone}" postcode="${formData.postcode || ''}"`);
       return NextResponse.json(
         { success: true, message: 'Special offer request received' },
         { status: 200 }

@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { supabase, type ContactMessage } from '@/lib/supabase';
-import { trackContactForm, getGclid } from '@/lib/tracking';
+import { trackContactForm, getGclid, getSubmitStamp } from '@/lib/tracking';
 import { Loader as Loader2, CircleCheck as CheckCircle2, CircleAlert as AlertCircle } from 'lucide-react';
 
 export function ContactForm() {
@@ -35,7 +35,7 @@ export function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, gclid: getGclid(), website: honeypot }),
+        body: JSON.stringify({ ...formData, gclid: getGclid(), website: honeypot, _ts: getSubmitStamp() }),
       });
 
       const result = await response.json();

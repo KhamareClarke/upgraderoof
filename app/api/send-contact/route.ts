@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
+import { invalidEmailReason, invalidSubmissionTimingReason } from '@/lib/lead-validation';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
 
 const ghlOpps = require('@/lib/ghl/opportunities.js');
@@ -62,6 +63,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'Name and email are required.' },
         { status: 400 }
+      );
+    }
+
+    // Content validation — reject junk/too-fast submissions silently so bots
+    // can't tell they've been filtered.
+    const emailReason = invalidEmailReason(formData.email);
+    const timingReason = invalidSubmissionTimingReason(formData);
+    if (emailReason || timingReason) {
+      console.log(`[spam] contact lead rejected (${[emailReason, timingReason].filter(Boolean).join('; ')}) — email="${formData.email}"`);
+      return NextResponse.json(
+        { success: true, message: 'Message received' },
+        { status: 200 }
       );
     }
 

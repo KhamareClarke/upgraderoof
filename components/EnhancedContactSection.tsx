@@ -15,7 +15,7 @@ type ContactMessage = {
   subject: string;
   message: string;
 };
-import { trackContactForm, trackPhoneClick, trackWhatsAppClick, trackEmailClick, getGclid } from '@/lib/tracking';
+import { trackContactForm, trackPhoneClick, trackWhatsAppClick, trackEmailClick, getGclid, getSubmitStamp } from '@/lib/tracking';
 import { 
   Loader2, 
   CheckCircle2, 
@@ -88,7 +88,7 @@ export function EnhancedContactSection() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, gclid: getGclid() }),
+        body: JSON.stringify({ ...formData, gclid: getGclid(), _ts: getSubmitStamp() }),
       });
 
       const result = await response.json();
