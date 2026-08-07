@@ -6,6 +6,7 @@ import { StickyMobileCta } from '@/components/StickyMobileCta';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { CheckCircle, Phone, MapPin, Shield, Award, Clock, Star, ArrowRight, Home, Layers, Flame, Droplets, Zap, Wrench } from 'lucide-react';
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
+import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 
 interface AreaFAQ {
   q: string;
@@ -334,6 +335,33 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
                 <MapPin className="w-4 h-4 text-brand-orange" />{area.name}
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Google Reviews */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center gap-1 mb-3">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+              ))}
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-2">
+              Why {town} Homeowners Choose Us
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              5★ rated on Google with hundreds of verified customer reviews
+            </p>
+          </div>
+          <div className="max-w-5xl mx-auto">
+            <GhlReviewsWidget />
+          </div>
+          <div className="text-center mt-8">
+            <Link href="/reviews" className="text-brand-orange font-semibold hover:underline inline-flex items-center gap-1">
+              Read all reviews <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>

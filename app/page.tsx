@@ -6,6 +6,7 @@ import { WhyChooseUs } from '@/components/WhyChooseUs';
 import { VideoTestimonials } from '@/components/VideoTestimonials';
 import { CTABanner } from '@/components/CTABanner';
 import { ReviewsBlock, GalleryBlock, FAQBlock, ContactBlock, SEOBlock } from '@/components/HomepageSections';
+import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 import { CheckCircle, Star, Award, Shield, Home as HomeIcon, Layers, MapPin, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
@@ -140,6 +141,28 @@ export default function Home() {
         <ReviewsBlock />
         <VideoTestimonials />
       </div>
+
+      {/* Live Google Reviews — real customer reviews via GHL */}
+      <section className="section-padding bg-gray-50">
+        <div className="container-custom">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center justify-center gap-1 mb-3">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+              ))}
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-2">
+              Real Reviews from Real Customers
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              5★ rated on Google with hundreds of verified reviews from homeowners across Cheshire
+            </p>
+          </div>
+          <div className="max-w-5xl mx-auto">
+            <GhlReviewsWidget />
+          </div>
+        </div>
+      </section>
       <div className="bg-gradient-to-b from-white via-gray-50 to-gray-100">
         <section id="gallery">
           <GalleryBlock />
