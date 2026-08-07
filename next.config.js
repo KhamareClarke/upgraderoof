@@ -26,6 +26,26 @@ const nextConfig = {
       { source: '/thank-you-contact-us/', destination: '/', permanent: true },
       { source: '/flat-roofs', destination: '/services/flat-roofing', permanent: true },
       { source: '/flat-roofs/', destination: '/services/flat-roofing', permanent: true },
+      // GSC 404 fixes — legacy plural/top-level service URLs redirect to /services/*
+      { source: '/gutters-fascias', destination: '/services/gutters-fascias', permanent: true },
+      { source: '/gutters-fascias/', destination: '/services/gutters-fascias', permanent: true },
+      { source: '/tile-slate-roofs', destination: '/services/tile-slate-roofing', permanent: true },
+      { source: '/tile-slate-roofs/', destination: '/services/tile-slate-roofing', permanent: true },
+      { source: '/chimney-repairs', destination: '/services/chimney-repairs', permanent: true },
+      { source: '/chimney-repairs/', destination: '/services/chimney-repairs', permanent: true },
+      { source: '/skylights', destination: '/services/skylights-roof-windows', permanent: true },
+      { source: '/skylights/', destination: '/services/skylights-roof-windows', permanent: true },
+      { source: '/cladding-installations', destination: '/services/cladding', permanent: true },
+      { source: '/cladding-installations/', destination: '/services/cladding', permanent: true },
+      // GSC 404 fixes — legacy town-service URLs redirect to their local-commercial parent
+      { source: '/roof-replacements-sandbach', destination: '/roofers-sandbach', permanent: true },
+      { source: '/roof-replacements-sandbach/', destination: '/roofers-sandbach', permanent: true },
+      { source: '/roof-repairs-sandbach', destination: '/roofers-sandbach', permanent: true },
+      { source: '/roof-repairs-sandbach/', destination: '/roofers-sandbach', permanent: true },
+      { source: '/roof-repairs-crewe', destination: '/roofers-crewe', permanent: true },
+      { source: '/roof-repairs-crewe/', destination: '/roofers-crewe', permanent: true },
+      { source: '/roof-repairs-congleton', destination: '/roofers-congleton', permanent: true },
+      { source: '/roof-repairs-congleton/', destination: '/roofers-congleton', permanent: true },
     ];
   },
 };
