@@ -203,7 +203,7 @@ export default function RoofRepairsPage() {
               <p>
                 Looking for a roofer in a specific area? See our <Link href="/roofers-sandbach" className="text-brand-orange hover:underline font-medium">Sandbach</Link>, <Link href="/roofers-crewe" className="text-brand-orange hover:underline font-medium">Crewe</Link>, <Link href="/roofers-congleton" className="text-brand-orange hover:underline font-medium">Congleton</Link>, or <Link href="/roofers-middlewich" className="text-brand-orange hover:underline font-medium">Middlewich</Link> roofing pages for
                 local details and reviews. If your roof is beyond repair, we also offer complete <Link href="/new-roofs" className="text-brand-orange hover:underline font-medium">new roof installations</Link> with
-                10-year guarantees. For out-of-hours emergencies — storm damage, sudden leaks, or structural issues — call our <Link href="/emergency-roofing" className="text-brand-orange hover:underline font-medium">24/7 emergency roofing line</Link> on 01270 897 606.
+                10-year guarantees. For out-of-hours emergencies (storm damage, sudden leaks, or structural issues), call our <Link href="/emergency-roofing" className="text-brand-orange hover:underline font-medium">24/7 emergency roofing line</Link> on 01270 897 606.
                 Not sure if you need repairs? Read our guides on <Link href="/blog/roof-damage-signs" className="text-brand-orange hover:underline font-medium">spotting roof damage early</Link> and <Link href="/blog/roof-maintenance-checklist" className="text-brand-orange hover:underline font-medium">seasonal roof maintenance</Link>.
               </p>
             </div>

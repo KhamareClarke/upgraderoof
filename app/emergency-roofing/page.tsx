@@ -93,7 +93,7 @@ export default function EmergencyRoofingPage() {
               24/7 Emergency Roofing Services
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              When disaster strikes, we're ready. Based in Sandbach, we cover Crewe, Congleton, Middlewich, Nantwich, and all of Cheshire.
+              If you have storm damage or an active leak, our team is on standby. Based in Sandbach, we cover Crewe, Congleton, Middlewich, Nantwich, and all of Cheshire.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -27,7 +27,7 @@ const faqs = [
   },
   {
     question: 'Can you match existing tiles for repairs?',
-    answer: "Yes — tile and slate matching is part of the service. We'll do our best to source materials that blend with your existing roof so repairs are as seamless as possible."
+    answer: "Yes — tile and slate matching is part of the service. We'll do our best to source materials that blend with your existing roof so repairs blend in as well as possible."
   },
 ];
 

@@ -496,7 +496,7 @@ export default function SpecialOfferPage() {
             Free Roof Inspection — Offer Ends 31st July 2026
           </h2>
           <p className="text-lg mb-6">
-            Book before the deadline. No cost, no obligation — just an expert roof check and honest advice.
+            We provide a thorough visual roof check at no charge, with no sales pressure.
           </p>
           
           {/* Countdown Timer */}

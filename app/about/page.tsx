@@ -63,7 +63,7 @@ export default function AboutPage() {
     {
       icon: Zap,
       title: 'Innovation',
-      description: 'Using cutting-edge techniques and materials for long-lasting results.',
+      description: 'We use modern techniques and materials that deliver lasting results.',
       color: 'yellow',
     },
   ];
@@ -99,7 +99,7 @@ export default function AboutPage() {
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 px-2">About Us</h1>
           <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto px-2">
-            Your trusted roofing specialists in Cheshire for over 25 years
+            Local roofers protecting Cheshire homes since 1999
           </p>
         </div>
       </section>
@@ -113,14 +113,14 @@ export default function AboutPage() {
                 <span>Our Story</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-4 sm:mb-6">
-                Building Trust, One Roof at a Time
+                Delivering durable roofing across Cheshire since 1999
               </h2>
               <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700 leading-relaxed">
                 <p>
                   Founded in 1999, Upgrade Roofs has grown from a small family business to become one of the most trusted roofing companies in the region. Our journey has been built on a simple principle: deliver exceptional quality and service on every single project.
                 </p>
                 <p>
-                  With over 25 years of experience, we've seen the roofing industry evolve, and we've evolved with it. From traditional tile and slate work to modern flat roofing systems, we combine time-honored craftsmanship with cutting-edge techniques and materials.
+                  With over 25 years of experience, we've seen the roofing industry evolve, and we've evolved with it. From traditional tile and slate work to modern flat roofing systems, we combine traditional craftsmanship with modern techniques and materials.
                 </p>
                 <p>
                   Today, our team of skilled professionals continues to uphold the values that have made us successful: integrity, quality, and customer satisfaction. We're not just roofers; we're your partners in protecting your most valuable investment.

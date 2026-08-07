@@ -66,7 +66,7 @@ export default function GalleryPage() {
               Our <span className="text-brand-orange">Portfolio</span>
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              Browse through our extensive portfolio of roofing projects showcasing quality craftsmanship
+              See photos of completed projects across Cheshire.
             </p>
           </div>
 

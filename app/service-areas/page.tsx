@@ -221,7 +221,7 @@ export default function ServiceAreasPage() {
             <div>
               <h2 className="text-3xl font-bold text-brand-navy mb-4">Based in Sandbach, Covering Cheshire</h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Our office at 20 Crewe Road, Sandbach puts us within reach of 15 towns across Cheshire, Staffordshire, and the Pennine fringe. From Winsford and Holmes Chapel on the doorstep to Wilmslow, Knutsford, and Macclesfield further north — and Newcastle-under-Lyme and Biddulph to the south — we cover a wide service area while keeping response times fast.
+                Our office at 20 Crewe Road, Sandbach puts us within reach of 15 towns across Cheshire, Staffordshire, and the Pennine fringe. We cover towns from Winsford and Holmes Chapel up to Wilmslow, Knutsford, and Macclesfield in the north, as well as Newcastle-under-Lyme and Biddulph to the south, while keeping response times fast.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">

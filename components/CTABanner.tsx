@@ -12,7 +12,7 @@ export function CTABanner() {
             Got a Roof Leak or Need Urgent Repairs?
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-7 md:mb-8">
-            Our team is on call around the clock. Fast, reliable roofing help across Cheshire and the North West — whenever you need it.
+            Our local roofers are on call 24/7 to secure active leaks or storm damage.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Button

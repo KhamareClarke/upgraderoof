@@ -72,8 +72,8 @@ export function Services() {
             Every Roofing Need. <span className="text-brand-orange">One Trusted Team.</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From minor repairs to complete roof replacements, we deliver comprehensive roofing solutions
-            tailored to your property — using premium materials and cutting-edge techniques.
+            From minor repairs to complete roof replacements, we deliver roofing solutions tailored to your
+            property, backed by premium materials and modern techniques.
           </p>
         </div>
 
