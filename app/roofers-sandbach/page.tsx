@@ -1,11 +1,39 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
+import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
+import { townData } from '@/lib/town-data';
 import { CheckCircle, Phone, MapPin, Shield, Award, Clock, Star, ArrowRight, Home, Layers, Flame, Droplets, Zap, Wrench } from 'lucide-react';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
+
+const data = townData.sandbach;
+
+export const metadata: Metadata = {
+  title: 'Roofers Sandbach | Local Roofer in CW11 | Upgrade Roofs',
+  description: 'Your local Sandbach roofers, based on Crewe Road CW11. Roof repair, new roofs, and flat roofing with 25+ years experience. Emergency response in 15–20 minutes. CORC certified. Free quotes. 01270 897606.',
+  keywords: 'roofers sandbach, roofer sandbach, roof repair sandbach, roof replacement sandbach, flat roofing sandbach, local roofers CW11',
+  openGraph: {
+    title: 'Roofers Sandbach | Your Local CW11 Roofer | Upgrade Roofs',
+    description: 'Based in Sandbach, we provide roof repair, re-roofing, and flat roofing across CW11. Local response, free quotes.',
+    url: 'https://www.upgraderoofs.co.uk/roofers-sandbach',
+    siteName: 'Upgrade Roofs',
+    images: [{ url: 'https://www.upgraderoofs.co.uk/images/6.jpeg', width: 1200, height: 630, alt: 'Professional roofers serving Sandbach, Cheshire' }],
+    locale: 'en_GB',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Roofers Sandbach | Upgrade Roofs | 01270 897606',
+    description: 'Your local Sandbach roofers. Roof repairs, new roofs & flat roofing. Free quotes.',
+    images: ['https://www.upgraderoofs.co.uk/images/6.jpeg'],
+  },
+  alternates: { canonical: 'https://www.upgraderoofs.co.uk/roofers-sandbach' },
+  robots: { index: true, follow: true },
+};
 
 export default function RoofersSandbachPage() {
   return (
@@ -249,61 +277,8 @@ export default function RoofersSandbachPage() {
             </div>
             <p className="text-gray-600">5.0 average from 127+ Google reviews</p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              {
-                text: 'Had a leak above our bedroom after the big storm. Called Upgrade Roofs and they were at our house on Middlewich Road within the hour. Temporary fix that night, full repair done by Wednesday. Brilliant service.',
-                name: 'James H.',
-                location: 'Middlewich Road, Sandbach',
-                service: 'Emergency Roof Repair',
-              },
-              {
-                text: 'Complete re-roof on our 1950s semi in Elworth. The team were punctual, tidy, and finished in under a week. New Marley tiles look fantastic and the price was very fair compared to other quotes we had.',
-                name: 'Sarah & David P.',
-                location: 'Elworth, Sandbach',
-                service: 'New Roof',
-              },
-              {
-                text: 'Replaced our flat garage roof with EPDM rubber. No more leaks after 10 years of patching the old felt roof. Quick, clean job with a 20-year guarantee. Would definitely recommend to anyone in Sandbach.',
-                name: 'Mark T.',
-                location: 'Sandbach Heath',
-                service: 'Flat Roofing',
-              },
-              {
-                text: 'Our chimney had been leaking for months. Upgrade Roofs re-pointed the stack and replaced all the lead flashings. The damp patch in the bedroom has completely gone. Really pleased with the work.',
-                name: 'Christine L.',
-                location: 'Hightown, Sandbach',
-                service: 'Chimney Repair',
-              },
-              {
-                text: 'Used Upgrade Roofs for new guttering and fascias on our detached house. The old wooden fascias were rotten. New uPVC looks smart and should last decades. Fair price, no hard sell, great team.',
-                name: 'Robert & Anne K.',
-                location: 'Wheelock, Sandbach',
-                service: 'Guttering & Fascias',
-              },
-              {
-                text: 'Needed a few slipped tiles fixed and some ridge pointing done. Other companies wanted to charge a fortune or wouldn\'t come out for a small job. Upgrade Roofs came the next day and sorted it in a couple of hours. Very reasonable.',
-                name: 'Paul S.',
-                location: 'Ettiley Heath, Sandbach',
-                service: 'Roof Repair',
-              },
-            ].map((review, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
-                <div className="flex gap-1 mb-3">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} className="w-4 h-4 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-gray-700 text-sm leading-relaxed mb-4 italic">"{review.text}"</p>
-                <div className="border-t pt-3">
-                  <p className="font-semibold text-brand-navy text-sm">{review.name}</p>
-                  <p className="text-xs text-gray-500 flex items-center gap-1">
-                    <MapPin className="w-3 h-3" /> {review.location}
-                  </p>
-                  <p className="text-xs text-brand-orange font-medium mt-1">{review.service}</p>
-                </div>
-              </div>
-            ))}
+          <div className="max-w-5xl mx-auto">
+            <GhlReviewsWidget />
           </div>
           <div className="text-center mt-8">
             <Link href="/reviews" className="text-brand-orange font-semibold hover:underline inline-flex items-center gap-1">

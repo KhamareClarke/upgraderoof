@@ -232,43 +232,6 @@ export function StructuredData() {
       worstRating: 1,
       reviewCount: 127
     },
-    review: [
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'Sarah P.' },
-        datePublished: '2025-03-12',
-        reviewBody: 'Upgrade Roofs did an absolutely fantastic job on our new slate roof in Sandbach. Professional, tidy, and finished on time. Highly recommended.'
-      },
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'David W.' },
-        datePublished: '2025-05-04',
-        reviewBody: 'Called Upgrade Roofs after storm damage to our chimney in Crewe. They arrived the same day, made it safe, and completed the full repair within the week. Excellent service and very fair price.'
-      },
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'Karen M.' },
-        datePublished: '2025-07-18',
-        reviewBody: 'Had a new EPDM flat roof fitted to our garage extension in Nantwich. The team were efficient, left the site spotless, and the finish is superb. 20-year guarantee gives real peace of mind.'
-      },
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'James H.' },
-        datePublished: '2025-09-22',
-        reviewBody: 'Used Upgrade Roofs for a full re-roof on our Victorian terrace in Middlewich. They matched the original Welsh slate perfectly and the workmanship is outstanding. Would not hesitate to recommend.'
-      },
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'Linda T.' },
-        datePublished: '2026-01-08',
-        reviewBody: 'The team replaced our gutters and fascias across the whole house in Congleton in a single day. Very professional, great communication throughout, and the price was exactly as quoted. Brilliant.'
-      },
-    ],
     potentialAction: {
       '@type': 'RequestQuote',
       target: {

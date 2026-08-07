@@ -1,35 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Star, Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
 import Link from 'next/link';
-import { VideoTestimonials } from '@/components/VideoTestimonials';
-import { supabase, type Testimonial } from '@/lib/supabase';
-import { ReviewCardSkeleton } from '@/components/LoadingSkeletons';
+import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 
 export default function ReviewsPage() {
-  const [reviews, setReviews] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchReviews();
-  }, []);
-
-  const fetchReviews = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('testimonials')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      if (error) throw error;
-      setReviews(data || []);
-    } catch (error) {
-      console.error('Error fetching reviews:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
   return (
     <div className="min-h-screen bg-white">
       <section className="relative h-[300px] sm:h-[350px] md:h-[400px] flex items-center justify-center overflow-hidden">
@@ -62,48 +37,11 @@ export default function ReviewsPage() {
                 <Star key={star} className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 fill-brand-orange text-brand-orange" />
               ))}
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-2">4.9 out of 5 Stars</h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600">Based on 127+ customer reviews</p>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-2">Rated 5 Stars by Our Customers</h2>
+            <p className="text-sm sm:text-base md:text-lg text-gray-600">Live reviews pulled straight from Google</p>
           </div>
 
-          {loading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-10 sm:mb-12 md:mb-16">
-              {[...Array(6)].map((_, i) => (
-                <ReviewCardSkeleton key={i} />
-              ))}
-            </div>
-          ) : reviews.length === 0 ? (
-            <div className="text-center py-8 sm:py-10 md:py-12 px-4">
-              <p className="text-sm sm:text-base md:text-lg text-gray-600">No reviews available yet.</p>
-            </div>
-          ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-10 sm:mb-12 md:mb-16">
-            {reviews.map((review, index) => (
-              <div
-                key={index}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
-              >
-                <div className="flex items-center gap-0.5 sm:gap-1 mb-2 sm:mb-3">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-brand-orange text-brand-orange" />
-                  ))}
-                </div>
-
-                <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-brand-orange/20 mb-2" />
-
-                <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-3 sm:mb-4 break-words">{review.text}</p>
-
-                <div className="pt-3 sm:pt-4 border-t border-gray-200">
-                  <p className="font-semibold text-sm sm:text-base text-brand-navy">{review.name}</p>
-                  <p className="text-xs sm:text-sm text-gray-600">{review.location}</p>
-                  <p className="text-[10px] sm:text-xs text-gray-500 mt-1">{new Date(review.created_at).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' })}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          )}
-
-          <VideoTestimonials />
+          <GhlReviewsWidget />
         </div>
       </section>
 

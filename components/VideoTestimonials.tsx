@@ -1,31 +1,9 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Star, Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export function VideoTestimonials() {
-  const testimonials = [
-    {
-      name: 'Sarah Thompson',
-      location: 'Sandbach, Cheshire',
-      rating: 5,
-      text: 'Absolutely brilliant service from start to finish. The team was professional, tidy, and completed our roof replacement ahead of schedule. Highly recommended!',
-    },
-    {
-      name: 'Michael Davies',
-      location: 'Crewe, Cheshire',
-      rating: 5,
-      text: 'Had our flat roof repaired and the quality of work is outstanding. Fair pricing and excellent communication throughout the project.',
-    },
-    {
-      name: 'Jennifer Walsh',
-      location: 'Congleton, Cheshire',
-      rating: 5,
-      text: 'Called them out for an emergency leak repair. They arrived quickly and fixed the problem efficiently. Very honest and reliable company.',
-    },
-  ];
-
   return (
     <section id="reviews" className="section-padding bg-white">
       <div className="container-custom">
@@ -77,26 +55,6 @@ export function VideoTestimonials() {
               ))}
             </div>
             <span className="text-lg sm:text-xl md:text-2xl font-bold text-brand-navy">5.0 Stars on Google</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="relative hover:shadow-lg transition-shadow">
-                <CardContent className="pt-4 sm:pt-5 md:pt-6 p-4 sm:p-5 md:p-6">
-                  <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-brand-orange/20 mb-3 sm:mb-4" />
-                  <div className="flex mb-2 sm:mb-3">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <p className="text-sm sm:text-base text-gray-700 mb-3 sm:mb-4 leading-relaxed">{testimonial.text}</p>
-                  <div>
-                    <p className="font-semibold text-sm sm:text-base text-brand-navy">{testimonial.name}</p>
-                    <p className="text-xs sm:text-sm text-gray-500">{testimonial.location}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
           </div>
         </div>
 

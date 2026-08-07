@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { Zap, Phone, CheckCircle, Clock, Shield, AlertTriangle, MapPin, ArrowRight, Star } from 'lucide-react';
+import { Zap, Phone, CheckCircle, Clock, Shield, AlertTriangle, MapPin, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -184,19 +185,8 @@ export default function EmergencyRoofingPage() {
       <section className="py-12 bg-white">
         <div className="container-custom">
           <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">Emergency Call-Out Reviews</h2>
-          <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              { text: 'Called at 7pm on a Friday with water pouring through the ceiling. They were at our house within 40 minutes, had a tarp on before dark, and came back Monday to do the full repair. Absolute lifesavers.', name: 'James H.', location: 'Middlewich Road, Sandbach' },
-              { text: 'Tree branch came through our roof in the storm. Upgrade Roofs made it safe that evening and handled everything with our insurance. Couldn\'t have asked for better service in a crisis.', name: 'Lisa & Pete C.', location: 'Wheelock, Sandbach' },
-              { text: 'Woke up to a puddle in the hallway. Called the emergency line and they diagnosed a slipped valley tile within the hour. Quick fix, reasonable price, and proper follow-up visit a week later.', name: 'Tom B.', location: 'Crewe' },
-            ].map((r, i) => (
-              <div key={i} className="bg-gray-50 rounded-xl p-5 border border-gray-200">
-                <div className="flex gap-1 mb-2">{[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 text-yellow-400 fill-current" />)}</div>
-                <p className="text-sm text-gray-700 italic mb-3">"{r.text}"</p>
-                <p className="text-sm font-semibold text-brand-navy">{r.name}</p>
-                <p className="text-xs text-gray-500">{r.location}</p>
-              </div>
-            ))}
+          <div className="max-w-4xl mx-auto">
+            <GhlReviewsWidget />
           </div>
         </div>
       </section>

@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { Phone, CheckCircle, Clock, Shield, Wrench, MapPin, ArrowRight, Star } from 'lucide-react';
+import { Phone, CheckCircle, Clock, Shield, Wrench, MapPin, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { RoofRepairsSchema } from './schema';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -179,19 +180,8 @@ export default function RoofRepairsPage() {
         <section className="py-12 bg-white">
           <div className="container-custom">
             <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">What Customers Say About Our Repairs</h2>
-            <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {[
-                { text: 'Had a leak above the bathroom that two other roofers couldn\'t fix. Upgrade Roofs found the problem in 20 minutes — a failed lead flashing behind the soil pipe. Fixed properly, no more damp.', name: 'Karen W.', location: 'Elworth, Sandbach' },
-                { text: 'Storm blew off 6 tiles on our semi. They came same day, replaced the tiles and checked the rest of the roof while they were up there. Fair price, no fuss.', name: 'Mike R.', location: 'Middlewich Road, Sandbach' },
-                { text: 'Our ridge tiles had been loose for months. Upgrade Roofs re-bedded them with a dry ridge system. Looks much better and should last decades now.', name: 'Janet & Alan D.', location: 'Crewe' },
-              ].map((r, i) => (
-                <div key={i} className="bg-gray-50 rounded-xl p-5 border border-gray-200">
-                  <div className="flex gap-1 mb-2">{[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 text-yellow-400 fill-current" />)}</div>
-                  <p className="text-sm text-gray-700 italic mb-3">"{r.text}"</p>
-                  <p className="text-sm font-semibold text-brand-navy">{r.name}</p>
-                  <p className="text-xs text-gray-500">{r.location}</p>
-                </div>
-              ))}
+            <div className="max-w-4xl mx-auto">
+              <GhlReviewsWidget />
             </div>
           </div>
         </section>

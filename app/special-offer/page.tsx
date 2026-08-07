@@ -17,6 +17,7 @@ import {
   ArrowUp
 } from 'lucide-react';
 import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid, getSubmitStamp } from '@/lib/tracking';
+import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 import Image from 'next/image';
 
 export default function SpecialOfferPage() {
@@ -359,17 +360,9 @@ export default function SpecialOfferPage() {
                 </p>
               </form>
 
-              {/* Review snippet under form */}
-              <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-2xl">
-                <div className="flex items-center justify-center gap-1 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-center text-gray-700 italic font-medium mb-2">
-                  "Fast, friendly, and professional. The inspection was thorough and found issues early."
-                </p>
-                <p className="text-center text-sm text-gray-600 font-semibold">– Kerry, Crewe</p>
+              {/* Live Google reviews snippet under form */}
+              <div className="mt-8">
+                <GhlReviewsWidget />
               </div>
             </div>
           </div>

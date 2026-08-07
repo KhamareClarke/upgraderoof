@@ -40,7 +40,7 @@ export function SEOAccordion() {
                 Professional Roofing Services in <span className="text-brand-orange">Cheshire</span>
               </h3>
               <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                Upgrade Roofs is Cheshire's trusted roofing company with over 25 years of experience. Based in Sandbach, we provide expert roofing services across Crewe, Congleton, Middlewich, Nantwich, Alsager, Holmes Chapel, and throughout Cheshire.
+                Upgrade Roofs has been roofing homes across Cheshire for over 25 years. We're based in Sandbach on Crewe Road, so whether it's a roof in Congleton, Crewe, or Nantwich, we're usually only a short drive away.
               </p>
             </div>
 
@@ -55,10 +55,10 @@ export function SEOAccordion() {
                   <h4 className="text-2xl font-bold text-brand-navy">Expert Roofing Contractors</h4>
                 </div>
                 <p className="text-gray-600 mb-4 leading-relaxed">
-                  As CORC (Confederation of Roofing Contractors) certified professionals, we deliver the highest quality roofing workmanship. Our team of skilled roofers specializes in tile and slate roofing, flat roof installations, chimney repairs, guttering, fascias, and emergency roof repairs.
+                  As CORC (Confederation of Roofing Contractors) certified professionals, our workmanship speaks for itself. Our team of skilled roofers specializes in tile and slate roofing, flat roof installations, chimney repairs, guttering, fascias, and emergency roof repairs.
                 </p>
                 <p className="text-gray-600 leading-relaxed">
-                  We carry £10 million public liability insurance and are fully qualified to handle all types of residential and commercial roofing projects. From minor roof repairs to complete roof replacements, we provide reliable, professional service every time.
+                  We carry £10 million public liability insurance and are fully qualified to work on both homes and commercial buildings — from minor roof repairs to complete roof replacements.
                 </p>
               </div>
 
@@ -81,7 +81,7 @@ export function SEOAccordion() {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
-                    <span><strong className="text-white">£10M Insured</strong> - Complete peace of mind with comprehensive insurance coverage</span>
+                    <span><strong className="text-white">£10M Insured</strong> - We're covered for whatever a job throws at us</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
@@ -104,7 +104,7 @@ export function SEOAccordion() {
               <div className="text-center mb-10">
                 <h4 className="text-3xl font-bold text-brand-navy mb-4">Our Roofing Services in Cheshire</h4>
                 <p className="text-gray-600 max-w-3xl mx-auto">
-                  We offer a comprehensive range of roofing services to homeowners and businesses throughout Cheshire. Whether you need a new roof installation, roof repairs, or routine maintenance, our experienced team delivers exceptional results.
+                  From new roof installations to repairs and routine maintenance, we cover the full range of roofing work. Whether it's a job for your home or your business, you'll know exactly what's being done and what it costs.
                 </p>
               </div>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

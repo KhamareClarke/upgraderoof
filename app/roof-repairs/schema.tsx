@@ -62,33 +62,6 @@ const faqData = {
   ],
 };
 
-const reviewData = [
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Review',
-    author: { '@type': 'Person', name: 'Karen W.' },
-    reviewBody: "Had a leak above the bathroom that two other roofers couldn't fix. Upgrade Roofs found the problem in 20 minutes — a failed lead flashing behind the soil pipe. Fixed properly, no more damp.",
-    reviewRating: { '@type': 'Rating', ratingValue: 5 },
-    publisher: { '@id': 'https://www.upgraderoofs.co.uk/#organization' },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Review',
-    author: { '@type': 'Person', name: 'Mike R.' },
-    reviewBody: 'Storm blew off 6 tiles on our semi. They came same day, replaced the tiles and checked the rest of the roof while they were up there. Fair price, no fuss.',
-    reviewRating: { '@type': 'Rating', ratingValue: 5 },
-    publisher: { '@id': 'https://www.upgraderoofs.co.uk/#organization' },
-  },
-  {
-    '@context': 'https://schema.org',
-    '@type': 'Review',
-    author: { '@type': 'Person', name: 'Janet & Alan D.' },
-    reviewBody: 'Our ridge tiles had been loose for months. Upgrade Roofs re-bedded them with a dry ridge system. Looks much better and should last decades now.',
-    reviewRating: { '@type': 'Rating', ratingValue: 5 },
-    publisher: { '@id': 'https://www.upgraderoofs.co.uk/#organization' },
-  },
-];
-
 export function RoofRepairsSchema() {
   return (
     <>
@@ -100,13 +73,6 @@ export function RoofRepairsSchema() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
       />
-      {reviewData.map((review, index) => (
-        <script
-          key={index}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(review) }}
-        />
-      ))}
     </>
   );
 }
