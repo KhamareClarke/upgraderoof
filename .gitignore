@@ -36,6 +36,9 @@ master-audit-results.json
 scripts_out_hist.txt
 gsc-export/
 
+# indexing resume runtime state (regenerated per-run, never commit)
+scripts/.indexing-state.json
+
 # vercel
 .vercel
 

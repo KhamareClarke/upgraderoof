@@ -8,9 +8,16 @@ const ghl = require('@/lib/ghl-client.js');
  *
  * Receives GoHighLevel workflow triggers fired when an opportunity's stage
  * changes (e.g. to "Site Visit Booked" or "Job Won"), and uploads an
- * OFFLINE CONVERSION back to Google Ads (API v22) against the existing
- * "Calls from ads" conversion action — so Google can attribute the closed
- * revenue to the original click (gclid).
+ * OFFLINE CONVERSION back to Google via the Data Manager API
+ * (`v1/events:ingest`) — so Google can attribute the closed revenue to the
+ * original click (gclid).
+ *
+ * The legacy ConversionUploadService.UploadClickConversions (Google Ads API
+ * v22) path is deprecated and now rejected ("use the Data Manager API").
+ * Data Manager uses a DIFFERENT OAuth scope
+ * (https://www.googleapis.com/auth/datamanager) and has NO developer-token /
+ * login-customer-id headers; the customer is addressed in-body via the
+ * Destination.operatingAccount.
  *
  * GHL setup:
  *   Opportunities → Workflow → trigger "Opportunity Status Changed" /
@@ -29,29 +36,28 @@ const ghl = require('@/lib/ghl-client.js');
  *   }
  *
  * Env required (server):
- *   GOOGLE_ADS_CUSTOMER_ID, GOOGLE_ADS_DEVELOPER_TOKEN,
- *   GOOGLE_ADS_CLIENT_ID, GOOGLE_ADS_CLIENT_SECRET, GOOGLE_ADS_REFRESH_TOKEN
- *   (optional) GOOGLE_ADS_LOGIN_CUSTOMER_ID  — MCC manager id
- *   (optional) GHL_WEBHOOK_SECRET            — shared secret to verify callers
- *   (optional) GADS_OFFLINE_CONV_ACTION      — conversion action resource/id
- *                                              (defaults to "Calls from ads")
+ *   GOOGLE_ADS_CUSTOMER_ID                — addressed as destination operating account
+ *   GOOGLE_DM_CLIENT_ID, GOOGLE_DM_CLIENT_SECRET, GOOGLE_DM_REFRESH_TOKEN
+ *   (optional) GHL_WEBHOOK_SECRET         — shared secret to verify callers
+ *   (optional) GADS_CONV_SITE_VISIT / GADS_CONV_JOB_WON — conversion action ids
+ *                                                (defaults 7700922852 / 7700922855)
  */
 
-const ADS_API_VERSION = 'v22';
-// Host is injectable so tests can point the upload at a local mock without
-// touching real Google Ads. Defaults to production (https). A mock over plain
-// HTTP can set GADS_API_PROTOCOL=http.
-const ADS_HOST = (process.env.GADS_API_HOST || 'googleads.googleapis.com').replace(/^https?:\/\//, '').replace(/\/$/, '');
-const ADS_PROTOCOL = (process.env.GADS_API_PROTOCOL || 'https').replace(/:\/\/$/, '');
-const ADS_BASE = `${ADS_PROTOCOL}://${ADS_HOST}`;
-const OAUTH_TOKEN_URL = process.env.GADS_OAUTH_TOKEN_URL || 'https://oauth2.googleapis.com/token';
+// Data Manager ingest is a single host; injectable so tests can point the
+// upload at a local mock without touching the real endpoint.
+const DM_HOST = (process.env.DM_API_HOST || 'datamanager.googleapis.com').replace(/^https?:\/\//, '').replace(/\/$/, '');
+const DM_PROTOCOL = (process.env.DM_API_PROTOCOL || 'https').replace(/:\/\/$/, '');
+const DM_BASE = `${DM_PROTOCOL}://${DM_HOST}`;
+const DM_INGEST_PATH = '/v1/events:ingest';
+const OAUTH_TOKEN_URL = process.env.DM_OAUTH_TOKEN_URL || process.env.GADS_OAUTH_TOKEN_URL || 'https://oauth2.googleapis.com/token';
 
-// Stage names that trigger an offline conversion upload. Each maps to its own
-// Google Ads conversion action (created for offline import) so "Site Visit
-// Booked" and "Job Won" report as separate goals with their own values.
-// conversionActionId matches the live actions in customer 8479028400; the env
-// vars allow override without a code change.
-const CUSTOMER_ID_DIGITS = (process.env.GOOGLE_ADS_CUSTOMER_ID || '8479028400').replace(/\D/g, '');
+/**
+ * Stage names that trigger an offline conversion upload. Each maps to its own
+ * Google Ads conversion action (created for offline import) so "Site Visit
+ * Booked" and "Job Won" report as separate goals with their own values.
+ * conversionActionId matches the live actions in customer 8479028400; the env
+ * vars allow override without a code change.
+ */
 const STAGE_CONVERSIONS: Array<{ match: RegExp; label: string; defaultValue: number; conversionActionId: string }> = [
   {
     match: /site\s*visit\s*booked/i,
@@ -85,120 +91,99 @@ function pick(body: any, ...paths: string[][]): string | undefined {
   return undefined;
 }
 
-// --- Google Ads auth + offline conversion upload -----------------------------
+// --- Data Manager auth + offline conversion upload --------------------------
 
-async function getAdsAccessToken(): Promise<string> {
-  const { GOOGLE_ADS_CLIENT_ID, GOOGLE_ADS_CLIENT_SECRET, GOOGLE_ADS_REFRESH_TOKEN } = process.env;
-  if (!GOOGLE_ADS_CLIENT_ID || !GOOGLE_ADS_CLIENT_SECRET || !GOOGLE_ADS_REFRESH_TOKEN) {
-    throw new Error('Google Ads OAuth env vars not configured');
+async function getDmAccessToken(): Promise<string> {
+  const { GOOGLE_DM_CLIENT_ID, GOOGLE_DM_CLIENT_SECRET, GOOGLE_DM_REFRESH_TOKEN } = process.env;
+  if (!GOOGLE_DM_CLIENT_ID || !GOOGLE_DM_CLIENT_SECRET || !GOOGLE_DM_REFRESH_TOKEN) {
+    throw new Error('Data Manager OAuth env vars not configured (GOOGLE_DM_*)');
   }
   const res = await fetch(OAUTH_TOKEN_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     body: new URLSearchParams({
-      client_id: GOOGLE_ADS_CLIENT_ID,
-      client_secret: GOOGLE_ADS_CLIENT_SECRET,
-      refresh_token: GOOGLE_ADS_REFRESH_TOKEN,
+      client_id: GOOGLE_DM_CLIENT_ID,
+      client_secret: GOOGLE_DM_CLIENT_SECRET,
+      refresh_token: GOOGLE_DM_REFRESH_TOKEN,
       grant_type: 'refresh_token',
     }),
   });
   const data = await res.json();
   if (!res.ok || !data.access_token) {
-    throw new Error(`Ads token exchange failed: ${JSON.stringify(data).slice(0, 200)}`);
+    throw new Error(`Data Manager token exchange failed: ${JSON.stringify(data).slice(0, 200)}`);
   }
   return data.access_token;
 }
 
-function adsHeaders(accessToken: string): Record<string, string> {
-  const h: Record<string, string> = {
+function dmHeaders(accessToken: string): Record<string, string> {
+  // Data Manager uses only standard Bearer auth — NO developer-token and NO
+  // login-customer-id header. The customer is addressed in the request body.
+  return {
     Authorization: `Bearer ${accessToken}`,
-    'developer-token': process.env.GOOGLE_ADS_DEVELOPER_TOKEN || '',
     'Content-Type': 'application/json',
   };
-  if (process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID) {
-    h['login-customer-id'] = process.env.GOOGLE_ADS_LOGIN_CUSTOMER_ID.replace(/\D/g, '');
-  }
-  return h;
 }
 
 /**
- * Resolve the conversion action resource name for "Calls from ads" (or the
- * override in GADS_OFFLINE_CONV_ACTION) so we upload against the right action.
- */
-async function resolveConversionAction(headers: Record<string, string>, customerId: string): Promise<string> {
-  const override = (process.env.GADS_OFFLINE_CONV_ACTION || '').trim();
-  if (override) {
-    // Accept either a bare numeric id or a full resource name.
-    return override.startsWith('customers/')
-      ? override
-      : `customers/${customerId}/conversionActions/${override.replace(/\D/g, '')}`;
-  }
-  const query = `
-    SELECT conversion_action.resource_name, conversion_action.name
-    FROM conversion_action
-    WHERE conversion_action.name = 'Calls from ads'
-    LIMIT 1`;
-  const res = await fetch(
-    `${ADS_BASE}/${ADS_API_VERSION}/customers/${customerId}/googleAds:searchStream`,
-    { method: 'POST', headers, body: JSON.stringify({ query }) }
-  );
-  const data = await res.json();
-  if (!res.ok) {
-    throw new Error(`conversion_action lookup failed: ${JSON.stringify(data).slice(0, 300)}`);
-  }
-  const rows = (Array.isArray(data) ? data : [data]).flatMap((b: any) => b.results || []);
-  const rn = rows[0] && rows[0].conversionAction && rows[0].conversionAction.resourceName;
-  if (!rn) throw new Error('Conversion action "Calls from ads" not found in account');
-  return rn;
-}
-
-/**
- * Upload a click (offline) conversion to Google Ads v22.
+ * Upload a click (offline) conversion to the Data Manager API
+ * (`datamanager.events.ingest`), which replaced the deprecated
+ * ConversionUploadService.UploadClickConversions.
+ *
+ * Body maps to IngestEventsRequest:
+ *   destinations[0].operatingAccount.accountId  = Google Ads customer id
+ *   destinations[0].operatingAccount.accountType = GOOGLE_ADS
+ *   destinations[0].productDestinationId        = conversion action id
+ *   events[0].adIdentifiers.gclid               = gclid
+ *   events[0].eventTimestamp                    = conversion time (RFC-3339)
+ *   events[0].conversionValue / currency        = value + currency
  */
 async function uploadOfflineConversion(opts: {
   gclid: string;
-  conversionAction: string;
-  conversionDateTime: string;
+  conversionActionId: string;
+  eventTimestamp: string;
   value: number;
   currency?: string;
 }): Promise<void> {
   const customerId = (process.env.GOOGLE_ADS_CUSTOMER_ID || '').replace(/\D/g, '');
   if (!customerId) throw new Error('GOOGLE_ADS_CUSTOMER_ID not set');
-  const accessToken = await getAdsAccessToken();
-  const headers = adsHeaders(accessToken);
-  const conversionAction = opts.conversionAction || await resolveConversionAction(headers, customerId);
+  const accessToken = await getDmAccessToken();
+  const headers = dmHeaders(accessToken);
+  const currency = opts.currency || 'GBP';
 
-  const operation = {
-    create: {
-      gclid: opts.gclid,
-      conversionAction,
-      conversionDateTime: opts.conversionDateTime,
-      conversionValue: opts.value,
-      currencyCode: opts.currency || 'GBP',
-    },
+  const body = {
+    destinations: [
+      {
+        operatingAccount: {
+          accountId: customerId,
+          accountType: 'GOOGLE_ADS',
+        },
+        productDestinationId: opts.conversionActionId,
+      },
+    ],
+    events: [
+      {
+        adIdentifiers: { gclid: opts.gclid },
+        eventTimestamp: opts.eventTimestamp,
+        conversionValue: opts.value,
+        currency,
+      },
+    ],
   };
-  const res = await fetch(
-    `${ADS_BASE}/${ADS_API_VERSION}/customers/${customerId}/conversionUploads:uploadClickConversions`,
-    {
-      method: 'POST',
-      headers,
-      body: JSON.stringify({ conversions: [operation.create], partialFailure: true }),
-    }
-  );
-  const data = await res.json();
+
+  const res = await fetch(`${DM_BASE}${DM_INGEST_PATH}`, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(body),
+  });
+  const data = await res.json().catch(() => ({}));
   if (!res.ok) {
-    throw new Error(`uploadClickConversions failed: ${JSON.stringify(data).slice(0, 400)}`);
-  }
-  if (data.partialFailureError) {
-    throw new Error(`offline conversion rejected: ${data.partialFailureError.message || JSON.stringify(data.partialFailureError).slice(0, 300)}`);
+    throw new Error(`Data Manager ingest failed: ${JSON.stringify(data).slice(0, 400)}`);
   }
 }
 
-/** Format "YYYY-MM-DD HH:mm:ss+00:00" as the Ads API expects. */
-function adsDateTime(d: Date): string {
-  const pad = (n: number) => String(n).padStart(2, '0');
-  return `${d.getUTCFullYear()}-${pad(d.getUTCMonth() + 1)}-${pad(d.getUTCDate())} ` +
-    `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())}+00:00`;
+/** Format an RFC-3339 UTC timestamp (with "Z") for the event timestamp. */
+function dmDateTime(d: Date): string {
+  return d.toISOString();
 }
 
 /**
@@ -303,11 +288,10 @@ export async function POST(request: NextRequest) {
 
   try {
     // Route each stage to its own conversion action (Site Visit Booked / Job Won).
-    const conversionAction = `customers/${CUSTOMER_ID_DIGITS}/conversionActions/${conv.conversionActionId}`;
     await uploadOfflineConversion({
       gclid,
-      conversionAction,
-      conversionDateTime: adsDateTime(new Date()),
+      conversionActionId: conv.conversionActionId,
+      eventTimestamp: dmDateTime(new Date()),
       value,
     });
   } catch (err) {
