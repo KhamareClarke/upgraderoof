@@ -7,7 +7,7 @@
  *
  * GTM  : GTM-5LMDG3F7
  * GA4  : G-7V452FMYFY
- * Ads  : AW-8479028400
+ * Ads  : AW-7693225904 (lead-form conversion container; comment on AW-8479028400 below)
  *
  * Conversion events are pushed to window.dataLayer from lib/tracking.ts.
  * GTM listens for those events and fires GA4 event tags + Ads conversion tags.
@@ -96,10 +96,10 @@ export function Analytics() {
 
       {/* ── 4. Google Ads global site tag ────────────────────────────────
           Two configs:
-          - AW-8479028400 : account-level (remarketing, call extensions)
-          - AW-17763560213: conversion tag for "Submit lead forms" — Google
-            matches this against the /special-offer URL pattern automatically,
-            no event snippet or conversion label required. */}
+          - AW-7693225904 : account-level lead-form conversion container
+            ("Submit lead form") — the GADS_ID/GADS_CONV_ID fallback.
+          - GADS_CONV_ID  : live lead-form action (NEXT_PUBLIC_GADS_CONV_ID).
+          - GADS_CLICK_CONV_ID : phone/WhatsApp tap action, only when set. */}
       <Script id="google-ads-config" strategy="afterInteractive">
         {`
           gtag('config', '${GADS_ID}');

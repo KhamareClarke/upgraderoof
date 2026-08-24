@@ -660,11 +660,11 @@ async function ads() {
   // 6b. Conversion action inventory (names + status).
   try {
     const caRes = await gaql(
-      `SELECT conversion_action.name, conversion_action.status, conversion_action.type, conversion_action.category
+      `SELECT conversion_action.resource_name, conversion_action.id, conversion_action.name, conversion_action.status, conversion_action.type, conversion_action.category
        FROM conversion_action`);
     result.conversionActions = flatten(caRes).map((r) => {
       const ca = r.conversionAction || {};
-      return { name: ca.name || null, status: ca.status || null, type: ca.type || null, category: ca.category || null };
+      return { resourceName: ca.resourceName || null, id: ca.id || null, name: ca.name || null, status: ca.status || null, type: ca.type || null, category: ca.category || null };
     });
     if (caRes.status !== 200) result.notes.push('conversion_action query HTTP ' + caRes.status);
   } catch (e) {
