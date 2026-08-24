@@ -3,6 +3,7 @@ import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
+import { invalidNameReason, invalidPhoneReason, invalidPostcodeReason } from '@/lib/lead-validation';
 
 export async function POST(request: NextRequest) {
   try {
@@ -32,6 +33,21 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'Name, phone and postcode are required.' },
         { status: 400 }
+      );
+    }
+
+    // Content validation — reject junk leads the honeypot + rate limit let
+    // through. Return a fake success so bots can't tell they've been filtered.
+    const spamReasons = [
+      invalidNameReason(formData.name),
+      invalidPhoneReason(formData.phone),
+      invalidPostcodeReason(formData.postcode),
+    ].filter(Boolean);
+    if (spamReasons.length > 0) {
+      console.log(`[spam] quote lead rejected (${spamReasons.join('; ')}) — name="${formData.name}" phone="${formData.phone}" postcode="${formData.postcode}"`);
+      return NextResponse.json(
+        { success: true, message: 'Quote request received' },
+        { status: 200 }
       );
     }
 

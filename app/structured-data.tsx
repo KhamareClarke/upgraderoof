@@ -325,16 +325,19 @@ export function StructuredData() {
   // These should be injected page-specifically where the content actually exists.
   // See: /roofers-sandbach, /roof-repairs, etc. for page-level FAQ schema.
 
+  // Consolidate all site-level entities into a single @graph document anchored
+  // to #organization. A single JSON-LD blob is more robustly parsed by both
+  // search engines and HTML-only LLM scrapers than multiple disjoint scripts,
+  // and cross-references (publisher, isPartOf, branchOf) resolve via @id.
+  const graph = {
+    '@context': 'https://schema.org',
+    '@graph': [organizationData, websiteData, speakableData],
+  };
+
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
-      />
-    </>
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+    />
   );
 }

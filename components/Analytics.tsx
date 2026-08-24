@@ -19,8 +19,8 @@ import { captureClickIds } from '@/lib/tracking';
 
 const GTM_ID         = process.env.NEXT_PUBLIC_GTM_ID         || 'GTM-5LMDG3F7';
 const GA4_ID         = process.env.NEXT_PUBLIC_GA4_ID         || 'G-7V452FMYFY';
-const GADS_ID        = process.env.NEXT_PUBLIC_GADS_ID        || 'AW-8479028400';
-const GADS_CONV_ID   = process.env.NEXT_PUBLIC_GADS_CONV_ID   || 'AW-17763560213';
+const GADS_ID        = process.env.NEXT_PUBLIC_GADS_ID        || 'AW-7693225904';
+const GADS_CONV_ID   = process.env.NEXT_PUBLIC_GADS_CONV_ID   || 'AW-7693225904';
 // Dedicated conversion action for low-value phone/WhatsApp taps. Must be a real
 // conversion action ID in Google Ads. Deliberately null when unset — do NOT fall
 // back to the lead-form ID, else taps get mislabelled as full lead-form conversions.

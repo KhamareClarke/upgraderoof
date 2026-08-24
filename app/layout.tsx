@@ -74,6 +74,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const gadsConvId = process.env.NEXT_PUBLIC_GADS_CONV_ID || 'AW-7693225904';
   return (
     <html lang="en-GB" className={poppins.variable}>
       <head>
@@ -81,6 +82,17 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />
+        {/* Google Ads global site tag — rendered inline in <head> so the AW
+            conversion id is present in the initial HTML for attribution. */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-7693225904"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', '${gadsConvId}');`,
+          }}
+        />
         <StructuredData />
       </head>
       <body className="font-sans antialiased">

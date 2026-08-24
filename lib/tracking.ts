@@ -27,7 +27,7 @@ declare global {
   }
 }
 
-const GADS_CONV_ID = process.env.NEXT_PUBLIC_GADS_CONV_ID || 'AW-17763560213';
+const GADS_CONV_ID = process.env.NEXT_PUBLIC_GADS_CONV_ID || 'AW-7693225904';
 // Separate conversion action for low-value engagement clicks (phone/WhatsApp
 // taps) so they don't pollute the lead-form conversion data. Create the action
 // in Google Ads (Tools → Conversions → "Phone/WhatsApp click") and set its ID
@@ -46,16 +46,22 @@ const GCLID_TS_KEY = 'ur_gclid_ts';
 const GCLID_TTL_MS = 90 * 24 * 60 * 60 * 1000;
 
 /**
- * Capture the `gclid` (and `gbraid`/`wbraid` for iOS) from the landing URL
- * into localStorage on first touch. Call once on app mount. Subsequent
- * form submissions read it back via getGclid() so the click that drove the
- * lead can be credited when the deal closes offline.
+ * Capture the `gclid` from the landing URL into localStorage on first touch.
+ * Call once on app mount. Subsequent form submissions read it back via
+ * getGclid() so the click that drove the lead can be credited when the deal
+ * closes offline.
+ *
+ * IMPORTANT: only a genuine `gclid` is stored here. `gbraid`/`wbraid` are
+ * separate iOS/PMax click ids with a different format and cannot be uploaded
+ * to offline-conversion uploads as a gclid — doing so produces the
+ * "Unparseable gclid" error Google reported (100% of conversions failing).
+ * They are deliberately ignored.
  */
 export function captureClickIds() {
   if (typeof window === 'undefined') return;
   try {
     const params = new URLSearchParams(window.location.search);
-    const gclid = params.get('gclid') || params.get('gbraid') || params.get('wbraid');
+    const gclid = params.get('gclid');
     if (gclid) {
       window.localStorage.setItem(GCLID_STORAGE_KEY, gclid);
       window.localStorage.setItem(GCLID_TS_KEY, String(Date.now()));

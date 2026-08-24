@@ -63,6 +63,16 @@ export function TownLocalBusinessSchema({ town, postcode, slug, lat, lng, addres
       worstRating: 1,
       reviewCount: 127,
     },
+    hasCredential: [
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'Professional Certification',
+        recognizedBy: {
+          '@type': 'Organization',
+          name: 'Confederation of Roofing Contractors (CORC)',
+        },
+      },
+    ],
     potentialAction: {
       '@type': 'RequestQuote',
       target: {

@@ -48,6 +48,16 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/api/', '/admin/', '/thank-you'],
       },
+      {
+        userAgent: 'Google-Extended',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/thank-you'],
+      },
+      {
+        userAgent: 'CCBot',
+        allow: '/',
+        disallow: ['/api/', '/admin/', '/thank-you'],
+      },
     ],
     sitemap: 'https://www.upgraderoofs.co.uk/sitemap.xml',
     host: 'https://www.upgraderoofs.co.uk',

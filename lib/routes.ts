@@ -155,7 +155,7 @@ const localCommercial: RouteEntry[] = [
   {
     path: '/roofers-sandbach',
     pageType: 'local-commercial',
-    lastModified: '2025-03-19',
+    lastModified: '2025-03-31',
     changeFreq: 'monthly',
     priority: 0.95,
     label: 'Roofers Sandbach',
@@ -163,7 +163,7 @@ const localCommercial: RouteEntry[] = [
   {
     path: '/roofers-crewe',
     pageType: 'local-commercial',
-    lastModified: '2025-03-19',
+    lastModified: '2025-03-31',
     changeFreq: 'monthly',
     priority: 0.85,
     label: 'Roofers Crewe',
@@ -171,7 +171,7 @@ const localCommercial: RouteEntry[] = [
   {
     path: '/roofers-middlewich',
     pageType: 'local-commercial',
-    lastModified: '2025-03-19',
+    lastModified: '2025-03-31',
     changeFreq: 'monthly',
     priority: 0.85,
     label: 'Roofers Middlewich',
@@ -179,7 +179,7 @@ const localCommercial: RouteEntry[] = [
   {
     path: '/roofers-congleton',
     pageType: 'local-commercial',
-    lastModified: '2025-03-19',
+    lastModified: '2025-03-31',
     changeFreq: 'monthly',
     priority: 0.85,
     label: 'Roofers Congleton',
@@ -187,7 +187,7 @@ const localCommercial: RouteEntry[] = [
   {
     path: '/roofers-nantwich',
     pageType: 'local-commercial',
-    lastModified: '2025-03-19',
+    lastModified: '2025-03-31',
     changeFreq: 'monthly',
     priority: 0.85,
     label: 'Roofers Nantwich',
@@ -195,7 +195,7 @@ const localCommercial: RouteEntry[] = [
   {
     path: '/roofers-alsager',
     pageType: 'local-commercial',
-    lastModified: '2025-03-19',
+    lastModified: '2025-03-31',
     changeFreq: 'monthly',
     priority: 0.85,
     label: 'Roofers Alsager',
@@ -203,7 +203,7 @@ const localCommercial: RouteEntry[] = [
   {
     path: '/roofers-holmes-chapel',
     pageType: 'local-commercial',
-    lastModified: '2025-03-19',
+    lastModified: '2025-03-31',
     changeFreq: 'monthly',
     priority: 0.85,
     label: 'Roofers Holmes Chapel',

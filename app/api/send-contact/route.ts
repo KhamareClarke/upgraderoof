@@ -3,6 +3,7 @@ import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
+import { invalidNameReason } from '@/lib/lead-validation';
 
 const ghlOpps = require('@/lib/ghl/opportunities.js');
 
@@ -62,6 +63,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, error: 'Name and email are required.' },
         { status: 400 }
+      );
+    }
+
+    // Content validation — reject junk names the honeypot + rate limit let
+    // through. Return a fake success so bots can't tell they've been filtered.
+    // (Only the name is validated: this form accepts email-only enquiries, so
+    // enforcing phone/postcode presence would reject legitimate leads.)
+    const nameReason = invalidNameReason(formData.name);
+    const emailReason = typeof formData.email !== 'string'
+      || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())
+      ? 'email invalid' : null;
+    if (nameReason || emailReason) {
+      console.log(`[spam] contact lead rejected (${[nameReason, emailReason].filter(Boolean).join('; ')}) — name="${formData.name}" email="${formData.email}"`);
+      return NextResponse.json(
+        { success: true, message: 'Message received' },
+        { status: 200 }
       );
     }
 
