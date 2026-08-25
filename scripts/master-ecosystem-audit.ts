@@ -199,7 +199,7 @@ async function serviceAccountClient(scopes: string[]): Promise<any> {
   return auth.getClient();
 }
 
-function baseHeader(label: string, notes: string[]) {
+function baseHeader(label: string, notes: string) {
   console.log('\n' + info('▶ ' + label) + subtle(notes ? '  ' + notes : ''));
 }
 
@@ -240,8 +240,8 @@ async function checkGbp() {
       name: `locations/${GBP_LOCATION_ID}`,
       readMask: 'name,title,storeCode,phoneNumbers,categories,websiteUri,regularHours,latlng,metadata',
     });
-    const d = loc.data || {};
-    const md = d.metadata || {};
+    const d = (loc.data || {}) as any;
+    const md = (d.metadata || {}) as any;
     record('GBP', 'Location fetch', 'OK', `"${d.title || '(untitled)'}" — categories: ${(d.categories?.primaryCategory && d.categories.primaryCategory.displayName) || '(unset)'}`);
     record('GBP', 'Metadata / verification', (md.canDelete === undefined && !md.duplicate ? 'WARN' : 'OK'), `verified=${md.verified ? 'yes' : 'no'}, duplicate=${md.duplicate ? 'yes' : 'no'}`);
     record('GBP', 'Maps coordinate (latlng)', d.latlng ? 'OK' : 'WARN', d.latlng ? `${d.latlng.latitude},${d.latlng.longitude}` : 'no latlng — Maps pin may be unfixed');
@@ -292,7 +292,7 @@ async function checkGsc() {
   for (const t of SERVICE_TOWNS) {
     const url = `https://www.upgraderoofs.co.uk/${t.slug}`;
     try {
-      const inspected = await google.webmasters({ version: 'v3', auth }).urlInspection.index.inspect({
+      const inspected = await (google.webmasters({ version: 'v3', auth }) as any).urlInspection.index.inspect({
         siteUrl: SITE_URL,
         requestBody: { inspectionUrl: url, siteUrl: SITE_URL },
       });
