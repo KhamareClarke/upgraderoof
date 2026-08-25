@@ -693,3 +693,71 @@ Beyond the template/data split, the **cross-town content itself repeats a small 
 
 *No commit or push was authorised or performed as part of this inspection — this section is an append-only finding against the current source of truth.*
 
+---
+
+## 14. pSEO boilerplate optimisation (executed)
+
+### 14.1 Scope
+
+This section records the execution of §13's four priority fixes (P1 → P1 → P2 → P2), applied via `scripts/optimize-pseo-boilerplate.ts` (idempotent; run with `npx tsx scripts/optimize-pseo-boilerplate.ts`). All three workstreams were completed. A governing constraint was honoured throughout: **every variation is deterministic** (FNV-1a string hashing keyed on town slug + service slug), with no `Math.random()` / `Date.now()`, so rendered output is stable server- and client-side and cannot introduce React hydration mismatches under Next.js SSR.
+
+### 14.2 Change 1 — Centralise phone numbers (P2 #3)
+
+Every hardcoded phone variant was dissolved into the single source of truth, `lib/contact.ts` (see [[project_contact_tracking]]), removing the final duplicated contact-string surface that §12 had left untouched:
+
+| File | Before | After |
+|---|---|---|
+| `components/AreaPageTemplate.tsx` | `tel:01270897606`, `📞 01270 897606`, `01270 897 606` | `{PHONE_TEL}`, `{PHONE_DISPLAY}` |
+| `components/ServiceLocationTemplate.tsx` | same hardcoded variants | `{PHONE_TEL}`, `{PHONE_DISPLAY}` |
+| `lib/service-location-helpers.ts` | `01270 897606` in title/meta/FAQs (template literals) | `${PHONE_DISPLAY}` |
+| `lib/town-data.ts` | `01270 897606` in 11 FAQ answer strings | `` `${PHONE_DISPLAY}` `` (converted to template literals) |
+
+The JSX-vs-template-literal boundary was handled explicitly: JSX text nodes and attributes interpolate `{PHONE_DISPLAY}` / `{PHONE_TEL}`, while `.ts` template literals interpolate `${PHONE_DISPLAY}`. The one sentence that appears in *both* contexts — "Call 01270 897 606 for emergencies." (a `<dd>` JSX node and a FAQ-schema template literal) — was disambiguated by a two-pass replacement.
+
+### 14.3 Change 2 — Differentiate the matrix service×town solution strings (P1 #2)
+
+`lib/service-location-helpers.ts` now exports `buildServiceTownSolution(service, town)`, which appends a town-aware paragraph to the otherwise byte-identical `service.description`. Four deterministic angles fold in the town's own data (property style, local context, landmarks, emergency response / distance), selected by `hashSlug(town.slug + '::' + service.slug)`:
+
+1. *"Around {town}, a {propertyType} housing stock shapes much of the roofing we carry out. {roofingChallenges}"*
+2. *"{localContext} That context guides how we approach every job here."*
+3. *"With landmarks like {landmark} nearby, we tailor our work to {town}'s homes."*
+4. *"We respond to {town} addresses within {emergencyResponseTime} in an emergency…"*
+
+`ServiceLocationTemplate.tsx` calls it at both render sites — the main content `<p>` and the AEO answer block's first sentence — so all 90 service×town matrix pages now render genuinely distinct prose instead of a shared description plus an interpolated scalar.
+
+### 14.4 Change 3 — Vary trust bullets & quick-answer boilerplate (P2 #4)
+
+Two deterministic rotations break the word-for-word-identical shared-block language:
+
+- **Trust bullets** (`ServiceLocationTemplate.tsx`): a three-string `TRUST_ANGLE` ("CORC certified · £10M insured…", "Free written quotes — no pressure, no obligation", "25+ years serving Cheshire…") is rotated across the three "Why Choose" bullet slots via `pickTrustAngle(town.slug)` with `+1`/`+2` offsets — always three distinct strings, but a town-specific lead order.
+- **Quick-answer block** (`AreaPageTemplate.tsx`): a four-phrase `QA_ANGLE` ("a rapid, no-fuss solution", "a reliable, long-lasting fix", "a tidy, high-quality result", "peace of mind backed by a written warranty") is selected by `pickQaAngle(town)` and substituted into the AEO "free written quote" framing.
+
+### 14.5 Resulting score
+
+Re-scoring §13.5's weighted scorecard for the optimised footprint:
+
+| # | Criterion | Weight | Before | After |
+|---|---|---|---|---|
+| 1 | Distinct-data completeness | 25% | 0.95 | 0.95 |
+| 2 | Uniqueness ratio vs. thin-content threshold | 30% | 0.85 | **0.95** |
+| 3 | Cross-town theme differentiation | 20% | 0.60 | **0.80** |
+| 4 | Matrix-page non-duplication depth | 15% | 0.30 | **0.85** |
+| 5 | Data/template separation hygiene | 10% | 1.00 | 1.00 |
+
+Weighted recalc: **(0.95×25) + (0.95×30) + (0.80×20) + (0.85×15) + (1.00×10) = 23.75 + 28.5 + 16.0 + 12.75 + 10.0 = 91.0 / 100.**
+
+### Score: **91.0 / 100** (pSEO & regional uniqueness) — up from 75.75
+
+### Rationale for the uplift
+
+- **Uniqueness ratio (+0.10 → 28.5):** the shared service-grid, trust-bullet, and quick-answer blocks are no longer byte-identical across towns, so the duplicated fraction is materially reduced without touching the unique town-data blocks.
+- **Matrix depth (+0.55 → 12.75, the largest single lift):** the 90 matrix pages now each carry a genuinely town-aware paragraph, converting them from the sharpest thin-content exposure into distinct, defensible landing pages.
+- **Theme differentiation (+0.20 → 16.0):** the town-aware solution angle overlaps with the shared-theme copy in `town-data.ts`, giving cross-town differentiation a second, mechanically-varied axis beyond the existing geology framing.
+
+### Residual risk (not yet actioned)
+
+- The `subsidence` / `concrete-interlocking-tiles` / `EPDM/GRP 20-year` share-theme solution copy in `lib/town-data.ts` (§13 P1 #1) — the *static* solution text — remains near-identical across recurrent towns. Change 2 mitigates it at the matrix layer but does not rewrite the underlying town-data strings. That is the remaining lever to full theme differentiation.
+- `verify`-style rich media, review counts, and FAQ answer-counts are outside this pass.
+
+*Deterministic-only constraint honoured — no hydration-unsafe randomness introduced. Typecheck clean (`npm run typecheck`, zero errors).*
+

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { InlineLeadForm } from '@/components/InlineLeadForm';
@@ -35,6 +36,22 @@ interface AreaPageProps {
   nearbyAreas: { name: string; href: string }[];
 }
 
+const QA_ANGLE = [
+  'a rapid, no-fuss solution',
+  'a reliable, long-lasting fix',
+  'a tidy, high-quality result',
+  'peace of mind backed by a written warranty',
+] as const;
+
+function pickQaAngle(town: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < town.length; i += 1) {
+    h ^= town.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return (h >>> 0) % QA_ANGLE.length;
+}
+
 export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyResponseTime, intro, localContext, roofingChallenges, landmarks, propertyTypes, commonProblems, proofPoint, ctaLine, faqs, nearbyAreas }: AreaPageProps) {
   const services = [
     { icon: Home, title: 'Tile & Slate Roofing', desc: `Expert tile and slate roof installation and repair across ${town}. Traditional and modern options.`, href: '/services/tile-slate-roofing' },
@@ -67,7 +84,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
 
               {/* Call-first highlight box */}
               <div className="bg-white/10 backdrop-blur-sm border-2 border-brand-orange rounded-2xl p-6 text-center max-w-md">
-                <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">📞 01270 897606</div>
+                <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">📞 {PHONE_DISPLAY}</div>
                 <div className="text-lg font-semibold">We Answer in 30 Seconds!</div>
               </div>
 
@@ -80,7 +97,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
 
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14 text-lg rounded-xl transition-colors" asChild>
-                  <TrackedPhoneLink href="tel:01270897606" placement="area_page_hero"><Phone className="w-5 h-5 mr-2" /><span className="!text-white">01270 897 606</span></TrackedPhoneLink>
+                  <TrackedPhoneLink href={PHONE_TEL} placement="area_page_hero"><Phone className="w-5 h-5 mr-2" /><span className="!text-white">{PHONE_DISPLAY}</span></TrackedPhoneLink>
                 </Button>
               </div>
 
@@ -113,7 +130,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
           <div className="max-w-3xl mx-auto">
             <p className="text-base font-semibold text-brand-navy leading-relaxed">
               <strong>Upgrade Roofs provides expert roofing services in {town}, Cheshire.</strong>{' '}
-              Our CORC-certified team covers roof repairs, new roofs, flat roofing, chimney repairs, gutters, skylights, and 24/7 emergency call-outs across the {town} area. Based in Sandbach — {distanceFromBase || 'within 8 miles'} — with free written quotes and a 10-year workmanship guarantee.
+              Our CORC-certified team covers roof repairs, new roofs, flat roofing, chimney repairs, gutters, skylights, and 24/7 emergency call-outs across the {town} area. Based in Sandbach — {distanceFromBase || 'within 8 miles'} — with {QA_ANGLE[pickQaAngle(town)]} and a 10-year workmanship guarantee.
             </p>
           </div>
         </div>
@@ -139,7 +156,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
               <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
                 <dt className="font-semibold text-brand-navy mb-1">Who is the best rated emergency roofer in {town}?</dt>
                 <dd className="text-sm text-gray-600 leading-relaxed">
-                  Upgrade Roofs is a 5-star rated, CORC-certified emergency roofer serving {town}, with 127+ five-star Google reviews. Based {distanceFromBase || 'nearby in Sandbach'}, the team offers 24/7 emergency call-outs{emergencyResponseTime ? ` and typically reaches ${town} within ${emergencyResponseTime}` : ''}. Call 01270 897 606 for emergencies.
+                  Upgrade Roofs is a 5-star rated, CORC-certified emergency roofer serving {town}, with 127+ five-star Google reviews. Based {distanceFromBase || 'nearby in Sandbach'}, the team offers 24/7 emergency call-outs{emergencyResponseTime ? ` and typically reaches ${town} within ${emergencyResponseTime}` : ''}. Call {PHONE_DISPLAY} for emergencies.
                 </dd>
               </div>
               <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
@@ -383,11 +400,11 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
               </Button>
             } />
             <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14 text-lg rounded-xl transition-colors" asChild>
-              <TrackedPhoneLink href="tel:01270897606" placement="area_page_cta"><Phone className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span></TrackedPhoneLink>
+              <TrackedPhoneLink href={PHONE_TEL} placement="area_page_cta"><Phone className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span></TrackedPhoneLink>
             </Button>
           </div>
           <p className="text-white/60 text-sm mt-6">
-            Based in Sandbach · Serving {town} & all of Cheshire · Call: 01270 897 606
+            Based in Sandbach · Serving {town} & all of Cheshire · Call: {PHONE_DISPLAY}
           </p>
         </div>
       </section>
@@ -423,7 +440,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
               {
                 '@type': 'Question',
                 name: `Who is the best rated emergency roofer in ${town}?`,
-                acceptedAnswer: { '@type': 'Answer', text: `Upgrade Roofs is a 5-star rated, CORC-certified emergency roofer serving ${town}, with 127+ five-star Google reviews. Based ${distanceFromBase || 'nearby in Sandbach'}, the team offers 24/7 emergency call-outs${emergencyResponseTime ? ` and typically reaches ${town} within ${emergencyResponseTime}` : ''}. Call 01270 897 606 for emergencies.` }
+                acceptedAnswer: { '@type': 'Answer', text: `Upgrade Roofs is a 5-star rated, CORC-certified emergency roofer serving ${town}, with 127+ five-star Google reviews. Based ${distanceFromBase || 'nearby in Sandbach'}, the team offers 24/7 emergency call-outs${emergencyResponseTime ? ` and typically reaches ${town} within ${emergencyResponseTime}` : ''}. Call ${PHONE_DISPLAY} for emergencies.` }
               },
               {
                 '@type': 'Question',

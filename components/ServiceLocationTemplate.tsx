@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
@@ -6,12 +7,27 @@ import { CheckCircle, Phone, MapPin, Shield, Award, Clock, Star, ArrowRight } fr
 import type { ServiceData } from '@/lib/service-data';
 import type { TownData } from '@/lib/town-data';
 import { services } from '@/lib/service-data';
-import { generateServiceLocationFaqs } from '@/lib/service-location-helpers';
+import { generateServiceLocationFaqs, buildServiceTownSolution } from '@/lib/service-location-helpers';
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 
 interface ServiceLocationTemplateProps {
   service: ServiceData;
   town: TownData;
+}
+
+const TRUST_ANGLE = [
+  'CORC certified · £10M insured · 10-year workmanship guarantee',
+  'Free written quotes — no pressure, no obligation',
+  '25+ years serving Cheshire homeowners and businesses',
+] as const;
+
+function pickTrustAngle(slug: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < slug.length; i += 1) {
+    h ^= slug.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return (h >>> 0) % TRUST_ANGLE.length;
 }
 
 export function ServiceLocationTemplate({ service, town }: ServiceLocationTemplateProps) {
@@ -94,7 +110,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
 
             {/* Call-first highlight box */}
             <div className="bg-white/10 backdrop-blur-sm border-2 border-brand-orange rounded-2xl p-6 text-center max-w-md">
-              <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">📞 01270 897606</div>
+              <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">📞 {PHONE_DISPLAY}</div>
               <div className="text-lg font-semibold">We Answer in 30 Seconds!</div>
             </div>
 
@@ -105,8 +121,8 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
                 </Button>
               } />
               <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14 text-lg rounded-xl transition-colors" asChild>
-                <TrackedPhoneLink href="tel:01270897606" placement="service_location_hero">
-                  <Phone className="w-5 h-5 mr-2" /><span className="!text-white">01270 897 606</span>
+                <TrackedPhoneLink href={PHONE_TEL} placement="service_location_hero">
+                  <Phone className="w-5 h-5 mr-2" /><span className="!text-white">{PHONE_DISPLAY}</span>
                 </TrackedPhoneLink>
               </Button>
             </div>
@@ -136,7 +152,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
           <div className="max-w-3xl mx-auto">
             <p className="text-base font-semibold text-brand-navy leading-relaxed">
               <strong>Upgrade Roofs provides expert {service.name.toLowerCase()} in {town.town} ({town.postcode}).</strong>{' '}
-              {service.description.split('.')[0]}. {town.distanceFromBase} — emergency response within {town.emergencyResponseTime}. CORC certified, £10M insured, 10-year workmanship guarantee, free written quotes.
+              {buildServiceTownSolution(service, town).split('.')[0]}. {town.distanceFromBase} — emergency response within {town.emergencyResponseTime}. CORC certified, £10M insured, 10-year workmanship guarantee, free written quotes.
             </p>
           </div>
         </div>
@@ -165,7 +181,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
                 {service.name} in <span className="text-brand-orange">{town.town}</span>
               </h2>
               <div className="text-gray-600 leading-relaxed space-y-4 text-lg">
-                <p>{service.description}</p>
+                <p>{buildServiceTownSolution(service, town)}</p>
                 <p>
                   Our team is based in Sandbach — {town.distanceFromBase} — making us one of the closest qualified roofing contractors to {town.town}. {town.proofPoint} Whether you need a small repair or a full installation, we understand the roofing characteristics of properties in the {town.postcode} area.
                 </p>
@@ -193,15 +209,15 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 text-sm">CORC certified · £10M insured · 10-year workmanship guarantee</span>
+                  <span className="text-gray-700 text-sm">{TRUST_ANGLE[pickTrustAngle(town.slug)]}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 text-sm">Free written quotes — no pressure, no obligation</span>
+                  <span className="text-gray-700 text-sm">{TRUST_ANGLE[(pickTrustAngle(town.slug) + 1) % TRUST_ANGLE.length]}</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 text-sm">25+ years serving Cheshire homeowners and businesses</span>
+                  <span className="text-gray-700 text-sm">{TRUST_ANGLE[(pickTrustAngle(town.slug) + 2) % TRUST_ANGLE.length]}</span>
                 </li>
               </ul>
               <div className="mt-6 pt-6 border-t border-gray-200">
@@ -326,13 +342,13 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
               </Button>
             } />
             <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14 text-lg rounded-xl transition-colors" asChild>
-              <TrackedPhoneLink href="tel:01270897606" placement="service_location_cta">
+              <TrackedPhoneLink href={PHONE_TEL} placement="service_location_cta">
                 <Phone className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span>
               </TrackedPhoneLink>
             </Button>
           </div>
           <p className="text-white/60 text-sm mt-6">
-            Based in Sandbach · Serving {town.town} & all of Cheshire · Call: 01270 897 606
+            Based in Sandbach · Serving {town.town} & all of Cheshire · Call: {PHONE_DISPLAY}
           </p>
         </div>
       </section>

@@ -1,3 +1,4 @@
+import { PHONE_DISPLAY } from './contact';
 /**
  * ---------------------------------------------------------------
  * PER-TOWN UNIQUE CONTENT — structured data source for town pages.
@@ -134,7 +135,7 @@ export const townData: Record<string, TownData> = {
     proofPoint: 'Regularly working on properties across the CW12 postcode from town centre to Astbury.',
     ctaLine: 'Based in Sandbach \u2014 6 miles from Congleton. Emergency response within 30\u201345 minutes.',
     faqs: [
-      { q: 'How quickly can you reach Congleton for an emergency?', a: 'We are based in Sandbach, approximately 6 miles from Congleton. For emergencies we can typically arrive within 30-45 minutes. Call 01270 897606 for emergencies.' },
+      { q: 'How quickly can you reach Congleton for an emergency?', a: `We are based in Sandbach, approximately 6 miles from Congleton. For emergencies we can typically arrive within 30-45 minutes. Call ${PHONE_DISPLAY} for emergencies.` },
       { q: 'Do you work on older properties in Congleton town centre?', a: 'Yes. We have extensive experience with period properties in Congleton, including natural slate re-roofing, lime mortar ridge work, and lead flashing repairs. We can match existing materials sympathetically.' },
       { q: 'How much does a roof replacement cost in Congleton?', a: 'Typical costs in Congleton range from \u00a35,000-\u00a38,000 for terraced houses, \u00a37,000-\u00a311,000 for semi-detached, and \u00a39,000-\u00a316,000+ for larger detached properties. We always provide a free inspection and written quote first.' },
       { q: 'Can you fix storm damage to roofs in Congleton?', a: "Yes. Congleton properties can be more exposed to storm damage due to the town's position. We provide 24/7 emergency response for storm damage, including make-safe work, tarpaulin cover, and permanent repairs. We also handle insurance claims paperwork." },
@@ -171,7 +172,7 @@ export const townData: Record<string, TownData> = {
     ctaLine: 'Heritage roofing specialists serving Nantwich and the CW5 postcode area.',
     faqs: [
       { q: 'Can you work on listed buildings in Nantwich?', a: 'Yes. We have experience working on period and listed properties in Nantwich using traditional materials including natural Welsh slate, handmade clay tiles, and lime mortar. We understand conservation area requirements and can advise on material choices that meet planning conditions.' },
-      { q: 'How quickly can you reach Nantwich?', a: 'We are based in Sandbach, approximately 8 miles from Nantwich. Standard inspections can usually be arranged for the same or next day. Emergency callouts reach Nantwich within 30-45 minutes. Call 01270 897606 for emergencies.' },
+      { q: 'How quickly can you reach Nantwich?', a: `We are based in Sandbach, approximately 8 miles from Nantwich. Standard inspections can usually be arranged for the same or next day. Emergency callouts reach Nantwich within 30-45 minutes. Call ${PHONE_DISPLAY} for emergencies.` },
       { q: 'Do you offer roof maintenance contracts in Nantwich?', a: 'Yes. We provide annual roof inspection and maintenance packages for Nantwich homeowners. Regular maintenance catches small issues before they become expensive problems \u2014 particularly important for the older properties Nantwich is known for.' },
       { q: 'How much does re-roofing cost in Nantwich?', a: 'Costs depend on property size and materials. A typical terraced house re-roof starts from \u00a35,000, semi-detached from \u00a36,500, and detached from \u00a39,000. Listed properties requiring specialist materials may cost more. We always provide a detailed free quote.' },
     ],
@@ -239,7 +240,7 @@ export const townData: Record<string, TownData> = {
     proofPoint: 'Serving the CW7 area from our Sandbach base — typically the closest professional roofer for Winsford call-outs.',
     ctaLine: '8 miles from Winsford. Fast response, free written quotes, 10-year guarantee.',
     faqs: [
-      { q: 'How far are you from Winsford?', a: 'We are based in Sandbach, approximately 8 miles from Winsford town centre. We can attend most inspections the same day, and emergency callouts typically reach Winsford within 20–35 minutes. Call 01270 897606.' },
+      { q: 'How far are you from Winsford?', a: `We are based in Sandbach, approximately 8 miles from Winsford town centre. We can attend most inspections the same day, and emergency callouts typically reach Winsford within 20–35 minutes. Call ${PHONE_DISPLAY}.` },
       { q: 'Do you replace concrete tile roofs in Winsford?', a: 'Yes. Many Winsford properties from the 1970s and 1980s have concrete interlocking tiles that are now deteriorating. We strip and re-tile these roofs with modern lightweight tiles or natural slate, complete with new felt, battens, and ventilation to current building regulations.' },
       { q: 'How much does a roof replacement cost in Winsford?', a: 'A terraced house re-roof in Winsford typically costs £4,500–£7,500. Semi-detached properties range from £6,000–£10,000. We always provide a free inspection and written quote before any work begins.' },
       { q: 'Do you repair flat roofs on Winsford extensions?', a: 'Absolutely. We regularly install EPDM and GRP flat roofing systems on extensions and garages across Winsford. These systems carry 20-year waterproof guarantees and are typically completed within 1–2 days.' },
@@ -272,7 +273,7 @@ export const townData: Record<string, TownData> = {
     proofPoint: 'Regular roofing projects across CW8 and CW9 — from Victorian terraces to modern estates.',
     ctaLine: 'Serving Northwich from our Sandbach base. Free inspections, written quotes, no obligation.',
     faqs: [
-      { q: 'How quickly can you reach Northwich for an emergency?', a: 'We are based in Sandbach, approximately 13 miles from Northwich. For emergencies we typically reach Northwich within 30–45 minutes. For planned work, same-day or next-day inspections are usually available. Call 01270 897606.' },
+      { q: 'How quickly can you reach Northwich for an emergency?', a: `We are based in Sandbach, approximately 13 miles from Northwich. For emergencies we typically reach Northwich within 30–45 minutes. For planned work, same-day or next-day inspections are usually available. Call ${PHONE_DISPLAY}.` },
       { q: 'Do you work on properties affected by subsidence in Northwich?', a: 'Yes. We have experience working on Northwich properties where ground movement has affected roof structures. We carry out a full assessment before re-roofing and use materials and methods that accommodate the conditions found in the CW8 and CW9 areas.' },
       { q: 'Can you match original slate on Victorian properties in Northwich?', a: 'Absolutely. We source natural Welsh slate and quality reclaimed slates to match existing roofs on Victorian and Edwardian properties in Northwich. We can also advise on lime mortar ridge details and conservation-sensitive methods where needed.' },
       { q: 'How much does a new roof cost in Northwich?', a: 'A terraced house re-roof typically costs £5,000–£8,000. Semi-detached properties range from £6,500–£10,000. We provide a free inspection and detailed written quote before any work begins.' },
@@ -305,7 +306,7 @@ export const townData: Record<string, TownData> = {
     proofPoint: 'Completing roofing projects across SK10 and SK11 — from exposed Pennine-edge properties to town-centre terraces.',
     ctaLine: '15 miles from Macclesfield. Experienced with the exposed conditions in this area. Free quotes.',
     faqs: [
-      { q: 'How quickly can you reach Macclesfield for an emergency?', a: 'We are based in Sandbach, approximately 15 miles from Macclesfield. For emergencies we typically reach Macclesfield within 35–50 minutes. Call 01270 897606 and we will dispatch a team as quickly as possible.' },
+      { q: 'How quickly can you reach Macclesfield for an emergency?', a: `We are based in Sandbach, approximately 15 miles from Macclesfield. For emergencies we typically reach Macclesfield within 35–50 minutes. Call ${PHONE_DISPLAY} and we will dispatch a team as quickly as possible.` },
       { q: 'Do you work on period properties in Prestbury and Bollington?', a: 'Yes. We have experience working on the period properties, listed buildings, and conservation area homes in Prestbury and Bollington. We use natural slate, clay tiles, and traditional methods to maintain the character of these properties.' },
       { q: 'Can you fit dry ridge systems on exposed Macclesfield properties?', a: 'Absolutely. We regularly install dry ridge and dry verge systems on Macclesfield properties that are prone to wind damage. These systems outperform mortar-bedded ridges in exposed locations and require no maintenance.' },
       { q: 'How much does a full re-roof cost in Macclesfield?', a: 'A terraced house re-roof in Macclesfield typically costs £5,000–£8,000. Semi-detached properties range from £7,000–£11,000. Period properties requiring specialist materials may cost more. We always provide a free inspection and written quote.' },
@@ -339,7 +340,7 @@ export const townData: Record<string, TownData> = {
     ctaLine: 'Heritage roofing specialists serving Knutsford and the WA16 postcode area. Free quotes.',
     faqs: [
       { q: 'Can you work on listed buildings in Knutsford?', a: 'Yes. We have experience working on listed and conservation area properties in Knutsford using traditional materials including natural Welsh slate, handmade clay tiles, and lime mortar. We understand planning conditions and can advise on material choices and any approvals required.' },
-      { q: 'How quickly can you reach Knutsford?', a: 'We are based in Sandbach, approximately 17 miles from Knutsford. For emergencies we typically arrive within 40–55 minutes. Standard inspections can be arranged same or next day. Call 01270 897606.' },
+      { q: 'How quickly can you reach Knutsford?', a: `We are based in Sandbach, approximately 17 miles from Knutsford. For emergencies we typically arrive within 40–55 minutes. Standard inspections can be arranged same or next day. Call ${PHONE_DISPLAY}.` },
       { q: 'Do you offer roof inspections for high-value properties in Knutsford?', a: 'Yes. We regularly carry out detailed roof inspections on high-value properties in Knutsford and the surrounding area. Our written inspection reports document all findings and prioritise any remedial work required, helping homeowners plan maintenance budgets.' },
       { q: 'How much does a re-roof cost for a large detached property in Knutsford?', a: 'For large detached properties in Knutsford, re-roofing costs typically range from £9,000 to £20,000+, depending on size, roof complexity, and materials. Listed properties requiring specialist materials may cost more. We always provide a detailed free quote after inspection.' },
     ],
@@ -372,9 +373,9 @@ export const townData: Record<string, TownData> = {
     ctaLine: 'Heritage and modern roofing across Tarporley and the CW6 area. Free written quotes.',
     faqs: [
       { q: 'Do you work on listed properties near Tarporley?', a: 'Yes. We work on listed and conservation area properties across the CW6 postcode, including farmhouses, cottages, and period town buildings in Tarporley, Bunbury, and Beeston. We use natural slate, clay tiles, and lime mortar as required.' },
-      { q: 'How quickly can you reach Tarporley?', a: 'We are based in Sandbach, approximately 15 miles from Tarporley. For emergencies we typically arrive within 35–50 minutes. For standard inspections, same-day or next-day visits are usually available. Call 01270 897606.' },
+      { q: 'How quickly can you reach Tarporley?', a: `We are based in Sandbach, approximately 15 miles from Tarporley. For emergencies we typically arrive within 35–50 minutes. For standard inspections, same-day or next-day visits are usually available. Call ${PHONE_DISPLAY}.` },
       { q: 'Can you re-roof a rural farmhouse in the CW6 area?', a: 'Absolutely. We have experience re-roofing rural farmhouses and cottages across the CW6 area. We source appropriate materials for each property, including reclaimed Welsh slate, clay ridge tiles, and traditional mortar mixes where required.' },
-      { q: 'How much does a roof inspection cost in Tarporley?', a: 'We offer free no-obligation inspections and written quotes across the Tarporley area. For properties that require a detailed written condition report, we can discuss our survey options. Call 01270 897606 to arrange a visit.' },
+      { q: 'How much does a roof inspection cost in Tarporley?', a: `We offer free no-obligation inspections and written quotes across the Tarporley area. For properties that require a detailed written condition report, we can discuss our survey options. Call ${PHONE_DISPLAY} to arrange a visit.` },
     ],
     nearbyAreas: [
       { name: 'Nantwich', href: '/roofers-nantwich' },
@@ -404,7 +405,7 @@ export const townData: Record<string, TownData> = {
     proofPoint: 'Experienced with Biddulph’s exposed moorland conditions — we specify for the actual weather this area receives.',
     ctaLine: '12 miles from Biddulph. Experienced with exposed upland properties. Free quotes.',
     faqs: [
-      { q: 'How quickly can you reach Biddulph for an emergency?', a: 'We are based in Sandbach, approximately 12 miles from Biddulph. For emergencies we typically reach Biddulph within 30–40 minutes. Call 01270 897606 for emergency roofing assistance.' },
+      { q: 'How quickly can you reach Biddulph for an emergency?', a: `We are based in Sandbach, approximately 12 miles from Biddulph. For emergencies we typically reach Biddulph within 30–40 minutes. Call ${PHONE_DISPLAY} for emergency roofing assistance.` },
       { q: 'Do you install dry ridge systems on exposed Biddulph properties?', a: 'Yes. We regularly install dry ridge and dry hip systems on Biddulph properties where mortar failure has caused problems. These systems are rated for the wind speeds experienced in the Staffordshire Moorlands and require no ongoing maintenance.' },
       { q: 'How much does a re-roof cost in Biddulph?', a: 'A terraced house re-roof in Biddulph typically costs £4,500–£7,500. Semi-detached properties range from £6,000–£9,500. We always provide a free inspection and written quote before any work begins.' },
       { q: 'Can you carry out emergency storm damage repairs in Biddulph?', a: 'Yes. We provide 24/7 emergency storm damage response across Biddulph. We can carry out make-safe work, tarpaulin cover, and temporary repairs quickly, followed by a full permanent repair once the weather allows.' },
@@ -437,7 +438,7 @@ export const townData: Record<string, TownData> = {
     proofPoint: 'Providing professional roofing across Newcastle-under-Lyme and the ST5 postcode — free inspections available.',
     ctaLine: '14 miles from Newcastle-under-Lyme. Fast response, free quotes, 10-year guarantee.',
     faqs: [
-      { q: 'How quickly can you reach Newcastle-under-Lyme for a roof repair?', a: 'We are based in Sandbach, approximately 14 miles from Newcastle-under-Lyme. For emergency call-outs we typically arrive within 30–45 minutes. For planned work, same-day or next-day inspections are usually available. Call 01270 897606.' },
+      { q: 'How quickly can you reach Newcastle-under-Lyme for a roof repair?', a: `We are based in Sandbach, approximately 14 miles from Newcastle-under-Lyme. For emergency call-outs we typically arrive within 30–45 minutes. For planned work, same-day or next-day inspections are usually available. Call ${PHONE_DISPLAY}.` },
       { q: 'Do you work on commercial properties in Newcastle-under-Lyme?', a: 'Yes. We carry out flat roofing, cladding, and repair work on commercial properties across Newcastle-under-Lyme including offices, retail units, and industrial buildings. We carry £10M public liability insurance for commercial projects.' },
       { q: 'Can you replace slate on a Victorian terrace in Newcastle-under-Lyme?', a: 'Absolutely. We have extensive experience re-roofing Victorian terraces in Newcastle-under-Lyme and across Staffordshire. We source natural Welsh slate and can match existing materials for a sympathetic finish.' },
       { q: 'How much does a new roof cost in Newcastle-under-Lyme?', a: 'A terraced house re-roof typically costs £4,500–£7,500. Semi-detached properties range from £6,000–£10,000. We always provide a free inspection and written quote before any work begins.' },
@@ -470,7 +471,7 @@ export const townData: Record<string, TownData> = {
     proofPoint: 'Providing quality-first roofing for Wilmslow’s demanding residential market — free inspections and written quotes.',
     ctaLine: '18 miles from Wilmslow. Quality-focused roofing to match Wilmslow’s high standards. Free quotes.',
     faqs: [
-      { q: 'How quickly can you reach Wilmslow?', a: 'We are based in Sandbach, approximately 18 miles from Wilmslow. For emergencies we typically arrive within 40–55 minutes. For planned work, same-day or next-day inspections are usually available. Call 01270 897606.' },
+      { q: 'How quickly can you reach Wilmslow?', a: `We are based in Sandbach, approximately 18 miles from Wilmslow. For emergencies we typically arrive within 40–55 minutes. For planned work, same-day or next-day inspections are usually available. Call ${PHONE_DISPLAY}.` },
       { q: 'Do you work on large detached properties in Wilmslow?', a: 'Yes. We regularly work on the larger, more complex roof structures found on executive homes in Wilmslow. Our team is experienced with multi-section roofs, large lead valley systems, dormers, and roof windows that are common on Wilmslow properties.' },
       { q: 'Can you replace valleys and hips on a complex roof in Wilmslow?', a: 'Absolutely. Valley and hip failures are among the most common issues on larger Wilmslow properties. We use code-compliant lead or GRP valley systems and ensure all surrounding tiles are correctly laid, pointed, and secured before we leave.' },
       { q: 'How much does a re-roof cost for a large home in Wilmslow?', a: 'For a large detached property in Wilmslow, re-roofing costs typically range from £9,000 to £20,000+, depending on size, roof complexity, and materials. We always provide a detailed free inspection and written quote before any work begins.' },

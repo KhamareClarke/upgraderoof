@@ -1,4 +1,5 @@
 import { services, getService, type ServiceData } from './service-data';
+import { PHONE_DISPLAY } from './contact';
 import { townData, type TownData } from './town-data';
 import type { Metadata } from 'next';
 
@@ -14,8 +15,8 @@ export function generateServiceLocationMetadata(townKey: string, serviceSlug: st
   const canonical = `https://www.upgraderoofs.co.uk/${town.slug}/${serviceSlug}`;
 
   return {
-    title: `${service.name} ${town.town} | Upgrade Roofs | 01270 897606`,
-    description: `Professional ${service.name.toLowerCase()} in ${town.town} (${town.postcode}). ${town.distanceFromBase}. CORC certified, £10M insured, 10-year guarantee. Free written quotes. Call 01270 897606.`,
+    title: `${service.name} ${town.town} | Upgrade Roofs | ${PHONE_DISPLAY}`,
+    description: `Professional ${service.name.toLowerCase()} in ${town.town} (${town.postcode}). ${town.distanceFromBase}. CORC certified, £10M insured, 10-year guarantee. Free written quotes. Call ${PHONE_DISPLAY}.`,
     openGraph: {
       title: `${service.name} in ${town.town} | Upgrade Roofs`,
       description: `Expert ${service.name.toLowerCase()} across ${town.town}. ${service.description.split('.')[0]}.`,
@@ -26,12 +27,44 @@ export function generateServiceLocationMetadata(townKey: string, serviceSlug: st
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${service.name} ${town.town} | 01270 897606`,
+      title: `${service.name} ${town.town} | ${PHONE_DISPLAY}`,
       description: `Expert ${service.name.toLowerCase()} in ${town.town}. Free quotes, 10-year guarantee.`,
     },
     alternates: { canonical },
     robots: { index: true, follow: true },
   };
+}
+
+// ---------------------------------------------------------------------------
+// Town-aware solution paragraph. Each service×town matrix page otherwise
+// renders the byte-identical ServiceData.description; this folds the town's own
+// geography / property styles into a deterministic lead-in so every combo
+// reads distinct (keyed on town.slug + service.slug via FNV-1a — hydration-safe).
+// ---------------------------------------------------------------------------
+const SOLUTION_ANGLE: ((town: TownData) => string)[] = [
+  (town) =>
+    `Around ${town.town}, a ${town.propertyTypes?.[0]?.toLowerCase() ?? 'typical'} housing stock shapes much of the roofing we carry out. ${town.roofingChallenges}`,
+  (town) =>
+    `${town.localContext} That context guides how we approach every job here.`,
+  (town) =>
+    `With ${town.landmarks?.[0] ? 'landmarks like ' + town.landmarks[0] + ' nearby' : 'the local area well known to us'}, we tailor our work to ${town.town}’s homes.`,
+  (town) =>
+    `We respond to ${town.town} addresses within ${town.emergencyResponseTime} in an emergency, and plan larger work around ${town.distanceFromBase.toLowerCase()}.`,
+];
+
+export function buildServiceTownSolution(service: ServiceData, town: TownData): string {
+  const seed = hashSlug(town.slug + '::' + service.slug);
+  const angle = SOLUTION_ANGLE[seed % SOLUTION_ANGLE.length];
+  return `${service.description} ${angle(town)}`;
+}
+
+function hashSlug(input: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < input.length; i += 1) {
+    h ^= input.charCodeAt(i);
+    h = Math.imul(h, 0x01000193);
+  }
+  return h >>> 0;
 }
 
 export function generateServiceLocationFaqs(
@@ -41,7 +74,7 @@ export function generateServiceLocationFaqs(
   const shared = [
     {
       q: `How quickly can you reach ${town.town} for ${service.name.toLowerCase()} work?`,
-      a: `We are based in Sandbach, ${town.distanceFromBase}. For emergencies we typically reach ${town.town} within ${town.emergencyResponseTime}. For planned work, same-day or next-day inspections are usually available. Call 01270 897606.`,
+      a: `We are based in Sandbach, ${town.distanceFromBase}. For emergencies we typically reach ${town.town} within ${town.emergencyResponseTime}. For planned work, same-day or next-day inspections are usually available. Call ${PHONE_DISPLAY}.`,
     },
     {
       q: `Are you insured for ${service.name.toLowerCase()} work in ${town.town}?`,
