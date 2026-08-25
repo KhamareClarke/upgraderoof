@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
+import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 
 export const metadata: Metadata = {
   title: 'Cladding Installation Cheshire | uPVC & Timber | Upgrade Roofs',
@@ -135,6 +136,72 @@ export default function CladdingPage() {
       </section>
 
       <ServiceAreaLinks serviceName="Cladding" />
+
+      {/* FAQ Section — visible details/summary accordions + matching FAQPage JSON-LD */}
+      <section className="section-padding bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": [\n    {\n      \"@type\": \"Question\",\n      \"name\": \"How much does exterior cladding cost in Cheshire?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Exterior cladding in Cheshire typically costs between £60 and £120 per square metre supplied and fitted, depending on whether you choose timber, composite, or metal. A full house front often totals £3,000 to £8,000. We provide a free, itemised written quote tailored to your property.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Which cladding material lasts the longest?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Metal and composite cladding are the most durable, lasting 30 to 40 years with minimal upkeep. Timber cladding looks classic but needs periodic treatment, typically lasting 25 to 30 years when well maintained. We'll recommend the right material for your home's style and exposure across Cheshire.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Is your cladding installation guaranteed?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Yes. All our cladding installations are covered by a 10-year workmanship guarantee, with manufacturer warranties on the materials. As a CORC certified, £10M insured contractor, we cover Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.\"\n      }\n    }\n  ]\n}" }}
+        />
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-gray-600">
+                Answers to common questions about our service across Cheshire.
+              </p>
+            </div>
+            <div className="space-y-3 sm:space-y-4">
+              {[
+                {
+                  question: "How much does exterior cladding cost in Cheshire?",
+                  answer: "Exterior cladding in Cheshire typically costs between £60 and £120 per square metre supplied and fitted, depending on whether you choose timber, composite, or metal. A full house front often totals £3,000 to £8,000. We provide a free, itemised written quote tailored to your property.",
+                },
+                {
+                  question: "Which cladding material lasts the longest?",
+                  answer: "Metal and composite cladding are the most durable, lasting 30 to 40 years with minimal upkeep. Timber cladding looks classic but needs periodic treatment, typically lasting 25 to 30 years when well maintained. We'll recommend the right material for your home's style and exposure across Cheshire.",
+                },
+                {
+                  question: "Is your cladding installation guaranteed?",
+                  answer: "Yes. All our cladding installations are covered by a 10-year workmanship guarantee, with manufacturer warranties on the materials. As a CORC certified, £10M insured contractor, we cover Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.",
+                },
+              ].map((faq, index) => (
+                <details
+                  key={index}
+                  className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+                  open={index === 0}
+                >
+                  <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4">
+                    <span className="font-semibold text-brand-navy text-base group-hover:text-brand-orange transition-colors text-left pr-2">
+                      {faq.question}
+                    </span>
+                    <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 transition-transform duration-300 group-open:rotate-180" />
+                  </summary>
+                  <div className="px-5 pb-4">
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </details>
+              ))}
+            </div>
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-600 mb-3">Still have questions?</p>
+              <TrackedPhoneLink
+                href="tel:01270897606"
+                placement="faq_section"
+                className="inline-flex items-center justify-center px-6 py-2.5 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm"
+              >
+                Call Us: 01270 897 606
+              </TrackedPhoneLink>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
 
       <section className="section-padding bg-brand-grey">
         <div className="container-custom text-center px-2">

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
+import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 
 export const metadata: Metadata = {
   title: 'Flat Roofing Cheshire | EPDM & GRP Installation | Upgrade Roofs',
@@ -132,6 +133,72 @@ export default function FlatRoofingPage() {
       </section>
 
       <ServiceAreaLinks serviceName="Flat Roofing" />
+
+      {/* FAQ Section — visible details/summary accordions + matching FAQPage JSON-LD */}
+      <section className="section-padding bg-white">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": [\n    {\n      \"@type\": \"Question\",\n      \"name\": \"How much does a flat roof cost in Cheshire?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Flat roof costs in Cheshire typically range from £800 to £2,000 depending on size, access, and the membrane you choose. EPDM rubber and GRP fibreglass are long-lasting options; felt is the most budget-friendly. We provide a free, itemised written quote so you know the exact cost before any work starts.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Which flat roof material lasts the longest?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"GRP fibreglass and EPDM rubber are the most durable flat roof materials, both routinely lasting 25 to 30 years or more. Felt roofs are cheaper up front but generally last 10 to 15 years. We recommend EPDM or GRP for extensions, garages, and commercial buildings across Cheshire.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"What guarantee do you offer on flat roofing work?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Every flat roof we install is covered by a 20-year waterproof warranty on the membrane plus a 10-year workmanship guarantee. As a CORC certified, £10M insured roofer, we also offer Insurance Backed Guarantees for full peace of mind throughout Sandbach, Crewe, and wider Cheshire.\"\n      }\n    }\n  ]\n}" }}
+        />
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3">
+                Frequently Asked Questions
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-gray-600">
+                Answers to common questions about our service across Cheshire.
+              </p>
+            </div>
+            <div className="space-y-3 sm:space-y-4">
+              {[
+                {
+                  question: "How much does a flat roof cost in Cheshire?",
+                  answer: "Flat roof costs in Cheshire typically range from £800 to £2,000 depending on size, access, and the membrane you choose. EPDM rubber and GRP fibreglass are long-lasting options; felt is the most budget-friendly. We provide a free, itemised written quote so you know the exact cost before any work starts.",
+                },
+                {
+                  question: "Which flat roof material lasts the longest?",
+                  answer: "GRP fibreglass and EPDM rubber are the most durable flat roof materials, both routinely lasting 25 to 30 years or more. Felt roofs are cheaper up front but generally last 10 to 15 years. We recommend EPDM or GRP for extensions, garages, and commercial buildings across Cheshire.",
+                },
+                {
+                  question: "What guarantee do you offer on flat roofing work?",
+                  answer: "Every flat roof we install is covered by a 20-year waterproof warranty on the membrane plus a 10-year workmanship guarantee. As a CORC certified, £10M insured roofer, we also offer Insurance Backed Guarantees for full peace of mind throughout Sandbach, Crewe, and wider Cheshire.",
+                },
+              ].map((faq, index) => (
+                <details
+                  key={index}
+                  className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+                  open={index === 0}
+                >
+                  <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4">
+                    <span className="font-semibold text-brand-navy text-base group-hover:text-brand-orange transition-colors text-left pr-2">
+                      {faq.question}
+                    </span>
+                    <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 transition-transform duration-300 group-open:rotate-180" />
+                  </summary>
+                  <div className="px-5 pb-4">
+                    <p className="text-sm text-gray-600 leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </div>
+                </details>
+              ))}
+            </div>
+            <div className="mt-8 text-center">
+              <p className="text-sm text-gray-600 mb-3">Still have questions?</p>
+              <TrackedPhoneLink
+                href="tel:01270897606"
+                placement="faq_section"
+                className="inline-flex items-center justify-center px-6 py-2.5 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm"
+              >
+                Call Us: 01270 897 606
+              </TrackedPhoneLink>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
 
       <section className="section-padding bg-brand-grey">
         <div className="container-custom text-center px-2">
