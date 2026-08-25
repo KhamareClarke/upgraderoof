@@ -8,6 +8,33 @@
 
 ---
 
+## Executive Summary
+
+This is a four-pillar audit of the `upgraderoofs.co.uk` content surface, spanning **technical SEO + structured data**, **AEO / answer readiness**, **GEO / entity alignment**, and **programmatic SEO (pSEO) regional uniqueness**. The findings below are the *current* state after every fix landed and `tsc --noEmit` was confirmed green.
+
+The 13 sections are **not independent pillars** — several supersede earlier snapshots of the same pillar. The report re-audits the core crawl/schema files (§8 superseding §1–§5), the AEO readiness (§10 superseding §6), and the entity markup (§11 + §12 superseding §7). Treating all 13 as co-equal would double-count stale scores, so the consolidated score is built from the four **latest** live pillar scores:
+
+| Pillar | Latest section(s) | Score | Status |
+|---|---|---|---|
+| Technical SEO & structured data (crawl/schema) | §8 (supersedes §1–§5) | **91 / 100** | Minor housekeeping only |
+| AEO / answer-engine readiness | §10 (supersedes §6) | **100 / 100** | FAQ schema + visible accordions everywhere |
+| GEO / entity alignment & attribution | §11 + §12 (supersedes §7) | **84.25 / 100** | GBP ID split fixed; visible citations still open |
+| pSEO / regional uniqueness | §13 | **75.75 / 100** | Thin 90-page matrix is the main risk |
+| **Overall ecosystem score** | — | **87.75 / 100** | Weighted mean of the four live pillars |
+
+### Overall ecosystem score: **87.75 / 100**
+
+The overall is the **equally-weighted mean of the four live pillar scores** — (91 + 100 + 84.25 + 75.75) ÷ 4 = **87.75 / 100**. Every pillar is now above 75; the residual risk is concentrated in a single lever (pSEO matrix-page thinness), not spread across the surface.
+
+**Superseded historical scores (for traceability, not aggregated):** initial core audit §1–§5 = 92, early AEO §6 = 64.5, early entity §7 = 57.75. These were the "before" readings that motivated the fixes now reflected in §8, §10, and §11–§12.
+
+**Highest-leverage remaining fixes (in order):**
+1. **pSEO matrix pages (§13, −10.5)** — add one 40–60-word town-aware paragraph per service×town page; today they read as `service.description` + an interpolated scalar, close to doorway content.
+2. **Cross-town theme differentiation (§13, −8.0)** — rewrite the 6 near-identical `subsidence` / `concrete-tiles` / `EPDM-20-year` solution strings in `lib/town-data.ts`.
+3. **Visible attribution (§11.4, priority 4)** — surface human-readable citation/byline links (CORC, VELUX, MyApproved) to convert machine-only `sameAs`/`hasCredential` into a provenance trail.
+
+---
+
 ## 1. Structured Data — LocalBusiness
 
 **File:** `app/structured-data.tsx`
@@ -572,4 +599,97 @@ Removed the self-asserted `aggregateRating` block (`@type: AggregateRating`, `ra
 `npm run typecheck` surfaced three pre-existing `--downlevelIteration` (`TS2802`) / implicit-any (`TS7006`) errors in unrelated script files (`scripts/fix-aeo-gaps.ts:150`, `scripts/fix-entity-consistency.ts:297/301`) — none in the files this patch touched. Remediated at source per the `d71222e` convention (`Array.from(...)` + explicit `Map<string, Patch[]>` typing), and confirmed clean: **`tsc --noEmit` now reports zero errors**.
 
 Resolved status: **P0, P1, P2 all closed; typecheck green.** Score impact (§11.4): GBP identifier alignment `0.00 → 1.00` (+20.0), source-attribution `sameAs` weak-link sub-deduction cleared (partial recovery toward the 0.15 attribution score, pending visible citation links — still open as §11.4 priority 4).
+
+---
+
+## 13. Programmatic SEO (pSEO) & Regional Uniqueness Audit
+
+This is the fourth scheduled inspection (Step 4). It audits the 15-town regional landing-page footprint and its 90-page service-location matrix for **programmatic-SEO uniqueness** — the degree to which each generated page carries genuinely distinct content rather than templated/duplicated text that would trigger Google's thin-content or doorway-page flags.
+
+### 13.1 Footprint inventory
+
+The town footprint is generated from a single structured source (`lib/town-data.ts`, 15 `TownData` entries) rendered by a shared template (`components/AreaPageTemplate.tsx`); the page files only select a town. The service-location matrix is `SERVICE_SLUGS` (6) × `TOWN_SLUGS` (15) = **90 pages** at URL depth 3 (`/<townSlug>/<serviceSlug>`), rendered by `components/ServiceLocationTemplate.tsx`.
+
+| Layer | Count | Source | Template |
+|---|---|---|---|
+| Town landing pages (`/roofers-<town>`) | 15 | `lib/town-data.ts` (15 keys) | `AreaPageTemplate.tsx` |
+| Service × town matrix (`/<town>/<service>`) | 90 | 6 `ServiceData` × 15 towns | `ServiceLocationTemplate.tsx` |
+| **Total regional pages** | **105** | | |
+
+### 13.2 Unique vs. shared content (town pages)
+
+The town page splits cleanly into **per-town unique blocks** (rendered verbatim from each `TownData` entry) and **shared/templated blocks** (identical across all 15 towns, only `${town}` interpolating).
+
+**UNIQUE per-town blocks** — 10 distinct content blocks per town, each georeferenced to that specific place:
+
+| Block | TownData field | Distinctness signal |
+|---|---|---|
+| Hero intro | `intro` | names the town + distance-from-base |
+| Local context | `localContext` | street/estate-level geography (e.g. "Nantwich Road", "Leighton West") |
+| Roofing challenges | `roofingChallenges` | geology/geography-differentiated (see 13.4) |
+| Areasserved | `landmarks` (5–6) | real neighbourhood/landmark names |
+| Property types | `propertyTypes` (4–5) | town-specific housing archetypes |
+| Common problems | `commonProblems` (3 pairs) | problem→solution mapped to the town |
+| Proof point | `proofPoint` | count/nearness claim unique per town |
+| CTA line | `ctaLine` | distance + angle unique per town |
+| FAQs | `faqs` (4 Q/A) | each answers "what about *<town>*" |
+| Nearby areas | `nearbyAreas` (5–6) | town's actual radial neighbours |
+
+Roughly **10 unique blocks × ~50–90 words each ≈ 600–900 words of genuinely distinct content per town**, versus `postcode`/`distanceFromBase`/`emergencyResponseTime` (structured scalars, inherently templated) and the shared blocks below.
+
+**SHARED/templated blocks** (byte-identical across all 15 towns) — in `AreaPageTemplate.tsx`:
+
+- 6-service card grid (lines 39–46: Tile & Slate, Flat Roofing "20-year guarantee", Chimney, Guttering, Roof Repairs, Emergency) — identical descriptions.
+- Hero trust bullets (CORC certified, £10M public liability, 10-year workmanship guarantee, free written quote).
+- AEO answer block (lines 114–117) boilerplate.
+- Quick-Answers section (3 Q&As: cost £150–£500/£500–£2,000; "127+ five-star Google reviews"; flat roof 1–2 days EPDM/GRP "20-year waterproof guarantee").
+- Trust bar, cross-links paragraph, breadcrumb, 3-entry FAQPage + Speakable schema, CTA boilerplate.
+- Hero phone `tel:01270897606` hardcoded inline rather than read from `lib/contact.ts` (see [[project_contact_tracking]]).
+
+### 13.3 The 90-page matrix — thin by design
+
+`ServiceLocationTemplate` pairs an identical per-service `ServiceData.description` with a narrow slice of `TownData` (`town`, `postcode`, `distanceFromBase`, `emergencyResponseTime`, `proofPoint`, `roofingChallenges`, `ctaLine`, `nearbyAreas`). The only substantive town-specificity in each matrix page is a **short interpolated paragraph + a handful of interpolated scalars**; `generateServiceLocationFaqs(service, town)` produces 2 shared + 2 service-specific FAQs. These pages are functionally doorway variants — each duplicates the shared `service.description` and adds only the town's name, distance, and proof point. This is the highest thin-content risk in the footprint.
+
+### 13.4 Recurring-theme overlap analysis (the key duplication signal)
+
+Beyond the template/data split, the **cross-town content itself repeats a small number of high-signal themes** verbatim-ish. Grep across `lib/town-data.ts` surfaced 31 occurrences of the recurring strings `subsidence | concrete interlocking | 20-year guarantee/waterproof | EPDM | GRP | dry ridge`. The overlaps that most dilute uniqueness:
+
+| Recurring theme | Towns that repeat it | Nature |
+|---|---|---|
+| **Subsidence / ground movement** (salt mining / brine) | Middlewich, Northwich, Winsford, Newcastle-under-Lyme | Each frames it via *different* geology (River Croco vs brine extraction vs right-to-buy salts), but "subsidence affects roof alignment + flexible fixings" is 4× near-identical |
+| **Concrete interlocking tiles 1960s–80s** | Alsager, Winsford, Newcastle-under-Lyme | The solution string "strip-and-retile with modern lightweight tiles/ventilation to current regs" is nearly word-for-word across 3 towns |
+| **EPDM/GRP flat roof "20-year waterproof guarantee"** | Alsager, Winsford, Newcastle-under-Lyme, Crewe, Sandbach, Holmes Chapel (6×) | The highest-frequency shared boilerplate — identical claim recurring in FAQs + commonProblems |
+| **"Original Welsh slate" heritage repair** | Crewe, Congleton, Nantwich, Northwich, Macclesfield, Newcastle-under-Lyme | Differentiated by building era asserted, but the material/technique copy is shared |
+
+**Net assessment of unique-to-duplicated ratio.** Per town page, of the ~1,100–1,400 rendered words, roughly **55–65% is unique town-specific content** (the 10 data-driven blocks) and **35–45% is shared template prose** (service grid, trust bullets, answer block, quick answers, CTA). The unique fraction comfortably **exceeds the 30% minimum distinct-data threshold** that a defensible pSEO footprint should hold, so **no doorway-page flag is warranted at the town-page layer.** The residual `subsidence`/`concrete-tiles` theme overlap means the *intro/context/challenge* blocks are more differentiated than the *commonProblem/FAQ solution* blocks, but the themes are still framed through town-specific geology, so the overlap is differentiation-by-angle rather than true duplication.
+
+### 13.5 Scorecard (weighted)
+
+| # | Criterion | Weight | Score (0–1) | Weighted |
+|---|---|---|---|---|
+| 1 | Distinct-data completeness (landmarks/property/problems per town) | 25% | 0.95 | 23.75 |
+| 2 | Uniqueness ratio vs. thin-content threshold (≥30% distinct) | 30% | 0.85 | 25.5 |
+| 3 | Cross-town theme differentiation (subsidence/tiles/EPDM overlap) | 20% | 0.60 | 12.0 |
+| 4 | Matrix-page (90-page) non-duplication depth | 15% | 0.30 | 4.5 |
+| 5 | Data/template separation hygiene (single source of truth) | 10% | 1.00 | 10.0 |
+| | | **TOTAL** | 100% | | **75.75** |
+
+### Score: **75.75 / 100** (pSEO & regional uniqueness)
+
+### Deduction rationale
+
+- **−1.25 distinct-data (weight 25) = 0.95**: all 15 towns carry the full 10-block dataset (intro, context, challenges, 5–6 landmarks, 4–5 property types, 3 problem pairs, proof point, CTA, 4 FAQs, neighbours); the 0.05 discount is for `emergencyResponseTime`/`postcode` being structured scalars with limited rewrite surface.
+- **−4.5 uniqueness ratio (weight 30) = 0.85**: unique content is ~55–65% of rendered words, comfortably above the 30% floor, but the shared service-grid + quick-answer + trust-bullet blocks and the hardcoded inline phone (vs. `lib/contact.ts`) mean ~35–45% of each page is byte-identical across town pages. The town layer clears the threshold yet leaves material templating on the page.
+- **−8.0 theme differentiation (weight 20) = 0.60**: `subsidence` (4 towns), `concrete interlocking tiles` (3 towns), and `EPDM/GRP 20-year guarantee` (6 towns) recur with near-identical solution copy. The differentiation is by framing/angle rather than by distinctly-worded solution text, which is the single largest pSEO-quality lever remaining.
+- **−10.5 matrix depth (weight 15) = 0.30**: the 90 matrix pages are thin by construction — a shared `service.description` plus a short interpolated paragraph, with only 2 service-specific + 2 shared FAQs. Each is one step removed from a doorway page and represents the sharpest thin-content exposure in the footprint.
+- **−0.0 data/template separation (weight 10) = 1.00**: the header comment and architecture (page files "just select a town"; all town content lives in `town-data.ts`) is a clean single-source-of-truth pattern with zero data drift.
+
+### Priority fixes (pSEO — ordered)
+
+1. **🟠 P1 — Differentiate the 6-shared theme "solution" strings.** Rewrite the recurring `subsidence`, `concrete-interlocking-tiles`, and `EPDM/GRP 20-year` solution copy in `lib/town-data.ts` so each town phrases its solution distinctly (`commonProblems[].solution` and overlapping FAQs), rather than sharing near-identical "strip-and-retile… to current regs" / "flexible fixings accommodate movement" boilerplate. This single change lifts the largest weighted criterion (theme differentiation, −8.0).
+2. **🟠 P1 — Deepen the 90 matrix pages.** Add one genuinely town-specific sentence per matrix page (drawn from the town's `roofingChallenges`/`landmarks`) into `ServiceLocationTemplate`, so the service×town combos stop reading as pure `service.description` + interpolated scalar. A single 40–60-word town-aware paragraph materially raises the matrix non-duplication depth (currently −10.5).
+3. **🟡 P2 — Centralise the hero phone.** Replace the hardcoded `tel:01270897606` and "📞 01270 897 606" strings in `AreaPageTemplate.tsx` with `PHONE_TEL`/`PHONE_DISPLAY` from `lib/contact.ts` (see [[project_contact_tracking]]) so the contact surface has one owner, consistent with the GBP-ID centralisation in §12.1.
+4. **🟡 P2 — Vary the shared trust bullets and quick-answer boilerplate** so not every town page carries word-for-word-identical "127+ five-star reviews" and "free written quote" framing; minor rotation keeps the shared-block language from being the dominant repeated string on any page.
+
+*No commit or push was authorised or performed as part of this inspection — this section is an append-only finding against the current source of truth.*
 
