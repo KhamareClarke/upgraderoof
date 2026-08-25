@@ -56,13 +56,6 @@ export function TownLocalBusinessSchema({ town, postcode, slug, lat, lng, addres
       },
       geoRadius: '8000',
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: 4.9,
-      bestRating: 5,
-      worstRating: 1,
-      reviewCount: 127,
-    },
     hasCredential: [
       {
         '@type': 'EducationalOccupationalCredential',

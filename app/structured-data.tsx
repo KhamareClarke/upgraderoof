@@ -63,14 +63,14 @@ export function StructuredData() {
       'https://www.x.com/upgraderoofs',
       'https://www.youtube.com/@upgraderoofs',
       'https://www.pinterest.com/upgraderoofs',
-      'https://share.google/EkNuUQIZgxYuyzVpu',
+      'https://www.google.com/maps/place/Upgrade+Roofs',
       'https://www.corc.org.uk/',
-      'https://find-and-update.company-information.service.gov.uk/search?q=upgrade+roofs+ltd'
+      'https://find-and-update.company-information.service.gov.uk/company/15660654'
     ],
     identifier: {
       '@type': 'PropertyValue',
       name: 'Google Business Profile ID',
-      value: '17098915606572808840'
+      value: '17098906572808840'
     },
     areaServed: [
       {

@@ -49,7 +49,7 @@ export default function SkylightsRoofWindowsPage() {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <p className="text-base font-semibold text-brand-navy leading-relaxed">
-              <strong>Upgrade Roofs installs skylights and roof windows across Cheshire</strong> including Velux, fixed, and opening units on both pitched and flat roofs. VELUX-approved installers with fully watertight manufacturer flashing fitted. 10-year workmanship guarantee, free written quotes. Serving Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.
+              <strong>Upgrade Roofs installs skylights and roof windows across Cheshire</strong> including Velux, fixed, and opening units on both pitched and flat roofs. VELUX-approved installers with fully watertight manufacturer flashing fitted. 10-year workmanship guarantee plus manufacturer warranty, free written quotes. Serving Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.
             </p>
           </div>
         </div>

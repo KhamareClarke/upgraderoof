@@ -147,7 +147,7 @@ function verifyMoneyPageFaq(): Check[] {
 
     // Parity: every "name:" in the schema's FAQPage questions must appear as
     // visible <summary> text on the page.
-    const schemaQuestions = [...schema.matchAll(/name:\s*['"]([^'"]+)['"]/g)].map((m) => m[1]);
+    const schemaQuestions = Array.from(schema.matchAll(/name:\s*['"]([^'"]+)['"]/g)).map((m) => m[1]);
     const parity = schemaQuestions.length > 0 && schemaQuestions.every((q) => page.includes(q));
     checks.push({ name: `${label} FAQ schema↔HTML parity`, pass: parity,
       detail: parity

@@ -459,3 +459,117 @@ The two follow-on items that remain outside the 100/100 threshold (and do not re
 2. **P2 — Resolve the three-way FAQ implementation.** Either delete `components/FAQPageSchema.tsx` (orphaned) and standardize on one pattern, or adopt `FAQPageSchema` across the service subpages and retire the ad-hoc `useState` accordion in `tile-slate-roofing`.
 3. **P2 — Extend `SpeakableSpecification` to the core commercial pages**, or otherwise align the two answer-first patterns so that answer-engine extraction (`id="answer"`) and Speakable eligibility behave identically on `roof-repairs` / `new-roofs` / `emergency-roofing`.
 4. **P3 — Reconcile the homepage `FAQ.tsx` self-emission** (already flagged §8, Finding 30 / §9 priority 2) against the finalized FAQ policy so the FAQ-schema surface has one owner instead of four.
+
+---
+
+## 11. Entity markup re-audit — current state, GBP alignment & factual density
+
+This is the follow-on inspection from the §7 "Entity-Markup Consistency" pass. §7 scored 57.75/100 against code that has since drifted; this section re-audits against the **current** source of truth in `app/structured-data.tsx`, `app/api/gbp/route.ts`, and the visible content blocks, and adds an explicit factual-density vs. source-attribution read that §7 did not carry.
+
+### 11.1 Entity-markup consistency (current-state re-audit)
+
+`app/structured-data.tsx` still consolidates the organisation into a single `@graph` of `[organizationData, websiteData, speakableData]`, and the internal `@id` graph is stable and correct: `#organization` is the root, with `provider`/`seller` (service pages), `branchOf` (town pages), and `author`/`publisher` all resolving to `https://www.upgraderoofs.co.uk/#organization`. The NAP normalisation claimed in §7 is now **actually** in place:
+
+| Field | §7 finding | Current `structured-data.tsx` state | Verdict |
+|---|---|---|---|
+| `telephone` | Finding 26 — `'01270 897606'` non-E.164 | `'+441270897606'` (line 13) | **✅ Fixed** |
+| Trust signals in schema | Finding 23 — absent from machine-readable schema | `description` now carries "25+ years, 5,000+ projects, £10M public liability, 10-year workmanship guarantee" (line 15) | **✅ Fixed** |
+| `aggregateRating` | Finding 22 — `5.0` self-asserted | Removed from `#organization` (deliberate, manual-action risk — comment lines 229–234) | **✅ Fixed** |
+| `identifier` (GBP ID) | §7 assumed parity | `value: '17098915606572808840'` (20 digits, line 70–74) | **⚠️ Broken — see 11.2** |
+| NAP address / geo | Finding 24 — consistent | `20 Crewe Road`, Sandbach, Cheshire, CW11 4NE, lat 53.1461 / long −2.3679 | **✅ Unchanged** |
+| CORC credential + service catalog | Finding — present | `hasCredential` (EducationalOccupationalCredential → CORC) + 6-service `hasOfferCatalog` | **✅ Unchanged** |
+
+The entity layer itself is now clean on NAP, credential, and catalog dimensions. The remaining consistency break is not *inside* `structured-data.tsx` — it is the divergence between that file and the canonical GBP reference. Two guardrails sit behind that:
+
+- **P2a — Divergent `aggregateRating` in `components/TownLocalBusinessSchema.tsx` (lines 59–65).** The 90 town pages still emit `aggregateRating.ratingValue: 4.9, reviewCount: 127` via `TownLocalBusinessSchema`, while `structured-data.tsx` deliberately removed `aggregateRating` from the root organisation to avoid a manual-action risk. The town pages therefore re-introduce self-asserted review markup that the central schema disciplined away — a consistency lapse across the `@id` graph, even though the `4.9` figure itself is consistent with the £10M/CORC trust posture.
+- **P2b — `identifier` differs between the two authorship surfaces.** Covered separately in 11.2 below.
+
+### 11.2 Google Business Profile alignment — CRITICAL
+
+The canonical, live source of truth for the business's GBP identity is `app/api/gbp/route.ts`, which reads the profile via the Business Information API (`business.manage` scope) and returns `{ profile, rating, reviews }` using a hard-coded location name.
+
+- **`app/api/gbp/route.ts` line 33** — `const TARGET_LOCATION_ID = '17098906572808840';` **(17 digits)**
+- **`app/structured-data.tsx` lines 70–74** — `identifier: { '@type': 'PropertyValue', name: 'Google Business Profile ID', value: '17098915606572808840' }` **(20 digits)**
+
+The 20-digit value has the sub-string `1**56**` inserted (`1709891**56**06572808840` vs `170989**0**6572808840`). These are **not the same identifier** — a genuine entity-alignment breakage, not a formatting artifact. Google uses `identifier` (a `PropertyValue` naming the GBP ID) as one of the reconciliation signals when matching structured-data to a Business Profile. Emitting a GBP ID that does not resolve to the actual `TARGET_LOCATION_ID` the API queries weakens that reconciliation and, more importantly, means the two files disagree about a single, load-bearing fact.
+
+Resolution paths (to be applied once, then burned in):
+
+1. **Replace the `value` in `structured-data.tsx` with the canonical `'17098906572808840'`** (the 17-digit ID the API actually queries — dedupe/correct the stray `156`).
+2. **Extract a single shared constant** (e.g. `lib/contact.ts` alongside the existing phone/WhatsApp constants — see [[project_contact_tracking]]) so the GBP ID has one owner and cannot drift again. Both `route.ts` and `structured-data.tsx` would import it.
+3. **Consider dropping the `identifier` block entirely** rather than emitting a wrong value, if the GBP ID is not yet a deliberate reconciliation strategy — a correct-but-absent identifier is safer than an incorrect one.
+
+### 11.3 Factual density vs. source attribution
+
+**Factual density — HIGH.** Concrete, quotable supporting facts are present in every content block audited: prices (£150 chimney repointing → £1,500+ rebuild; £800–£2,000 flat roof; £700–£2,500 per skylight; £60–£120/m² cladding), durations/materials (EPDM/GRP 25–30 yrs; felt 10–15 yrs; uPVC 20–25 yrs), credentials (CORC certified, VELUX approved), insurance (£10M public liability), and warranties (10-year workmanship; 20-year waterproof on flat-membrane; Insurance Backed Guarantee). These are the facts answer engines extract verbatim, and they are consistent across page types.
+
+**Source attribution — LOW (the governing gap).** None of the high-density facts are externally attributed:
+
+- **No `datePublished` / `dateModified`** on any page or schema node — nothing signals recency or that the £10M / warranty / credential claims are current as of the last re-verification.
+- **No author byline or `Person`/`Organization` author entity** in visible content — the `author` slot in `WebPage` resolves to `#organization`, but no named individual or reviewer is surfaced, so E-E-A-T "experience" has no carrier.
+- **No third-party citation/verification links** in visible content — the CORC-approved, VELUX-approved, and MyApproved claims are asserted, not linked out to the issuing bodies. Source attribution relies entirely on `sameAs` (8 URLs in schema) and `hasCredential.recognizedBy`, which are machine-only and do not render to a human.
+- **Weak `sameAs` entries (pre-existing, re-confirmed).** `sameAs` includes a Google Maps share URL (`share.google/EkNuUQIZgxYuyzVpu`) and a Companies House **search** URL (`…/search?q=upgrade+roofs+ltd`) rather than a canonical profile/chamber reference — the Companies House search string is not a stable entity identifier.
+
+This asymmetry is the substantive finding behind the score: the site is *factually dense but attributionally thin*. For E-E-A-T and entity work, density without a visible provenance trail is discounted by Google's quality raters, so the density being shipped is not fully capitalised.
+
+### 11.4 Scorecard (weighted)
+
+Criteria re-score the §7 entity dimensions on current state and add factual-density / source-attribution axes.
+
+| # | Criterion | Weight | Score (0–1) | Weighted |
+|---|---|---|---|---|
+| 1 | NAP consistency (name/address/phone/geo) | 25% | 1.00 | 25.0 |
+| 2 | GBP identifier alignment (reconciliation ID) | 20% | **0.00** | 0.0 |
+| 3 | Credential + catalog + trust-signal markup | 20% | 0.90 | 18.0 |
+| 4 | Factual density (prices/durations/warranties) | 20% | 0.95 | 19.0 |
+| 5 | Source attribution (dates/byline/citation links) | 15% | **0.15** | 2.25 |
+| | | **TOTAL** | 100% | | **64.25** |
+
+### Score: **64.25 / 100** (entity markup re-audit)
+
+### Deduction rationale
+
+- **−20.0 GBP ID (weight 20%) = 0.00**: `structured-data.tsx` emits `identifier.value: '17098915606572808840'` (20 digits) which does **not** match the canonical `TARGET_LOCATION_ID = '17098906572808840'` (17 digits) in `app/api/gbp/route.ts`. A wrong reconciliation ID is scored as an outright miss, not a partial.
+- **−2.0 credential/catalog (weight 20) = 0.90**: CORC credential and 6-service catalog are present and correct, but the divergent `aggregateRating` in `TownLocalBusinessSchema.tsx` (lines 59–65) re-introduces self-asserted review markup that the central schema removed — a consistency lapse, not a factual error.
+- **−1.0 factual density (weight 20) = 0.95**: density is uniformly high; the deduction is for the *attribution* of that density (see next) rather than for missing facts.
+- **−12.75 source attribution (weight 15) = 0.15**: no `datePublished`/`dateModified`, no byline/author, no visible third-party citation links, and weak `sameAs` (share URL + Companies House search page). This is the single largest quality lever remaining.
+
+### Priority fixes (entity re-audit — ordered)
+
+1. **🔴 P0 — Correct and re-centralise the GBP `identifier`.** Set `structured-data.tsx` `identifier.value` to the canonical `'17098906572808840'` (drop the stray `156`), and extract a shared `GBP_LOCATION_ID` constant into `lib/contact.ts` (see [[project_contact_tracking]]) imported by both `app/structured-data.tsx` and `app/api/gbp/route.ts`. One owner, no drift.
+2. **🟠 P1 — De-duplicate `aggregateRating`.** Remove `aggregateRating` from `components/TownLocalBusinessSchema.tsx` (lines 59–65), or reintroduce it centrally with a deliberate strategy — do not maintain two contradictory policies (central = removed; town = self-asserted `4.9`/`127`).
+3. **🟠 P1 — Add `dateModified` (+ optional `datePublished`)** to `WebPage`/`Article` and surface a "last updated" line in visible content so the dense factual claims read as current.
+4. **🟡 P2 — Add visible citation/verification links** to the issuing bodies (CORC, VELUX, MyApproved) and an author/owner byline, converting machine-only `sameAs`/`hasCredential` into a human-readable provenance trail.
+5. **🟡 P2 — Replace weak `sameAs` entries** (the Maps share URL and the Companies House *search* URL) with stable canonical `@id`s (e.g. a Companies House company-number profile URL and the GBP listing's canonical maps URL) that reconcile as entity references.
+
+*No commit or push was authorised or performed as part of this inspection — this section is an append-only finding against the current source of truth.*
+
+---
+
+## §12 — Corrective entity-alignment resolution (Request 4, RESOLVED)
+
+Executed `scripts/fix-entity-alignment-gaps.ts` to close the three priority gaps identified in §11.4. All six edits applied and verified idempotent.
+
+### 12.1 P0 — GBP ID entity split (FIXED)
+
+`app/structured-data.tsx` `identifier.value` rewritten `'17098915606572808840'` (20 digits) → `'17098906572808840'` (17 digits), now identical to `TARGET_LOCATION_ID` in `app/api/gbp/route.ts`. The GBP reconciliation identifier reconciles under a single canonical value; no `20` vs `17` digit entity split remains.
+
+### 12.2 P1 — Residual aggregate ratings (FIXED)
+
+Removed the self-asserted `aggregateRating` block (`@type: AggregateRating`, `ratingValue: 4.9`, `reviewCount: 127`) from `components/TownLocalBusinessSchema.tsx`. Town schemas now align with the root `#organization` schema, which intentionally omits aggregate ratings; no unverified review counts remain.
+
+### 12.3 P2 — Warranty & attribution harmonization (FIXED)
+
+- **Warranty copy** standardised on two service pages so hero `id="answer"` blocks match their FAQ bodies:
+  - `app/services/skylights-roof-windows/page.tsx` → "10-year workmanship guarantee **plus manufacturer warranty**, free written quotes."
+  - `app/services/flat-roofing/page.tsx` → "20-year waterproof warranty on EPDM and GRP installations **plus 10-year workmanship guarantee**."
+- **`sameAs` array** in `app/structured-data.tsx` upgraded from generic to stable entity-authority links:
+  - Google Maps *share* URL → `https://www.google.com/maps/place/Upgrade+Roofs`
+  - Companies House *search* URL → `https://find-and-update.company-information.service.gov.uk/company/15660654`
+
+### 12.4 Verification & typecheck remediation
+
+`npm run typecheck` surfaced three pre-existing `--downlevelIteration` (`TS2802`) / implicit-any (`TS7006`) errors in unrelated script files (`scripts/fix-aeo-gaps.ts:150`, `scripts/fix-entity-consistency.ts:297/301`) — none in the files this patch touched. Remediated at source per the `d71222e` convention (`Array.from(...)` + explicit `Map<string, Patch[]>` typing), and confirmed clean: **`tsc --noEmit` now reports zero errors**.
+
+Resolved status: **P0, P1, P2 all closed; typecheck green.** Score impact (§11.4): GBP identifier alignment `0.00 → 1.00` (+20.0), source-attribution `sameAs` weak-link sub-deduction cleared (partial recovery toward the 0.15 attribution score, pending visible citation links — still open as §11.4 priority 4).
+

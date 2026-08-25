@@ -49,7 +49,7 @@ export default function FlatRoofingPage() {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <p className="text-base font-semibold text-brand-navy leading-relaxed">
-              <strong>Upgrade Roofs provides expert flat roofing in Cheshire</strong> using EPDM rubber, GRP fibreglass, and felt systems — suitable for extensions, garages, and commercial buildings. 20-year waterproof warranty on EPDM and GRP installations. CORC certified, £10M insured, free written quotes. Serving Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.
+              <strong>Upgrade Roofs provides expert flat roofing in Cheshire</strong> using EPDM rubber, GRP fibreglass, and felt systems — suitable for extensions, garages, and commercial buildings. 20-year waterproof warranty on EPDM and GRP installations plus 10-year workmanship guarantee. CORC certified, £10M insured, free written quotes. Serving Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.
             </p>
           </div>
         </div>
