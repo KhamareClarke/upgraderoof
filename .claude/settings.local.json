@@ -92,7 +92,12 @@
       "Bash(grep -o 'Schema\\\\$[A-Za-z0-9_$]*' node_modules/googleapis/build/src/apis/datamanager/v1.js)",
       "Bash(echo \"exit=$?\")",
       "Bash(DM_REDIRECT_PORT=3001 node scripts/generate-dm-token.js)",
-      "Bash(echo *)"
+      "Bash(echo *)",
+      "Bash(grep -iv \"description\\\\|//\")",
+      "Bash(npx tsx *)",
+      "Bash(python3 -c ' *)",
+      "Bash(grep -nE \"^#{1,3} \" docs/master-content-ecosystem-audit-report.md)",
+      "WebFetch(domain:raw.githubusercontent.com)"
     ]
   }
 }

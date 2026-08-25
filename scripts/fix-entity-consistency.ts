@@ -292,15 +292,15 @@ function main() {
     byFile.set(p.file, list);
   }
 
-  const patchesMap: Map<string, Patch[]> = byFile;
-
   const summary = { applied: 0, already: 0, absentOk: 0, missing: 0 };
 
-  for (const [file, patches] of Array.from(patchesMap)) {
+  const files = Array.from(byFile.keys());
+  for (const file of files) {
+    const patches = byFile.get(file)!;
     const abs = path.join(ROOT, file);
     if (!fs.existsSync(abs)) {
       console.log(fail(`  ✗ MISSING FILE ${file} — all its patches skipped`));
-      patches.forEach((p) => (summary.missing++, console.log(fail(`      · ${p.provenance}`))));
+      patches.forEach((p: Patch) => (summary.missing++, console.log(fail(`      · ${p.provenance}`))));
       continue;
     }
     const content = read(file);
