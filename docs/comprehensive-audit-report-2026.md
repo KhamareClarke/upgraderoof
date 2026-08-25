@@ -48,7 +48,7 @@
 - Reviews (legacy v4): ✅
 - Maps/Geocoding: ✅
 
-**10 service-area place IDs (geocoded) vs live GBP service area:**
+**15 service-area place IDs (geocoded) vs live GBP service area:**
 | Region | Geocoded placeId | In live GBP service area? |
 |---|---|---|
 | Cheshire, England | `ChIJnZeKE4v5ekgRy45KEYpdhTU` | ✅ |
@@ -118,8 +118,8 @@
 
 **Account:** Upgrade Roofs · status ENABLED · GBP
 
-**Geo-target alignment vs 10 towns:**
-- 0/10 towns explicitly targeted
+**Geo-target alignment vs 15 towns:**
+- 0/15 towns explicitly targeted
 | Town | Targeted |
 |---|---|
 | Cheshire | ❌ |
@@ -191,7 +191,7 @@
 **Current executed changes (this audit):**
 - Performed live, read-only diagnostics across GBP, Maps, GSC, Indexing, GA4 and Ads — no production writes (single harmless Indexing API URL_UPDATED smoke test excluded).
 - Resolved the live business location by name (business regex) rather than relying on any hardcoded ID.
-- Cross-referenced geocoded 10-town place IDs against the live GBP service area.
+- Cross-referenced geocoded 15-town place IDs against the live GBP service area.
 - Verified verification/voice-of-merchant status, API scopes, ads geo-targeting alignment, location-asset linkage, and conversion partitioning.
 
 **Remaining action items (recommended):**

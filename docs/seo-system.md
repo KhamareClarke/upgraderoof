@@ -82,7 +82,7 @@ This is a Next.js App Router site. SEO is managed through:
 
 5. **Update `ServiceAreaLinks`** component if needed
 
-6. **Update `docs/seo-map.md`** with the new page entry
+6. **Update `lib/town-data.ts`** with the new page entry
 
 ---
 
@@ -127,7 +127,7 @@ This is a Next.js App Router site. SEO is managed through:
 
 5. **Update money pages** — add a blog link to the relevant money page's cross-links section if the post is highly relevant
 
-6. **Update `docs/seo-map.md`**
+6. **Update `lib/town-data.ts`**
 
 ---
 
@@ -222,7 +222,7 @@ Handled by the root layout / Analytics component. No per-page action needed.
 | `components/ServiceAreaLinks.tsx` | Town page links used on money pages |
 | `app/sitemap.ts` | Auto-generated sitemap |
 | `app/robots.ts` | robots.txt configuration |
-| `docs/seo-map.md` | Complete page-role documentation |
+| `lib/town-data.ts` | Town footprint source of truth |
 
 ---
 
