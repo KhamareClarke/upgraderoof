@@ -42,6 +42,11 @@ const GADS_CLICK_CONV_ID = process.env.NEXT_PUBLIC_GADS_CLICK_CONV_ID || null;
 
 const GCLID_STORAGE_KEY = 'ur_gclid';
 const GCLID_TS_KEY = 'ur_gclid_ts';
+// First-party cookie name for the same gclid. A cookie survives redirects and
+// private/cleared localStorage far better than localStorage alone, so it is
+// the authoritative store; localStorage is kept as a secondary read fallback.
+const GCLID_COOKIE_KEY = 'ur_gclid';
+const GCLID_COOKIE_MAX_AGE = String(90 * 24 * 60 * 60); // 90 days, in seconds
 // Google Ads click ids are valid for offline-conversion upload for 90 days.
 const GCLID_TTL_MS = 90 * 24 * 60 * 60 * 1000;
 
@@ -65,21 +70,41 @@ export function captureClickIds() {
     if (gclid) {
       window.localStorage.setItem(GCLID_STORAGE_KEY, gclid);
       window.localStorage.setItem(GCLID_TS_KEY, String(Date.now()));
+      // First-party cookie — raw, unaltered gclid, 90-day Max-Age. Path=/ so
+      // it is sent on every subpage; no transformation (preserves case + base64
+      // characters exactly). document.cookie never throws, but keep it inside
+      // the same try/catch scope for symmetry.
+      document.cookie =
+        GCLID_COOKIE_KEY + '=' + encodeURIComponent(gclid) +
+        '; path=/; max-age=' + GCLID_COOKIE_MAX_AGE +
+        '; samesite=lax';
     }
   } catch {
     /* storage unavailable — non-fatal */
   }
 }
 
-/**
- * Return the stored gclid if it's still within the 90-day attribution
- * window, else null. Read at form-submit time and sent to the API so it
- * can be attached to the GHL contact's custom fields.
- */
+/** Read the raw gclid back out of the first-party cookie, if present. */
+function getGclidFromCookie(): string | null {
+  if (typeof document === 'undefined') return null;
+  try {
+    const match = document.cookie
+      .split(';')
+      .map(c => c.trim())
+      .find(c => c.startsWith(GCLID_COOKIE_KEY + '='));
+    if (!match) return null;
+    return decodeURIComponent(match.slice(GCLID_COOKIE_KEY.length + 1));
+  } catch {
+    return null;
+  }
+}
+
 export function getGclid(): string | null {
   if (typeof window === 'undefined') return null;
   try {
-    const value = window.localStorage.getItem(GCLID_STORAGE_KEY);
+    // Cookie is authoritative (survives redirects); fall back to localStorage.
+    const cookieValue = getGclidFromCookie();
+    const value = cookieValue || window.localStorage.getItem(GCLID_STORAGE_KEY);
     const ts = Number(window.localStorage.getItem(GCLID_TS_KEY) || 0);
     if (!value) return null;
     if (ts && Date.now() - ts > GCLID_TTL_MS) {

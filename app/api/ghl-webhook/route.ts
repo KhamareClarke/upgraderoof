@@ -73,6 +73,27 @@ const STAGE_CONVERSIONS: Array<{ match: RegExp; label: string; defaultValue: num
   },
 ];
 
+const GCLID_RE = /^[A-Za-z0-9_-]{20,128}$/;
+
+/**
+ * Validate a Google Click ID BEFORE it is handed to the Data Manager
+ * ingest endpoint. Data Manager fast-fails the ENTIRE request on a single
+ * bad event (no partial-failure row), so we reject malformed / lowercased /
+ * double-encoded / gbraid-shaped tokens here and log them locally instead.
+ */
+function validateGclid(raw: string): { ok: true; value: string } | { ok: false; reason: string } {
+  const s = (raw || '').trim();
+  if (!s) return { ok: false, reason: 'gclid is empty' };
+  // A genuine gclid normally contains an uppercase char; an all-lowercase
+  // token is almost always a .toLowerCase() transform upstream.
+  if (s === s.toLowerCase() && s !== s.toUpperCase()) {
+    return { ok: false, reason: 'gclid appears lowercased — gclid is case-sensitive' };
+  }
+  if (!GCLID_RE.test(s)) {
+    return { ok: false, reason: 'gclid fails charset/length rule (' + s.length + ' chars)' };
+  }
+  return { ok: true, value: s };
+}
 function jsonError(message: string, status = 400) {
   return NextResponse.json({ success: false, error: message }, { status });
 }
@@ -143,6 +164,7 @@ async function uploadOfflineConversion(opts: {
   eventTimestamp: string;
   value: number;
   currency?: string;
+  transactionId?: string;
 }): Promise<void> {
   const customerId = (process.env.GOOGLE_ADS_CUSTOMER_ID || '').replace(/\D/g, '');
   if (!customerId) throw new Error('GOOGLE_ADS_CUSTOMER_ID not set');
@@ -163,6 +185,11 @@ async function uploadOfflineConversion(opts: {
     events: [
       {
         adIdentifiers: { gclid: opts.gclid },
+        // Data Manager expects a stable idempotency key so retries don't
+        // double-count the conversion. Derived from the raw gclid + the
+        // conversion action so the same (gclid, stage) pair dedupes within
+        // the 90-day window.
+        transactionId: opts.transactionId || `${opts.gclid}:${opts.conversionActionId}`,
         eventTimestamp: opts.eventTimestamp,
         conversionValue: opts.value,
         currency,
@@ -284,12 +311,26 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ success: true, ignored: true, reason: 'no gclid on contact — lead did not originate from a Google Ads click' }, { status: 200 });
   }
 
+  // Reject malformed click ids BEFORE the ingest call so Google never sees a
+  // bad event (which would fast-fail the whole request). Log it so we can
+  // trace the upstream capture that corrupted it.
+  const gclidCheck = validateGclid(gclid);
+  if (!gclidCheck.ok) {
+    console.error('[ghl-webhook] rejecting malformed gclid for "' + conv.label + '": ' + gclidCheck.reason);
+    await emitFleetIngest({
+      event_type: 'ghl_offline_conversion_skipped',
+      summary: 'GHL "' + conv.label + '" — malformed gclid rejected (' + gclidCheck.reason + ') for ' + (contactId || email || phone || 'unknown'),
+      payload: { stage, contactId, email, phone, gclid: (gclid || '').slice(0, 12) + '…', reason: gclidCheck.reason },
+    });
+    return NextResponse.json({ success: false, ignored: true, reason: 'malformed gclid: ' + gclidCheck.reason }, { status: 422 });
+  }
+
   const value = rawValue != null && !isNaN(Number(rawValue)) ? Number(rawValue) : conv.defaultValue;
 
   try {
     // Route each stage to its own conversion action (Site Visit Booked / Job Won).
     await uploadOfflineConversion({
-      gclid,
+      gclid: gclidCheck.value,
       conversionActionId: conv.conversionActionId,
       eventTimestamp: dmDateTime(new Date()),
       value,
