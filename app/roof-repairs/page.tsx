@@ -196,6 +196,33 @@ export default function RoofRepairsPage() {
           </div>
         </section>
 
+        {/* FAQ — rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
+        <section className="py-12 bg-gray-50">
+          <div className="container-custom">
+            <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">Roof Repair FAQs</h2>
+            <div className="max-w-3xl mx-auto space-y-4">
+              <details className="bg-white rounded-xl p-6 border border-gray-200" open>
+                <summary className="font-semibold text-brand-navy cursor-pointer">Do you offer same-day service for urgent roof repairs?</summary>
+                <p className="mt-3 text-gray-600">
+                  Yes, we offer same-day service for most urgent repairs. Being based in Sandbach allows us to quickly reach locations across south and mid-Cheshire, often getting on-site within 30-45 minutes for emergencies.
+                </p>
+              </details>
+              <details className="bg-white rounded-xl p-6 border border-gray-200">
+                <summary className="font-semibold text-brand-navy cursor-pointer">Is there a guarantee on your roof repairs?</summary>
+                <p className="mt-3 text-gray-600">
+                  Absolutely. All our roof repairs are backed by our comprehensive 10-year workmanship guarantee, giving you complete peace of mind.
+                </p>
+              </details>
+              <details className="bg-white rounded-xl p-6 border border-gray-200">
+                <summary className="font-semibold text-brand-navy cursor-pointer">Are there any hidden costs or call-out fees?</summary>
+                <p className="mt-3 text-gray-600">
+                  No. We provide fixed-price quotes for all repair work. There are no surprise charges or hidden call-out fees.
+                </p>
+              </details>
+            </div>
+          </div>
+        </section>
+
         {/* Contextual Cross-Links */}
         <section className="py-10 bg-white">
           <div className="container-custom">

@@ -6,6 +6,7 @@ import { Home, CheckCircle, Clock, Shield, Award, MapPin, ArrowRight, Phone, Sta
 import Link from 'next/link';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { NewRoofsSchema } from './schema';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -48,6 +49,7 @@ export const metadata: Metadata = {
 export default function NewRoofsPage() {
   return (
     <>
+      <NewRoofsSchema />
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://www.upgraderoofs.co.uk' },
         { name: 'New Roofs', url: 'https://www.upgraderoofs.co.uk/new-roofs' },
@@ -80,6 +82,26 @@ export default function NewRoofsPage() {
                 </TrackedPhoneLink>
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- AEO: Answer-First Content Block --- */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto bg-gray-50 border-2 border-brand-orange/20 rounded-2xl p-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
+              New Roof Installations in Sandbach &amp; Cheshire
+            </h2>
+            <p className="text-lg text-gray-800 mb-4">
+              <strong>Upgrade Roofs designs and installs new tile, slate, and flat roofs across Sandbach and Cheshire.</strong> From complete re-roofing to extensions and new builds, we deliver a weathertight, guaranteed roof built to last with a full 10-year workmanship guarantee.
+            </p>
+            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-gray-700">
+              <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-brand-orange" /> New Tile Roofs</li>
+              <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-brand-orange" /> Natural Slate Roofs</li>
+              <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-brand-orange" /> Flat Roof Systems</li>
+              <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-brand-orange" /> Full Re-Roofing</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -217,6 +239,33 @@ export default function NewRoofsPage() {
                 <p className="text-xs text-gray-500">{r.location}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ — rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
+      <section className="py-12 bg-gray-50">
+        <div className="container-custom">
+          <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">New Roof FAQs</h2>
+          <div className="max-w-3xl mx-auto space-y-4">
+            <details className="bg-white rounded-xl p-6 border border-gray-200" open>
+              <summary className="font-semibold text-brand-navy cursor-pointer">How much does a new roof cost in Cheshire?</summary>
+              <p className="mt-3 text-gray-600">
+                Every roof is different, so costs vary depending on size, materials, and the scope of work involved. We provide free, no-obligation quotes with transparent, itemised pricing — no hidden costs, no surprises.
+              </p>
+            </details>
+            <details className="bg-white rounded-xl p-6 border border-gray-200">
+              <summary className="font-semibold text-brand-navy cursor-pointer">How long does a new roof take to install?</summary>
+              <p className="mt-3 text-gray-600">
+                Most new roof installations in Sandbach and Cheshire are completed within a few days, depending on the size and complexity of your roof. We'll give you a clear schedule before any work begins and keep you informed throughout the project.
+              </p>
+            </details>
+            <details className="bg-white rounded-xl p-6 border border-gray-200">
+              <summary className="font-semibold text-brand-navy cursor-pointer">Is my new roof guaranteed?</summary>
+              <p className="mt-3 text-gray-600">
+                Yes. All our new roofs are backed by a comprehensive 10-year workmanship guarantee, giving you complete peace of mind.
+              </p>
+            </details>
           </div>
         </div>
       </section>

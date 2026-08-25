@@ -593,8 +593,8 @@ export default function OfferSandbachPage() {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Upgrade Roofs",
-        "address": { "@type": "PostalAddress", "streetAddress": "20 Crewe Rd", "addressLocality": "Sandbach", "postalCode": "CW11 4NE", "addressCountry": "GB" },
-        "telephone": "01270897606",
+        "address": { "@type": "PostalAddress", "streetAddress": "20 Crewe Road", "addressLocality": "Sandbach", "addressRegion": "Cheshire", "postalCode": "CW11 4NE", "addressCountry": "GB" },
+        "telephone": "+441270897606",
         "url": "https://www.upgraderoofs.co.uk/offer-sandbach",
         "areaServed": "Sandbach"
       })}} />

@@ -1,8 +1,5 @@
-'use client';
-
-import { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
-import { trackPhoneClick } from '@/lib/tracking';
+import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 
 const faqs = [
   {
@@ -31,11 +28,27 @@ const faqs = [
   },
 ];
 
-export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+const faqData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.answer,
+    },
+  })),
+};
 
+export function FAQ() {
   return (
     <section className="section-padding">
+      {/* FAQPage JSON-LD — mirrors the visible details/summary Q&As verbatim */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
+      />
       <div className="container-custom">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
@@ -53,50 +66,35 @@ export function FAQ() {
 
           <div className="space-y-3 sm:space-y-4">
             {faqs.map((faq, index) => (
-              <div
+              <details
                 key={index}
-                className="bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+                className="group bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+                open={index === 0}
               >
-                <button
-                  className="w-full px-4 py-4 sm:px-5 sm:py-5 md:px-6 text-left flex items-center justify-between gap-3 sm:gap-4 group"
-                  onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  aria-expanded={openIndex === index}
-                  aria-controls={`faq-answer-${index}`}
-                >
+                <summary className="cursor-pointer list-none px-4 py-4 sm:px-5 sm:py-5 md:px-6 flex items-center justify-between gap-3 sm:gap-4">
                   <span className="font-semibold text-brand-navy text-sm sm:text-base md:text-lg group-hover:text-brand-orange transition-colors text-left pr-2">
                     {faq.question}
                   </span>
-                  <ChevronDown
-                    className={`w-4 h-4 sm:w-5 sm:h-5 text-brand-orange flex-shrink-0 transition-transform duration-300 ${
-                      openIndex === index ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
-
-                <div
-                  id={`faq-answer-${index}`}
-                  className={`px-4 sm:px-5 md:px-6 overflow-hidden transition-all duration-300 ${
-                    openIndex === index ? 'pb-4 sm:pb-5 max-h-96' : 'max-h-0'
-                  }`}
-                  aria-hidden={openIndex !== index}
-                >
+                  <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-brand-orange flex-shrink-0 transition-transform duration-300 group-open:rotate-180" />
+                </summary>
+                <div className="px-4 pb-4 sm:px-5 sm:pb-5 md:px-6">
                   <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
                     {faq.answer}
                   </p>
                 </div>
-              </div>
+              </details>
             ))}
           </div>
 
           <div className="mt-8 sm:mt-10 md:mt-12 text-center">
             <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">Still have questions?</p>
-            <a
+            <TrackedPhoneLink
               href="tel:01270897606"
+              placement="faq_section"
               className="inline-flex items-center justify-center px-6 sm:px-8 py-2.5 sm:py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base"
-              onClick={() => trackPhoneClick('faq_section')}
             >
               Call Us: 01270 897 606
-            </a>
+            </TrackedPhoneLink>
           </div>
         </div>
       </div>

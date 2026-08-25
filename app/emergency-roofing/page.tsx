@@ -6,6 +6,7 @@ import { Zap, Phone, CheckCircle, Clock, Shield, AlertTriangle, MapPin, ArrowRig
 import Link from 'next/link';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { EmergencyRoofingSchema } from './schema';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -48,6 +49,7 @@ export const metadata: Metadata = {
 export default function EmergencyRoofingPage() {
   return (
     <>
+      <EmergencyRoofingSchema />
       <BreadcrumbSchema items={[
         { name: 'Home', url: 'https://www.upgraderoofs.co.uk' },
         { name: 'Emergency Roofing', url: 'https://www.upgraderoofs.co.uk/emergency-roofing' },
@@ -81,6 +83,26 @@ export default function EmergencyRoofingPage() {
                 </TrackedPhoneLink>
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* --- AEO: Answer-First Content Block --- */}
+      <section className="section-padding bg-white">
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto bg-red-50 border-2 border-red-200 rounded-2xl p-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
+              24/7 Emergency Roofing in Sandbach &amp; Cheshire
+            </h2>
+            <p className="text-lg text-gray-800 mb-4">
+              <strong>Upgrade Roofs provides fast, round-the-clock emergency roofing across Sandbach and Cheshire.</strong> Storm damage, sudden leaks, or missing tiles — our local team responds the same day to make your roof safe and watertight, with a permanent fix to follow.
+            </p>
+            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-gray-700">
+              <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-red-600" /> Storm Damage Make-Safe</li>
+              <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-red-600" /> Emergency Leak Repairs</li>
+              <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-red-600" /> Missing Tile Replacement</li>
+              <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-red-600" /> 24/7 Call-Out Response</li>
+            </ul>
           </div>
         </div>
       </section>
@@ -197,6 +219,33 @@ export default function EmergencyRoofingPage() {
                 <p className="text-xs text-gray-500">{r.location}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ — rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
+      <section className="py-12 bg-gray-50">
+        <div className="container-custom">
+          <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">Emergency Roofing FAQs</h2>
+          <div className="max-w-3xl mx-auto space-y-4">
+            <details className="bg-white rounded-xl p-6 border border-gray-200" open>
+              <summary className="font-semibold text-brand-navy cursor-pointer">How fast can you respond to a roofing emergency?</summary>
+              <p className="mt-3 text-gray-600">
+                We offer a 24/7 emergency call-out service across Cheshire and the North West. Being based in Sandbach allows us to reach most locations quickly, often getting on-site within 30-45 minutes for urgent repairs.
+              </p>
+            </details>
+            <details className="bg-white rounded-xl p-6 border border-gray-200">
+              <summary className="font-semibold text-brand-navy cursor-pointer">Do you offer emergency roofing services?</summary>
+              <p className="mt-3 text-gray-600">
+                Yes. We offer a 24/7 emergency call-out service across Cheshire and the North West. If you have an urgent leak or storm damage, call us now on 01270 897 606.
+              </p>
+            </details>
+            <details className="bg-white rounded-xl p-6 border border-gray-200">
+              <summary className="font-semibold text-brand-navy cursor-pointer">What should I do while waiting for an emergency roofer?</summary>
+              <p className="mt-3 text-gray-600">
+                Move furniture away from the affected area, place a bucket under active leaks, and avoid climbing onto the roof yourself. Our team will make the roof safe and watertight as quickly as possible before arranging a permanent fix.
+              </p>
+            </details>
           </div>
         </div>
       </section>

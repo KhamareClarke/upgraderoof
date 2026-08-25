@@ -29,11 +29,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/admin/', '/thank-you'],
       },
       {
-        userAgent: 'anthropic-ai',
-        allow: '/',
-        disallow: ['/api/', '/admin/', '/thank-you'],
-      },
-      {
         userAgent: 'PerplexityBot',
         allow: '/',
         disallow: ['/api/', '/admin/', '/thank-you'],

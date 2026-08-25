@@ -202,49 +202,6 @@ export default function Home() {
         <ContactBlock />
       </section>
 
-      {/* Homepage FAQPage Schema — matches FAQ component questions */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'FAQPage',
-            mainEntity: [
-              {
-                '@type': 'Question',
-                name: 'How much does a new roof cost in Cheshire?',
-                acceptedAnswer: { '@type': 'Answer', text: 'Costs vary by property size and materials. A terraced house re-roof in Cheshire typically costs £5,000–£8,000; semi-detached £6,500–£10,000; larger detached homes £8,000–£15,000+. We provide free, no-obligation written quotes with transparent itemised pricing — no hidden costs.' }
-              },
-              {
-                '@type': 'Question',
-                name: 'How long does a roof replacement take?',
-                acceptedAnswer: { '@type': 'Answer', text: 'Most residential roof replacements take 3 to 7 working days depending on property size and weather conditions. We provide a clear schedule before starting, keep you informed throughout, and remove debris daily.' }
-              },
-              {
-                '@type': 'Question',
-                name: 'Do you offer emergency roofing services?',
-                acceptedAnswer: { '@type': 'Answer', text: 'Yes. Upgrade Roofs provides a 24/7 emergency call-out service across Cheshire. Based in Sandbach on Crewe Road, we can typically reach any Cheshire property within 30–60 minutes. Call 01270 897606 for emergencies.' }
-              },
-              {
-                '@type': 'Question',
-                name: 'What areas of Cheshire do you cover?',
-                acceptedAnswer: { '@type': 'Answer', text: 'We cover Sandbach, Crewe, Middlewich, Congleton, Alsager, Nantwich, Holmes Chapel, and surrounding areas throughout Cheshire. Our base is at 20 Crewe Road, Sandbach, CW11 4NE.' }
-              },
-              {
-                '@type': 'Question',
-                name: 'What warranty do you offer on roofing work?',
-                acceptedAnswer: { '@type': 'Answer', text: 'All work comes with a 10-year workmanship guarantee backed by our Insurance Backed Guarantee (IBG) scheme. Marley tile roofs carry a 15-year manufacturer warranty and EPDM flat roofs a 20-year waterproof guarantee. We are CORC certified and carry £10M public liability insurance.' }
-              },
-              {
-                '@type': 'Question',
-                name: 'Can you match existing tiles for repairs?',
-                acceptedAnswer: { '@type': 'Answer', text: 'Yes. Tile and slate matching is part of our service. We source from a wide range of manufacturers and suppliers and can usually find a very close match for most tile and slate types used on Cheshire properties.' }
-              },
-            ]
-          })
-        }}
-      />
-
       {/* BreadcrumbList Schema */}
       <script
         type="application/ld+json"

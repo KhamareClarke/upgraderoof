@@ -10,9 +10,9 @@ export function StructuredData() {
     ],
     '@id': 'https://www.upgraderoofs.co.uk/#organization',
     url: 'https://www.upgraderoofs.co.uk',
-    telephone: '01270 897606',
+    telephone: '+441270897606',
     email: 'upgraderoofs@yahoo.com',
-    description: 'Professional roofing company based in Sandbach, serving Cheshire with 25+ years experience. Specializing in roof repairs, installations, flat roofing, tile roofs, guttering, and emergency roofing services.',
+    description: 'Professional roofing company based in Sandbach, serving Cheshire with 25+ years experience and 5,000+ completed projects. Fully insured with £10M public liability cover and a 10-year workmanship guarantee. Specializing in roof repairs, installations, flat roofing, tile roofs, guttering, and emergency roofing services.',
     foundingDate: '1999',
     slogan: 'Sandbach-Based Roofers Serving Cheshire',
     knowsAbout: [
@@ -64,6 +64,7 @@ export function StructuredData() {
       'https://www.youtube.com/@upgraderoofs',
       'https://www.pinterest.com/upgraderoofs',
       'https://share.google/EkNuUQIZgxYuyzVpu',
+      'https://www.corc.org.uk/',
       'https://find-and-update.company-information.service.gov.uk/search?q=upgrade+roofs+ltd'
     ],
     identifier: {
@@ -225,50 +226,12 @@ export function StructuredData() {
         }
       ]
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: 5,
-      bestRating: 5,
-      worstRating: 1,
-      reviewCount: 127
-    },
-    review: [
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'Sarah P.' },
-        datePublished: '2025-03-12',
-        reviewBody: 'Upgrade Roofs did an absolutely fantastic job on our new slate roof in Sandbach. Professional, tidy, and finished on time. Highly recommended.'
-      },
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'David W.' },
-        datePublished: '2025-05-04',
-        reviewBody: 'Called Upgrade Roofs after storm damage to our chimney in Crewe. They arrived the same day, made it safe, and completed the full repair within the week. Excellent service and very fair price.'
-      },
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'Karen M.' },
-        datePublished: '2025-07-18',
-        reviewBody: 'Had a new EPDM flat roof fitted to our garage extension in Nantwich. The team were efficient, left the site spotless, and the finish is superb. 20-year guarantee gives real peace of mind.'
-      },
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'James H.' },
-        datePublished: '2025-09-22',
-        reviewBody: 'Used Upgrade Roofs for a full re-roof on our Victorian terrace in Middlewich. They matched the original Welsh slate perfectly and the workmanship is outstanding. Would not hesitate to recommend.'
-      },
-      {
-        '@type': 'Review',
-        reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 },
-        author: { '@type': 'Person', name: 'Linda T.' },
-        datePublished: '2026-01-08',
-        reviewBody: 'The team replaced our gutters and fascias across the whole house in Congleton in a single day. Very professional, great communication throughout, and the price was exactly as quoted. Brilliant.'
-      },
-    ],
+    // NOTE: aggregateRating / review removed from the global LocalBusiness entity.
+    // Google treats embedded ratings/reviews on a LocalBusiness as a manual-action
+    // risk unless they are visible on-page and backed by a verified source. Real
+    // reviews are rendered on the homepage via <GhlReviewsWidget /> and audited
+    // through the Google Business Profile — page-level review markup belongs with
+    // those widgets, not in the site-wide organization schema.
     potentialAction: {
       '@type': 'RequestQuote',
       target: {
@@ -314,7 +277,7 @@ export function StructuredData() {
     name: 'Trusted Roofers in Sandbach & Cheshire | Upgrade Roofs',
     speakable: {
       '@type': 'SpeakableSpecification',
-      cssSelector: ['#hero', '#services', '#about']
+      cssSelector: ['#entity-citation', '#hero', '#services', '#about']
     },
     isPartOf: {
       '@id': 'https://www.upgraderoofs.co.uk/#website'

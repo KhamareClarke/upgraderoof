@@ -90,8 +90,8 @@ export function Footer() {
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-brand-orange flex-shrink-0 mt-1" />
                 <div>
-                  <p className="text-white/70 text-sm tracking-wide">20 Crewe Rd</p>
-                  <p className="text-white/70 text-sm tracking-wide">Sandbach, United Kingdom</p>
+                  <p className="text-white/70 text-sm tracking-wide">20 Crewe Road</p>
+                  <p className="text-white/70 text-sm tracking-wide">Sandbach, Cheshire</p>
                   <p className="text-white/70 text-sm tracking-wide">CW11 4NE</p>
                 </div>
               </div>

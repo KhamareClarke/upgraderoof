@@ -42,7 +42,7 @@ const reviewPageSchema = {
     '@id': 'https://www.upgraderoofs.co.uk/#organization',
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: 5,
+      ratingValue: 4.9,
       bestRating: 5,
       worstRating: 1,
       reviewCount: 127,

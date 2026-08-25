@@ -14,7 +14,7 @@ export function TownLocalBusinessSchema({ town, postcode, slug, lat, lng, addres
     '@id': `https://www.upgraderoofs.co.uk/${slug}#localbusiness`,
     name: `Upgrade Roofs — Roofers in ${town}`,
     url: `https://www.upgraderoofs.co.uk/${slug}`,
-    telephone: '01270 897606',
+    telephone: '+441270897606',
     email: 'upgraderoofs@yahoo.com',
     image: 'https://www.upgraderoofs.co.uk/images/6.jpeg',
     branchOf: {
@@ -58,7 +58,7 @@ export function TownLocalBusinessSchema({ town, postcode, slug, lat, lng, addres
     },
     aggregateRating: {
       '@type': 'AggregateRating',
-      ratingValue: 5,
+      ratingValue: 4.9,
       bestRating: 5,
       worstRating: 1,
       reviewCount: 127,
