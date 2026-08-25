@@ -424,7 +424,7 @@ async function checkAds() {
       if (cc.negative === true) negativeCount++; else positiveCount++;
     }
     // Resolve geo target constant names in a second query.
-    const uniqueGeo = [...new Set(geoNames)];
+    const uniqueGeo = Array.from(new Set(geoNames));
     if (locRes.status === 200 && uniqueGeo.length) {
       const ids = uniqueGeo.map((n) => `'${n}'`).join(', ');
       const nameRes = await gaql(

@@ -126,7 +126,7 @@ async function resolveCampaign(headers: Record<string, string>): Promise<string>
 async function currentTownTargets(headers: Record<string, string>, campaignRN: string): Promise<Set<string>> {
   const rows = await gaql(headers,
     `SELECT campaign_criterion.location.geo_target_constant FROM campaign_criterion WHERE campaign.resource_name = '${campaignRN}' AND campaign_criterion.type = 'LOCATION' AND campaign_criterion.negative = FALSE`);
-  const consts = [...new Set(rows.map((r) => r.campaignCriterion?.location?.geoTargetConstant).filter(Boolean))];
+  const consts = Array.from(new Set(rows.map((r) => r.campaignCriterion?.location?.geoTargetConstant).filter(Boolean)));
   const names = new Set<string>();
   if (consts.length) {
     const gr = await gaql(headers,
