@@ -97,7 +97,9 @@
       "Bash(npx tsx *)",
       "Bash(python3 -c ' *)",
       "Bash(grep -nE \"^#{1,3} \" docs/master-content-ecosystem-audit-report.md)",
-      "WebFetch(domain:raw.githubusercontent.com)"
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Read(//c/Users/khama/.claude/skills/**)",
+      "Read(//c/Users/khama/.claude/plugins/**)"
     ]
   }
 }
