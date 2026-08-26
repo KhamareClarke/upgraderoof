@@ -4,8 +4,9 @@ import { Services } from '@/components/Services';
 import { WhyChooseUs } from '@/components/WhyChooseUs';
 import { CTABanner } from '@/components/CTABanner';
 import { GalleryBlock, FAQBlock, ContactBlock } from '@/components/HomepageSections';
-import { GoogleGbpReviews } from '@/components/GoogleGbpReviews';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
+import { Button } from '@/components/ui/button';
+import { GOOGLE_REVIEW_URL } from '@/lib/contact';
 import { MapPin, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -126,12 +127,28 @@ export default function Home() {
             </p>
           </div>
           <div className="max-w-5xl mx-auto">
-            <GoogleGbpReviews />
+            <script
+              src="https://reputationhub.site/reputation/assets/review-widget.js"
+              async
+            />
+            <iframe
+              className="lc_reviews_widget"
+              src="https://reputationhub.site/reputation/widgets/review_widget/Lk9anvdNEEpmFiRndNJk?widgetId=69b5695b24ab18f7cd169219"
+              frameBorder="0"
+              scrolling="no"
+              style={{ minWidth: '100%', width: '100%' }}
+              title="Customer reviews"
+            />
           </div>
           <div className="text-center mt-10">
-            <Link href="/#contact" className="inline-flex items-center gap-2 text-brand-orange font-semibold hover:underline">
+            <a
+              href={GOOGLE_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-brand-orange px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-brand-orange/90"
+            >
               Leave us a review <ArrowRight className="w-4 h-4" />
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -187,9 +204,16 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center">
-            <Link href="/service-areas" className="inline-flex items-center gap-2 text-brand-orange font-semibold hover:underline">
-              View all service areas <ArrowRight className="w-4 h-4" />
-            </Link>
+            <Button
+              size="lg"
+              className="group bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 inline-flex items-center gap-2.5"
+              asChild
+            >
+              <Link href="/service-areas" className="flex items-center justify-center gap-2.5">
+                View all service areas
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>

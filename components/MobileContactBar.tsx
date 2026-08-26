@@ -1,6 +1,6 @@
 'use client';
 
-import { Phone, Mail } from 'lucide-react';
+import { PhoneCall, Send } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { trackPhoneClick, trackWhatsAppClick, trackEmailClick } from '@/lib/tracking';
 
@@ -22,7 +22,7 @@ export function MobileContactBar() {
           onClick={() => trackPhoneClick('mobile_contact_bar')}
         >
           <div className="w-10 h-10 bg-brand-orange/10 rounded-full flex items-center justify-center group-hover:bg-brand-orange/20 transition-colors">
-            <Phone className="w-5 h-5 text-brand-orange" />
+            <PhoneCall className="w-5 h-5 text-brand-orange" />
           </div>
           <span className="text-xs font-medium">Call</span>
         </a>
@@ -50,7 +50,7 @@ export function MobileContactBar() {
           onClick={() => trackEmailClick('mobile_contact_bar')}
         >
           <div className="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
-            <Mail className="w-5 h-5 text-blue-500" />
+            <Send className="w-5 h-5 text-blue-500" />
           </div>
           <span className="text-xs font-medium">Email</span>
         </a>

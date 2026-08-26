@@ -101,7 +101,8 @@
       "Read(//c/Users/khama/.claude/skills/**)",
       "Read(//c/Users/khama/.claude/plugins/**)",
       "WebFetch(domain:highlevel.stoplight.io)",
-      "Bash(python -c \"from PIL import Image; im=Image.open\\('public/images/badge-light@2x.png'\\); print\\(im.size\\)\")"
+      "Bash(python -c \"from PIL import Image; im=Image.open\\('public/images/badge-light@2x.png'\\); print\\(im.size\\)\")",
+      "Bash(grep -viE \"TrustBadges|ui/badge|badgeVariants|placement=\\\\\"trust|// |\\\\{/\\\\*|comment\")"
     ]
   }
 }

@@ -1,10 +1,10 @@
-import { Award, Shield, ShieldCheck, Star, Clock } from 'lucide-react';
+import { BadgeCheck, FileBadge, HardHat, Layers, Medal, Star, Zap, ShieldCheck } from 'lucide-react';
 
 export function TrustStrip() {
   const accreditations = [
     {
       name: 'MyApproved',
-      icon: ShieldCheck,
+      icon: BadgeCheck,
       subtitle: 'Vetted & Verified',
     },
     {
@@ -14,31 +14,31 @@ export function TrustStrip() {
     },
     {
       name: 'Confederation of Roofing Contractors',
-      icon: Award,
+      icon: HardHat,
       subtitle: 'Approved Member',
     },
     {
       name: 'Insurance Backed Guarantee',
-      icon: ShieldCheck,
+      icon: FileBadge,
       subtitle: 'IBG Protected',
     },
     {
       name: 'Freefoam',
-      icon: Award,
+      icon: Layers,
       subtitle: 'Approved Installer',
     },
     {
       name: 'Marley',
-      icon: Award,
+      icon: Medal,
       subtitle: 'Registered Installer',
     },
   ];
 
   // Mobile-only extras moved from hero badges
   const mobileExtras = [
-    { name: 'Fully Insured', subtitle: '£10M Cover', icon: Shield },
-    { name: 'Accredited', subtitle: '5 Star Rated', icon: Award },
-    { name: 'Fast Response', subtitle: '24/7 Emergency', icon: Clock },
+    { name: 'Fully Insured', subtitle: '£10M Cover', icon: ShieldCheck },
+    { name: 'Accredited', subtitle: '5 Star Rated', icon: Star },
+    { name: 'Fast Response', subtitle: '24/7 Emergency', icon: Zap },
   ];
 
   return (

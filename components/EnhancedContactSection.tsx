@@ -16,16 +16,15 @@ type ContactMessage = {
   message: string;
 };
 import { trackContactForm, trackPhoneClick, trackWhatsAppClick, trackEmailClick, getGclid } from '@/lib/tracking';
-import { 
-  Loader2, 
-  CheckCircle2, 
-  AlertCircle, 
-  Phone,
-  Mail,
+import {
+  Loader2,
+  CheckCircle2,
+  AlertCircle,
+  PhoneCall,
+  Send,
   MapPin,
-  Clock,
-  MessageCircle,
-  BadgeCheck
+  CalendarClock,
+  MessageSquareMore
 } from 'lucide-react';
 
 export function EnhancedContactSection() {
@@ -185,7 +184,7 @@ export function EnhancedContactSection() {
                     </Button>
                     <Button asChild className="bg-brand-orange hover:bg-brand-orange/90">
                       <a href="tel:01270897606" onClick={() => trackPhoneClick('contact_form_success')}>
-                        <Phone className="w-4 h-4 mr-2" />
+                        <PhoneCall className="w-4 h-4 mr-2" />
                         Call Now
                       </a>
                     </Button>
@@ -323,7 +322,7 @@ export function EnhancedContactSection() {
               <div className="space-y-5">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-brand-orange/20 flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-brand-orange" />
+                    <PhoneCall className="w-6 h-6 text-brand-orange" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white">Call Us</h3>
@@ -340,7 +339,7 @@ export function EnhancedContactSection() {
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                    <MessageCircle className="w-6 h-6 text-green-400" />
+                    <MessageSquareMore className="w-6 h-6 text-green-400" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white">WhatsApp</h3>
@@ -359,7 +358,7 @@ export function EnhancedContactSection() {
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-blue-400" />
+                    <Send className="w-6 h-6 text-blue-400" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white">Email</h3>
@@ -376,7 +375,7 @@ export function EnhancedContactSection() {
 
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-6 h-6 text-purple-400" />
+                    <CalendarClock className="w-6 h-6 text-purple-400" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white">Business Hours</h3>
@@ -413,36 +412,6 @@ export function EnhancedContactSection() {
                 </div>
               </div>
 
-              {/* Accreditations & Trust Badges */}
-              <div className="pt-5 border-t border-white/15">
-                <h3 className="flex items-center gap-2 font-semibold text-white mb-4">
-                  <BadgeCheck className="w-5 h-5 text-brand-orange" />
-                  Accredited & Trusted
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-center rounded-lg bg-white p-3">
-                    <img
-                      src="/images/corc_logo-1024x549.webp"
-                      alt="CORC certified roofing contractor"
-                      className="h-12 w-auto object-contain"
-                    />
-                  </div>
-                  <div className="flex items-center justify-center rounded-lg bg-white p-3">
-                    <img
-                      src="/images/Google-Review-Emblem-500x281.png"
-                      alt="Google reviews rating"
-                      className="h-12 w-auto object-contain"
-                    />
-                  </div>
-                  <div className="flex items-center justify-center rounded-lg bg-white p-3">
-                    <img
-                      src="/images/badge-light@2x.png"
-                      alt="MyApproved verified member"
-                      className="h-12 w-auto object-contain"
-                    />
-                  </div>
-                </div>
-              </div>
               </div>
             </div>
           </div>

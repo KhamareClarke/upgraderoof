@@ -5,7 +5,7 @@ import { QuoteForm } from '@/components/QuoteForm';
 import { InlineLeadForm } from '@/components/InlineLeadForm';
 import { StickyMobileCta } from '@/components/StickyMobileCta';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { CheckCircle, Phone, MapPin, Shield, Award, Clock, Star, ArrowRight, Home, Layers, Flame, Droplets, Zap, Wrench } from 'lucide-react';
+import { CheckCircle, PhoneCall, MapPin, ShieldCheck, Medal, CalendarClock, Star, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer } from 'lucide-react';
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 
@@ -54,11 +54,11 @@ function pickQaAngle(town: string): number {
 
 export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyResponseTime, intro, localContext, roofingChallenges, landmarks, propertyTypes, commonProblems, proofPoint, ctaLine, faqs, nearbyAreas }: AreaPageProps) {
   const services = [
-    { icon: Home, title: 'Tile & Slate Roofing', desc: `Expert tile and slate roof installation and repair across ${town}. Traditional and modern options.`, href: '/services/tile-slate-roofing' },
+    { icon: BrickWall, title: 'Tile & Slate Roofing', desc: `Expert tile and slate roof installation and repair across ${town}. Traditional and modern options.`, href: '/services/tile-slate-roofing' },
     { icon: Layers, title: 'Flat Roofing', desc: `EPDM rubber and GRP fibreglass flat roofing for ${town} properties. Up to 20-year guarantee.`, href: '/services/flat-roofing' },
     { icon: Flame, title: 'Chimney Repairs', desc: `Chimney repointing, lead flashing, and stack repairs for ${town} homes.`, href: '/services/chimney-repairs' },
-    { icon: Droplets, title: 'Guttering & Fascias', desc: `uPVC guttering, fascias, and soffits. Full replacements and repairs in ${town}.`, href: '/services/gutters-fascias' },
-    { icon: Wrench, title: 'Roof Repairs', desc: `Fast, reliable roof repairs for leaks, storm damage, and missing tiles in ${town}.`, href: '/roof-repairs' },
+    { icon: CloudRain, title: 'Guttering & Fascias', desc: `uPVC guttering, fascias, and soffits. Full replacements and repairs in ${town}.`, href: '/services/gutters-fascias' },
+    { icon: Hammer, title: 'Roof Repairs', desc: `Fast, reliable roof repairs for leaks, storm damage, and missing tiles in ${town}.`, href: '/roof-repairs' },
     { icon: Zap, title: 'Emergency Roofing', desc: `24/7 emergency call-outs to ${town}. Storm damage, leaks, and urgent make-safe work.`, href: '/emergency-roofing' },
   ];
 
@@ -97,14 +97,14 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
 
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14 text-lg rounded-xl transition-colors" asChild>
-                  <TrackedPhoneLink href={PHONE_TEL} placement="area_page_hero"><Phone className="w-5 h-5 mr-2" /><span className="!text-white">{PHONE_DISPLAY}</span></TrackedPhoneLink>
+                  <TrackedPhoneLink href={PHONE_TEL} placement="area_page_hero"><PhoneCall className="w-5 h-5 mr-2" /><span className="!text-white">{PHONE_DISPLAY}</span></TrackedPhoneLink>
                 </Button>
               </div>
 
               {/* Trust indicators */}
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20 max-w-md">
                 <div className="text-center">
-                  <Shield className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
+                  <ShieldCheck className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
                   <div className="text-xs font-semibold">Fully Insured</div>
                 </div>
                 <div className="text-center">
@@ -112,7 +112,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
                   <div className="text-xs font-semibold">5★ Google Rating</div>
                 </div>
                 <div className="text-center">
-                  <Clock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
+                  <CalendarClock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
                   <div className="text-xs font-semibold">Same Day Response</div>
                 </div>
               </div>
@@ -174,10 +174,10 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       <section className="bg-gray-50 py-6 border-b border-gray-200">
         <div className="container-custom">
           <div className="flex flex-wrap justify-center gap-6 sm:gap-10 text-sm text-gray-700">
-            <div className="flex items-center gap-2"><Award className="w-5 h-5 text-brand-orange" /><span className="font-semibold">25+ Years</span></div>
-            <div className="flex items-center gap-2"><Shield className="w-5 h-5 text-brand-orange" /><span className="font-semibold">£10M Insured</span></div>
+            <div className="flex items-center gap-2"><Medal className="w-5 h-5 text-brand-orange" /><span className="font-semibold">25+ Years</span></div>
+            <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-brand-orange" /><span className="font-semibold">£10M Insured</span></div>
             <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-brand-orange" /><span className="font-semibold">CORC Certified</span></div>
-            <div className="flex items-center gap-2"><Shield className="w-5 h-5 text-brand-orange" /><span className="font-semibold">10-Year Workmanship Guarantee</span></div>
+            <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-brand-orange" /><span className="font-semibold">10-Year Workmanship Guarantee</span></div>
             <div className="flex items-center gap-2"><Star className="w-5 h-5 text-brand-orange" /><span className="font-semibold">5-Star Reviews</span></div>
           </div>
         </div>
@@ -198,11 +198,6 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4 text-brand-orange" />
                   <span className="font-semibold">{distanceFromBase}</span>
-                </div>
-              )}
-              {emergencyResponseTime && (
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4 text-brand-orange" />
                   <span className="font-semibold">Emergency: {emergencyResponseTime}</span>
                 </div>
               )}

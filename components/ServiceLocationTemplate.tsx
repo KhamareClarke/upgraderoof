@@ -3,7 +3,7 @@ import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { CheckCircle, Phone, MapPin, Shield, Award, Clock, Star, ArrowRight } from 'lucide-react';
+import { CheckCircle, PhoneCall, MapPin, ShieldCheck, Medal, CalendarClock, Star, ArrowRight } from 'lucide-react';
 import type { ServiceData } from '@/lib/service-data';
 import type { TownData } from '@/lib/town-data';
 import { services } from '@/lib/service-data';
@@ -122,7 +122,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
               } />
               <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14 text-lg rounded-xl transition-colors" asChild>
                 <TrackedPhoneLink href={PHONE_TEL} placement="service_location_hero">
-                  <Phone className="w-5 h-5 mr-2" /><span className="!text-white">{PHONE_DISPLAY}</span>
+                  <PhoneCall className="w-5 h-5 mr-2" /><span className="!text-white">{PHONE_DISPLAY}</span>
                 </TrackedPhoneLink>
               </Button>
             </div>
@@ -130,7 +130,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
             {/* Trust indicators */}
             <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20 max-w-md">
               <div className="text-center">
-                <Shield className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
+                <ShieldCheck className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
                 <div className="text-xs font-semibold">Fully Insured</div>
               </div>
               <div className="text-center">
@@ -138,7 +138,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
                 <div className="text-xs font-semibold">5★ Google Rating</div>
               </div>
               <div className="text-center">
-                <Clock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
+                <CalendarClock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
                 <div className="text-xs font-semibold">Same Day Response</div>
               </div>
             </div>
@@ -162,11 +162,11 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
       <section className="bg-white py-5 border-b border-gray-100">
         <div className="container-custom">
           <div className="flex flex-wrap justify-center gap-6 sm:gap-10 text-sm text-gray-700">
-            <div className="flex items-center gap-2"><Award className="w-5 h-5 text-brand-orange" /><span className="font-semibold">25+ Years</span></div>
-            <div className="flex items-center gap-2"><Shield className="w-5 h-5 text-brand-orange" /><span className="font-semibold">£10M Insured</span></div>
+            <div className="flex items-center gap-2"><Medal className="w-5 h-5 text-brand-orange" /><span className="font-semibold">25+ Years</span></div>
+            <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-brand-orange" /><span className="font-semibold">£10M Insured</span></div>
             <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-brand-orange" /><span className="font-semibold">CORC Certified</span></div>
             <div className="flex items-center gap-2"><Star className="w-5 h-5 text-brand-orange" /><span className="font-semibold">5-Star Rated</span></div>
-            <div className="flex items-center gap-2"><Clock className="w-5 h-5 text-brand-orange" /><span className="font-semibold">24/7 Emergency</span></div>
+            <div className="flex items-center gap-2"><CalendarClock className="w-5 h-5 text-brand-orange" /><span className="font-semibold">24/7 Emergency</span></div>
           </div>
         </div>
       </section>
@@ -343,7 +343,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
             } />
             <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14 text-lg rounded-xl transition-colors" asChild>
               <TrackedPhoneLink href={PHONE_TEL} placement="service_location_cta">
-                <Phone className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span>
+                <PhoneCall className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span>
               </TrackedPhoneLink>
             </Button>
           </div>

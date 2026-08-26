@@ -1,6 +1,6 @@
 'use client';
 
-import { MapPin, Home, Clock, CheckCircle } from 'lucide-react';
+import { MapPin, MapPinned, CloudRain, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 
 interface LocalAreaContentProps {
@@ -45,7 +45,7 @@ export function LocalAreaContent({
             <div className="bg-gray-50 p-6 rounded-xl">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-brand-orange/10 rounded-lg flex items-center justify-center">
-                  <Home className="w-5 h-5 text-brand-orange" />
+                  <MapPinned className="w-5 h-5 text-brand-orange" />
                 </div>
                 <h3 className="text-xl font-bold text-brand-navy">Areas We Cover in {town}</h3>
               </div>
@@ -64,7 +64,7 @@ export function LocalAreaContent({
             <div className="bg-gray-50 p-6 rounded-xl">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-brand-orange/10 rounded-lg flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-brand-orange" />
+                  <CloudRain className="w-5 h-5 text-brand-orange" />
                 </div>
                 <h3 className="text-xl font-bold text-brand-navy">Local Roofing Challenges</h3>
               </div>

@@ -22,3 +22,7 @@ export const PHONE_TEL = 'tel:01270897606';
 export const WHATSAPP_DISPLAY = 'WhatsApp';
 export const WHATSAPP_NUMBER = '447379440583';
 export const WHATSAPP_WA = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+/** Google Business Profile review-write URL (opens the "leave a review" prompt). */
+export const GOOGLE_REVIEW_URL =
+  'https://www.google.com/maps/place/Upgrade+Roofs?hl=en-GB';

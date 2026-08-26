@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Mail, Phone, Clock, MapPin, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
+import { Send, PhoneCall, CalendarClock, MapPin, Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { TrackedEmailLink } from '@/components/TrackedEmailLink';
 
@@ -97,7 +97,7 @@ export function Footer() {
               </div>
 
               <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-brand-orange flex-shrink-0" />
+                <PhoneCall className="w-5 h-5 text-brand-orange flex-shrink-0" />
                 <div className="space-y-1.5">
                   <TrackedPhoneLink
                     href="tel:01270897606"
@@ -110,7 +110,7 @@ export function Footer() {
               </div>
 
               <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-brand-orange flex-shrink-0" />
+                <Send className="w-5 h-5 text-brand-orange flex-shrink-0" />
                 <TrackedEmailLink
                   href="mailto:upgraderoofs@yahoo.com"
                   placement="footer"
@@ -121,7 +121,7 @@ export function Footer() {
               </div>
 
               <div className="flex items-start space-x-3">
-                <Clock className="w-5 h-5 text-brand-orange flex-shrink-0 mt-1" />
+                <CalendarClock className="w-5 h-5 text-brand-orange flex-shrink-0 mt-1" />
                 <div>
                   <p className="text-white/70 text-sm tracking-wide">Monday - Friday: 8am - 6pm</p>
                   <p className="text-white/70 text-sm tracking-wide">Saturday: 9am - 4pm</p>

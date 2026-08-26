@@ -1,10 +1,10 @@
 'use client';
 
-import { Shield, Award, Star, CheckCircle } from 'lucide-react';
+import { BadgeCheck, HardHat, Star, ShieldCheck, FileBadge, Layers, Medal } from 'lucide-react';
 
 const badges = [
   {
-    icon: Shield,
+    icon: BadgeCheck,
     title: 'MyApproved',
     subtitle: 'Vetted & Verified',
     description: 'Approved',
@@ -12,7 +12,7 @@ const badges = [
     bgColor: 'bg-green-50',
   },
   {
-    icon: Award,
+    icon: HardHat,
     title: 'Confederation of',
     subtitle: 'Roofing Contractors',
     description: 'Approved Member',
@@ -28,7 +28,7 @@ const badges = [
     bgColor: 'bg-yellow-50',
   },
   {
-    icon: CheckCircle,
+    icon: ShieldCheck,
     title: 'Fully Insured',
     subtitle: '£10M Public Liability',
     description: 'Protected',
@@ -36,7 +36,7 @@ const badges = [
     bgColor: 'bg-orange-50',
   },
   {
-    icon: Shield,
+    icon: FileBadge,
     title: 'Insurance Backed',
     subtitle: 'Guarantee',
     description: 'IBG Protected',
@@ -44,7 +44,7 @@ const badges = [
     bgColor: 'bg-purple-50',
   },
   {
-    icon: CheckCircle,
+    icon: Layers,
     title: 'Freefoam',
     subtitle: 'Approved Installer',
     description: 'Certified',
@@ -52,7 +52,7 @@ const badges = [
     bgColor: 'bg-teal-50',
   },
   {
-    icon: Award,
+    icon: Medal,
     title: 'Marley',
     subtitle: 'Registered Installer',
     description: 'Certified',

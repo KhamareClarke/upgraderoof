@@ -21,10 +21,10 @@ export function WhyChooseUs() {
             <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
           </div>
           <div className="sm:grid sm:grid-cols-2 sm:gap-8 sm:items-end">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+            <h2 className="text-center sm:text-left text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
               Quality Work from a <span className="text-brand-orange">Team You Can Trust</span>
             </h2>
-            <p className="text-lg text-gray-300 leading-relaxed mt-4 sm:mt-0 sm:border-l-4 sm:border-brand-orange sm:pl-6">
+            <p className="text-center sm:text-left text-lg text-gray-300 leading-relaxed mt-4 sm:mt-0 sm:border-l-4 sm:border-brand-orange sm:pl-6">
               We price every job up front and back it with a written guarantee, so you know the cost and the cover before any work starts.
             </p>
           </div>
@@ -46,7 +46,7 @@ export function WhyChooseUs() {
           <div>
             <div className="space-y-4 sm:space-y-5 mb-8 sm:mb-10">
               {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-start space-x-3 sm:space-x-4">
+                <div key={index} className="flex items-start justify-center sm:justify-start space-x-3 sm:space-x-4">
                   <div className="flex-shrink-0 w-6 h-6 sm:w-7 sm:h-7 bg-brand-orange rounded-full flex items-center justify-center mt-1">
                     <Check className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-white" strokeWidth={2.5} />
                   </div>
@@ -55,15 +55,17 @@ export function WhyChooseUs() {
               ))}
             </div>
 
-            <QuoteForm trigger={
-              <Button
-                size="lg"
-                className="group relative bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-8 sm:px-10 text-sm sm:text-base tracking-wide h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 w-full sm:w-auto inline-flex items-center gap-2.5"
-              >
-                Book Your Free Quote
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
-            } />
+            <div className="flex justify-center">
+              <QuoteForm trigger={
+                <Button
+                  size="lg"
+                  className="group relative bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-8 sm:px-10 text-sm sm:text-base tracking-wide h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 w-full sm:w-auto inline-flex items-center gap-2.5"
+                >
+                  Book Your Free Quote
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </Button>
+              } />
+            </div>
           </div>
         </div>
       </div>

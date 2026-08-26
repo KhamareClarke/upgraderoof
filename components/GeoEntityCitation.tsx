@@ -1,4 +1,4 @@
-import { MapPin, Phone, Shield, Award, ChevronDown } from 'lucide-react';
+import { MapPin, PhoneCall, ShieldCheck, Medal, ChevronDown } from 'lucide-react';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 
 interface GeoEntityCitationProps {
@@ -49,10 +49,10 @@ export function GeoEntityCitation({ town, postcode }: GeoEntityCitationProps) {
             <TrackedPhoneLink href="tel:01270897606" placement="entity_citation" className="text-brand-orange font-semibold hover:underline">01270 897 606</TrackedPhoneLink>.
           </p>
           <div className="flex flex-wrap gap-3 sm:gap-4 mt-3 text-xs text-gray-600">
-            <span className="inline-flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-brand-orange" /> CORC Certified</span>
-            <span className="inline-flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-brand-orange" /> £10M Insured</span>
+            <span className="inline-flex items-center gap-1.5"><Medal className="w-3.5 h-3.5 text-brand-orange" /> CORC Certified</span>
+            <span className="inline-flex items-center gap-1.5"><ShieldCheck className="w-3.5 h-3.5 text-brand-orange" /> £10M Insured</span>
             <span className="inline-flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-brand-orange" /> 20 Crewe Rd, Sandbach CW11 4NE</span>
-            <span className="inline-flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-brand-orange" /> 01270 897 606</span>
+            <span className="inline-flex items-center gap-1.5"><PhoneCall className="w-3.5 h-3.5 text-brand-orange" /> 01270 897 606</span>
           </div>
         </div>
       </details>

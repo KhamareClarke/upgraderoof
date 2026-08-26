@@ -1,14 +1,13 @@
 import { Button } from '@/components/ui/button';
-import { Chrome as Home, Layers, Flame, Droplets, Sun, Square, ArrowRight } from 'lucide-react';
+import { BrickWall, Layers, Flame, CloudRain, Sun, Fence, ArrowRight } from 'lucide-react';
 import { QuoteForm } from '@/components/QuoteForm';
-import Link from 'next/link';
 import Image from 'next/image';
 
 export function Services() {
   const services = [
     {
       title: 'Tile & Slate Roofs',
-      icon: Home,
+      icon: BrickWall,
       image: '/images/6.jpeg',
       alt: 'Professional tile and slate roof installation in Cheshire',
       gradient: 'from-blue-500/20 to-purple-500/20',
@@ -32,7 +31,7 @@ export function Services() {
     },
     {
       title: 'Gutters & Fascias',
-      icon: Droplets,
+      icon: CloudRain,
       image: '/images/2.jpeg',
       alt: 'Gutter and fascia installation Cheshire',
       gradient: 'from-teal-500/20 to-cyan-500/20',
@@ -48,7 +47,7 @@ export function Services() {
     },
     {
       title: 'Cladding Installations',
-      icon: Square,
+      icon: Fence,
       image: '/images/4.jpeg',
       alt: 'External wall cladding installation Cheshire',
       gradient: 'from-slate-500/20 to-gray-500/20',
@@ -116,17 +115,6 @@ export function Services() {
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <Link href={service.href}>
-                    <Button
-                      variant="ghost"
-                      className="group/btn w-full justify-between px-0 text-brand-navy hover:text-brand-orange hover:bg-transparent font-semibold transition-all border-t border-gray-200 rounded-none pt-4"
-                    >
-                      <span>Learn More</span>
-                      <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
-                  </Link>
-                </div>
               </div>
             );
           })}

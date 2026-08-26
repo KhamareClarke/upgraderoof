@@ -1,6 +1,6 @@
 'use client';
 
-import { Phone } from 'lucide-react';
+import { PhoneCall } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { trackPhoneClick } from '@/lib/tracking';
 
@@ -13,7 +13,7 @@ export function FloatingCallButton() {
         asChild
       >
         <a href="tel:01270897606" className="flex items-center justify-center" onClick={() => trackPhoneClick('floating_call_button')}>
-          <Phone className="w-6 h-6 group-hover:animate-bounce" />
+          <PhoneCall className="w-6 h-6 group-hover:animate-bounce" />
           <span className="ml-2 font-bold">Call Now</span>
         </a>
       </Button>

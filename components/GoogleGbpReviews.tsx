@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Star, Quote } from 'lucide-react';
+import { GOOGLE_REVIEW_URL } from '@/lib/contact';
 
 interface Review {
   id: string | null;
@@ -193,6 +194,14 @@ export function GoogleGbpReviews() {
           <p className="text-gray-400 text-sm mt-1">
             Fresh reviews are on their way — check back shortly.
           </p>
+          <a
+            href={GOOGLE_REVIEW_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-brand-orange px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-brand-orange/90"
+          >
+            Leave us a review
+          </a>
         </div>
       )}
     </div>
