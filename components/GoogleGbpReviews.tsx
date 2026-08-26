@@ -1,32 +1,21 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Star, Quote, ExternalLink } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 
-interface GbpReview {
-  reviewId: string | null;
-  starRating: string | null;
-  starValue: number | null;
+interface Review {
+  id: string | null;
   reviewer: string;
   comment: string | null;
+  starValue: number | null;
   createTime: string | null;
-  updateTime: string | null;
   ownerReply: string | null;
 }
 
-interface GbpProfile {
-  title: string | null;
-  primaryCategory: string | null;
-  placeId: string | null;
-  mapsUri: string | null;
-  newReviewUri: string | null;
-}
-
-interface GbpResponse {
+interface ReviewsResponse {
   success: boolean;
-  profile: GbpProfile;
   rating: { average: number | null; totalReviews: number | null };
-  reviews: GbpReview[];
+  reviews: Review[];
 }
 
 function formatDate(iso: string | null): string {
@@ -72,14 +61,17 @@ function GoogleLogo({ className }: { className?: string }) {
 }
 
 export function GoogleGbpReviews() {
-  const [data, setData] = useState<GbpResponse | null>(null);
+  const [data, setData] = useState<ReviewsResponse | null>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
   useEffect(() => {
     let cancelled = false;
-    fetch('/api/gbp', { headers: { accept: 'application/json' } })
+    const timeout = setTimeout(() => {
+      if (!cancelled) setStatus('error');
+    }, 6000);
+    fetch('/api/reviews', { headers: { accept: 'application/json' } })
       .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))))
-      .then((json: GbpResponse) => {
+      .then((json: ReviewsResponse) => {
         if (cancelled) return;
         if (!json || !json.success) {
           setStatus('error');
@@ -90,15 +82,16 @@ export function GoogleGbpReviews() {
       })
       .catch(() => {
         if (!cancelled) setStatus('error');
-      });
+      })
+      .finally(() => clearTimeout(timeout));
     return () => {
       cancelled = true;
+      clearTimeout(timeout);
     };
   }, []);
 
   const rating = data?.rating;
   const reviews = (data?.reviews ?? []).filter((r) => r.comment);
-  const mapsUri = data?.profile?.mapsUri;
 
   // A live average + count is the whole point — fall back quietly if unavailable.
   const average = rating?.average != null ? rating.average : null;
@@ -154,7 +147,7 @@ export function GoogleGbpReviews() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {reviews.map((review) => (
             <figure
-              key={review.reviewId ?? review.createTime ?? `${review.reviewer}-${review.comment?.slice(0, 12)}`}
+              key={review.id ?? review.createTime ?? `${review.reviewer}-${review.comment?.slice(0, 12)}`}
               className="flex flex-col bg-white border border-gray-200 rounded-2xl p-7 shadow-sm"
             >
               <div className="flex items-center gap-3 mb-4">
@@ -200,21 +193,6 @@ export function GoogleGbpReviews() {
           <p className="text-gray-400 text-sm mt-1">
             Fresh reviews are on their way — check back shortly.
           </p>
-        </div>
-      )}
-
-      {/* Link out to Google */}
-      {mapsUri && (
-        <div className="text-center mt-8">
-          <a
-            href={mapsUri}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-brand-orange font-semibold hover:underline"
-          >
-            Read all our Google reviews
-            <ExternalLink className="w-4 h-4" />
-          </a>
         </div>
       )}
     </div>

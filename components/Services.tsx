@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { Chrome as Home, Layers, Flame, Droplets, Sun, Square, ArrowRight, Sparkles } from 'lucide-react';
+import { Chrome as Home, Layers, Flame, Droplets, Sun, Square, ArrowRight } from 'lucide-react';
+import { QuoteForm } from '@/components/QuoteForm';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -7,7 +8,6 @@ export function Services() {
   const services = [
     {
       title: 'Tile & Slate Roofs',
-      description: 'Expert installation and repair of traditional tile and slate roofing. Weather-resistant, durable, and designed to enhance the look of your home for decades to come.',
       icon: Home,
       image: '/images/6.jpeg',
       alt: 'Professional tile and slate roof installation in Cheshire',
@@ -16,7 +16,6 @@ export function Services() {
     },
     {
       title: 'Flat Roofs',
-      description: 'Modern flat roofing solutions with superior waterproofing. The ideal choice for extensions, garages, and commercial properties.',
       icon: Layers,
       image: '/images/3.jpeg',
       alt: 'EPDM and GRP flat roof installation Cheshire',
@@ -25,7 +24,6 @@ export function Services() {
     },
     {
       title: 'Chimney Repairs',
-      description: 'Professional chimney maintenance and repair, from repointing to full rebuilds. We keep your chimney safe, functional, and watertight.',
       icon: Flame,
       image: '/images/1.jpeg',
       alt: 'Chimney repair and repointing service Cheshire',
@@ -34,7 +32,6 @@ export function Services() {
     },
     {
       title: 'Gutters & Fascias',
-      description: 'Complete gutter and fascia installation, repair, and maintenance. Quality materials fitted properly to protect your property from water damage.',
       icon: Droplets,
       image: '/images/2.jpeg',
       alt: 'Gutter and fascia installation Cheshire',
@@ -43,7 +40,6 @@ export function Services() {
     },
     {
       title: 'Skylights & Roof Windows',
-      description: 'Bring natural light into your home with professionally installed skylights and roof windows. Expert fitting and weatherproofing guaranteed.',
       icon: Sun,
       image: '/images/10.jpeg',
       alt: 'Velux skylight and roof window installation Cheshire',
@@ -52,7 +48,6 @@ export function Services() {
     },
     {
       title: 'Cladding Installations',
-      description: "Transform your property's exterior with modern, weather-resistant cladding installed to the highest standards.",
       icon: Square,
       image: '/images/4.jpeg',
       alt: 'External wall cladding installation Cheshire',
@@ -72,11 +67,10 @@ export function Services() {
           </div>
           <div className="sm:grid sm:grid-cols-2 sm:gap-8 sm:items-end">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-navy leading-tight">
-              Every Roofing Need. <span className="text-brand-orange">One Trusted Team.</span>
+              One Local Team for <span className="text-brand-orange">Every Roofing Job</span>
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed mt-4 sm:mt-0 sm:border-l-4 sm:border-brand-orange sm:pl-6">
-              From minor repairs to complete roof replacements, we deliver comprehensive roofing solutions
-              tailored to your property — using premium materials and cutting-edge techniques.
+              From a slipped tile to a full roof replacement, one local team handles the whole job. Every one carries a written guarantee.
             </p>
           </div>
         </div>
@@ -123,10 +117,6 @@ export function Services() {
                 </div>
 
                 <div className="p-6">
-                  <p className="text-gray-600 leading-relaxed mb-6">
-                    {service.description}
-                  </p>
-
                   <Link href={service.href}>
                     <Button
                       variant="ghost"
@@ -142,25 +132,16 @@ export function Services() {
           })}
         </div>
 
-        <div className="mt-16">
-          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 bg-brand-navy text-white w-full shadow-lg px-6 py-8 sm:px-10 sm:py-10">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-brand-orange flex items-center justify-center flex-shrink-0">
-              <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
-            </div>
-            <div className="text-center sm:text-left flex-1">
-              <p className="text-white text-sm tracking-wide mb-1 font-medium">Need a custom solution?</p>
-              <p className="text-lg sm:text-xl font-bold">We've got you covered!</p>
-            </div>
+        <div className="text-center mt-12">
+          <QuoteForm trigger={
             <Button
               size="lg"
-              className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold w-full sm:w-auto transition-all rounded-none"
-              asChild
+              className="group bg-brand-orange hover:bg-brand-navy text-white font-semibold px-8 py-3 h-12 rounded-lg inline-flex items-center gap-2.5"
             >
-              <Link href="/contact" className="flex items-center justify-center">
-                Contact Us
-              </Link>
+              Get Your Free Quote
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
-          </div>
+          } />
         </div>
       </div>
     </section>

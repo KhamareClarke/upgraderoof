@@ -110,7 +110,7 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
             <div className="text-center mb-6">
               <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl p-5 mb-5">
                 <div className="text-xl font-bold mb-1">📞 Call Now: 01270 897606</div>
-                <div className="text-sm opacity-90">We answer in 30 seconds — instant quote</div>
+                <div className="text-sm opacity-90">We answer in 30 seconds with an instant quote</div>
               </div>
               <DialogHeader className="space-y-1">
                 <DialogTitle className="text-2xl font-bold text-brand-navy text-center">Get Your Free Roof Inspection</DialogTitle>
@@ -266,7 +266,7 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
               <p className="text-center text-gray-700 italic font-medium text-sm mb-1">
                 "Fast, friendly, and professional. The inspection was thorough and found issues early."
               </p>
-              <p className="text-center text-xs text-gray-600 font-semibold">– Kerry, Crewe</p>
+              <p className="text-center text-xs text-gray-600 font-semibold">Kerry, Crewe</p>
             </div>
           </>
         )}

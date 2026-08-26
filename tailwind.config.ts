@@ -24,7 +24,7 @@ const config: Config = {
       },
       colors: {
         brand: {
-          navy: '#0F1419',
+          navy: '#0A1F44',
           orange: '#D4622A',
           grey: '#FAFBFC',
           'navy-light': '#1E2A38',

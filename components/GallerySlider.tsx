@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, X, ZoomIn } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, ZoomIn, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface GalleryImage {
   src: string;
@@ -83,237 +84,6 @@ const galleryImages: GalleryImage[] = [
     location: 'Holmes Chapel, CW4',
     category: 'Skylights',
   },
-  {
-    src: '/images/IMG-20240916-WA0000.jpg',
-    alt: 'Roofing project completed by Upgrade Roofs in Cheshire',
-    title: 'Roofing Project - Cheshire',
-    location: 'Cheshire',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/IMG-20241030-WA0000.jpg',
-    alt: 'Professional roofing work in progress Sandbach',
-    title: 'Roof Work - Sandbach',
-    location: 'Sandbach, CW11',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/IMG-20241108-WA0004.jpg',
-    alt: 'Completed roof installation Crewe area',
-    title: 'Roof Installation - Crewe',
-    location: 'Crewe, CW1',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/IMG-20241115-WA0003.jpg',
-    alt: 'Quality roofing craftsmanship Middlewich',
-    title: 'Quality Roofing - Middlewich',
-    location: 'Middlewich, CW10',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.52_1947b559.jpg',
-    alt: 'Roof repair project Congleton professional finish',
-    title: 'Roof Repair - Congleton',
-    location: 'Congleton, CW12',
-    category: 'Repairs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.52_25d5767d.jpg',
-    alt: 'Flat roof waterproofing Nantwich',
-    title: 'Flat Roof - Nantwich',
-    location: 'Nantwich, CW5',
-    category: 'Flat Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.52_3070e212.jpg',
-    alt: 'Tile roof restoration Holmes Chapel',
-    title: 'Tile Restoration - Holmes Chapel',
-    location: 'Holmes Chapel, CW4',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.52_4b1b18d7.jpg',
-    alt: 'Chimney repointing and repair Alsager',
-    title: 'Chimney Repair - Alsager',
-    location: 'Alsager, ST7',
-    category: 'Chimneys',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.52_980ddb1b.jpg',
-    alt: 'Gutter cleaning and maintenance Sandbach',
-    title: 'Gutter Maintenance - Sandbach',
-    location: 'Sandbach, CW11',
-    category: 'Gutters',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.52_e8fdd95f.jpg',
-    alt: 'Professional roofing team at work Crewe',
-    title: 'Roofing Team - Crewe',
-    location: 'Crewe, CW1',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.52_e9aca2cc.jpg',
-    alt: 'Roof inspection and assessment Middlewich',
-    title: 'Roof Inspection - Middlewich',
-    location: 'Middlewich, CW10',
-    category: 'Inspections',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.53_003d3c21.jpg',
-    alt: 'Lead flashing installation Congleton',
-    title: 'Lead Work - Congleton',
-    location: 'Congleton, CW12',
-    category: 'Lead Work',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.53_6336d6af.jpg',
-    alt: 'Fascia and soffit replacement Nantwich',
-    title: 'Fascias - Nantwich',
-    location: 'Nantwich, CW5',
-    category: 'Gutters',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.53_6be5d9aa.jpg',
-    alt: 'Complete roof replacement Holmes Chapel',
-    title: 'Roof Replacement - Holmes Chapel',
-    location: 'Holmes Chapel, CW4',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.53_c118c125.jpg',
-    alt: 'Storm damage repair Alsager emergency service',
-    title: 'Storm Repair - Alsager',
-    location: 'Alsager, ST7',
-    category: 'Emergency',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.53_dbf84946.jpg',
-    alt: 'Slate roof maintenance Sandbach',
-    title: 'Slate Maintenance - Sandbach',
-    location: 'Sandbach, CW11',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.54_8a48077e.jpg',
-    alt: 'Roof valley repair Crewe lead work',
-    title: 'Valley Repair - Crewe',
-    location: 'Crewe, CW1',
-    category: 'Lead Work',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.54_a038d68f.jpg',
-    alt: 'Flat roof repair Middlewich EPDM',
-    title: 'Flat Roof Repair - Middlewich',
-    location: 'Middlewich, CW10',
-    category: 'Flat Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.54_ab257b7f.jpg',
-    alt: 'Roof tile replacement Congleton',
-    title: 'Tile Replacement - Congleton',
-    location: 'Congleton, CW12',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.54_cbd4d281.jpg',
-    alt: 'Chimney cowl installation Nantwich',
-    title: 'Chimney Cowl - Nantwich',
-    location: 'Nantwich, CW5',
-    category: 'Chimneys',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.54_e3f2bc59.jpg',
-    alt: 'Roofing materials quality workmanship Holmes Chapel',
-    title: 'Quality Materials - Holmes Chapel',
-    location: 'Holmes Chapel, CW4',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.55_1e294251.jpg',
-    alt: 'Roof ridge repair Alsager',
-    title: 'Ridge Repair - Alsager',
-    location: 'Alsager, ST7',
-    category: 'Repairs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.55_581ab1f8.jpg',
-    alt: 'Gutter downpipe installation Sandbach',
-    title: 'Downpipes - Sandbach',
-    location: 'Sandbach, CW11',
-    category: 'Gutters',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.55_6a3edf83.jpg',
-    alt: 'Roof flashing repair Crewe waterproofing',
-    title: 'Flashing Repair - Crewe',
-    location: 'Crewe, CW1',
-    category: 'Lead Work',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.55_929330ef.jpg',
-    alt: 'Professional roofing service Middlewich',
-    title: 'Professional Service - Middlewich',
-    location: 'Middlewich, CW10',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.56_420e66d1.jpg',
-    alt: 'Roof ventilation installation Congleton',
-    title: 'Ventilation - Congleton',
-    location: 'Congleton, CW12',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.56_5a14b8eb.jpg',
-    alt: 'Moss removal and roof cleaning Nantwich',
-    title: 'Roof Cleaning - Nantwich',
-    location: 'Nantwich, CW5',
-    category: 'Maintenance',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.56_848eb65d.jpg',
-    alt: 'Roof inspection drone survey Holmes Chapel',
-    title: 'Drone Survey - Holmes Chapel',
-    location: 'Holmes Chapel, CW4',
-    category: 'Inspections',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.56_c8ad1c5f.jpg',
-    alt: 'Completed roofing project Alsager satisfied customer',
-    title: 'Completed Project - Alsager',
-    location: 'Alsager, ST7',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.57_2a6462b1.jpg',
-    alt: 'Roof repair in progress Sandbach',
-    title: 'Repair in Progress - Sandbach',
-    location: 'Sandbach, CW11',
-    category: 'Repairs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.57_2c9b3b50.jpg',
-    alt: 'Quality roofing finish Crewe',
-    title: 'Quality Finish - Crewe',
-    location: 'Crewe, CW1',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.57_51667db9.jpg',
-    alt: 'Roofing expertise Middlewich',
-    title: 'Expert Work - Middlewich',
-    location: 'Middlewich, CW10',
-    category: 'Tile Roofs',
-  },
-  {
-    src: '/images/WhatsApp Image 2024-12-09 at 21.50.57_a3a65185.jpg',
-    alt: 'Professional roofing Congleton Cheshire',
-    title: 'Professional Roofing - Congleton',
-    location: 'Congleton, CW12',
-    category: 'Tile Roofs',
-  },
 ];
 
 export function GallerySlider() {
@@ -367,11 +137,16 @@ export function GallerySlider() {
     <section id="gallery" className="section-padding bg-brand-grey">
       <div className="container-custom">
         <div className="text-center mb-8 sm:mb-10 md:mb-12">
+          <div className="inline-flex items-center gap-3 mb-4">
+            <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+            <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Our Work</span>
+            <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3 sm:mb-4 px-2">
             See the Quality for Yourself
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-            From leaks to full roof replacements — see why locals across Cheshire trust Upgrade Roofs.
+            From leaks to full roof replacements, see why locals across Cheshire trust Upgrade Roofs.
           </p>
         </div>
 
@@ -466,27 +241,13 @@ export function GallerySlider() {
             </div>
           </div>
 
-          {/* Progress Dots */}
-          <div className="flex justify-center gap-1.5 mt-6">
-            {Array.from({ length: Math.ceil(galleryImages.length / slidesPerView) }).map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentIndex(index * slidesPerView)}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  Math.floor(currentIndex / slidesPerView) === index
-                    ? 'bg-brand-orange w-6'
-                    : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-                aria-label={`Go to slide group ${index + 1}`}
-              />
-            ))}
-          </div>
         </div>
+      </div>
 
-        {/* Image Count */}
-        <p className="text-center text-sm text-gray-500 mt-4">
-          Showing {galleryImages.length} completed projects across Cheshire
-        </p>
+      <div className="text-center mt-10">
+        <Link href="/#contact" className="inline-flex items-center gap-2 text-brand-orange font-semibold hover:underline">
+          Get a free quote for your project <ArrowRight className="w-4 h-4" />
+        </Link>
       </div>
 
       {/* Lightbox Modal */}

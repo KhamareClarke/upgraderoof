@@ -164,6 +164,73 @@ export async function pushLeadToGhl(input: GhlLeadInput): Promise<string | null>
   }
 }
 
+/** A single Google review, normalized to the shape the homepage cards render. */
+export interface GhlGoogleReview {
+  id: string | null;
+  reviewer: string;
+  comment: string | null;
+  starValue: number | null;
+  createTime: string | null;
+  ownerReply: string | null;
+}
+
+/**
+ * Fetch Google reviews for the location via GHL's Reviews API.
+ *
+ * GHL mirrors Google (and Facebook) reviews once the "Reviews" integration is
+ * connected to the location; they surface through `GET /reviews/` with the same
+ * location-scoped token used everywhere else. GHL does not expose the aggregate
+ * average/count through this endpoint, so callers combine list + local average.
+ *
+ * Endpoint: GET https://services.leadconnectorhq.com/reviews/?locationId={id}
+ * Auth:     Bearer <GHL_API_KEY>, Version: 2021-07-28 (via ghlFetch).
+ * Returns:  `reviews` array of `{ id, title, comment, rating, name, source,
+ *           productName, createdAt, updatedAt }` (source = 'google' | 'facebook'
+ *           | 'reviews_campaign').
+ *
+ * Non-throwing: a GHL outage or disconnect must never crash the page — failures
+ * are logged and an empty list is returned so the caller degrades gracefully.
+ */
+export async function getGoogleReviews(limit = 5): Promise<GhlGoogleReview[]> {
+  const c = creds();
+  if (!c) {
+    console.warn('[ghl] getGoogleReviews skipped — GHL_LOCATION_ID / GHL_API_KEY not set');
+    return [];
+  }
+  try {
+    const res = await ghlFetch(
+      `/reviews/?locationId=${encodeURIComponent(c.locationId)}&limit=${limit}`,
+      'GET',
+      c.token,
+    );
+    if (res.status !== 200) {
+      console.warn(`[ghl] getGoogleReviews returned HTTP ${res.status}: ${JSON.stringify(res.body).slice(0, 300)}`);
+      return [];
+    }
+    const all = Array.isArray(res.body?.reviews) ? res.body.reviews : [];
+    return all
+      .filter((r: any) => {
+        const src = (r.source || '').toLowerCase();
+        return src === 'google' || src === 'reviews_campaign' || !src;
+      })
+      .slice(0, limit)
+      .map((r: any) => {
+        const rating = Number(r.rating ?? r.starRating);
+        return {
+          id: r.id || null,
+          reviewer: r.name || 'Anonymous',
+          comment: r.comment || null,
+          starValue: Number.isFinite(rating) ? rating : null,
+          createTime: r.createdAt || r.updatedAt || null,
+          ownerReply: r.ownerReply || null,
+        };
+      });
+  } catch (err) {
+    console.error('[ghl] getGoogleReviews failed:', err instanceof Error ? (err.stack || err.message) : err);
+    return [];
+  }
+}
+
 /**
  * Fetch pipelines + stages for the location. Used by the webhook to map
  * stage ids → names so it can react to "Job Won" / "Site Visit Booked".

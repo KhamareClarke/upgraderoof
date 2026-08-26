@@ -1,10 +1,10 @@
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 
 const faqs = [
   {
     question: 'How much does a new roof cost in Cheshire?',
-    answer: "Every roof is different, so costs vary depending on size, materials, and the scope of work involved. We provide free, no-obligation quotes with transparent, itemised pricing — no hidden costs, no surprises."
+    answer: "Every roof is different, so costs vary depending on size, materials, and the scope of work involved. We provide free, no-obligation quotes with transparent, itemised pricing and no hidden costs or surprises."
   },
   {
     question: 'How long does a roof replacement take?',
@@ -12,11 +12,11 @@ const faqs = [
   },
   {
     question: 'What roofing services do you offer?',
-    answer: "We provide a complete range of roofing services — new roofs, re-roofing and roof repairs, traditional tile and slate roofing, modern flat roofing (EPDM rubber and GRP fibreglass), chimney repairs, guttering and fascias, skylights, cladding, and 24/7 emergency roof repairs. Whatever your property needs across Cheshire, our team handles it from first survey to final sign-off, backed by a 10-year guarantee. Upgrade Roofs is CORC-certified and holds £10 million public liability insurance."
+    answer: "We provide a complete range of roofing services, from new roofs and re-roofing to traditional tile and slate, modern flat roofing (EPDM rubber and GRP fibreglass), chimney repairs, guttering and fascias, skylights, cladding, and 24/7 emergency roof repairs. Whatever your property needs across Cheshire, our team handles it from first survey to final sign-off, backed by a 10-year guarantee. Upgrade Roofs is CORC-certified and holds £10 million public liability insurance."
   },
   {
     question: 'Where are you based and what areas do you cover?',
-    answer: "We're based at 20 Crewe Road, Sandbach CW11 4NE and cover the whole of Cheshire — including Crewe, Congleton, Middlewich, Nantwich, Alsager, and Holmes Chapel — plus surrounding towns and villages. Free written quotes are always available; call 01270 897 606 or use the site to request yours."
+    answer: "We're based at 20 Crewe Road, Sandbach CW11 4NE and cover the whole of Cheshire, including Crewe, Congleton, Middlewich, Nantwich, Alsager, and Holmes Chapel plus surrounding towns and villages. Free written quotes are always available; call 01270 897 606 or use the site to request yours."
   },
   {
     question: 'Do you offer emergency roofing services?',
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     question: 'What areas of Cheshire do you cover?',
-    answer: "We're based in Sandbach and cover the whole of south and mid-Cheshire — including Crewe, Congleton, Middlewich, Nantwich, Alsager, and Holmes Chapel — plus the surrounding towns and villages throughout Cheshire. Give us a call if you're unsure whether we cover your location and our team will confirm right away."
+    answer: "We're based in Sandbach and cover the whole of south and mid-Cheshire, including Crewe, Congleton, Middlewich, Nantwich, Alsager, and Holmes Chapel plus the surrounding towns and villages throughout Cheshire. Give us a call if you're unsure whether we cover your location and our team will confirm right away."
   },
   {
     question: 'What warranty do you offer on roofing work?',
@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     question: 'Can you match existing tiles for repairs?',
-    answer: "Yes — tile and slate matching is part of the service. We'll do our best to source materials that blend with your existing roof so repairs are as seamless as possible."
+    answer: "Yes, tile and slate matching is part of the service. We'll do our best to source materials that blend with your existing roof so repairs are as seamless as possible."
   },
 ];
 
@@ -60,15 +60,16 @@ export function FAQ() {
       <div className="container-custom">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-8 sm:mb-10 md:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs sm:text-sm font-medium">
-              <HelpCircle className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>Frequently Asked Questions</span>
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+              <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Frequently Asked Questions</span>
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3 sm:mb-4 px-2">
               Got Questions? We've Got Answers.
             </h2>
             <p className="text-sm sm:text-base md:text-lg text-gray-600 px-4">
-              Can't find what you're looking for? Contact us directly — we're always happy to help.
+              Can't find what you're looking for? Contact us directly and we'll be happy to help.
             </p>
           </div>
 

@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { supabase, type ContactMessage } from '@/lib/supabase';
 import { trackContactForm, getGclid } from '@/lib/tracking';
 import { Loader as Loader2, CircleCheck as CheckCircle2, CircleAlert as AlertCircle } from 'lucide-react';
@@ -92,9 +92,6 @@ export function ContactForm() {
     <Card className="w-full">
       <CardHeader>
         <CardTitle className="text-xl sm:text-2xl">Send Us a Message</CardTitle>
-        <CardDescription className="text-sm sm:text-base">
-          Fill out the form below and we'll get back to you within 24 hours.
-        </CardDescription>
       </CardHeader>
       <CardContent className="px-4 sm:px-6">
                 {success ? (

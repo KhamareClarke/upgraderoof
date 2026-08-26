@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardDescription, CardTitle } from '@/components/ui/card';
 // import { supabase, type ContactMessage } from '@/lib/supabase';
 
 type ContactMessage = {
@@ -20,11 +20,12 @@ import {
   Loader2, 
   CheckCircle2, 
   AlertCircle, 
-  Phone, 
-  Mail, 
-  MapPin, 
+  Phone,
+  Mail,
+  MapPin,
   Clock,
-  MessageCircle 
+  MessageCircle,
+  BadgeCheck
 } from 'lucide-react';
 
 export function EnhancedContactSection() {
@@ -156,16 +157,15 @@ export function EnhancedContactSection() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Contact Form */}
-          <Card className="w-full shadow-xl border-0 hover-lift">
-            <CardHeader className="pb-6">
-              <CardTitle className="text-2xl text-brand-navy">Send Us a Message</CardTitle>
-              <CardDescription className="text-base">
+        {/* Single Contact Us card */}
+        <Card className="w-full max-w-5xl mx-auto shadow-xl border-0 hover-lift">
+          <div className="grid lg:grid-cols-3">
+            {/* Contact Form (2 of 3 columns) */}
+            <div className="lg:col-span-2 p-6 sm:p-8">
+              <CardTitle className="text-2xl text-brand-navy mb-2">Send Us a Message</CardTitle>
+              <CardDescription className="text-base mb-6">
                 Fill out the form below and we'll get back to you within 24 hours.
               </CardDescription>
-            </CardHeader>
-            <CardContent>
               {success ? (
                 <div className="py-8 text-center">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -313,109 +313,88 @@ export function EnhancedContactSection() {
                   </Button>
                 </form>
               )}
-            </CardContent>
-          </Card>
-
-          {/* Contact Information & Map */}
-          <div className="space-y-8">
-            {/* Contact Cards */}
-            <div className="grid gap-6">
-              <Card className="hover-lift border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-brand-orange/10 flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-6 h-6 text-brand-orange" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-brand-navy mb-2">Call Us</h3>
-                      <p className="text-gray-600 mb-2">Get immediate assistance</p>
-                      <a 
-                        href="tel:01270897606" 
-                        className="text-brand-orange font-semibold hover:underline"
-                        onClick={() => trackPhoneClick('contact_sidebar')}
-                      >
-                        01270 897 606
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover-lift border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-green-500/10 flex items-center justify-center flex-shrink-0">
-                      <MessageCircle className="w-6 h-6 text-green-500" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-brand-navy mb-2">WhatsApp</h3>
-                      <p className="text-gray-600 mb-2">Quick messaging</p>
-                      <a 
-                        href="https://wa.me/447379440583" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-green-500 font-semibold hover:underline"
-                        onClick={() => trackWhatsAppClick('contact_sidebar')}
-                      >
-                        Message Us
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover-lift border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-500/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="w-6 h-6 text-blue-500" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-brand-navy mb-2">Email</h3>
-                      <p className="text-gray-600 mb-2">Send us an email</p>
-                      <a
-                        href="mailto:upgraderoofs@yahoo.com"
-                        className="text-blue-500 font-semibold hover:underline"
-                        onClick={() => trackEmailClick('contact_section_sidebar')}
-                      >
-                        upgraderoofs@yahoo.com
-                      </a>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="hover-lift border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-purple-500/10 flex items-center justify-center flex-shrink-0">
-                      <Clock className="w-6 h-6 text-purple-500" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-brand-navy mb-2">Business Hours</h3>
-                      <div className="text-gray-600 space-y-1">
-                        <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
-                        <p>Saturday: 9:00 AM - 4:00 PM</p>
-                        <p>Sunday: Emergency only</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
 
-            {/* Service Area Map */}
-            <Card className="border-0 shadow-lg">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-brand-navy">
+            {/* Contact Information, Hours & Map */}
+            <div className="lg:col-span-1 border-t lg:border-t-0 lg:border-l border-gray-200 bg-brand-navy p-6 sm:p-8">
+              <CardTitle className="text-2xl text-white mb-6">Contact Information</CardTitle>
+              <div className="space-y-6">
+              {/* Contact methods */}
+              <div className="space-y-5">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-brand-orange/20 flex items-center justify-center flex-shrink-0">
+                    <Phone className="w-6 h-6 text-brand-orange" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white">Call Us</h3>
+                    <p className="text-gray-300 text-sm mb-1">Get immediate assistance</p>
+                    <a
+                      href="tel:01270897606"
+                      className="text-brand-orange font-semibold hover:underline"
+                      onClick={() => trackPhoneClick('contact_sidebar')}
+                    >
+                      01270 897 606
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                    <MessageCircle className="w-6 h-6 text-green-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white">WhatsApp</h3>
+                    <p className="text-gray-300 text-sm mb-1">Quick messaging</p>
+                    <a
+                      href="https://wa.me/447379440583"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-green-400 font-semibold hover:underline"
+                      onClick={() => trackWhatsAppClick('contact_sidebar')}
+                    >
+                      Message Us
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                    <Mail className="w-6 h-6 text-blue-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white">Email</h3>
+                    <p className="text-gray-300 text-sm mb-1">Send us an email</p>
+                    <a
+                      href="mailto:upgraderoofs@yahoo.com"
+                      className="text-blue-400 font-semibold hover:underline"
+                      onClick={() => trackEmailClick('contact_section_sidebar')}
+                    >
+                      upgraderoofs@yahoo.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                    <Clock className="w-6 h-6 text-purple-400" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white">Business Hours</h3>
+                    <div className="text-gray-300 text-sm space-y-1">
+                      <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
+                      <p>Saturday: 9:00 AM - 4:00 PM</p>
+                      <p>Sunday: Emergency only</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Service Area */}
+              <div className="pt-5 border-t border-white/15">
+                <h3 className="flex items-center gap-2 font-semibold text-white mb-3">
                   <MapPin className="w-5 h-5 text-brand-orange" />
                   Service Area
-                </CardTitle>
-                <CardDescription>
-                  We serve Cheshire and surrounding areas
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
+                </h3>
                 <div className="aspect-video rounded-lg overflow-hidden">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d76832.89194948935!2d-2.4738!3d53.1365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487a4c5b7c4b0b0b%3A0x0!2sCheshire%2C%20UK!5e0!3m2!1sen!2suk!4v1699000000000!5m2!1sen!2suk"
@@ -428,14 +407,46 @@ export function EnhancedContactSection() {
                     title="Upgrade Roofs Service Area - Cheshire"
                   />
                 </div>
-                <div className="mt-4 text-sm text-gray-600">
-                  <p className="font-medium text-brand-navy mb-2">Areas we cover:</p>
+                <div className="mt-4 text-sm text-gray-300">
+                  <p className="font-medium text-white mb-2">Areas we cover:</p>
                   <p>Sandbach · Crewe · Middlewich · Congleton · Alsager · Nantwich · Holmes Chapel · and surrounding areas throughout Cheshire and the North West.</p>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+
+              {/* Accreditations & Trust Badges */}
+              <div className="pt-5 border-t border-white/15">
+                <h3 className="flex items-center gap-2 font-semibold text-white mb-4">
+                  <BadgeCheck className="w-5 h-5 text-brand-orange" />
+                  Accredited & Trusted
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-center justify-center rounded-lg bg-white p-3">
+                    <img
+                      src="/images/corc_logo-1024x549.webp"
+                      alt="CORC certified roofing contractor"
+                      className="h-12 w-auto object-contain"
+                    />
+                  </div>
+                  <div className="flex items-center justify-center rounded-lg bg-white p-3">
+                    <img
+                      src="/images/Google-Review-Emblem-500x281.png"
+                      alt="Google reviews rating"
+                      className="h-12 w-auto object-contain"
+                    />
+                  </div>
+                  <div className="flex items-center justify-center rounded-lg bg-white p-3">
+                    <img
+                      src="/images/badge-light@2x.png"
+                      alt="MyApproved verified member"
+                      className="h-12 w-auto object-contain"
+                    />
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
           </div>
-        </div>
+        </Card>
       </div>
     </section>
   );

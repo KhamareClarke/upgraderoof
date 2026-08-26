@@ -5,6 +5,7 @@ import { WhyChooseUs } from '@/components/WhyChooseUs';
 import { CTABanner } from '@/components/CTABanner';
 import { GalleryBlock, FAQBlock, ContactBlock } from '@/components/HomepageSections';
 import { GoogleGbpReviews } from '@/components/GoogleGbpReviews';
+import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { MapPin, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -53,6 +54,11 @@ export default function Home() {
         <div className="container-custom">
           <div className="py-10 sm:py-12">
             <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-3 mb-4">
+                <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Accredited &amp; Insured</span>
+                <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+              </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
                 Trusted &amp; Approved
               </h2>
@@ -63,8 +69,8 @@ export default function Home() {
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 items-center">
               {[
                 { src: '/images/corc_logo-1024x549.webp', alt: 'CORC certified member logo', width: 1024, height: 549, label: 'CORC Certified', meta: 'Approved member', priority: true },
-                { src: '/images/badge-dark.svg', alt: 'MyApproved verified member badge', width: 664, height: 248, label: '£10M Insured', meta: 'Public liability cover', priority: false },
-                { src: '/images/badge-dark.svg', alt: 'Insurance Backed Guarantee badge', width: 664, height: 248, label: 'IBG Guarantee', meta: 'Insurance-backed work', priority: false },
+                { src: '/images/badge-light@2x.png', alt: 'MyApproved verified member badge', width: 760, height: 284, label: '£10M Insured', meta: 'Public liability cover', priority: false },
+                { src: '/images/badge-light@2x.png', alt: 'Insurance Backed Guarantee badge', width: 760, height: 284, label: 'IBG Guarantee', meta: 'Insurance-backed work', priority: false },
                 { src: '/images/Google-Review-Emblem-500x281.png', alt: 'Google reviews emblem with 5 star rating', width: 500, height: 281, label: '5-Star Rated', meta: 'Google · MyApproved verified', priority: false },
               ].map((item, index) => (
                 <div key={index} className="group flex flex-col items-center text-center">
@@ -83,6 +89,15 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <div className="text-center mt-10">
+              <TrackedPhoneLink
+                href="tel:01270897606"
+                placement="trust_badges"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base"
+              >
+                Get a Free Quote
+              </TrackedPhoneLink>
+            </div>
           </div>
         </div>
       </section>
@@ -98,15 +113,25 @@ export default function Home() {
       <section id="reviews" className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+              <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Customer Reviews</span>
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+            </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-2">
               Real Reviews from Real Customers
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Rated 5★ on Google by homeowners across Cheshire — here&apos;s what they say about our work
+              Rated 5★ on Google by homeowners across Cheshire&apos;s towns and villages
             </p>
           </div>
           <div className="max-w-5xl mx-auto">
             <GoogleGbpReviews />
+          </div>
+          <div className="text-center mt-10">
+            <Link href="/#contact" className="inline-flex items-center gap-2 text-brand-orange font-semibold hover:underline">
+              Leave us a review <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </section>
@@ -122,6 +147,11 @@ export default function Home() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+              <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Where We Work</span>
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+            </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-3">
               Roofing Services Across <span className="text-brand-orange">Cheshire</span>
             </h2>
