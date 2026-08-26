@@ -129,3 +129,37 @@ Run `npm run dev`. Every tracking call logs to the browser console with an orang
 - [ ] Click any WhatsApp link → `whatsapp_click` fires with correct `placement`
 - [ ] Check Network tab — no duplicate event requests
 - [ ] Check console in dev mode — `[tracking]` logs appear with orange prefix
+
+---
+
+## GoHighLevel (GHL) Client Notification Workflow (Account 8479028400)
+
+### Purpose
+
+Additive, **non-disruptive** instant email alert to `upgraderoofs@yahoo.com` whenever a new contact is created in the Upgrade Roofs GHL account. Complements (does not replace) the existing nodemailer email path in `lib/mail.ts`, which already delivers lead details to the same mailbox via `EMAIL_TO` (default `upgraderoofs@yahoo.com`).
+
+### Workflow Configuration Steps
+
+1. In GHL (account **8479028400**), navigate to **Automations → Workflows → Create Workflow**, and choose **"Start from Scratch"**.
+2. Set the trigger to **"Contact Created"** (the built-in trigger that fires whenever a new contact is upserted — this catches all three website forms: quote, contact, and special offer).
+3. Add an **"Email"** step (or "Internal Notification") with recipient `upgraderoofs@yahoo.com`.
+4. Compose the body using GHL contact merge tags:
+   - **Name:** `{{contact.name}}`
+   - **Phone:** `{{contact.phone}}`
+   - **Email:** `{{contact.email}}`
+   - **Service Requested (per-form fallback):** `{{contact.service_type}}` → `{{contact.service_needed}}` → `{{contact.subject}}`
+   - **Postcode:** `{{contact.postcode}}` (quote form only)
+   - **Source:** `{{contact.source}}` or the `{{contact.tags}}` (reveals `website-lead`, `cheshire-roof-quote`, `contact-form`, `special-offer`)
+5. **Service Requested fallback rationale:** each form writes a different service field into GHL, and the contact form's `subject` is delivered via notes only — so the notification should display the first non-empty of `service_type` (quote form) → `service_needed` (special offer form) → `subject` (contact form). Use GHL's conditional/custom-value merge or a small "If/Else" branch to render whichever field is populated.
+6. The contact's **gclid** (first-party click id) is available as `{{contact.gclid}}` (written natively at upsert time by `lib/ghl.ts`) and as the readable custom-field copy — useful for a "Google Ads Lead" flag in the alert.
+7. Publish and enable the workflow. No code changes are required.
+
+### Non-Disruption Guarantee
+
+- **Runs asynchronously on a parallel branch after contact creation** — it never runs inline with, or before, the website form API routes (`send-quote`, `send-contact`, `send-special-offer`), so it cannot block or delay the lead capture.
+- **Preserves GCLIDs & Tracking** — the gclid is written to the contact *at upsert time* (in `lib/ghl.ts`) and read *at opportunity stage-shift time* (in `app/api/ghl-webhook/route.ts` via tolerant `pick()`). A "Contact Created" notification fires downstream of the upsert and before any stage shift, altering neither write nor read.
+- **Preserves API data syncs** — GHL contact/opportunity sync, `triggerSpeedToLead`, and Voice AI workflow enrollment are all independent of the notification step.
+- **Preserves offline conversions** — the Google Ads `UPLOAD_CLICKS` path in `app/api/ghl-webhook/route.ts` is keyed off opportunity stage changes, not contact creation; the notification does not touch it.
+- **No delay** — the notification is a parallel GHL-side action; the existing nodemailer email and all conversion events continue to fire on their own paths.
+
+> **Security note:** Keep `GHL_WEBHOOK_SECRET` set in **both** Vercel and the GHL workflow's "Send Webhook" step. If left empty, the webhook endpoint (`/api/ghl-webhook`) is an open auth/abuse hole.
