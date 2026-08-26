@@ -34,6 +34,10 @@ const TARGET_LOCATION_ID = '17098906572808840';
 
 const REVIEW_COUNT = 5;
 
+/** The exact service account that must be granted Manager on the profile. */
+const EXPECTED_SERVICE_ACCOUNT =
+  'roofing-audit-bot-upgraderoofs@upgraderoofs-api.iam.gserviceaccount.com';
+
 const STAR_VALUE: Record<string, number> = {
   ONE: 1,
   TWO: 2,
@@ -50,16 +54,45 @@ function resolveKeyFile(): string {
 }
 
 async function getGbpClient(): Promise<{ accessToken: string }> {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: resolveKeyFile(),
-    scopes: GBP_SCOPES,
-  });
+  const keyFile = resolveKeyFile();
+  let auth;
+  try {
+    // Load the key as a credential so we can surface the client email early.
+    const keyJson = JSON.parse(require('fs').readFileSync(keyFile, 'utf8'));
+    if (keyJson.client_email && keyJson.client_email !== EXPECTED_SERVICE_ACCOUNT) {
+      console.warn(
+        `[gbp] WARNING: key file "${keyFile}" is for "${keyJson.client_email}", ` +
+          `expected "${EXPECTED_SERVICE_ACCOUNT}". Reviews will not resolve unless the ` +
+          `service account is renamed to match the authorized one.`
+      );
+    }
+    auth = new google.auth.GoogleAuth({ keyFile, scopes: GBP_SCOPES });
+  } catch (cause: any) {
+    // Key file missing/unreadable — surface as a clear, actionable error.
+    throw new Error(
+      `GBP service-account key file not found or invalid at "${keyFile}" (` +
+        `${cause?.message ?? cause}). Set GOOGLE_APPLICATION_CREDENTIALS to a valid path.`
+    );
+  }
+
   const client = await auth.getClient();
   const { token } = await client.getAccessToken();
   if (!token) {
     throw new Error('GBP service-account access token exchange failed');
   }
   return { accessToken: token };
+}
+
+/**
+ * Return the resolved account id from a location resource name of the form
+ * `accounts/{acctId}/locations/{locId}`. Because the service account has only
+ * *one* known accessible account, a mismatched leading id cannot happen in
+ * practice — but guarding here keeps the legacy personal-account pin from
+ * silently corrupting the path.
+ */
+function pinAccountId(candidate: string): string | null {
+  const m = candidate.match(/^(?:accounts\/)?(\d+)(?:\/locations\/|$)/);
+  return m ? m[1] : null;
 }
 
 /** Raw GET helper enforcing JSON parse + throwing on non-2xx status. */
@@ -104,17 +137,44 @@ function jsonGet(
   });
 }
 
-/** Resolve accounts/{acctId}/locations/{locId} for the target location. */
+/**
+ * List `accountName`'s locations and find the one matching TARGET_LOCATION_ID.
+ * Returns the location resource name, or null if not present.
+ */
+async function resolveLocation(
+  accessToken: string,
+  accountName: string,
+): Promise<string | null> {
+  const locRes: any = await jsonGet(
+    'mybusinessbusinessinformation.googleapis.com',
+    `/v1/${accountName}/locations?readMask=name&pageSize=100`,
+    accessToken,
+  );
+  const locations: any[] = locRes.locations || [];
+  for (const loc of locations) {
+    if (loc.name && loc.name.includes(`locations/${TARGET_LOCATION_ID}`)) {
+      return loc.name;
+    }
+  }
+  return null;
+}
+
+/** Resolve the live accounts/{acctId}/locations/{locId} for the target location. */
 async function resolveLocationName(accessToken: string): Promise<string> {
-  // Fast path: caller pinned the account id.
-  const pinned = process.env.GBP_ACCOUNT_ID?.trim();
-  if (pinned) {
-    const acct = pinned.replace(/^accounts\//, '');
-    return `accounts/${acct}/locations/${TARGET_LOCATION_ID}`;
+  const pinnedId = pinAccountId(process.env.GBP_ACCOUNT_ID?.trim() ?? '');
+
+  // Fast path: pinned account id, direct location lookup.
+  if (pinnedId) {
+    const name = await resolveLocation(accessToken, `accounts/${pinnedId}`);
+    if (name) return name;
+    console.warn(
+      `[gbp] GBP_ACCOUNT_ID=${pinnedId} has no matching location ` +
+        `locations/${TARGET_LOCATION_ID}; falling back to account discovery.`
+    );
   }
 
-  // Otherwise: list accounts, then list each account's locations and match the
-  // target location id. Most accounts expose a single location.
+  // Otherwise: list all accessible accounts, then each account's locations and
+  // match the target location id. Most accounts expose a single location.
   const acctRes: any = await jsonGet(
     'mybusinessaccountmanagement.googleapis.com',
     '/v1/accounts',
@@ -124,21 +184,19 @@ async function resolveLocationName(accessToken: string): Promise<string> {
 
   for (const acct of accounts) {
     const accountName: string = acct.name; // accounts/{id}
-    const locRes: any = await jsonGet(
-      'mybusinessbusinessinformation.googleapis.com',
-      `/v1/${accountName}/locations?readMask=name&pageSize=100`,
-      accessToken,
-    );
-    const locations: any[] = locRes.locations || [];
-    for (const loc of locations) {
-      if (loc.name && loc.name.includes(`locations/${TARGET_LOCATION_ID}`)) {
-        return loc.name;
-      }
-    }
+    const found = await resolveLocation(accessToken, accountName);
+    if (found) return found;
   }
 
+  // Author the most useful diagnosis: account types + verification state tell us
+  // exactly why the Manager grant is still missing.
+  const summary = accounts
+    .map((a) => `${a.name || '?'}(${a.type || 'UNKNOWN'}/${a.verificationState || '?'})`)
+    .join(', ') || '(no accounts visible)';
   throw new Error(
-    `Target location locations/${TARGET_LOCATION_ID} not found in accessible accounts`
+    `Target location locations/${TARGET_LOCATION_ID} not found in accessible accounts ` +
+      `[${summary}]. The service account must be added as a Manager on the verified ` +
+      `"Upgrade Roofs" profile in business.google.com.`
   );
 }
 
@@ -158,12 +216,25 @@ export async function GET(_request: NextRequest) {
     );
 
     // 2. Reviews + rating (legacy My Business v4, the only endpoint exposing
-    //    the average rating + review count).
-    const reviewsRes: any = await jsonGet(
-      'mybusiness.googleapis.com',
-      `/v4/accounts/${accountId}/locations/${locationId}/reviews?pageSize=${REVIEW_COUNT}&orderBy=updateTime%20desc`,
-      accessToken,
-    );
+    //    the average rating + review count). This is the endpoint most likely
+    //    to 404 while the Manager grant is still propagating — degrade to an
+    //    empty review set rather than failing the whole request, so the
+    //    profile/rating fields are still usable and the client falls back
+    //    gracefully.
+    let reviewsRes: any = {};
+    try {
+      reviewsRes = await jsonGet(
+        'mybusiness.googleapis.com',
+        `/v4/accounts/${accountId}/locations/${locationId}/reviews?pageSize=${REVIEW_COUNT}&orderBy=updateTime%20desc`,
+        accessToken,
+      );
+    } catch (reviewsErr: any) {
+      console.warn(
+        `[gbp] reviews fetch failed (status ${reviewsErr?.status ?? 'n/a'}): ` +
+          `${reviewsErr?.message ?? reviewsErr} — continuing without reviews.`
+      );
+      reviewsRes = {};
+    }
 
     const metadata = detail.metadata || {};
     const profile = {
@@ -206,7 +277,22 @@ export async function GET(_request: NextRequest) {
   } catch (error: any) {
     const message = error?.message || String(error);
     const status = error?.status && Number(error.status) ? Number(error.status) : 500;
-    console.error('[gbp] error:', message);
+
+    // Classify for a clean, greppable console trail. The two real-world failure
+    // classes are (a) auth/permission — Manager grant, scopes — and (b) location
+    // resolution — the account can't see the verified profile yet.
+    const lower = message.toLowerCase();
+    const category = /permission|forbidden|unauthorized|scope|access token|credential/i.test(lower)
+      ? 'permissions'
+      : /not found|404|no accessible accounts|not found in accessible/i.test(lower)
+        ? 'location-resolution'
+        : 'unknown';
+
+    console.error(`[gbp] error (${category}):`, message);
+    if (status >= 400 && status < 500 && error?.status) {
+      console.error(`[gbp] HTTP status ${error.status}`);
+    }
+
     return NextResponse.json({ success: false, error: message }, { status });
   }
 }

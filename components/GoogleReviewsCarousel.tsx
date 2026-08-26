@@ -85,9 +85,13 @@ export function GoogleReviewsCarousel() {
     <section className="section-padding bg-gradient-to-br from-orange-50 via-amber-50/30 to-white">
       <div className="container-custom">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 rounded-full bg-brand-orange/10 text-brand-orange text-sm font-medium">
-            <Star className="w-4 h-4 fill-current" />
-            <span>What Our Customers Say</span>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="h-px w-12 bg-gray-300" aria-hidden="true" />
+            <span className="flex items-center gap-2 text-brand-orange font-semibold text-sm uppercase tracking-[0.2em]">
+              <Star className="w-4 h-4 fill-current" />
+              <span>What Our Customers Say</span>
+            </span>
+            <span className="h-px w-12 bg-gray-300" aria-hidden="true" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
             Don't Just Take Our Word For It
@@ -98,7 +102,8 @@ export function GoogleReviewsCarousel() {
         </div>
 
         <div className="relative max-w-4xl mx-auto">
-          <div className="overflow-hidden rounded-2xl bg-white shadow-xl">
+          <div className="relative overflow-hidden bg-white border border-gray-300 shadow-sm">
+            <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-brand-orange to-brand-orange/0" aria-hidden="true" />
             <div className="relative h-80 md:h-64">
               {reviews.map((review, index) => (
                 <div
@@ -125,7 +130,7 @@ export function GoogleReviewsCarousel() {
                     </p>
                     
                     <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-brand-orange rounded-full flex items-center justify-center text-white font-bold">
+                      <div className="w-12 h-12 bg-brand-orange flex items-center justify-center text-white font-bold">
                         {review.avatar}
                       </div>
                       <div>
@@ -143,7 +148,7 @@ export function GoogleReviewsCarousel() {
             variant="outline"
             size="sm"
             onClick={prevReview}
-            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm border-gray-200 hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg"
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm border border-gray-200 hover:bg-white transition-all duration-300 shadow-md"
           >
             <ChevronLeft className="w-4 h-4" />
           </Button>
@@ -152,7 +157,7 @@ export function GoogleReviewsCarousel() {
             variant="outline"
             size="sm"
             onClick={nextReview}
-            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm border-gray-200 hover:bg-white hover:scale-110 transition-all duration-300 shadow-lg"
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 backdrop-blur-sm border border-gray-200 hover:bg-white transition-all duration-300 shadow-md"
           >
             <ChevronRight className="w-4 h-4" />
           </Button>
@@ -162,9 +167,9 @@ export function GoogleReviewsCarousel() {
               <button
                 key={index}
                 onClick={() => goToReview(index)}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentReview 
-                    ? 'bg-brand-orange scale-125' 
+                className={`w-8 h-[3px] transition-all duration-300 ${
+                  index === currentReview
+                    ? 'bg-brand-orange'
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />

@@ -5,9 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import { supabase, type QuoteRequest } from '@/lib/supabase';
 import { trackQuoteRequest, trackQuoteFormOpen, getGclid } from '@/lib/tracking';
 import { Loader as Loader2, CircleCheck as CheckCircle2, CircleAlert as AlertCircle, Star } from 'lucide-react';
+import { TurnstileWidget } from '@/components/TurnstileWidget';
 
 export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -16,13 +19,19 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState<QuoteRequest>({
     name: '',
+    email: '',
     phone: '',
     postcode: '',
+    service_type: '',
+    message: '',
+    roof_type: '',
   });
   const [honeypot, setHoneypot] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const resetForm = () => {
-    setFormData({ name: '', phone: '', postcode: '' });
+    setFormData({ name: '', email: '', phone: '', postcode: '', service_type: '', message: '', roof_type: '' });
+    setTurnstileToken('');
     setLoading(false);
     setError(null);
   };
@@ -43,7 +52,7 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
       const response = await fetch('/api/send-quote', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, gclid: getGclid(), website: honeypot }),
+        body: JSON.stringify({ ...formData, gclid: getGclid(), turnstileToken, website: honeypot }),
       });
 
       const result = await response.json();
@@ -58,6 +67,7 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
       }
 
       trackQuoteRequest({
+        service_type: formData.service_type,
         postcode: formData.postcode,
       });
 
@@ -148,6 +158,63 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
                   className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
                 />
               </div>
+              <div>
+                <Label htmlFor="email" className="text-brand-navy font-semibold text-sm">Email Address</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email || ''}
+                  onChange={(e) => handleChange('email', e.target.value)}
+                  placeholder="john@example.com"
+                  autoComplete="email"
+                  className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="roof_type" className="text-brand-navy font-semibold text-sm">Roof Type</Label>
+                  <Select value={formData.roof_type} onValueChange={(value) => handleChange('roof_type', value)}>
+                    <SelectTrigger className="mt-2 h-12 text-base border-2 rounded-xl">
+                      <SelectValue placeholder="Select type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="tile">Tile Roof</SelectItem>
+                      <SelectItem value="slate">Slate Roof</SelectItem>
+                      <SelectItem value="flat">Flat Roof</SelectItem>
+                      <SelectItem value="other">Other/Not Sure</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="service_type" className="text-brand-navy font-semibold text-sm">Service Needed</Label>
+                  <Select value={formData.service_type} onValueChange={(value) => handleChange('service_type', value)}>
+                    <SelectTrigger className="mt-2 h-12 text-base border-2 rounded-xl">
+                      <SelectValue placeholder="What you need" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="leak-repair">Leak Repair</SelectItem>
+                      <SelectItem value="new-roof">New Roof</SelectItem>
+                      <SelectItem value="flat-roof">Flat Roof</SelectItem>
+                      <SelectItem value="tile-replacement">Tile Replacement</SelectItem>
+                      <SelectItem value="guttering">Guttering/Fascias</SelectItem>
+                      <SelectItem value="general">General Inspection</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div>
+                <Label htmlFor="message" className="text-brand-navy font-semibold text-sm">Your Project</Label>
+                <Textarea
+                  id="message"
+                  value={formData.message || ''}
+                  onChange={(e) => handleChange('message', e.target.value)}
+                  placeholder="Tell us about your roofing project, including property type, approximate size, and any specific requirements..."
+                  rows={4}
+                  className="mt-2 text-base border-2 focus:border-brand-orange rounded-xl resize-none"
+                />
+              </div>
 
               {/* Honeypot field — hidden from humans, visible to bots */}
               <div className="hidden" aria-hidden="true">
@@ -161,6 +228,8 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
                   autoComplete="off"
                 />
               </div>
+
+              <TurnstileWidget onToken={setTurnstileToken} />
 
               <Button
                 type="submit"

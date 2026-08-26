@@ -5,10 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { supabase, type ContactMessage } from '@/lib/supabase';
 import { trackContactForm, getGclid } from '@/lib/tracking';
 import { Loader as Loader2, CircleCheck as CheckCircle2, CircleAlert as AlertCircle } from 'lucide-react';
+import { TurnstileWidget } from '@/components/TurnstileWidget';
 
 export function ContactForm() {
   const [loading, setLoading] = useState(false);
@@ -20,8 +22,11 @@ export function ContactForm() {
     phone: '',
     subject: '',
     message: '',
+    roof_type: '',
+    service_needed: '',
   });
   const [honeypot, setHoneypot] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,7 +40,7 @@ export function ContactForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, gclid: getGclid(), website: honeypot }),
+        body: JSON.stringify({ ...formData, gclid: getGclid(), turnstileToken, website: honeypot }),
       });
 
       const result = await response.json();
@@ -63,7 +68,10 @@ export function ContactForm() {
         phone: '',
         subject: '',
         message: '',
+        roof_type: '',
+        service_needed: '',
       });
+      setTurnstileToken('');
 
       setTimeout(() => {
         setSuccess(false);
@@ -150,6 +158,39 @@ export function ContactForm() {
                       </div>
                     </div>
 
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="contact-roof-type" className="text-sm sm:text-base">Roof Type</Label>
+                        <Select value={formData.roof_type} onValueChange={(value) => handleChange('roof_type', value)}>
+                          <SelectTrigger className="text-sm sm:text-base">
+                            <SelectValue placeholder="Select type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="tile">Tile Roof</SelectItem>
+                            <SelectItem value="slate">Slate Roof</SelectItem>
+                            <SelectItem value="flat">Flat Roof</SelectItem>
+                            <SelectItem value="other">Other/Not Sure</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="contact-service-needed" className="text-sm sm:text-base">Service Needed</Label>
+                        <Select value={formData.service_needed} onValueChange={(value) => handleChange('service_needed', value)}>
+                          <SelectTrigger className="text-sm sm:text-base">
+                            <SelectValue placeholder="What you need" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="leak-repair">Leak Repair</SelectItem>
+                            <SelectItem value="new-roof">New Roof</SelectItem>
+                            <SelectItem value="flat-roof">Flat Roof</SelectItem>
+                            <SelectItem value="tile-replacement">Tile Replacement</SelectItem>
+                            <SelectItem value="guttering">Guttering/Fascias</SelectItem>
+                            <SelectItem value="general">General Inspection</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
                     <div className="space-y-2">
                       <Label htmlFor="contact-message" className="text-sm sm:text-base">Your Message *</Label>
                       <Textarea
@@ -175,6 +216,8 @@ export function ContactForm() {
                         autoComplete="off"
                       />
                     </div>
+
+                    <TurnstileWidget onToken={setTurnstileToken} />
 
                     {error && (
                       <div className="flex items-start space-x-2 p-3 bg-red-50 border border-red-200 rounded-md">

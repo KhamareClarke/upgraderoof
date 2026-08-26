@@ -1,4 +1,4 @@
-import { MapPin, Phone, Shield, Award } from 'lucide-react';
+import { MapPin, Phone, Shield, Award, ChevronDown } from 'lucide-react';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 
 interface GeoEntityCitationProps {
@@ -26,25 +26,36 @@ export function GeoEntityCitation({ town, postcode }: GeoEntityCitationProps) {
     <section
       id="entity-citation"
       aria-label="About Upgrade Roofs"
-      className="bg-white border-b border-gray-100 py-4"
+      className="mb-8 sm:mb-10"
     >
-      <div className="container-custom">
-        <p className="text-sm text-gray-600 leading-relaxed max-w-4xl mx-auto text-center">
-          <strong className="text-brand-navy">Upgrade Roofs</strong> is a CORC-certified
-          roofing contractor serving {area}. Based at 20 Crewe Road, Sandbach CW11 4NE, the
-          company holds £10 million public liability insurance and provides a 10-year
-          workmanship guarantee on all roofing work. Services include roof repairs, new
-          roofs, re-roofing, flat roofing (EPDM &amp; GRP), chimney repairs, guttering, and
-          24/7 emergency call-outs across {coverage}. Free written quotes — call{' '}
-          <TrackedPhoneLink href="tel:01270897606" placement="entity_citation" className="text-brand-orange font-semibold hover:underline">01270 897 606</TrackedPhoneLink>.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mt-3 text-xs text-gray-500">
-          <span className="inline-flex items-center gap-1"><Award className="w-3.5 h-3.5 text-brand-orange" /> CORC Certified</span>
-          <span className="inline-flex items-center gap-1"><Shield className="w-3.5 h-3.5 text-brand-orange" /> £10M Insured</span>
-          <span className="inline-flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-brand-orange" /> 20 Crewe Rd, Sandbach CW11 4NE</span>
-          <span className="inline-flex items-center gap-1"><Phone className="w-3.5 h-3.5 text-brand-orange" /> 01270 897 606</span>
+      <details
+        className="group bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+        open
+      >
+        <summary className="cursor-pointer list-none px-4 py-4 sm:px-5 sm:py-5 md:px-6 flex items-center justify-between gap-3 sm:gap-4">
+          <span className="font-semibold text-brand-navy text-sm sm:text-base md:text-lg text-left pr-2">
+            About Upgrade Roofs
+          </span>
+          <ChevronDown className="w-4 h-4 sm:w-5 sm:h-5 text-brand-orange flex-shrink-0 transition-transform duration-300 group-open:rotate-180" />
+        </summary>
+        <div className="px-4 pb-4 sm:px-5 sm:pb-5 md:px-6">
+          <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+            <strong className="text-brand-navy">Upgrade Roofs</strong> is a CORC-certified
+            roofing contractor serving {area}. Based at 20 Crewe Road, Sandbach CW11 4NE, the
+            company holds £10 million public liability insurance and provides a 10-year
+            workmanship guarantee on all roofing work. Services include roof repairs, new
+            roofs, re-roofing, flat roofing (EPDM &amp; GRP), chimney repairs, guttering, and
+            24/7 emergency call-outs across {coverage}. Free written quotes — call{' '}
+            <TrackedPhoneLink href="tel:01270897606" placement="entity_citation" className="text-brand-orange font-semibold hover:underline">01270 897 606</TrackedPhoneLink>.
+          </p>
+          <div className="flex flex-wrap gap-3 sm:gap-4 mt-3 text-xs text-gray-600">
+            <span className="inline-flex items-center gap-1.5"><Award className="w-3.5 h-3.5 text-brand-orange" /> CORC Certified</span>
+            <span className="inline-flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-brand-orange" /> £10M Insured</span>
+            <span className="inline-flex items-center gap-1.5"><MapPin className="w-3.5 h-3.5 text-brand-orange" /> 20 Crewe Rd, Sandbach CW11 4NE</span>
+            <span className="inline-flex items-center gap-1.5"><Phone className="w-3.5 h-3.5 text-brand-orange" /> 01270 897 606</span>
+          </div>
         </div>
-      </div>
+      </details>
     </section>
   );
 }

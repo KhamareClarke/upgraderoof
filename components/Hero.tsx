@@ -2,10 +2,9 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { Video, Shield, Award, Clock, ChevronLeft, ChevronRight, Phone } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Phone } from 'lucide-react';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import Link from 'next/link';
 import Image from 'next/image';
 
 const slides = [
@@ -89,8 +88,9 @@ export function Hero() {
                 fetchPriority={index === 0 ? 'high' : 'auto'}
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-slate-900/75" />
-              <div className="absolute inset-0 bg-gradient-to-b from-slate-900/60 via-slate-900/40 to-slate-900/70" />
+              <div className="absolute inset-0 bg-brand-navy/80" />
+              <div className="absolute inset-0 bg-gradient-to-b from-brand-navy/90 via-brand-navy-light/70 to-brand-navy/85" />
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/70 via-transparent to-brand-navy/60" />
             </div>
           </div>
         );
@@ -99,9 +99,10 @@ export function Hero() {
 
       <div className="container-custom relative z-10 pt-2 pb-8 sm:pt-4 sm:pb-16 md:pt-6 md:pb-20 lg:pt-8 lg:pb-24">
         <div className="max-w-5xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 mb-4 sm:mb-6 md:mb-8 rounded-full bg-white/15 sm:backdrop-blur-sm border border-white/20 text-white text-xs sm:text-sm font-medium tracking-wide fade-in-up">
-            <Award className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-brand-orange" />
-            <span className="whitespace-nowrap">Award-Winning Roofing Company 2024</span>
+          <div className="inline-flex items-center gap-3 mb-4 sm:mb-6 md:mb-8 fade-in-up">
+            <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+            <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Est. Sandbach, Cheshire</span>
+            <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
           </div>
 
           {/* STATIC H1 - CRITICAL FOR SEO */}
@@ -132,65 +133,28 @@ export function Hero() {
             ))}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 mb-8 sm:mb-10 md:mb-12 justify-center max-w-md sm:max-w-none mx-auto sm:mx-0">
+          <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mb-8 sm:mb-10 md:mb-12 justify-center max-w-md sm:max-w-none mx-auto sm:mx-0">
             <QuoteForm trigger={
               <Button
                 size="lg"
-                className="group relative bg-brand-orange hover:bg-brand-orange/95 text-white font-semibold px-8 sm:px-10 md:px-12 text-sm sm:text-base tracking-wide h-12 sm:h-14 md:h-16 overflow-hidden transition-all duration-500 hover:scale-[1.02] w-full sm:w-auto rounded-lg shadow-lg active:scale-95"
+                className="group relative bg-brand-orange hover:bg-brand-orange/95 text-white font-semibold px-8 sm:px-10 md:px-12 text-sm sm:text-base tracking-wide h-12 sm:h-14 md:h-16 overflow-hidden transition-all duration-500 hover:scale-[1.02] w-full sm:w-auto rounded-md shadow-xl active:scale-95"
               >
                 <span className="relative z-10">Get Your Free Quote</span>
               </Button>
             } />
-            <Button
-              size="lg"
-              variant="outline"
-              className="group border border-white/20 text-white hover:bg-white/10 hover:border-white/30 font-semibold px-8 sm:px-10 md:px-12 text-sm sm:text-base tracking-wide h-12 sm:h-14 md:h-16 bg-white/10 transition-all duration-500 hover:scale-[1.02] w-full sm:w-auto rounded-lg active:scale-95"
-              asChild
+            <TrackedPhoneLink
+              href="tel:01270897606"
+              placement="homepage_hero"
+              className="group inline-flex items-center justify-center gap-2.5 h-12 sm:h-14 md:h-16 px-6 text-white font-semibold text-sm sm:text-base tracking-wide transition-colors duration-300"
             >
-              <Link href="/contact" className="flex items-center justify-center">
-                <Video className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
-                <span>Book a Drone Inspection</span>
-              </Link>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="group border border-white/20 text-white hover:bg-white/10 hover:border-white/30 font-semibold px-8 sm:px-10 md:px-12 text-sm sm:text-base tracking-wide h-12 sm:h-14 md:h-16 bg-white/10 transition-all duration-500 hover:scale-[1.02] w-full sm:w-auto rounded-lg active:scale-95"
-              asChild
-            >
-              <TrackedPhoneLink href="tel:01270897606" placement="homepage_hero" className="flex items-center justify-center">
-                <Phone className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0" />
-                <span>Call 01270 897 606</span>
-              </TrackedPhoneLink>
-            </Button>
-          </div>
-
-          {/* Above-the-fold trust bar */}
-          <div className="mb-8 sm:mb-10 md:mb-12 px-4 sm:px-0">
-            <p className="inline-block text-white text-xs sm:text-sm font-semibold tracking-wide bg-white/10 border border-white/20 rounded-full px-4 sm:px-6 py-2 sm:py-2.5 backdrop-blur-sm">
-              CORC Certified <span className="text-brand-orange mx-1">·</span> £10M Insured <span className="text-brand-orange mx-1">·</span> 10-Year Guarantee <span className="text-brand-orange mx-1">·</span> 5-Star Rated
-            </p>
-          </div>
-
-          <div className="hidden sm:grid sm:grid-cols-3 gap-6 lg:gap-8 fade-in-up max-w-4xl mx-auto" style={{ animationDelay: '0.3s' }}>
-            {[
-              { icon: Shield, label: 'Fully Insured', value: '£10M Cover' },
-              { icon: Award, label: '5 Star Rated', value: 'Accredited' },
-              { icon: Clock, label: '24/7 Emergency', value: 'Fast Response' },
-            ].map((stat, index) => (
-              <div
-                key={index}
-                className="flex items-center justify-center gap-3 p-4 sm:p-5 rounded-xl bg-white/10 border border-white/10 hover:bg-white/15 transition-all duration-500 group"
-              >
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-brand-orange/25 flex items-center justify-center group-hover:scale-105 transition-transform duration-500 flex-shrink-0">
-                  <stat.icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                </div>
-                <div className="min-w-0 sm:text-left">
-                  <p className="text-white text-xs sm:text-sm tracking-wide font-medium">{stat.label}</p>
-                  <p className="text-white font-semibold text-sm sm:text-base mt-0.5">{stat.value}</p>
-                </div>
-              </div>
-            ))}
+              <span className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/30 text-white group-hover:border-brand-orange group-hover:text-brand-orange transition-colors duration-300">
+                <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+              </span>
+              <span className="text-left leading-tight">
+                <span className="block text-xs text-white/60 group-hover:text-white/80 transition-colors">Call us direct</span>
+                <span className="block">01270 897 606</span>
+              </span>
+            </TrackedPhoneLink>
           </div>
         </div>
       </div>

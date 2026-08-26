@@ -50,7 +50,7 @@ export function TrustStrip() {
             const Icon = accreditation.icon;
             return (
               <div key={`m-${index}`} className="flex sm:hidden flex-col items-center text-center min-w-0 flex-1" style={{ minWidth: '100px', maxWidth: '150px' }}>
-                <div className="w-12 h-12 bg-brand-orange/8 rounded-full flex items-center justify-center mb-2">
+                <div className="w-12 h-12 bg-brand-orange/10 flex items-center justify-center mb-2">
                   <Icon className="w-6 h-6 text-brand-orange" />
                 </div>
                 <p className="text-xs font-semibold text-brand-navy/90 break-words">{accreditation.name}</p>
@@ -62,7 +62,7 @@ export function TrustStrip() {
             const Icon = accreditation.icon;
             return (
               <div key={index} className="hidden sm:flex flex-col items-center text-center min-w-0 flex-1 sm:flex-none" style={{ minWidth: '120px', maxWidth: '160px' }}>
-                <div className="w-14 h-14 bg-brand-orange/8 rounded-full flex items-center justify-center mb-3">
+                <div className="w-14 h-14 bg-brand-orange/10 flex items-center justify-center mb-3">
                   <Icon className="w-7 h-7 text-brand-orange" />
                 </div>
                 <p className="text-sm font-semibold text-brand-navy/90 break-words">{accreditation.name}</p>

@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Textarea } from '@/components/ui/textarea';
 import { 
   Phone, 
   MessageCircle, 
@@ -18,6 +19,7 @@ import {
 } from 'lucide-react';
 import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
 import Image from 'next/image';
+import { TurnstileWidget } from '@/components/TurnstileWidget';
 
 export default function SpecialOfferPage() {
   const [mounted, setMounted] = useState(false);
@@ -25,11 +27,14 @@ export default function SpecialOfferPage() {
     name: '',
     phone: '',
     postcode: '',
+    email: '',
     roofType: '',
     serviceNeeded: '',
+    message: '',
     sameDayCallback: false
   });
   const [honeypot, setHoneypot] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
@@ -91,7 +96,7 @@ export default function SpecialOfferPage() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formData, gclid: getGclid(), website: honeypot }),
+        body: JSON.stringify({ ...formData, gclid: getGclid(), turnstileToken, website: honeypot }),
       });
 
       const result = await response.json();
@@ -288,6 +293,19 @@ export default function SpecialOfferPage() {
                   />
                 </div>
 
+                <div>
+                  <Label htmlFor="email" className="text-brand-navy font-semibold text-sm">Email Address</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    placeholder="john@example.com"
+                    autoComplete="email"
+                    className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
+                  />
+                </div>
+
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="roofType" className="text-brand-navy font-semibold text-sm">Roof Type</Label>
@@ -321,6 +339,18 @@ export default function SpecialOfferPage() {
                   </div>
                 </div>
 
+                <div>
+                  <Label htmlFor="message" className="text-brand-navy font-semibold text-sm">Your Project</Label>
+                  <Textarea
+                    id="message"
+                    value={formData.message}
+                    onChange={(e) => setFormData({...formData, message: e.target.value})}
+                    placeholder="Tell us about your roofing project, including property type, approximate size, and any specific requirements..."
+                    rows={4}
+                    className="mt-2 text-base border-2 focus:border-brand-orange rounded-xl resize-none"
+                  />
+                </div>
+
                 <div className="flex items-center space-x-3 p-4 bg-blue-50 rounded-xl">
                   <Checkbox
                     id="callback"
@@ -344,6 +374,8 @@ export default function SpecialOfferPage() {
                     autoComplete="off"
                   />
                 </div>
+
+                <TurnstileWidget onToken={setTurnstileToken} />
 
                 <Button
                   type="submit"

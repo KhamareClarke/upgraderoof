@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
-import { Check, Star } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { QuoteForm } from '@/components/QuoteForm';
-import Image from 'next/image';
 
 export function WhyChooseUs() {
   const benefits = [
@@ -16,18 +15,16 @@ export function WhyChooseUs() {
     <section id="about" className="section-padding bg-gradient-to-b from-gray-50 to-gray-100/50">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center">
-          <div className="relative h-[320px] sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-lg bg-gray-200">
-            <Image
-              src="/images/2.jpeg"
-              alt="Upgrade Roofs professional roofers installing gutters and fascias in Cheshire"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              loading="lazy"
-              quality={60}
-              className="object-cover scale-125"
-              style={{ objectPosition: 'center center' }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-transparent" />
+          <div className="relative rounded-2xl overflow-hidden shadow-lg bg-gray-900">
+            <video
+              className="w-full h-full object-cover aspect-video"
+              controls
+              preload="metadata"
+              poster="/images/7.jpeg"
+            >
+              <source src="/upgraderoofs.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </div>
 
           <div>
@@ -60,17 +57,6 @@ export function WhyChooseUs() {
                 Book Your Free Quote
               </Button>
             } />
-            
-            <div className="mt-6 flex items-center gap-2 text-gray-600">
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                ))}
-              </div>
-              <span className="font-semibold">5.0 Stars</span>
-              <span>·</span>
-              <span>50+ Google Reviews</span>
-            </div>
           </div>
         </div>
       </div>

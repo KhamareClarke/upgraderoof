@@ -70,11 +70,39 @@ export function invalidNameReason(name: unknown): string | null {
   return null;
 }
 
+// --- Email ------------------------------------------------------------------
+// The contact form (send-contact) is the site's only email-collecting surface,
+// and its previous regex check was far too loose — bots slip disposable-domain
+// and role-address submissions ("support@", "info@", "@mailinator.com") through
+// to the notify inbox. These checks sit on top of the basic @-format test the
+// route already performs.
+const DISPOSABLE_DOMAINS = new Set([
+  'mailinator.com', 'tempmail.com', '10minutemail.com', 'guerrillamail.com',
+  'throwawaymail.com', 'sharklasers.com', 'yopmail.com', 'maildrop.cc',
+  'getnada.com', 'temp-mail.org', 'dispostable.com', 'mailnesia.com',
+  'trashmail.com', 'mailcatch.com', 'mintemail.com', 'eyepaste.com',
+  'spambox.us', 'mailbox.org', 'grr.la', 'spamgourmet.com', 'mail.tm',
+  '0vv1.com', 'fakemail.net', 'mailtemp.com', 'getairmail.com',
+]);
+
+const ROLE_ADDRESS_PREFIX = /^(admin|info|sales|support|contact|help|noreply|no-reply|abuse|postmaster|webmaster|office|enquiries|enquiry|hello|mail|test|team|marketing|roofing|quotes|leads)@/i;
+
+export function invalidEmailReason(email: unknown): string | null {
+  if (typeof email !== 'string' || !email.trim()) return 'email missing';
+  const e = email.trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return 'email invalid format';
+  const domain = e.slice(e.lastIndexOf('@') + 1);
+  if (DISPOSABLE_DOMAINS.has(domain)) return 'email is a disposable domain';
+  if (ROLE_ADDRESS_PREFIX.test(e)) return 'email is a role/department address';
+  return null;
+}
+
 // --- Aggregate ---------------------------------------------------------------
 export interface LeadFields {
   name?: unknown;
   phone?: unknown;
   postcode?: unknown;
+  email?: unknown;
 }
 
 /**
@@ -86,8 +114,10 @@ export function validateLead(fields: LeadFields): string[] {
   const name = invalidNameReason(fields.name);
   const phone = invalidPhoneReason(fields.phone);
   const postcode = invalidPostcodeReason(fields.postcode);
+  const email = invalidEmailReason(fields.email);
   if (name) reasons.push(name);
   if (phone) reasons.push(phone);
   if (postcode) reasons.push(postcode);
+  if (email) reasons.push(email);
   return reasons;
 }

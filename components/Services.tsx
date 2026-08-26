@@ -64,28 +64,39 @@ export function Services() {
   return (
     <section id="services" className="section-padding bg-white relative overflow-hidden">
       <div className="container-custom relative">
-        <div className="text-center mb-16">
-          <div className="inline-block px-4 py-2 bg-brand-orange/10 rounded-full mb-4">
-            <span className="text-brand-orange font-semibold text-sm">Our Roofing Services</span>
+        <div className="mb-16">
+          <div className="flex items-center gap-4 mb-6">
+            <span className="h-px flex-1 bg-gray-300 sm:flex-none sm:w-16" aria-hidden="true" />
+            <span className="text-brand-orange font-semibold text-sm uppercase tracking-[0.2em]">Our Roofing Services</span>
+            <span className="h-px flex-1 bg-gray-300 sm:hidden" aria-hidden="true" />
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-navy mb-6">
-            Every Roofing Need. <span className="text-brand-orange">One Trusted Team.</span>
-          </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            From minor repairs to complete roof replacements, we deliver comprehensive roofing solutions
-            tailored to your property — using premium materials and cutting-edge techniques.
-          </p>
+          <div className="sm:grid sm:grid-cols-2 sm:gap-8 sm:items-end">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-brand-navy leading-tight">
+              Every Roofing Need. <span className="text-brand-orange">One Trusted Team.</span>
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed mt-4 sm:mt-0 sm:border-l-4 sm:border-brand-orange sm:pl-6">
+              From minor repairs to complete roof replacements, we deliver comprehensive roofing solutions
+              tailored to your property — using premium materials and cutting-edge techniques.
+            </p>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
+            const isFeature = index === 0;
             return (
               <div
                 key={index}
-                className="group relative overflow-hidden rounded-2xl bg-white border border-gray-200 hover:border-brand-orange/50 transition-all duration-300 hover:shadow-lg"
+                className={`group relative overflow-hidden bg-white border border-gray-300 hover:border-brand-navy transition-colors duration-300 ${
+                  isFeature
+                    ? 'sm:col-span-2 lg:col-span-2 lg:row-span-1 lg:h-full'
+                    : ''
+                }`}
               >
-                <div className="relative h-48 overflow-hidden">
+                <div className="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-brand-orange to-brand-orange/0" aria-hidden="true" />
+
+                <div className={`relative overflow-hidden ${isFeature ? 'h-56 sm:h-64 lg:h-full lg:min-h-[280px]' : 'h-48'}`}>
                   <Image
                     src={service.image}
                     alt={service.alt}
@@ -97,14 +108,17 @@ export function Services() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-brand-navy/50 to-transparent" />
 
-                  <div className="absolute top-4 right-4">
-                    <div className="w-12 h-12 rounded-xl bg-brand-orange/10 backdrop-blur-sm flex items-center justify-center">
+                  <div className="absolute top-4 left-4 flex items-center gap-3">
+                    <div className="w-12 h-12 bg-brand-orange flex items-center justify-center">
                       <Icon className="w-6 h-6 text-white" />
                     </div>
+                    <span className="hidden sm:block font-mono text-xs tracking-widest text-white/70">
+                      {'0' + (index + 1)}
+                    </span>
                   </div>
 
                   <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-2xl font-bold text-white">{service.title}</h3>
+                    <h3 className={`font-bold text-white ${isFeature ? 'text-3xl sm:text-4xl' : 'text-2xl'}`}>{service.title}</h3>
                   </div>
                 </div>
 
@@ -116,7 +130,7 @@ export function Services() {
                   <Link href={service.href}>
                     <Button
                       variant="ghost"
-                      className="group/btn w-full justify-between text-brand-navy hover:text-brand-orange hover:bg-transparent font-semibold transition-all"
+                      className="group/btn w-full justify-between px-0 text-brand-navy hover:text-brand-orange hover:bg-transparent font-semibold transition-all border-t border-gray-200 rounded-none pt-4"
                     >
                       <span>Learn More</span>
                       <ArrowRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
@@ -128,10 +142,10 @@ export function Services() {
           })}
         </div>
 
-        <div className="mt-12 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 sm:gap-6 p-6 sm:p-8 rounded-2xl bg-brand-navy text-white w-full sm:w-auto shadow-lg">
-            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl bg-brand-orange/20 flex items-center justify-center flex-shrink-0">
-              <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 text-brand-orange" />
+        <div className="mt-16">
+          <div className="flex flex-col sm:flex-row items-center gap-6 sm:gap-8 bg-brand-navy text-white w-full shadow-lg px-6 py-8 sm:px-10 sm:py-10">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 bg-brand-orange flex items-center justify-center flex-shrink-0">
+              <Sparkles className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
             </div>
             <div className="text-center sm:text-left flex-1">
               <p className="text-white text-sm tracking-wide mb-1 font-medium">Need a custom solution?</p>
@@ -139,7 +153,7 @@ export function Services() {
             </div>
             <Button
               size="lg"
-              className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold w-full sm:w-auto transition-all"
+              className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold w-full sm:w-auto transition-all rounded-none"
               asChild
             >
               <Link href="/contact" className="flex items-center justify-center">

@@ -143,8 +143,10 @@ export function EnhancedContactSection() {
     <section className="section-padding bg-gradient-to-br from-brand-grey to-white">
       <div className="container-custom">
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 rounded-full bg-brand-orange/10 text-brand-orange text-sm font-medium">
-            <span>Get In Touch</span>
+          <div className="flex items-center justify-center gap-4 mb-6">
+            <span className="h-px w-12 bg-gray-300" aria-hidden="true" />
+            <span className="text-brand-orange font-semibold text-sm uppercase tracking-[0.2em]">Get In Touch</span>
+            <span className="h-px w-12 bg-gray-300" aria-hidden="true" />
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
             Ready to Start Your Roofing Project?
@@ -321,7 +323,7 @@ export function EnhancedContactSection() {
               <Card className="hover-lift border-0 shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-brand-orange/10 flex items-center justify-center flex-shrink-0">
                       <Phone className="w-6 h-6 text-brand-orange" />
                     </div>
                     <div>
@@ -342,7 +344,7 @@ export function EnhancedContactSection() {
               <Card className="hover-lift border-0 shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-green-500/10 flex items-center justify-center flex-shrink-0">
                       <MessageCircle className="w-6 h-6 text-green-500" />
                     </div>
                     <div>
@@ -365,7 +367,7 @@ export function EnhancedContactSection() {
               <Card className="hover-lift border-0 shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-blue-500/10 flex items-center justify-center flex-shrink-0">
                       <Mail className="w-6 h-6 text-blue-500" />
                     </div>
                     <div>
@@ -386,7 +388,7 @@ export function EnhancedContactSection() {
               <Card className="hover-lift border-0 shadow-lg">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-purple-500/10 flex items-center justify-center flex-shrink-0">
                       <Clock className="w-6 h-6 text-purple-500" />
                     </div>
                     <div>

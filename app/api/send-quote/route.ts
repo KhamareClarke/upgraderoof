@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
-import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
-import { invalidNameReason, invalidPhoneReason, invalidPostcodeReason } from '@/lib/lead-validation';
+import { checkRateLimit, getClientIp, isTooFast } from '@/lib/rate-limit';
+import { invalidNameReason, invalidPhoneReason, invalidPostcodeReason, invalidEmailReason } from '@/lib/lead-validation';
+import { verifyTurnstile } from '@/lib/turnstile';
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,12 +37,36 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Timing heuristic — reject a repeat submission from the same identity
+    // arriving faster than a human can re-read and re-submit (retry/scripted
+    // bots). Fake success so bots can't tell they've been filtered.
+    if (isTooFast(clientIp, 3)) {
+      console.log(`[spam] quote lead too fast from ${clientIp}`);
+      return NextResponse.json(
+        { success: true, message: 'Quote request received' },
+        { status: 200 }
+      );
+    }
+
+    // Turnstile — env-gated. A configured gate rejects invalid/missing tokens;
+    // an unconfigured one passes everyone through. When the gate is on and the
+    // token fails, return a hard 400 (bot should give up), not a fake success.
+    const turnstile = await verifyTurnstile(formData.turnstileToken);
+    if (!turnstile.ok) {
+      console.log(`[spam] quote lead failed turnstile (${turnstile.reason}) from ${clientIp}`);
+      return NextResponse.json(
+        { success: false, error: 'CAPTCHA verification failed. Please try again.' },
+        { status: 400 }
+      );
+    }
+
     // Content validation — reject junk leads the honeypot + rate limit let
     // through. Return a fake success so bots can't tell they've been filtered.
     const spamReasons = [
       invalidNameReason(formData.name),
       invalidPhoneReason(formData.phone),
       invalidPostcodeReason(formData.postcode),
+      ...(formData.email ? [invalidEmailReason(formData.email)] : []),
     ].filter(Boolean);
     if (spamReasons.length > 0) {
       console.log(`[spam] quote lead rejected (${spamReasons.join('; ')}) — name="${formData.name}" phone="${formData.phone}" postcode="${formData.postcode}"`);
@@ -61,6 +86,8 @@ export async function POST(request: NextRequest) {
         phone: formData.phone,
         postcode: formData.postcode,
         service_type: formData.service_type,
+        roof_type: formData.roof_type,
+        message: formData.message,
       },
     });
 
@@ -75,8 +102,11 @@ export async function POST(request: NextRequest) {
       gclid: formData.gclid,
       tags: ['website-lead', 'cheshire-roof-quote', ...(formData.gclid ? ['google-ads-lead'] : [])],
       source: 'quote_form',
-      notes: `Service: ${formData.service_type || 'n/a'}\n\n${formData.message || ''}`,
-      customFields: formData.service_type ? { service_type: formData.service_type } : undefined,
+      notes: `Service: ${formData.service_type || 'n/a'}\nRoof type: ${formData.roof_type || 'n/a'}\n\n${formData.message || ''}`,
+      customFields: {
+        ...(formData.service_type ? { service_type: formData.service_type } : {}),
+        ...(formData.roof_type ? { roof_type: formData.roof_type } : {}),
+      },
     });
 
     try {
@@ -90,6 +120,7 @@ export async function POST(request: NextRequest) {
         <p><strong>Phone:</strong> ${formData.phone}</p>
         <p><strong>Postcode:</strong> ${formData.postcode}</p>
         ${formData.service_type ? `<p><strong>Service Type:</strong> ${formData.service_type}</p>` : ''}
+        ${formData.roof_type ? `<p><strong>Roof Type:</strong> ${formData.roof_type}</p>` : ''}
         ${formData.message ? `<p><strong>Additional Details:</strong></p><p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; white-space: pre-wrap;">${formData.message}</p>` : ''}
       </div>
       <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">

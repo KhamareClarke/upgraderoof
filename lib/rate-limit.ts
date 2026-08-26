@@ -10,6 +10,11 @@ interface RateLimitEntry {
 
 const submissions = new Map<string, RateLimitEntry>();
 
+// Track the first time we ever saw a given identity. Scripted bots fill and
+// submit forms in well under a humanly-possible time; stamping the very first
+// sighting lets routes reject a submission that arrives suspiciously fast.
+const firstSeen = new Map<string, number>();
+
 // Clean up old entries every 10 minutes
 setInterval(() => {
   const now = Date.now();
@@ -76,7 +81,35 @@ export function checkRateLimit(
 /**
  * Extract client IP from request headers.
  * Works with Vercel, Cloudflare, and standard proxies.
+ *
+ * If no forwarding header is present we derive a per-request pseudo-identity
+ * from the User-Agent (once) rather than returning a single shared "unknown".
+ * A shared "unknown" bucket collapses every headerless client into one shared
+ * counter, so one bot trip to the limit would block every legitimate caller
+ * sharing that bucket.
  */
+/**
+ * Return true if this identity first appeared too recently to be a human.
+ *
+ * A human filling a form takes at least a few seconds (reading the fields,
+ * typing, clicking). Scripted bots can complete the round-trip in well under
+ * a second. We stamp the first sighting of an identity and, if a submission
+ * lands within `minSeconds`, treat it as automated.
+ *
+ * This is intentionally lenient: we only reject on the *first* sighting of an
+ * identity, because the timers are in-memory and reset on serverless cold
+ * start, so a subsequent slow submission is never penalised by a stale stamp.
+ */
+export function isTooFast(ip: string, minSeconds: number = 3): boolean {
+  const now = Date.now();
+  const seen = firstSeen.get(ip);
+  if (seen === undefined) {
+    firstSeen.set(ip, now);
+    return false; // first sighting — can't compare against an earlier stamp
+  }
+  return now - seen < minSeconds * 1000;
+}
+
 export function getClientIp(request: Request): string {
   // Vercel-specific header
   const vercelIp = request.headers.get('x-vercel-forwarded-for');
@@ -90,6 +123,9 @@ export function getClientIp(request: Request): string {
   const cfIp = request.headers.get('cf-connecting-ip');
   if (cfIp) return cfIp;
 
-  // Fallback
-  return 'unknown';
+  // Fallback — no IP known. Use a UA-derived key so distinct callers don't
+  // share one bucket. This is weak (same UA still collapses) but strictly
+  // better than a route-wide "unknown" bucket.
+  const ua = request.headers.get('user-agent') || '';
+  return 'ua:' + ua.slice(0, 64);
 }

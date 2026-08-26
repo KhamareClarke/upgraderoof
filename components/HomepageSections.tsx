@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import { FAQ } from './FAQ';
-import { SEOAccordion } from './SEOAccordion';
 
 const GoogleReviewsCarousel = dynamic(() => import('./GoogleReviewsCarousel').then(m => m.GoogleReviewsCarousel));
 const GallerySlider = dynamic(() => import('./GallerySlider').then(m => m.GallerySlider));
@@ -26,8 +25,4 @@ export function FAQBlock() {
 
 export function ContactBlock() {
   return <EnhancedContactSection />;
-}
-
-export function SEOBlock() {
-  return <SEOAccordion />;
 }

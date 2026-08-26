@@ -1,13 +1,12 @@
 import type { Metadata } from 'next';
 import { Hero } from '@/components/Hero';
-import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { Services } from '@/components/Services';
 import { WhyChooseUs } from '@/components/WhyChooseUs';
-import { VideoTestimonials } from '@/components/VideoTestimonials';
 import { CTABanner } from '@/components/CTABanner';
-import { GalleryBlock, FAQBlock, ContactBlock, SEOBlock } from '@/components/HomepageSections';
-import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
-import { Star, Award, Shield, MapPin, ArrowRight } from 'lucide-react';
+import { GalleryBlock, FAQBlock, ContactBlock } from '@/components/HomepageSections';
+import { GoogleGbpReviews } from '@/components/GoogleGbpReviews';
+import { MapPin, ArrowRight } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -49,66 +48,40 @@ export default function Home() {
         <Hero />
       </section>
 
-      {/* GEO Entity Citation — dense, quotable business entity for AI answer engines */}
-      <GeoEntityCitation />
-
-      {/* Trust Badges Section */}
-      <section className="section-padding bg-gradient-to-b from-white to-gray-50">
+      {/* Trust & Credibility — official accreditation badges */}
+      <section className="border-b border-gray-200 bg-white">
         <div className="container-custom">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
-              Trusted & Approved
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Recognised by leading industry bodies and trusted by thousands of customers
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-            {/* MyApproved */}
-            <a
-              href="https://myapproved.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-3 overflow-hidden">
-                {/* MyApproved logo */}
-                <img
-                  src="https://myapproved.com/logo-icon.svg"
-                  alt="MyApproved logo"
-                  className="w-10 h-10 object-contain"
-                />
-              </div>
-              <p className="text-sm font-semibold text-gray-800">MyApproved</p>
-              <p className="text-xs text-gray-600 mt-1">Vetted & Verified</p>
-            </a>
-
-            {/* Google Reviews */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-3">
-                <Star className="w-8 h-8 text-blue-600" />
-              </div>
-              <p className="text-sm font-semibold text-gray-800">Google Reviews</p>
-              <p className="text-xs text-gray-600 mt-1">5 Star Rated</p>
+          <div className="py-10 sm:py-12">
+            <div className="text-center mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
+                Trusted &amp; Approved
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Recognised by leading industry bodies and trusted by thousands of customers
+              </p>
             </div>
-
-            {/* CORC */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-3">
-                <Award className="w-8 h-8 text-purple-600" />
-              </div>
-              <p className="text-sm font-semibold text-gray-800">CORC</p>
-              <p className="text-xs text-gray-600 mt-1">Approved Member</p>
-            </div>
-
-            {/* IBG */}
-            <div className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-3">
-                <Shield className="w-8 h-8 text-orange-600" />
-              </div>
-              <p className="text-sm font-semibold text-gray-800">IBG</p>
-              <p className="text-xs text-gray-600 mt-1">Insurance Backed Guarantee</p>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 items-center">
+              {[
+                { src: '/images/corc_logo-1024x549.webp', alt: 'CORC certified member logo', width: 1024, height: 549, label: 'CORC Certified', meta: 'Approved member', priority: true },
+                { src: '/images/badge-dark.svg', alt: 'MyApproved verified member badge', width: 664, height: 248, label: '£10M Insured', meta: 'Public liability cover', priority: false },
+                { src: '/images/badge-dark.svg', alt: 'Insurance Backed Guarantee badge', width: 664, height: 248, label: 'IBG Guarantee', meta: 'Insurance-backed work', priority: false },
+                { src: '/images/Google-Review-Emblem-500x281.png', alt: 'Google reviews emblem with 5 star rating', width: 500, height: 281, label: '5-Star Rated', meta: 'Google · MyApproved verified', priority: false },
+              ].map((item, index) => (
+                <div key={index} className="group flex flex-col items-center text-center">
+                  <div className="relative w-full max-w-[190px] h-24 flex items-center justify-center bg-white border border-gray-200 rounded-lg shadow-sm p-3 transition-transform duration-300 group-hover:scale-105">
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      width={item.width}
+                      height={item.height}
+                      className="w-full h-full object-contain"
+                      priority={item.priority}
+                    />
+                  </div>
+                  <p className="mt-5 text-sm sm:text-base font-bold text-brand-navy tracking-wide">{item.label}</p>
+                  <p className="text-xs text-gray-500 mt-1 leading-snug">{item.meta}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -120,26 +93,20 @@ export default function Home() {
       <section id="about">
         <WhyChooseUs />
       </section>
-      <VideoTestimonials />
 
-      {/* Live Google Reviews — real customer reviews via GHL */}
-      <section className="section-padding bg-gray-50">
+      {/* Live Google Reviews — real customer reviews from the Google Business Profile API */}
+      <section id="reviews" className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center gap-1 mb-3">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
-              ))}
-            </div>
             <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-2">
               Real Reviews from Real Customers
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              5★ rated on Google with hundreds of verified reviews from homeowners across Cheshire
+              Rated 5★ on Google by homeowners across Cheshire — here&apos;s what they say about our work
             </p>
           </div>
           <div className="max-w-5xl mx-auto">
-            <GhlReviewsWidget />
+            <GoogleGbpReviews />
           </div>
         </div>
       </section>
@@ -161,7 +128,7 @@ export default function Home() {
             <p className="text-gray-600 max-w-2xl mx-auto mb-6">
               Based in Sandbach, we serve homeowners and businesses throughout south and mid-Cheshire.
             </p>
-            <div className="inline-flex items-center gap-3 px-6 py-3 bg-brand-orange/10 border-2 border-brand-orange/30 rounded-xl">
+            <div className="inline-flex items-center gap-3 px-6 py-4 bg-white border border-gray-300 border-t-2 border-t-brand-orange">
               <MapPin className="w-5 h-5 text-brand-orange" />
               <span className="text-sm font-semibold text-brand-navy">
                 Looking for{' '}
@@ -183,7 +150,7 @@ export default function Home() {
               { name: 'Roofers Holmes Chapel', href: '/roofers-holmes-chapel' },
               { name: 'All Service Areas', href: '/service-areas' },
             ].map((area, i) => (
-              <Link key={i} href={area.href} className="group flex items-center gap-2 p-4 bg-white rounded-xl border border-gray-200 hover:border-brand-orange/50 hover:shadow-md transition-all">
+              <Link key={i} href={area.href} className="group flex items-center gap-2 p-4 bg-white border border-gray-300 hover:border-brand-navy transition-colors">
                 <MapPin className="w-4 h-4 text-brand-orange flex-shrink-0" />
                 <span className="text-sm font-semibold text-brand-navy group-hover:text-brand-orange transition-colors">{area.name}</span>
               </Link>
@@ -197,7 +164,6 @@ export default function Home() {
         </div>
       </section>
 
-      <SEOBlock />
       <section id="contact">
         <ContactBlock />
       </section>

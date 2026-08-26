@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
-import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
-import { invalidNameReason } from '@/lib/lead-validation';
+import { checkRateLimit, getClientIp, isTooFast } from '@/lib/rate-limit';
+import { invalidNameReason, invalidEmailReason } from '@/lib/lead-validation';
+import { verifyTurnstile } from '@/lib/turnstile';
 
 const ghlOpps = require('@/lib/ghl/opportunities.js');
 
@@ -66,14 +67,33 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Timing heuristic — reject a repeat submission from the same identity
+    // arriving faster than a human can (scripted/retry bots). Fake success.
+    if (isTooFast(clientIp, 3)) {
+      console.log(`[spam] contact lead too fast from ${clientIp}`);
+      return NextResponse.json(
+        { success: true, message: 'Message received' },
+        { status: 200 }
+      );
+    }
+
+    // Turnstile — env-gated. Only rejects when the gate is configured and the
+    // token fails; otherwise permits through.
+    const turnstile = await verifyTurnstile(formData.turnstileToken);
+    if (!turnstile.ok) {
+      console.log(`[spam] contact lead failed turnstile (${turnstile.reason}) from ${clientIp}`);
+      return NextResponse.json(
+        { success: false, error: 'CAPTCHA verification failed. Please try again.' },
+        { status: 400 }
+      );
+    }
+
     // Content validation — reject junk names the honeypot + rate limit let
     // through. Return a fake success so bots can't tell they've been filtered.
     // (Only the name is validated: this form accepts email-only enquiries, so
     // enforcing phone/postcode presence would reject legitimate leads.)
     const nameReason = invalidNameReason(formData.name);
-    const emailReason = typeof formData.email !== 'string'
-      || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())
-      ? 'email invalid' : null;
+    const emailReason = invalidEmailReason(formData.email);
     if (nameReason || emailReason) {
       console.log(`[spam] contact lead rejected (${[nameReason, emailReason].filter(Boolean).join('; ')}) — name="${formData.name}" email="${formData.email}"`);
       return NextResponse.json(
@@ -85,7 +105,15 @@ export async function POST(request: NextRequest) {
     await emitFleetIngest({
       event_type: 'lead',
       summary: `Contact form: ${formData.name} (${formData.email}) — ${formData.subject || 'no subject'}`,
-      payload: { name: formData.name, email: formData.email, subject: formData.subject },
+      payload: {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        roof_type: formData.roof_type,
+        service_needed: formData.service_needed,
+        message: formData.message,
+      },
     });
 
     // Push the lead into GHL. Awaited so the serverless runtime doesn't freeze
@@ -98,7 +126,11 @@ export async function POST(request: NextRequest) {
       gclid: formData.gclid,
       tags: ['website-lead', 'contact-form', ...(formData.gclid ? ['google-ads-lead'] : [])],
       source: 'contact_form',
-      notes: `Subject: ${formData.subject || 'n/a'}\n\n${formData.message || ''}`,
+      notes: `Subject: ${formData.subject || 'n/a'}\nService needed: ${formData.service_needed || 'n/a'}\nRoof type: ${formData.roof_type || 'n/a'}\n\n${formData.message || ''}`,
+      customFields: {
+        ...(formData.roof_type ? { roof_type: formData.roof_type } : {}),
+        ...(formData.service_needed ? { service_needed: formData.service_needed } : {}),
+      },
     });
     createOpportunityForContact(ghlContactId, formData.name)
       .catch(err => console.warn('[ghl] contact follow-up error:', err));
@@ -113,6 +145,8 @@ export async function POST(request: NextRequest) {
         <p><strong>Email:</strong> ${formData.email}</p>
         ${formData.phone ? `<p><strong>Phone:</strong> ${formData.phone}</p>` : ''}
         <p><strong>Subject:</strong> ${formData.subject}</p>
+        ${formData.service_needed ? `<p><strong>Service Needed:</strong> ${formData.service_needed}</p>` : ''}
+        ${formData.roof_type ? `<p><strong>Roof Type:</strong> ${formData.roof_type}</p>` : ''}
         <p><strong>Message:</strong></p>
         <p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; white-space: pre-wrap;">${formData.message}</p>
       </div>

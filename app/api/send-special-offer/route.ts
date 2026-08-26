@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { validateLead } from '@/lib/lead-validation';
+import { verifyTurnstile } from '@/lib/turnstile';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
-import { checkRateLimit, getClientIp } from '@/lib/rate-limit';
+import { checkRateLimit, getClientIp, isTooFast } from '@/lib/rate-limit';
 
 const ghlOpps = require('@/lib/ghl/opportunities.js');
 
@@ -65,6 +66,27 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Timing heuristic — reject a repeat submission from the same identity
+    // arriving faster than a human can (scripted/retry bots). Fake success.
+    if (isTooFast(clientIp, 3)) {
+      console.log(`[spam] special-offer lead too fast from ${clientIp}`);
+      return NextResponse.json(
+        { success: true, message: 'Special offer request received' },
+        { status: 200 }
+      );
+    }
+
+    // Turnstile — env-gated. Only rejects when the gate is configured and the
+    // token fails; otherwise permits through.
+    const turnstile = await verifyTurnstile(formData.turnstileToken);
+    if (!turnstile.ok) {
+      console.log(`[spam] special-offer lead failed turnstile (${turnstile.reason}) from ${clientIp}`);
+      return NextResponse.json(
+        { success: false, error: 'CAPTCHA verification failed. Please try again.' },
+        { status: 400 }
+      );
+    }
+
     // Content validation — reject junk leads (gibberish names, non-UK phones,
     // invalid postcodes) that the honeypot and IP rate limit let through.
     // Return a fake success so bots can't tell they've been filtered.
@@ -87,6 +109,7 @@ export async function POST(request: NextRequest) {
         roofType: formData.roofType,
         serviceNeeded: formData.serviceNeeded,
         sameDayCallback: formData.sameDayCallback,
+        message: formData.message,
       },
     });
 
@@ -102,7 +125,7 @@ export async function POST(request: NextRequest) {
       gclid: formData.gclid,
       tags: ['website-lead', 'special-offer', ...(formData.gclid ? ['google-ads-lead'] : [])],
       source: 'special_offer',
-      notes: `Service needed: ${formData.serviceNeeded || 'n/a'}\nRoof type: ${formData.roofType || 'n/a'}\nSame-day callback: ${formData.sameDayCallback ? 'Yes' : 'No'}`,
+      notes: `Service needed: ${formData.serviceNeeded || 'n/a'}\nRoof type: ${formData.roofType || 'n/a'}\nSame-day callback: ${formData.sameDayCallback ? 'Yes' : 'No'}\n\n${formData.message || ''}`,
       customFields: {
         ...(formData.roofType ? { roof_type: formData.roofType } : {}),
         ...(formData.serviceNeeded ? { service_needed: formData.serviceNeeded } : {}),
@@ -123,6 +146,7 @@ export async function POST(request: NextRequest) {
         ${formData.roofType ? `<p><strong>Roof Type:</strong> ${formData.roofType}</p>` : ''}
         ${formData.serviceNeeded ? `<p><strong>Service Needed:</strong> ${formData.serviceNeeded}</p>` : ''}
         <p><strong>Same Day Callback Requested:</strong> ${formData.sameDayCallback ? 'Yes' : 'No'}</p>
+        ${formData.message ? `<p><strong>Project Details:</strong></p><p style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; white-space: pre-wrap;">${formData.message}</p>` : ''}
       </div>
       <hr style="margin: 20px 0; border: none; border-top: 1px solid #ddd;">
       <p style="color: #666; font-size: 12px;">

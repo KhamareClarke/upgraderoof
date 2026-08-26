@@ -11,12 +11,20 @@ const faqs = [
     answer: "Timelines depend on the size and complexity of your roof. We'll give you a clear schedule before any work begins and keep you informed throughout the project."
   },
   {
+    question: 'What roofing services do you offer?',
+    answer: "We provide a complete range of roofing services — new roofs, re-roofing and roof repairs, traditional tile and slate roofing, modern flat roofing (EPDM rubber and GRP fibreglass), chimney repairs, guttering and fascias, skylights, cladding, and 24/7 emergency roof repairs. Whatever your property needs across Cheshire, our team handles it from first survey to final sign-off, backed by a 10-year guarantee. Upgrade Roofs is CORC-certified and holds £10 million public liability insurance."
+  },
+  {
+    question: 'Where are you based and what areas do you cover?',
+    answer: "We're based at 20 Crewe Road, Sandbach CW11 4NE and cover the whole of Cheshire — including Crewe, Congleton, Middlewich, Nantwich, Alsager, and Holmes Chapel — plus surrounding towns and villages. Free written quotes are always available; call 01270 897 606 or use the site to request yours."
+  },
+  {
     question: 'Do you offer emergency roofing services?',
     answer: 'Yes. We offer a 24/7 emergency call-out service across Cheshire and the North West. If you have an urgent leak or storm damage, call us now on 01270 897 606.'
   },
   {
     question: 'What areas of Cheshire do you cover?',
-    answer: "We cover Sandbach, Crewe, Middlewich, Congleton, Alsager, Nantwich, Holmes Chapel, and the surrounding areas throughout Cheshire. Give us a call if you're unsure whether we cover your location."
+    answer: "We're based in Sandbach and cover the whole of south and mid-Cheshire — including Crewe, Congleton, Middlewich, Nantwich, Alsager, and Holmes Chapel — plus the surrounding towns and villages throughout Cheshire. Give us a call if you're unsure whether we cover your location and our team will confirm right away."
   },
   {
     question: 'What warranty do you offer on roofing work?',

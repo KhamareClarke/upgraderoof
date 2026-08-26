@@ -65,6 +65,7 @@ export type QuoteRequest = {
   phone: string;
   postcode: string;
   service_type?: string;
+  roof_type?: string;
   message?: string;
   status?: string;
   created_at?: string;
@@ -78,6 +79,8 @@ export type ContactMessage = {
   phone?: string;
   subject: string;
   message: string;
+  roof_type?: string;
+  service_needed?: string;
   is_read?: boolean;
   created_at?: string;
 };
