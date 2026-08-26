@@ -5,7 +5,7 @@ import { QuoteForm } from '@/components/QuoteForm';
 import { InlineLeadForm } from '@/components/InlineLeadForm';
 import { StickyMobileCta } from '@/components/StickyMobileCta';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { CheckCircle, PhoneCall, MapPin, ShieldCheck, Medal, CalendarClock, Star, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer } from 'lucide-react';
+import { CheckCircle, PhoneCall, MapPin, ShieldCheck, Medal, CalendarClock, Star, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer, Clock, Phone } from 'lucide-react';
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 
