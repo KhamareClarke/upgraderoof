@@ -128,6 +128,7 @@ export default function Home() {
           </div>
           <div className="max-w-5xl mx-auto">
             <script
+              type="text/javascript"
               src="https://reputationhub.site/reputation/assets/review-widget.js"
               async
             />
