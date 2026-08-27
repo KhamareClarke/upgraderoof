@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   alternates: { canonical: 'https://www.upgraderoofs.co.uk/service-areas' },
+  robots: { index: true, follow: true },
 };
 
 const serviceAreas = [

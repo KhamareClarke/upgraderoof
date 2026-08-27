@@ -21,6 +21,7 @@ import { CtaSubMessage } from '@/components/CtaSubMessage';
 export const metadata: Metadata = {
   title: 'Sitemap | Upgrade Roofs - All Pages',
   description: 'Complete sitemap of all pages on Upgrade Roofs website. Easy navigation to all our roofing services, areas, and information.',
+  alternates: { canonical: 'https://www.upgraderoofs.co.uk/sitemap-page' },
   robots: {
     index: true,
     follow: true,

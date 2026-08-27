@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     description: 'Our service terms and conditions for roofing projects.',
     type: 'website',
   },
+  alternates: { canonical: 'https://www.upgraderoofs.co.uk/terms' },
+  robots: { index: true, follow: true },
 };
 
 export default function TermsPage() {

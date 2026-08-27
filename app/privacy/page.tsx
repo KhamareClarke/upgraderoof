@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     description: 'Our commitment to protecting your personal information and data privacy.',
     type: 'website',
   },
+  alternates: { canonical: 'https://www.upgraderoofs.co.uk/privacy' },
+  robots: { index: true, follow: true },
 };
 
 export default function PrivacyPage() {
