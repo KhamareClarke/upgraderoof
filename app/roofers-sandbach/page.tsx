@@ -5,6 +5,7 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { CheckCircle, Phone, MapPin, Shield, Award, Clock, Star, ArrowRight, Home, Layers, Flame, Droplets, Zap, Wrench } from 'lucide-react';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -31,11 +32,14 @@ export default function RoofersSandbachPage() {
               From emergency repairs to complete re-roofs, we're the local roofers Sandbach trusts.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-8 h-14 text-base">
-                  Get a Free Quote
-                </Button>
-              } />
+              <div className="flex flex-col items-center sm:items-start gap-2">
+                <QuoteForm trigger={
+                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-8 h-14 text-base">
+                    Get a Free Quote
+                  </Button>
+                } />
+                <CtaSubMessage dark />
+              </div>
               <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-8 h-14 text-base" asChild>
                 <TrackedPhoneLink href="tel:01270897606" placement="roofers_sandbach_hero">
                   <Phone className="w-5 h-5 mr-2" />
@@ -470,11 +474,14 @@ export default function RoofersSandbachPage() {
             subtitle="Get a free, no-obligation quote from Sandbach's most trusted roofing company. We'll inspect your roof, explain your options clearly, and give you a fair, written price."
           />
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <QuoteForm trigger={
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-10 h-14 text-base">
-                Get Your Free Quote
-              </Button>
-            } />
+            <div className="flex flex-col items-center gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-10 h-14 text-base">
+                  Get Your Free Quote
+                </Button>
+              } />
+              <CtaSubMessage dark />
+            </div>
             <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 font-semibold px-10 h-14 text-base" asChild>
               <TrackedPhoneLink href="tel:01270897606" placement="roofers_sandbach_bottom_cta">
                 <Phone className="w-5 h-5 mr-2" />

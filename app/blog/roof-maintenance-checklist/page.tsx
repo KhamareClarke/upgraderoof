@@ -4,6 +4,7 @@ import { Calendar, User, Clock, ArrowRight, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export default function RoofMaintenanceChecklistPost() {
   const springTasks = [
@@ -168,12 +169,15 @@ export default function RoofMaintenanceChecklistPost() {
                   Let our experienced team conduct a thorough inspection of your roof. We serve all of Cheshire 
                   including Sandbach, Crewe, Middlewich, Congleton, Alsager, Nantwich, and Holmes Chapel.
                 </p>
-                <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
-                  <Link href="/special-offer">
-                    Book Free Inspection
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+                <div className="flex flex-col items-start gap-2">
+                  <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
+                    <Link href="/special-offer">
+                      Book Free Inspection
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                  <CtaSubMessage dark />
+                </div>
               </div>
 
               <div className="text-center max-w-2xl mx-auto mt-12 mb-8">

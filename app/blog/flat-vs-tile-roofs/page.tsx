@@ -3,6 +3,7 @@ import { Calendar, User, Clock, ArrowRight, CheckCircle, XCircle } from 'lucide-
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export const metadata: Metadata = {
   title: 'Flat vs. Tile Roofs – Which Lasts Longer in the UK? | Cheshire Guide',
@@ -346,12 +347,15 @@ export default function FlatVsTileRoofsPost() {
                   Unsure which roofing system is best for your property? Our experienced team provides free consultations 
                   and detailed assessments to help you make the right choice.
                 </p>
-                <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
-                  <Link href="/contact">
-                    Get Free Consultation
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+                <div className="flex flex-col items-start gap-2">
+                  <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
+                    <Link href="/contact">
+                      Get Free Consultation
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                  <CtaSubMessage />
+                </div>
               </div>
 
               <div className="text-center max-w-2xl mx-auto mt-12 mb-8">

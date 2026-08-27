@@ -7,22 +7,19 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
-import { 
-  Phone, 
-  MessageCircle, 
-  CheckCircle, 
-  Star, 
-  Shield,
-  Clock,
+import {
+  Phone,
+  CheckCircle,
+  Star,
   ArrowUp
 } from 'lucide-react';
 import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
 import Image from 'next/image';
 import { TurnstileWidget } from '@/components/TurnstileWidget';
-import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
 import { ReviewsSection } from '@/components/ReviewsSection';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export default function SpecialOfferPage() {
   const [mounted, setMounted] = useState(false);
@@ -40,38 +37,11 @@ export default function SpecialOfferPage() {
   const [turnstileToken, setTurnstileToken] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
 
   // Set mounted state after component mounts
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Countdown timer
-  useEffect(() => {
-    if (!mounted) return;
-    
-    const targetDate = new Date('2026-07-31T23:59:59');
-    
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate.getTime() - now;
-      
-      setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000)
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [mounted]);
 
   // Scroll functionality
   useEffect(() => {
@@ -149,87 +119,23 @@ export default function SpecialOfferPage() {
 
         <div className="container-custom relative z-10 py-4 md:py-6">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left Column - Headlines */}
-            <div className="text-white space-y-4">
-              <HeroKicker light>Free Roof Inspection · Sandbach & Cheshire</HeroKicker>
+            {/* Left Column - Headlines (mirrors homepage hero) */}
+            <div className="text-white space-y-6">
+              <HeroKicker light>Est. Sandbach, Cheshire</HeroKicker>
 
-              <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                  Roof Leak or Damage in<br />
-                  <span className="text-brand-orange">Sandbach, Crewe,</span><br />
-                  <span className="text-brand-orange">Congleton or Cheshire?</span><br />
-                  <span className="text-3xl md:text-4xl">We'll Inspect It Free.</span>
-                </h1>
-                
-                <div className="bg-white/10 backdrop-blur-sm border border-brand-orange/40 border-l-4 border-l-brand-orange p-8 text-center">
-                  <div className="text-4xl md:text-5xl font-bold text-brand-orange mb-3">
-                    📞 01270 897606
-                  </div>
-                  <div className="text-xl font-semibold">
-                    We Answer in 30 Seconds!
-                  </div>
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                <p className="text-xl font-semibold text-brand-orange">
-                  Emergency Repairs • Leaks • New Roofs • Flat Roofs
-                </p>
-                <ul className="text-base text-white/90 space-y-1">
-                  <li>✓ CORC certified · properly qualified roofers</li>
-                  <li>✓ £10M public liability insurance</li>
-                  <li>✓ 10-year workmanship guarantee on all work</li>
-                  <li>✓ Free written quote · no obligation, no pressure</li>
-                  <li>✓ Based in Sandbach · fast across all of Cheshire</li>
-                </ul>
-              </div>
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight text-balance">
+                Get Your{' '}
+                <span className="text-brand-orange">Free Roof Inspection</span>
+                <br />
+                in Cheshire
+              </h1>
 
-              {/* Call-First CTAs */}
-              <div className="space-y-3 pt-2">
-                <a
-                  href="tel:01270897606"
-                  onClick={handlePhoneClick}
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-6 text-2xl rounded-xl border-l-4 border-l-brand-navy flex items-center justify-center gap-3 transition-colors"
-                >
-                  <Phone className="w-8 h-8" />
-                  <span className="!text-white">CALL NOW: 01270 897606</span>
-                </a>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <a
-                    href="https://wa.me/447379440583"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={handleWhatsAppClick}
-                    className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors"
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    <span className="!text-white">WhatsApp</span>
-                  </a>
-                  <button
-                    onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold py-4 rounded-xl transition-colors"
-                  >
-                    <span className="!text-white">📝 Quick Form</span>
-                  </button>
-                </div>
-              </div>
+              <p className="text-lg md:text-xl font-semibold text-brand-orange leading-snug">
+                We call you back within 10 minutes
+                <br />
+                <span className="text-white">guaranteed</span>
+              </p>
 
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20">
-                <div className="text-center">
-                  <Shield className="w-8 h-8 text-brand-orange mx-auto mb-2" />
-                  <div className="text-sm font-semibold">Fully Insured</div>
-                </div>
-                <div className="text-center">
-                  <Star className="w-8 h-8 text-yellow-400 fill-current mx-auto mb-2" />
-                  <div className="text-sm font-semibold">5★ Google Rating</div>
-                </div>
-                <div className="text-center">
-                  <Clock className="w-8 h-8 text-brand-orange mx-auto mb-2" />
-                  <div className="text-sm font-semibold">Same Day Response</div>
-                </div>
-              </div>
             </div>
 
             {/* Right Column - Clean Form */}
@@ -237,10 +143,10 @@ export default function SpecialOfferPage() {
               <div className="text-center mb-8">
                 <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 mb-6 border-l-4 border-l-brand-navy">
                   <div className="text-2xl font-bold mb-2">
-                    📞 Call Now: 01270 897606
+                    📞 01270 897606
                   </div>
                   <div className="text-lg opacity-90">
-                    We answer in 30 seconds · instant quote
+                    Prefer to talk? We'll answer straight away
                   </div>
                 </div>
 
@@ -249,7 +155,7 @@ export default function SpecialOfferPage() {
                     Book Your Free Roof Inspection
                   </h3>
                   <p className="text-gray-600">
-                    We'll call you back within 10 minutes to confirm
+                    Leave your details and we'll call you back within 10 minutes
                   </p>
                 </div>
               </div>
@@ -399,25 +305,75 @@ export default function SpecialOfferPage() {
                   ))}
                 </div>
                 <p className="text-center text-gray-700 italic font-medium mb-2">
-                  "Fast, friendly, and professional. The inspection was thorough and found issues early."
+                  "Fast, friendly, and thorough. They found a slipped tile before it caused any real damage."
                 </p>
-                <p className="text-center text-sm text-gray-600 font-semibold">– Kerry, Crewe</p>
+                <p className="text-center text-sm text-gray-600 font-semibold">Kerry, Crewe</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Trust Badges */}
-      <AuthorityBar />
+      {/* Trust Badges · matches homepage accreditation section */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="container-custom">
+          <div className="py-10 sm:py-12">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-3 mb-4">
+                <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Accredited &amp; Insured</span>
+                <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
+                Trusted &amp; Approved
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Recognised by leading industry bodies and trusted by thousands of customers
+              </p>
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 items-center">
+              {[
+                { src: '/images/corc_logo-1024x549.webp', alt: 'CORC certified member logo', width: 1024, height: 549, label: 'CORC Certified', meta: 'Approved member', priority: true },
+                { src: '/images/badge-light@2x.png', alt: 'MyApproved verified member badge', width: 760, height: 284, label: '£10M Insured', meta: 'Public liability cover', priority: false },
+                { src: '/images/badge-light@2x.png', alt: 'Insurance Backed Guarantee badge', width: 760, height: 284, label: 'IBG Guarantee', meta: 'Insurance-backed work', priority: false },
+                { src: '/images/Google-Review-Emblem-500x281.png', alt: 'Google reviews emblem with 5 star rating', width: 500, height: 281, label: '5-Star Rated', meta: 'Google · MyApproved verified', priority: false },
+              ].map((item, index) => (
+                <div key={index} className="group flex flex-col items-center text-center">
+                  <div className="relative w-full max-w-[190px] h-24 flex items-center justify-center bg-white border border-gray-200 rounded-lg shadow-sm p-3 transition-transform duration-300 group-hover:scale-105">
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      width={item.width}
+                      height={item.height}
+                      className="w-full h-full object-contain"
+                      priority={item.priority}
+                    />
+                  </div>
+                  <p className="mt-5 text-sm sm:text-base font-bold text-brand-navy tracking-wide">{item.label}</p>
+                  <p className="text-xs text-gray-500 mt-1 leading-snug">{item.meta}</p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <a
+                href="tel:01270897606"
+                onClick={handlePhoneClick}
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base"
+              >
+                Get a Free Quote
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Areas We Cover · matches every local keyword in the ad campaign */}
       <section className="py-10 bg-white border-b">
         <div className="container-custom">
           <SectionHeader
-            kicker="Coverage"
-            title={<>Serving Sandbach & <span className="text-brand-orange">All Surrounding Areas</span></>}
-            subtitle="Based in Sandbach CW11 · covering every corner of Cheshire within 30 minutes"
+            kicker="Where we work"
+            title={<>Roofing across <span className="text-brand-orange">Sandbach & Cheshire</span></>}
+            subtitle="Based in Sandbach CW11, we cover the surrounding towns and villages"
           />
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-w-4xl mx-auto">
             {[
@@ -446,7 +402,7 @@ export default function SpecialOfferPage() {
             ))}
           </div>
           <p className="text-center text-sm text-gray-500 mt-5">
-            Don't see your area? <a href="tel:01270897606" onClick={handlePhoneClick} className="text-brand-orange font-semibold hover:underline">Call 01270 897606</a> · we likely cover you.
+            Don't see your area? Call <a href="tel:01270897606" onClick={handlePhoneClick} className="text-brand-orange font-semibold hover:underline">01270 897606</a> and we'll let you know.
           </p>
         </div>
       </section>
@@ -456,17 +412,17 @@ export default function SpecialOfferPage() {
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
             <SectionHeader
-              kicker="Our Inspection"
-              title="What Your Free Inspection Covers"
+              kicker="What to expect"
+              title="What Your Free Roof Check Covers"
             />
             <div className="grid sm:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-8">
               {[
-                'Full roof structure check · tiles, slates, ridges',
-                'Lead flashing & valley condition',
-                'Gutters, fascias & soffits',
-                'Chimney pointing & flashings',
-                'Flat roof membranes (if applicable)',
-                'Written condition report with photos',
+                'Tiles, slates and ridges checked for cracks or movement',
+                'Lead flashing and valley condition',
+                'Gutters, fascias and soffits',
+                'Chimney pointing and flashings',
+                'Flat roof covering, if you have one',
+                'A written report with photos, so you can see for yourself',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-brand-orange flex-shrink-0 mt-0.5" />
@@ -474,44 +430,17 @@ export default function SpecialOfferPage() {
                 </div>
               ))}
             </div>
-            <Button 
-              size="lg" 
-              className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4"
-              onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <span className="!text-white">Book My Free Roof Check</span>
-            </Button>
+            <div className="flex flex-col items-center gap-2">
+              <Button
+                size="lg"
+                className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4"
+                onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <span className="!text-white">Book My Free Roof Check</span>
+              </Button>
+              <CtaSubMessage />
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Scarcity & Urgency */}
-      <section className="py-12 bg-gradient-to-r from-red-600 to-brand-orange text-white">
-        <div className="container-custom text-center">
-          <SectionHeader
-            dark
-            kicker="Limited Time Offer"
-            title="Free Roof Inspection · Offer Ends 31st July 2026"
-            subtitle="Book before the deadline. No cost, no obligation · just an expert roof check and honest advice."
-          />
-          
-          {/* Countdown Timer */}
-          <div className="flex justify-center gap-4 mb-8">
-            {Object.entries(timeLeft).map(([unit, value]) => (
-              <div key={unit} className="bg-white/20 rounded-lg p-4 min-w-[80px]">
-                <div className="text-2xl font-bold">{value.toString().padStart(2, '0')}</div>
-                <div className="text-sm capitalize">{unit}</div>
-              </div>
-            ))}
-          </div>
-
-          <Button
-            size="lg"
-            className="bg-white !text-brand-orange hover:bg-gray-100 font-bold px-8 py-4 text-lg"
-            onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            <span className="!text-brand-orange">Book My Free Inspection</span>
-          </Button>
         </div>
       </section>
 
@@ -520,19 +449,22 @@ export default function SpecialOfferPage() {
         <div className="container-custom text-center">
           <SectionHeader
             dark
-            kicker="Free Inspection"
-            title="Ready to Get Your Roof Checked for Free?"
-            subtitle="Don't wait until leaks become damage. We'll call you within 10 minutes to confirm your booking."
+            kicker="Free roof check"
+            title="Want Your Roof Looked At?"
+            subtitle="Leave your details and we'll get back to you within 10 minutes."
           />
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4 text-lg"
-              onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <span className="!text-white">Book My Free Inspection</span>
-            </Button>
+            <div className="flex flex-col items-center gap-2">
+              <Button
+                size="lg"
+                className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4 text-lg"
+                onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <span className="!text-white">Book My Free Inspection</span>
+              </Button>
+              <CtaSubMessage dark />
+            </div>
             <a
               href="tel:01270897606"
               onClick={handlePhoneClick}

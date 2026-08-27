@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-GB', {
@@ -302,11 +303,14 @@ export default function BlogPage() {
             title="Need Expert Roofing Advice?"
             subtitle="Our team is here to help with all your roofing questions"
           />
-          <Link href="/contact">
-            <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
-              Contact Us Today
-            </Button>
-          </Link>
+          <div className="flex flex-col items-center gap-2">
+            <Link href="/contact">
+              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
+                Contact Us Today
+              </Button>
+            </Link>
+            <CtaSubMessage dark />
+          </div>
           <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
             <Link href="/roofers-sandbach" className="text-white/70 hover:text-white transition-colors">Roofers Sandbach</Link>
             <span className="text-white/30">·</span>

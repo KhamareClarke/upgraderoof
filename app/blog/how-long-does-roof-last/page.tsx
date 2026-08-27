@@ -4,6 +4,7 @@ import { Calendar, User, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export default function HowLongDoesRoofLastPost() {
   const roofTypes = [
@@ -186,12 +187,15 @@ export default function HowLongDoesRoofLastPost() {
                   no-obligation roof assessments throughout Cheshire. We'll give you an honest 
                   evaluation and recommendations.
                 </p>
-                <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
-                  <Link href="/special-offer">
-                    Book Free Assessment
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+                <div className="flex flex-col items-start gap-2">
+                  <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
+                    <Link href="/special-offer">
+                      Book Free Assessment
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                  <CtaSubMessage dark />
+                </div>
               </div>
 
               <div className="text-center max-w-2xl mx-auto mt-12 mb-8">

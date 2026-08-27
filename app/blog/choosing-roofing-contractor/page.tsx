@@ -4,6 +4,7 @@ import { Calendar, User, Clock, ArrowRight, CheckCircle, XCircle, Shield } from 
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export default function ChoosingRoofingContractorPost() {
   const greenFlags = [
@@ -249,12 +250,15 @@ export default function ChoosingRoofingContractorPost() {
                   proof of all credentials, and references from satisfied customers across 
                   Sandbach, Crewe, Middlewich, Congleton, and all of Cheshire.
                 </p>
-                <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
-                  <Link href="/special-offer">
-                    Request Free Quote
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+                <div className="flex flex-col items-start gap-2">
+                  <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
+                    <Link href="/special-offer">
+                      Request Free Quote
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                  <CtaSubMessage dark />
+                </div>
               </div>
 
               <p className="mb-8">
