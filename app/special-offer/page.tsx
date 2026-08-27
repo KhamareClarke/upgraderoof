@@ -11,10 +11,13 @@ import {
   Phone,
   CheckCircle,
   Star,
-  ArrowUp
+  ArrowUp,
+  MapPin,
+  ArrowRight
 } from 'lucide-react';
 import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
 import Image from 'next/image';
+import Link from 'next/link';
 import { TurnstileWidget } from '@/components/TurnstileWidget';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
@@ -367,43 +370,61 @@ export default function SpecialOfferPage() {
         </div>
       </section>
 
-      {/* Areas We Cover · matches every local keyword in the ad campaign */}
-      <section className="py-10 bg-white border-b">
+      {/* Local Service Areas · Internal Linking Hub (matches homepage) */}
+      <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <SectionHeader
-            kicker="Where we work"
-            title={<>Roofing across <span className="text-brand-orange">Sandbach & Cheshire</span></>}
-            subtitle="Based in Sandbach CW11, we cover the surrounding towns and villages"
-          />
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-w-4xl mx-auto">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+              <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Where We Work</span>
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-3">
+              Roofing Services Across <span className="text-brand-orange">Cheshire</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-6">
+              Based in Sandbach, we serve homeowners and businesses throughout south and mid-Cheshire.
+            </p>
+            <div className="inline-flex items-center gap-3 px-6 py-4 bg-white border border-gray-300 border-t-2 border-t-brand-orange">
+              <MapPin className="w-5 h-5 text-brand-orange" />
+              <span className="text-sm font-semibold text-brand-navy">
+                Looking for{' '}
+                <Link href="/roofers-sandbach" className="text-brand-orange hover:underline font-bold">
+                  roofers in Sandbach
+                </Link>
+                ? We're based on Crewe Road, CW11 4NE
+              </span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
             {[
-              { town: 'Sandbach', postcode: 'CW11', highlight: true },
-              { town: 'Crewe', postcode: 'CW1–CW2' },
-              { town: 'Congleton', postcode: 'CW12' },
-              { town: 'Nantwich', postcode: 'CW5' },
-              { town: 'Alsager', postcode: 'ST7' },
-              { town: 'Middlewich', postcode: 'CW10' },
-              { town: 'Northwich', postcode: 'CW8–CW9' },
-              { town: 'Holmes Chapel', postcode: 'CW4' },
-              { town: 'Macclesfield', postcode: 'SK10–SK11' },
-              { town: 'Knutsford', postcode: 'WA16' },
-            ].map(({ town, postcode, highlight }) => (
-              <div
-                key={town}
-                className={`text-center py-3 px-2 rounded-xl border-2 ${
-                  highlight
-                    ? 'border-brand-orange bg-orange-50 font-bold text-brand-orange'
-                    : 'border-gray-200 bg-gray-50 text-gray-700'
-                }`}
-              >
-                <div className={`font-semibold text-sm ${highlight ? 'text-brand-orange' : 'text-brand-navy'}`}>{town}</div>
-                <div className="text-xs text-gray-500 mt-0.5">{postcode}</div>
-              </div>
+              { name: 'Roofers Sandbach', href: '/roofers-sandbach' },
+              { name: 'Roofers Crewe', href: '/roofers-crewe' },
+              { name: 'Roofers Middlewich', href: '/roofers-middlewich' },
+              { name: 'Roofers Congleton', href: '/roofers-congleton' },
+              { name: 'Roofers Nantwich', href: '/roofers-nantwich' },
+              { name: 'Roofers Alsager', href: '/roofers-alsager' },
+              { name: 'Roofers Holmes Chapel', href: '/roofers-holmes-chapel' },
+              { name: 'All Service Areas', href: '/service-areas' },
+            ].map((area, i) => (
+              <Link key={i} href={area.href} className="group flex items-center gap-2 p-4 bg-white border border-gray-300 hover:border-brand-navy transition-colors">
+                <MapPin className="w-4 h-4 text-brand-orange flex-shrink-0" />
+                <span className="text-sm font-semibold text-brand-navy group-hover:text-brand-orange transition-colors">{area.name}</span>
+              </Link>
             ))}
           </div>
-          <p className="text-center text-sm text-gray-500 mt-5">
-            Don't see your area? Call <a href="tel:01270897606" onClick={handlePhoneClick} className="text-brand-orange font-semibold hover:underline">01270 897606</a> and we'll let you know.
-          </p>
+          <div className="text-center">
+            <Button
+              size="lg"
+              className="group bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 inline-flex items-center gap-2.5"
+              asChild
+            >
+              <Link href="/service-areas" className="flex items-center justify-center gap-2.5">
+                View all service areas
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
