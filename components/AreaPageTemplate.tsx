@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { StickyMobileCta } from '@/components/StickyMobileCta';
+import { MobileContactBar } from '@/components/MobileContactBar';
 import { MapPin } from 'lucide-react';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { SectionHeader } from '@/components/SectionHeader';
@@ -191,8 +191,8 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
         }}
       />
 
-      {/* Sticky mobile CTA · Call / WhatsApp / Quick Form */}
-      <StickyMobileCta placement={`area_page_${town.toLowerCase().replace(/\s+/g, '_')}`} />
+      {/* Sticky mobile CTA · Call / WhatsApp / Message (matches homepage) */}
+      <MobileContactBar />
     </div>
   );
 }
