@@ -1,6 +1,6 @@
 'use client';
 
-import { CheckCircle, Award, Clock, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
+import { CheckCircle, Award, Clock, Shield, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
@@ -8,6 +8,7 @@ import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
+import { TrustBadgeGrid, InspectionChecklist, FinalCta } from '@/components/SpecialOfferSections';
 import { useState } from 'react';
 
 export default function TileSlateRoofingPage() {
@@ -95,6 +96,8 @@ export default function TileSlateRoofingPage() {
           </div>
         </div>
       </section>
+
+      <TrustBadgeGrid />
 
       <section className="section-padding">
         <div className="container-custom">
@@ -287,27 +290,25 @@ export default function TileSlateRoofingPage() {
         </div>
       </section>
 
+      <InspectionChecklist
+        items={[
+          'Existing roof covering, slates and tile condition',
+          'Batten condition, fixings and any slipped units',
+          'Ridge, hip and valley detailing for leaks',
+          'Underfelt or membrane condition and breathability',
+          'Best material match — slate, clay or concrete tile',
+          'A written quote with photos, so you can see for yourself',
+        ]}
+      />
+
       <ServiceAreaLinks serviceName="Tile & Slate Roofing" />
 
-      <section className="section-padding bg-white">
-        <div className="container-custom text-center px-2">
-          <SectionHeader
-            kicker="Get Started"
-            title="Ready to Start Your Roofing Project?"
-            subtitle="Get a free, no-obligation quote for your tile or slate roofing project"
-          />
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
-            <div className="flex flex-col items-center gap-2">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">
-                  Get Free Quote
-                </Button>
-              } />
-              <CtaSubMessage />
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinalCta
+        kicker="Get Started"
+        title="Ready to Start Your Roofing Project?"
+        subtitle="Get a free, no-obligation quote for your tile or slate roofing project"
+        ctaLabel="Get Free Quote"
+      />
     </div>
   );
 }

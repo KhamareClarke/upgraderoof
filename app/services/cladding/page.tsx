@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { CheckCircle, Award, Clock, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
+import { TrustBadgeGrid, InspectionChecklist, FinalCta } from '@/components/SpecialOfferSections';
 
 export const metadata: Metadata = {
   title: 'Cladding Installation Cheshire | uPVC & Timber | Upgrade Roofs',
@@ -57,6 +57,8 @@ export default function CladdingPage() {
           </div>
         </div>
       </section>
+
+      <TrustBadgeGrid />
 
       <section className="section-padding">
         <div className="container-custom">
@@ -140,6 +142,17 @@ export default function CladdingPage() {
         </div>
       </section>
 
+      <InspectionChecklist
+        items={[
+          'Wall substrate condition and suitability for cladding',
+          'Existing render, brickwork or timber checked for damage',
+          'Ventilation and breathability requirements',
+          'Preferred material, finish and colour options',
+          'Insulation and weatherproofing recommendations',
+          'A written quote with photos, so you can see for yourself',
+        ]}
+      />
+
       <ServiceAreaLinks serviceName="Cladding" />
 
       {/* FAQ Section · visible details/summary accordions + matching FAQPage JSON-LD */}
@@ -205,25 +218,12 @@ export default function CladdingPage() {
 
 
 
-      <section className="section-padding bg-brand-grey">
-        <div className="container-custom text-center px-2">
-          <SectionHeader
-            kicker="Get Started"
-            title="Ready to Transform Your Property?"
-            subtitle="Get a free quote for your cladding project in Cheshire"
-          />
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
-            <div className="flex flex-col items-center gap-2">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">
-                  Get Free Quote
-                </Button>
-              } />
-              <CtaSubMessage />
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinalCta
+        kicker="Get Started"
+        title="Ready to Transform Your Property?"
+        subtitle="Get a free quote for your cladding project in Cheshire"
+        ctaLabel="Get Free Quote"
+      />
     </div>
   );
 }

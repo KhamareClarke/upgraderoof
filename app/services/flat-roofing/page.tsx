@@ -8,6 +8,7 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
+import { TrustBadgeGrid, InspectionChecklist, FinalCta } from '@/components/SpecialOfferSections';
 
 export const metadata: Metadata = {
   title: 'Flat Roofing Cheshire | EPDM & GRP Installation | Upgrade Roofs',
@@ -57,6 +58,8 @@ export default function FlatRoofingPage() {
           </div>
         </div>
       </section>
+
+      <TrustBadgeGrid />
 
       <section className="section-padding">
         <div className="container-custom">
@@ -135,6 +138,17 @@ export default function FlatRoofingPage() {
         </div>
       </section>
 
+      <InspectionChecklist
+        items={[
+          'Existing flat roof covering, seams and flashings',
+          'Ponding areas and drainage outlet condition',
+          'Deck integrity and any soft or sagging spots',
+          'Best membrane choice — EPDM, GRP or felt',
+          'Insulation and upstand detailing',
+          'A written report with photos, so you can see for yourself',
+        ]}
+      />
+
       <ServiceAreaLinks serviceName="Flat Roofing" />
 
       {/* FAQ Section · visible details/summary accordions + matching FAQPage JSON-LD */}
@@ -200,25 +214,12 @@ export default function FlatRoofingPage() {
 
 
 
-      <section className="section-padding bg-brand-grey">
-        <div className="container-custom text-center px-2">
-          <SectionHeader
-            kicker="Get Started"
-            title="Ready to Start Your Flat Roofing Project?"
-            subtitle="Get a free, no-obligation quote for your flat roofing project in Cheshire"
-          />
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
-            <div className="flex flex-col items-center gap-2">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">
-                  Get Free Quote
-                </Button>
-              } />
-              <CtaSubMessage />
-            </div>
-          </div>
-        </div>
-      </section>
+      <FinalCta
+        kicker="Get Started"
+        title="Ready to Start Your Flat Roofing Project?"
+        subtitle="Get a free, no-obligation quote for your flat roofing project in Cheshire"
+        ctaLabel="Get Free Quote"
+      />
     </div>
   );
 }

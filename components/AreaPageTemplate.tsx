@@ -2,14 +2,13 @@ import Link from 'next/link';
 import { PHONE_DISPLAY } from '@/lib/contact';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
-import { InlineLeadForm } from '@/components/InlineLeadForm';
 import { StickyMobileCta } from '@/components/StickyMobileCta';
-import { CheckCircle, MapPin, ShieldCheck, Medal, CalendarClock, Star, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer, Clock } from 'lucide-react';
+import { CheckCircle, MapPin, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer, Clock } from 'lucide-react';
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
-import { HeroKicker } from '@/components/HeroKicker';
+import { AreaHero } from '@/components/AreaHero';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 interface AreaFAQ {
@@ -67,56 +66,8 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero · two-column, inline lead form (matches special-offer design) */}
-      <section className="relative py-10 sm:py-14 md:py-16 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/6.jpeg)' }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/90 via-brand-navy/80 to-brand-navy/70" />
-        </div>
-        <div className="container-custom relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left column · headlines & trust */}
-            <div className="text-white space-y-5">
-              <HeroKicker light>Free Roof Inspection · {town}</HeroKicker>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-                Roofers in <span className="text-brand-orange">{town}</span>
-              </h1>
-              <p className="text-lg sm:text-xl text-white/90 leading-relaxed">{intro}</p>
-
-              {/* Call-first highlight box */}
-              <div className="bg-white/10 backdrop-blur-sm border-l-4 border-brand-orange p-6 text-left max-w-md">
-                <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">{PHONE_DISPLAY}</div>
-                <div className="text-lg font-semibold">We Answer in 30 Seconds!</div>
-              </div>
-
-              <ul className="text-base text-white/90 space-y-1">
-                <li>✓ CORC certified · properly qualified roofers</li>
-                <li>✓ £10M public liability insurance</li>
-                <li>✓ 10-year workmanship guarantee on all work</li>
-                <li>✓ Free written quote · no obligation, no pressure</li>
-              </ul>
-
-              {/* Trust indicators */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20 max-w-md">
-                <div className="text-center">
-                  <ShieldCheck className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
-                  <div className="text-xs font-semibold">£10M Public Liability Insured</div>
-                </div>
-                <div className="text-center">
-                  <Star className="w-7 h-7 text-yellow-400 fill-current mx-auto mb-1.5" />
-                  <div className="text-xs font-semibold">5-Star Google · MyApproved Verified</div>
-                </div>
-                <div className="text-center">
-                  <CalendarClock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
-                  <div className="text-xs font-semibold">Same Day Response</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right column · inline lead form */}
-            <InlineLeadForm town={town} />
-          </div>
-        </div>
-      </section>
+      {/* Hero · two-column, town-specific (mirrors special-offer hero) */}
+      <AreaHero town={town} intro={intro} />
 
       {/* AEO Answer Block */}
       <section id="answer" className="bg-gray-50 border-b-2 border-brand-orange/20 py-6">
@@ -265,10 +216,10 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-gray-600 leading-relaxed text-lg">
             <p>
-              We handle everything from <Link href="/roof-repairs" className="text-brand-orange hover:underline font-medium">urgent roof repairs</Link> and 
-              <Link href="/emergency-roofing" className="text-brand-orange hover:underline font-medium"> emergency roofing</Link> call-outs to 
-              complete <Link href="/new-roofs" className="text-brand-orange hover:underline font-medium">new roof installations</Link> across {town}. 
-              Based in Sandbach, our team can usually reach {town} the same day. See our <Link href="/roofers-sandbach" className="text-brand-orange hover:underline font-medium">Sandbach roofing page</Link> for 
+              We handle everything from <Link href="/roof-repairs" className="text-brand-orange hover:underline font-medium">urgent roof repairs</Link> and
+              <Link href="/emergency-roofing" className="text-brand-orange hover:underline font-medium"> emergency roofing</Link> call-outs to
+              complete <Link href="/new-roofs" className="text-brand-orange hover:underline font-medium">new roof installations</Link> across {town}.
+              Based in Sandbach, our team can usually reach {town} the same day. See our <Link href="/roofers-sandbach" className="text-brand-orange hover:underline font-medium">Sandbach roofing page</Link> for
               local case studies, or browse our full <Link href="/services" className="text-brand-orange hover:underline font-medium">range of services</Link>.
             </p>
           </div>
@@ -334,27 +285,24 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       </section>
 
       {/* Customer Reviews */}
-      <ReviewsSection />
+      <ReviewsSection reviewCta="quote" />
 
       {/* CTA */}
       <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center">
           <SectionHeader dark kicker="Free Inspection" title={<>Need a Roofer in {town}?</>} />
-          <p className="text-xl mb-2 max-w-2xl mx-auto">
+          <p className="text-xl mb-8 max-w-2xl mx-auto">
             {ctaLine || 'Get a free, no-obligation quote. We\'ll inspect your roof and provide a clear, written price.'}
           </p>
-          <p className="text-lg mb-8 max-w-2xl mx-auto text-white/80">
-            We'll call you within 10 minutes to confirm your booking.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <div className="flex flex-col items-center gap-2">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-xl shadow-lg">
+          <div className="flex flex-col items-center gap-2">
+            <QuoteForm
+              trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-lg shadow-lg">
                   <span className="!text-white">Get Your Free Inspection</span>
                 </Button>
-              } />
-              <CtaSubMessage dark />
-            </div>
+              }
+            />
+            <CtaSubMessage dark />
           </div>
           <p className="text-white/60 text-sm mt-6">
             Based in Sandbach · Serving {town} & all of Cheshire · Call: {PHONE_DISPLAY}
