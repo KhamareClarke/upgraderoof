@@ -70,6 +70,46 @@ export function invalidNameReason(name: unknown): string | null {
   return null;
 }
 
+// --- Name / gclid isolation ---------------------------------------------------
+// Google Ads (and other ad platform) click identifiers sometimes leak into the
+// "name" field when a tracking script writes the token into the wrong input.
+// A gclid is 20-128 chars of [A-Za-z0-9_-]; it is never a human name, so detect
+// it and the token-ish shapes that commonly bleed in, and resolve the lead's
+// display name to a safe fallback rather than persisting a broken token.
+
+const GCLID_LIKE_RE = /^[A-Za-z0-9_-]{20,128}$/;
+const AD_TOKEN_PREFIX_RE = /^(gclid|gbraid|wbraid|msclkid|fbclid|ttclid|twclid|li_fat_id|utm|ad_id|click_id|adid)\b/i;
+
+/** True when the submitted "name" is actually an ad-tracking token, not a person. */
+export function nameLooksLikeTrackingToken(name: unknown): boolean {
+  if (typeof name !== 'string') return false;
+  const n = name.trim();
+  if (!n) return false;
+  if (AD_TOKEN_PREFIX_RE.test(n)) return true;
+  // A self-authored name is rarely a naked 20+ char token with no space —
+  // while a gclid always is. Guard against false positives on long hyphenated
+  // legal names by requiring the token shape AND an absence of whitespace.
+  return !/\s/.test(n) && GCLID_LIKE_RE.test(n);
+}
+
+/**
+ * Resolve the lead display name, isolating any ad-tracking token that leaked
+ * into the name field. Returns a safe name (falling back to a placeholder) and
+ * the captured token, so the caller can merge it into its dedicated gclid
+ * metadata instead of persisting it as the contact's name.
+ */
+export function sanitizeLeadName(name: unknown): { name: string; leakedGclid?: string } {
+  if (!nameLooksLikeTrackingToken(name)) {
+    return { name: typeof name === 'string' && name.trim() ? name : name as string };
+  }
+  const raw = String(name).trim();
+  // Keep the token for offline-conversion attribution; do not make it the name.
+  return {
+    name: 'Web Lead (Unnamed)',
+    leakedGclid: GCLID_LIKE_RE.test(raw) ? raw : undefined,
+  };
+}
+
 // --- Email ------------------------------------------------------------------
 // The contact form (send-contact) is the site's only email-collecting surface,
 // and its previous regex check was far too loose — bots slip disposable-domain

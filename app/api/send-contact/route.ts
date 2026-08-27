@@ -3,7 +3,7 @@ import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 import { checkRateLimit, getClientIp, isTooFast } from '@/lib/rate-limit';
-import { invalidNameReason, invalidEmailReason } from '@/lib/lead-validation';
+import { invalidNameReason, invalidEmailReason, sanitizeLeadName } from '@/lib/lead-validation';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { logLeadSubmission } from '@/lib/lead-logger';
 import { isSpamSubmission } from '@/lib/spam-filter';
@@ -71,6 +71,14 @@ export async function POST(request: NextRequest) {
         { status: 429 }
       );
     }
+
+    // Isolate any ad-tracking token that leaked into the name field: keep it in
+    // the dedicated gclid metadata, fall the display name back to a placeholder.
+    const nameResolution = sanitizeLeadName(formData?.name);
+    if (nameResolution.leakedGclid && !formData?.gclid) {
+      formData.gclid = nameResolution.leakedGclid;
+    }
+    formData.name = nameResolution.name;
 
     if (!formData?.name || !formData?.email) {
       return NextResponse.json(
