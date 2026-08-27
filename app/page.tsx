@@ -6,7 +6,7 @@ import { CTABanner } from '@/components/CTABanner';
 import { GalleryBlock, FAQBlock, ContactBlock } from '@/components/HomepageSections';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { Button } from '@/components/ui/button';
-import { GOOGLE_REVIEW_URL } from '@/lib/contact';
+import { ReviewsSection } from '@/components/ReviewsSection';
 import { MapPin, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -110,48 +110,9 @@ export default function Home() {
         <WhyChooseUs />
       </section>
 
-      {/* Live Google Reviews · real customer reviews from the Google Business Profile API */}
-      <section id="reviews" className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center gap-3 mb-4">
-              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
-              <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Customer Reviews</span>
-              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-2">
-              Real Reviews from Real Customers
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Rated 5★ on Google by homeowners across Cheshire&apos;s towns and villages
-            </p>
-          </div>
-          <div className="max-w-5xl mx-auto">
-            <script
-              type="text/javascript"
-              src="https://reputationhub.site/reputation/assets/review-widget.js"
-              async
-            />
-            <iframe
-              className="lc_reviews_widget"
-              src="https://reputationhub.site/reputation/widgets/review_widget/Lk9anvdNEEpmFiRndNJk?widgetId=69b5695b24ab18f7cd169219"
-              frameBorder="0"
-              scrolling="no"
-              style={{ minWidth: '100%', width: '100%' }}
-              title="Customer reviews"
-            />
-          </div>
-          <div className="text-center mt-10">
-            <a
-              href={GOOGLE_REVIEW_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-brand-orange px-6 py-3 font-semibold text-white shadow-sm transition-colors hover:bg-brand-orange/90"
-            >
-              Leave us a review <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
-        </div>
+      {/* Live customer reviews · reputationhub widget */}
+      <section id="reviews">
+        <ReviewsSection />
       </section>
       <div className="bg-gradient-to-b from-white via-gray-50 to-gray-100">
         <section id="gallery">

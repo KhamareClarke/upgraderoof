@@ -20,7 +20,7 @@ export function GhlReviewsWidget() {
         frameBorder="0"
         scrolling="no"
         loading="lazy"
-        title="Upgrade Roofs Google reviews"
+        title="Upgrade Roofs customer reviews"
       />
       <Script src={WIDGET_SCRIPT} strategy="afterInteractive" />
     </div>

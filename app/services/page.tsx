@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { SectionHeader } from '@/components/SectionHeader';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
+export const dynamic = 'force-static';
 export const revalidate = false;
 
 export const metadata: Metadata = {

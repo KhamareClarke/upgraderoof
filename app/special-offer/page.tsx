@@ -22,6 +22,7 @@ import { TurnstileWidget } from '@/components/TurnstileWidget';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
+import { ReviewsSection } from '@/components/ReviewsSection';
 
 export default function SpecialOfferPage() {
   const [mounted, setMounted] = useState(false);
@@ -543,6 +544,9 @@ export default function SpecialOfferPage() {
           </div>
         </div>
       </section>
+
+      {/* Customer Reviews · reputationhub widget */}
+      <ReviewsSection />
 
       {/* Mobile Sticky CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t p-3">

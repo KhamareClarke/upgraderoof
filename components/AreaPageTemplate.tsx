@@ -7,7 +7,7 @@ import { StickyMobileCta } from '@/components/StickyMobileCta';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { CheckCircle, PhoneCall, MapPin, ShieldCheck, Medal, CalendarClock, Star, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer, Clock, Phone } from 'lucide-react';
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
-import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
+import { ReviewsSection } from '@/components/ReviewsSection';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
@@ -340,30 +340,8 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
         </div>
       </section>
 
-      {/* Google Reviews */}
-      <section className="section-padding bg-white">
-        <div className="container-custom">
-          <SectionHeader
-            kicker="Reviews"
-            title={<>Why {town} Homeowners Choose Us</>}
-            subtitle={<>
-              <span className="inline-flex items-center justify-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                ))}
-              </span>{' '}5★ rated on Google with hundreds of verified customer reviews
-            </>}
-          />
-          <div className="max-w-5xl mx-auto">
-            <GhlReviewsWidget />
-          </div>
-          <div className="text-center mt-8">
-            <Link href="/reviews" className="text-brand-orange font-semibold hover:underline inline-flex items-center gap-1">
-              Read all reviews <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Customer Reviews */}
+      <ReviewsSection />
 
       {/* CTA */}
       <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">

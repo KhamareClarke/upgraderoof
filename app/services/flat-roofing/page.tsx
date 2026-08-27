@@ -7,6 +7,7 @@ import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export const metadata: Metadata = {
   title: 'Flat Roofing Cheshire | EPDM & GRP Installation | Upgrade Roofs',
@@ -34,11 +35,14 @@ export default function FlatRoofingPage() {
             <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 px-2">
               Superior waterproofing with modern materials and expert installation
             </p>
-            <QuoteForm trigger={
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">
-                Get Free Quote
-              </Button>
-            } />
+            <div className="flex flex-col items-center sm:items-start gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">
+                  Get Free Quote
+                </Button>
+              } />
+              <CtaSubMessage dark />
+            </div>
           </div>
         </div>
       </section>
@@ -204,11 +208,14 @@ export default function FlatRoofingPage() {
             subtitle="Get a free, no-obligation quote for your flat roofing project in Cheshire"
           />
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
-            <QuoteForm trigger={
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">
-                Get Free Quote
-              </Button>
-            } />
+            <div className="flex flex-col items-center gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">
+                  Get Free Quote
+                </Button>
+              } />
+              <CtaSubMessage />
+            </div>
             <Button size="lg" variant="outline" className="border-2 border-brand-navy text-brand-navy hover:bg-brand-navy hover:text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto" asChild>
               <Link href="/services" className="flex items-center justify-center">
                 View All Services
