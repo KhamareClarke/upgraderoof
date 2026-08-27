@@ -15,6 +15,7 @@ import { trackQuoteRequest, trackPhoneClick, getGclid } from '@/lib/tracking';
 import Image from 'next/image';
 import Link from 'next/link';
 import { LeadFormWizard } from '@/components/LeadFormWizard';
+import { QuoteForm } from '@/components/QuoteForm';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
 import { ReviewsSection } from '@/components/ReviewsSection';
@@ -226,13 +227,13 @@ export default function SpecialOfferPage() {
               ))}
             </div>
             <div className="text-center mt-10">
-              <a
-                href="tel:01270897606"
-                onClick={handlePhoneClick}
-                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base"
-              >
-                Get a Free Quote
-              </a>
+              <QuoteForm
+                trigger={
+                  <span className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base cursor-pointer">
+                    Get a Free Quote
+                  </span>
+                }
+              />
             </div>
           </div>
         </div>
@@ -282,16 +283,14 @@ export default function SpecialOfferPage() {
             ))}
           </div>
           <div className="text-center">
-            <Button
-              size="lg"
-              className="group bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 inline-flex items-center gap-2.5"
-              asChild
-            >
-              <Link href="/service-areas" className="flex items-center justify-center gap-2.5">
-                View all service areas
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </Button>
+            <QuoteForm
+              trigger={
+                <span className="inline-flex items-center justify-center gap-2.5 bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 cursor-pointer">
+                  Request a Free Quote
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300" />
+                </span>
+              }
+            />
           </div>
         </div>
       </section>
@@ -320,13 +319,16 @@ export default function SpecialOfferPage() {
               ))}
             </div>
             <div className="flex flex-col items-center gap-2">
-              <Button
-                size="lg"
-                className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4"
-                onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <span className="!text-white">Book My Free Roof Check</span>
-              </Button>
+              <QuoteForm
+                trigger={
+                  <Button
+                    size="lg"
+                    className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4"
+                  >
+                    <span className="!text-white">Book My Free Roof Check</span>
+                  </Button>
+                }
+              />
               <CtaSubMessage />
             </div>
           </div>
@@ -344,20 +346,23 @@ export default function SpecialOfferPage() {
           />
           
           <div className="flex flex-col items-center gap-2">
-            <Button
-              size="lg"
-              className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4 text-lg"
-              onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <span className="!text-white">Book My Free Inspection</span>
-            </Button>
+            <QuoteForm
+              trigger={
+                <Button
+                  size="lg"
+                  className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4 text-lg"
+                >
+                  <span className="!text-white">Book My Free Inspection</span>
+                </Button>
+              }
+            />
             <CtaSubMessage dark />
           </div>
         </div>
       </section>
 
       {/* Customer Reviews · reputationhub widget */}
-      <ReviewsSection />
+      <ReviewsSection reviewCta="quote" />
 
       {/* FAQ · cloned from homepage, styled to match this page */}
       <FAQ />

@@ -2,6 +2,7 @@
 
 import { Calendar, User, Clock, ArrowRight, Sun, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -278,12 +279,15 @@ export default function SkylightInstallationGuidePost() {
                   Transform your home with natural light. Our experienced team installs all types 
                   of skylights across Cheshire with full weatherproofing guarantees.
                 </p>
-                <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
-                  <Link href="/services/skylights-roof-windows">
-                    View Skylight Services
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+                <div className="flex flex-col items-start gap-2">
+                  <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
+                    <Link href="/services/skylights-roof-windows">
+                      View Skylight Services
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                  <CtaSubMessage dark />
+                </div>
               </div>
 
               <p className="mb-8">

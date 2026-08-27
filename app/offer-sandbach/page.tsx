@@ -20,6 +20,7 @@ import { trackQuoteRequest, trackPhoneClick, getGclid } from '@/lib/tracking';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
+import { QuoteForm } from '@/components/QuoteForm';
 
 export default function OfferSandbachPage() {
   const [mounted, setMounted] = useState(false);
@@ -234,7 +235,7 @@ export default function OfferSandbachPage() {
                 </div>
               ))}
             </div>
-            <div className="text-center mt-10">
+            <div className="text-center mt-10 flex flex-col items-center gap-2">
               <a
                 href="tel:01270897606"
                 onClick={() => trackPhoneClick('offer_sandbach_trust_badges')}
@@ -242,6 +243,7 @@ export default function OfferSandbachPage() {
               >
                 Get a Free Quote
               </a>
+              <CtaSubMessage dark={false} />
             </div>
           </div>
         </div>
@@ -280,7 +282,7 @@ export default function OfferSandbachPage() {
             subtitle="Don't wait until leaks become damage. We'll call you within 10 minutes to confirm your booking."
           />
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col items-center gap-2">
             <Button
               size="lg"
               className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4 text-lg"
@@ -288,14 +290,7 @@ export default function OfferSandbachPage() {
             >
               <span className="!text-white">Book My Free Inspection</span>
             </Button>
-            <a
-              href="tel:01270897606"
-              onClick={() => trackPhoneClick('offer_sandbach_bottom_cta')}
-              className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 py-4 text-lg rounded-md flex items-center justify-center gap-2 transition-colors"
-            >
-              <Phone className="w-5 h-5" />
-              <span className="!text-white">Call Now</span>
-            </a>
+            <CtaSubMessage dark />
           </div>
         </div>
       </section>
@@ -384,16 +379,14 @@ export default function OfferSandbachPage() {
             ))}
           </div>
           <div className="text-center">
-            <Button
-              size="lg"
-              className="group bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 inline-flex items-center gap-2.5"
-              asChild
-            >
-              <Link href="/service-areas" className="flex items-center justify-center gap-2.5">
-                View all service areas
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </Link>
-            </Button>
+            <QuoteForm
+              trigger={
+                <span className="inline-flex items-center justify-center gap-2.5 bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 cursor-pointer">
+                  Request a Free Quote
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300" />
+                </span>
+              }
+            />
           </div>
         </div>
       </section>

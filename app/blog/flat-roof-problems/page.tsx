@@ -2,6 +2,7 @@
 
 import { Calendar, User, Clock, ArrowRight, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -254,12 +255,15 @@ export default function FlatRoofProblemsPost() {
                   From repairs to complete replacements, our team specializes in all flat roofing 
                   systems. We serve Sandbach, Crewe, Middlewich, Congleton, and all of Cheshire.
                 </p>
-                <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
-                  <Link href="/services/flat-roofing">
-                    View Flat Roof Services
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+                <div className="flex flex-col items-start gap-2">
+                  <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
+                    <Link href="/services/flat-roofing">
+                      View Flat Roof Services
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                  <CtaSubMessage dark />
+                </div>
               </div>
 
               <p className="mb-8">

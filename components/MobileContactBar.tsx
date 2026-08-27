@@ -1,6 +1,6 @@
 'use client';
 
-import { PhoneCall, Send } from 'lucide-react';
+import { PhoneCall, Mail } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { trackPhoneClick, trackWhatsAppClick, trackEmailClick } from '@/lib/tracking';
 
@@ -50,13 +50,13 @@ export function MobileContactBar() {
         <a
           href="mailto:upgraderoofs@yahoo.com"
           className="flex flex-col items-center gap-1 text-brand-navy hover:text-blue-500 transition-colors group"
-          aria-label="Email us"
+          aria-label="Message us"
           onClick={() => trackEmailClick(placement)}
         >
           <div className="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
-            <Send className="w-5 h-5 text-blue-500" />
+            <Mail className="w-5 h-5 text-blue-500" />
           </div>
-          <span className="text-xs font-medium">Email</span>
+          <span className="text-xs font-medium">Message</span>
         </a>
       </div>
     </div>
