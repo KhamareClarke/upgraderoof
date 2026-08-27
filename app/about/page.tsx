@@ -242,25 +242,13 @@ export default function AboutPage() {
             title="Ready to Work With Us?"
             subtitle="Get a free, no-obligation quote for your roofing project today"
           />
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
-            <div className="flex flex-col items-center gap-2">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-13 md:h-14 text-base sm:text-lg w-full sm:w-auto">
-                  Get Free Quote
-                </Button>
-              } />
-              <CtaSubMessage dark />
-            </div>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-white !text-white bg-transparent hover:bg-white hover:!text-brand-navy font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-13 md:h-14 text-base sm:text-lg w-full sm:w-auto"
-              asChild
-            >
-              <Link href="/services" className="!text-white hover:!text-brand-navy flex items-center justify-center">
-                View Services
-              </Link>
-            </Button>
+          <div className="flex flex-col items-center gap-2">
+            <QuoteForm trigger={
+              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-13 md:h-14 text-base sm:text-lg w-full sm:w-auto">
+                Get Free Quote
+              </Button>
+            } />
+            <CtaSubMessage dark />
           </div>
         </div>
       </section>

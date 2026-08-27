@@ -69,21 +69,13 @@ export default function NewRoofsPage() {
             <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl">
               Complete roof replacements from our Sandbach base. Premium materials, expert craftsmanship, and a 10-year guarantee on every installation. Serving Sandbach and all of Cheshire.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex flex-col items-center sm:items-start gap-2">
-                <QuoteForm trigger={
-                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
-                    Get Free Quote
-                  </Button>
-                } />
-                <CtaSubMessage dark />
-              </div>
-              <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14" asChild>
-                <TrackedPhoneLink href="tel:01270897606" placement="new_roofs_hero">
-                  <Phone className="w-5 h-5 mr-2" />
-                  01270 897 606
-                </TrackedPhoneLink>
-              </Button>
+            <div className="flex flex-col items-center sm:items-start gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
+                  Get Free Quote
+                </Button>
+              } />
+              <CtaSubMessage dark />
             </div>
           </div>
         </div>
@@ -302,21 +294,13 @@ export default function NewRoofsPage() {
             title="Ready for a New Roof in Sandbach?"
             subtitle="Get a free, no-obligation quote for your complete roof replacement in Sandbach or across Cheshire"
           />
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14" asChild>
-              <TrackedPhoneLink href="tel:01270897606" placement="new_roofs_bottom_cta">
-                <Phone className="w-5 h-5 mr-2" />
-                Call 01270 897 606
-              </TrackedPhoneLink>
-            </Button>
-            <div className="flex flex-col items-center gap-2">
-              <QuoteForm trigger={
-                <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14">
-                  Get Free Quote
-                </Button>
-              } />
-              <CtaSubMessage dark />
-            </div>
+          <div className="flex flex-col items-center gap-2">
+            <QuoteForm trigger={
+              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14">
+                Get Free Quote
+              </Button>
+            } />
+            <CtaSubMessage dark />
           </div>
         </div>
       </section>

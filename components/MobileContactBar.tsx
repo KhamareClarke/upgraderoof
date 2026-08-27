@@ -6,12 +6,16 @@ import { trackPhoneClick, trackWhatsAppClick, trackEmailClick } from '@/lib/trac
 
 export function MobileContactBar() {
   const pathname = usePathname();
-  
-  // Hide on special-offer page as it has its own mobile CTA
-  if (pathname === '/special-offer') {
-    return null;
-  }
-  
+
+  // Per-page tracking identity, derived from the route so every page shares this
+  // single bottom bar rather than rendering its own copy.
+  const placement =
+    pathname === '/special-offer'
+      ? 'special_offer'
+      : pathname === '/offer-sandbach'
+        ? 'offer_sandbach'
+        : 'mobile_contact_bar';
+
   return (
     <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-lg md:hidden">
       <div className="flex items-center justify-around py-3 px-4">
@@ -19,7 +23,7 @@ export function MobileContactBar() {
           href="tel:01270897606"
           className="flex flex-col items-center gap-1 text-brand-navy hover:text-brand-orange transition-colors group"
           aria-label="Call us"
-          onClick={() => trackPhoneClick('mobile_contact_bar')}
+          onClick={() => trackPhoneClick(placement)}
         >
           <div className="w-10 h-10 bg-brand-orange/10 rounded-full flex items-center justify-center group-hover:bg-brand-orange/20 transition-colors">
             <PhoneCall className="w-5 h-5 text-brand-orange" />
@@ -33,7 +37,7 @@ export function MobileContactBar() {
           rel="noopener noreferrer"
           className="flex flex-col items-center gap-1 text-brand-navy hover:text-green-500 transition-colors group"
           aria-label="Contact us on WhatsApp"
-          onClick={() => trackWhatsAppClick('mobile_contact_bar')}
+          onClick={() => trackWhatsAppClick(placement)}
         >
           <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center group-hover:bg-green-500/20 transition-colors">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -47,7 +51,7 @@ export function MobileContactBar() {
           href="mailto:upgraderoofs@yahoo.com"
           className="flex flex-col items-center gap-1 text-brand-navy hover:text-blue-500 transition-colors group"
           aria-label="Email us"
-          onClick={() => trackEmailClick('mobile_contact_bar')}
+          onClick={() => trackEmailClick(placement)}
         >
           <div className="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center group-hover:bg-blue-500/20 transition-colors">
             <Send className="w-5 h-5 text-blue-500" />

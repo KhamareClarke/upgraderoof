@@ -30,12 +30,6 @@ export function CTABanner() {
               <CtaSubMessage dark />
             </div>
           </div>
-
-          <div className="mt-6 sm:mt-7 md:mt-8 flex justify-center items-center text-white">
-            <TrackedPhoneLink href="tel:01270897606" placement="cta_banner_landline" className="text-lg sm:text-xl md:text-2xl font-bold hover:text-brand-orange transition-colors">
-              01270 897 606
-            </TrackedPhoneLink>
-          </div>
         </div>
       </div>
     </section>

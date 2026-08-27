@@ -6,6 +6,7 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { TrackedEmailLink } from '@/components/TrackedEmailLink';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Free Roofing Quote Cheshire | 01270 897606',
@@ -261,6 +262,7 @@ export default function ContactPage() {
                 <span className="hidden sm:inline">Call Now: </span>01270 897 606
               </button>
             </TrackedPhoneLink>
+            <div className="mt-3"><CtaSubMessage dark /></div>
           </div>
         </div>
       </section>

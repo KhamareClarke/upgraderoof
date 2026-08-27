@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { BrickWall, Layers, Flame, CloudRain, Sun, Fence, ArrowRight } from 'lucide-react';
 import { QuoteForm } from '@/components/QuoteForm';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 import Image from 'next/image';
 
 export function Services() {
@@ -130,6 +131,7 @@ export function Services() {
               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Button>
           } />
+          <CtaSubMessage className="mt-3" />
         </div>
       </div>
     </section>

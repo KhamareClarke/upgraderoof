@@ -2,43 +2,27 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import {
   Phone,
   CheckCircle,
-  Star,
   ArrowUp,
   MapPin,
   ArrowRight
 } from 'lucide-react';
-import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
+import { trackQuoteRequest, trackPhoneClick, getGclid } from '@/lib/tracking';
 import Image from 'next/image';
 import Link from 'next/link';
-import { TurnstileWidget } from '@/components/TurnstileWidget';
+import { LeadFormWizard } from '@/components/LeadFormWizard';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
+import { FAQ } from '@/components/FAQ';
 
 export default function SpecialOfferPage() {
   const [mounted, setMounted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    postcode: '',
-    email: '',
-    roofType: '',
-    serviceNeeded: '',
-    message: '',
-    sameDayCallback: false
-  });
-  const [honeypot, setHoneypot] = useState('');
-  const [turnstileToken, setTurnstileToken] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // Set mounted state after component mounts
@@ -61,47 +45,42 @@ export default function SpecialOfferPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      // Call the API route to send email
-      const response = await fetch('/api/send-special-offer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...formData, gclid: getGclid(), turnstileToken, website: honeypot }),
-      });
+  const handleSubmit = async (values: Record<string, string>, extra: { turnstileToken: string; honeypot: string }) => {
+    const formData = {
+      name: values.name,
+      phone: values.phone,
+      postcode: values.postcode,
+      email: values.email,
+      roofType: values.roofType,
+      serviceNeeded: values.serviceNeeded,
+      message: values.message,
+      sameDayCallback: values.sameDayCallback === 'yes',
+    };
 
-      const result = await response.json();
+    const response = await fetch('/api/send-special-offer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...formData, gclid: getGclid(), turnstileToken: extra.turnstileToken, website: extra.honeypot }),
+    });
 
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit form');
-      }
+    const result = await response.json();
 
-      // Track only after confirmed success
-      trackQuoteRequest({
-        service_type: formData.serviceNeeded || formData.roofType,
-        postcode: formData.postcode,
-      });
-
-      // Redirect to thank you page on success
-      window.location.href = '/thank-you';
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Failed to submit form. Please try again or call us directly at 01270 897606');
-      setIsSubmitting(false);
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to submit form');
     }
+
+    // Track only after confirmed success
+    trackQuoteRequest({
+      service_type: formData.serviceNeeded || formData.roofType,
+      postcode: formData.postcode,
+    });
+
+    // Redirect to thank you page on success
+    window.location.href = '/thank-you';
   };
 
   const handlePhoneClick = () => {
     trackPhoneClick('special_offer');
-  };
-
-  const handleWhatsAppClick = () => {
-    trackWhatsAppClick('special_offer');
   };
 
   return (
@@ -144,14 +123,21 @@ export default function SpecialOfferPage() {
             {/* Right Column - Clean Form */}
             <div className="bg-white p-8 border border-gray-200 border-l-4 border-l-brand-navy">
               <div className="text-center mb-8">
-                <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 mb-6 border-l-4 border-l-brand-navy">
-                  <div className="text-2xl font-bold mb-2">
-                    📞 01270 897606
-                  </div>
-                  <div className="text-lg opacity-90">
-                    Prefer to talk? We'll answer straight away
-                  </div>
-                </div>
+                <a
+                  href="tel:01270897606"
+                  onClick={handlePhoneClick}
+                  className="block w-full border-2 border-brand-navy p-5 mb-6 text-center hover:border-brand-orange transition-colors"
+                >
+                  <span className="block text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+                    Call us direct
+                  </span>
+                  <span className="block mt-1 text-2xl font-bold text-brand-navy">
+                    01270 897 606
+                  </span>
+                  <span className="block mt-1 text-sm text-gray-600">
+                    We answer straight away
+                  </span>
+                </a>
 
                 <div className="space-y-2">
                   <h3 className="text-2xl font-bold text-brand-navy">
@@ -163,155 +149,37 @@ export default function SpecialOfferPage() {
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="name" className="text-brand-navy font-semibold text-sm">Name *</Label>
-                    <Input
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      placeholder="John Smith"
-                      required
-                      className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="phone" className="text-brand-navy font-semibold text-sm">Phone *</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      placeholder="Your phone number"
-                      required
-                      className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
-                    />
-                  </div>
-                </div>
+              <LeadFormWizard
+                config={{
+                  onSubmit: handleSubmit,
+                  submitLabel: 'Request Callback',
+                  headingStep1: 'Project & Contact Basics',
+                  subStep1: 'Tell us what you need and how to reach you.',
+                  headingStep2: 'Location & Final Confirmation',
+                  subStep2: 'Add your postcode and any project details.',
+                  extraStep2: (values, update) => (
+                    <div className="flex items-center gap-3 p-4 bg-gray-50 border border-gray-300 border-l-4 border-l-brand-orange rounded-md">
+                      <Checkbox
+                        checked={values.sameDayCallback === 'yes'}
+                        onCheckedChange={(checked) => update('sameDayCallback', checked ? 'yes' : '')}
+                      />
+                      <Label className="text-brand-navy font-medium">
+                        I'd like a same-day callback
+                      </Label>
+                    </div>
+                  ),
+                  validate: (values) => {
+                    const email = values.email?.trim() ?? '';
+                    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Please enter a valid email address.';
+                    return null;
+                  },
+                }}
+              />
 
-                <div>
-                  <Label htmlFor="postcode" className="text-brand-navy font-semibold text-sm">Postcode *</Label>
-                  <Input
-                    id="postcode"
-                    value={formData.postcode}
-                    onChange={(e) => setFormData({...formData, postcode: e.target.value})}
-                    placeholder="CW1 0LX"
-                    required
-                    className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
-                  />
-                </div>
-
-                <div>
-                  <Label htmlFor="email" className="text-brand-navy font-semibold text-sm">Email Address</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    placeholder="john@example.com"
-                    autoComplete="email"
-                    className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="roofType" className="text-brand-navy font-semibold text-sm">Roof Type</Label>
-                    <Select value={formData.roofType} onValueChange={(value) => setFormData({...formData, roofType: value})}>
-                      <SelectTrigger className="mt-2 h-12 text-base border-2 rounded-xl">
-                        <SelectValue placeholder="Select type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="tile">Tile Roof</SelectItem>
-                        <SelectItem value="slate">Slate Roof</SelectItem>
-                        <SelectItem value="flat">Flat Roof</SelectItem>
-                        <SelectItem value="other">Other/Not Sure</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label htmlFor="serviceNeeded" className="text-brand-navy font-semibold text-sm">Service Needed</Label>
-                    <Select value={formData.serviceNeeded} onValueChange={(value) => setFormData({...formData, serviceNeeded: value})}>
-                      <SelectTrigger className="mt-2 h-12 text-base border-2 rounded-xl">
-                        <SelectValue placeholder="What you need" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="leak-repair">Leak Repair</SelectItem>
-                        <SelectItem value="new-roof">New Roof</SelectItem>
-                        <SelectItem value="flat-roof">Flat Roof</SelectItem>
-                        <SelectItem value="tile-replacement">Tile Replacement</SelectItem>
-                        <SelectItem value="guttering">Guttering/Fascias</SelectItem>
-                        <SelectItem value="general">General Inspection</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="message" className="text-brand-navy font-semibold text-sm">Your Project</Label>
-                  <Textarea
-                    id="message"
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                    placeholder="Tell us about your roofing project, including property type, approximate size, and any specific requirements..."
-                    rows={4}
-                    className="mt-2 text-base border-2 focus:border-brand-orange rounded-xl resize-none"
-                  />
-                </div>
-
-                <div className="flex items-center space-x-3 p-4 bg-blue-50 rounded-xl">
-                  <Checkbox
-                    id="callback"
-                    checked={formData.sameDayCallback}
-                    onCheckedChange={(checked) => setFormData({...formData, sameDayCallback: !!checked})}
-                  />
-                  <Label htmlFor="callback" className="text-brand-navy font-medium">
-                    I'd like a same-day callback
-                  </Label>
-                </div>
-
-                {/* Honeypot field · hidden from humans, visible to bots */}
-                <div className="hidden" aria-hidden="true">
-                  <Label htmlFor="offer-website">Website</Label>
-                  <Input
-                    id="offer-website"
-                    type="text"
-                    value={honeypot}
-                    onChange={(e) => setHoneypot(e.target.value)}
-                    tabIndex={-1}
-                    autoComplete="off"
-                  />
-                </div>
-
-                <TurnstileWidget onToken={setTurnstileToken} />
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold py-4 text-xl h-16 rounded-xl border-l-4 border-l-brand-navy"
-                >
-                  <span className="!text-white">{isSubmitting ? 'Submitting...' : 'Request Callback'}</span>
-                </Button>
-
-                <p className="text-xs text-gray-500 text-center leading-relaxed">
-                  By submitting, you agree to be contacted about our services.<br />
-                  No spam, unsubscribe anytime.
-                </p>
-              </form>
-
-              {/* Review snippet under form */}
-              <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 border-l-4 border-l-brand-navy">
-                <div className="flex items-center justify-center gap-1 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                  ))}
-                </div>
-                <p className="text-center text-gray-700 italic font-medium mb-2">
-                  "Fast, friendly, and thorough. They found a slipped tile before it caused any real damage."
-                </p>
-                <p className="text-center text-sm text-gray-600 font-semibold">Kerry, Crewe</p>
-              </div>
+              <p className="mt-6 text-xs text-gray-500 text-center leading-relaxed">
+                By submitting, you agree to be contacted about our services.<br />
+                No spam, unsubscribe anytime.
+              </p>
             </div>
           </div>
         </div>
@@ -475,25 +343,15 @@ export default function SpecialOfferPage() {
             subtitle="Leave your details and we'll get back to you within 10 minutes."
           />
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <div className="flex flex-col items-center gap-2">
-              <Button
-                size="lg"
-                className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4 text-lg"
-                onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-              >
-                <span className="!text-white">Book My Free Inspection</span>
-              </Button>
-              <CtaSubMessage dark />
-            </div>
-            <a
-              href="tel:01270897606"
-              onClick={handlePhoneClick}
-              className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 py-4 text-lg rounded-md flex items-center justify-center gap-2 transition-colors"
+          <div className="flex flex-col items-center gap-2">
+            <Button
+              size="lg"
+              className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4 text-lg"
+              onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <Phone className="w-5 h-5" />
-              <span className="!text-white">Call Now</span>
-            </a>
+              <span className="!text-white">Book My Free Inspection</span>
+            </Button>
+            <CtaSubMessage dark />
           </div>
         </div>
       </section>
@@ -501,41 +359,14 @@ export default function SpecialOfferPage() {
       {/* Customer Reviews · reputationhub widget */}
       <ReviewsSection />
 
-      {/* Mobile Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t p-3">
-        <div className="flex gap-2">
-          <a
-            href="tel:01270897606"
-            onClick={handlePhoneClick}
-            className="flex-1 bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold text-sm py-4 px-3 rounded-md text-center animate-pulse flex items-center justify-center"
-          >
-            📞 CALL NOW
-          </a>
-          <a
-            href="https://wa.me/447379440583"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={handleWhatsAppClick}
-            className="bg-green-500 hover:bg-green-600 !text-white font-bold px-3 py-4 text-xs whitespace-nowrap rounded-md flex items-center justify-center gap-1"
-          >
-            <span>💬</span>
-            <span className="!text-white">WhatsApp</span>
-          </a>
-          <button
-            onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-blue-500 hover:bg-blue-600 !text-white font-bold px-3 py-4 text-xs whitespace-nowrap rounded-md flex items-center justify-center gap-1"
-          >
-            <span>📝</span>
-            <span className="!text-white">Quick Form</span>
-          </button>
-        </div>
-      </div>
+      {/* FAQ · cloned from homepage, styled to match this page */}
+      <FAQ />
 
       {/* Scroll to Top */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-20 right-4 z-40 bg-brand-navy text-white p-3 rounded-full hover:bg-brand-navy/90 transition-all"
+          className="fixed bottom-20 right-4 z-40 bg-brand-navy text-white p-3 rounded hover:bg-brand-navy/90 transition-all"
         >
           <ArrowUp className="w-5 h-5" />
         </button>

@@ -305,11 +305,6 @@ export default function TileSlateRoofingPage() {
               } />
               <CtaSubMessage />
             </div>
-            <Button size="lg" variant="outline" className="border-2 border-brand-navy text-brand-navy hover:bg-brand-navy hover:text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto" asChild>
-              <Link href="/services" className="flex items-center justify-center">
-                View All Services
-              </Link>
-            </Button>
           </div>
         </div>
       </section>

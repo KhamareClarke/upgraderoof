@@ -8,6 +8,7 @@ import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { EmergencyRoofingSchema } from './schema';
 import { SectionHeader } from '@/components/SectionHeader';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -67,19 +68,14 @@ export default function EmergencyRoofingPage() {
             <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl">
               Storm damage? Sudden leak? Based in Sandbach, we respond fast · usually on-site within 30 minutes. 24/7 emergency cover across Sandbach and all of Cheshire.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col items-center sm:items-start gap-2">
               <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14 animate-pulse" asChild>
                 <TrackedPhoneLink href="tel:01270897606" placement="emergency_hero_mobile">
                   <Phone className="w-5 h-5 mr-2" />
                   Call: 01270 897 606
                 </TrackedPhoneLink>
               </Button>
-              <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14" asChild>
-                <TrackedPhoneLink href="tel:01270897606" placement="emergency_hero_office">
-                  <Phone className="w-5 h-5 mr-2" />
-                  Office: 01270 897 606
-                </TrackedPhoneLink>
-              </Button>
+              <CtaSubMessage dark />
             </div>
           </div>
         </div>
@@ -183,12 +179,6 @@ export default function EmergencyRoofingPage() {
                     Call: 01270 897 606
                   </TrackedPhoneLink>
                 </Button>
-                <Button size="lg" variant="outline" className="w-full border-2 border-brand-navy text-brand-navy hover:bg-brand-navy hover:text-white font-semibold h-14" asChild>
-                  <TrackedPhoneLink href="tel:01270897606" placement="emergency_callout_office">
-                    <Phone className="w-5 h-5 mr-2" />
-                    Office: 01270 897 606
-                  </TrackedPhoneLink>
-                </Button>
               </div>
               <div className="mt-6">
                 <Link href="/service-areas" className="inline-flex items-center gap-2 text-brand-orange font-semibold hover:underline text-sm">
@@ -287,6 +277,7 @@ export default function EmergencyRoofingPage() {
               Call Now: 01270 897 606
             </TrackedPhoneLink>
           </Button>
+          <CtaSubMessage dark className="mt-3" />
         </div>
       </section>
     </div>

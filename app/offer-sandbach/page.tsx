@@ -2,46 +2,28 @@
 
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { 
-  Phone, 
-  MessageCircle, 
-  CheckCircle, 
-  Star, 
-  Shield,
-  Clock,
-  ArrowUp
+import { Label } from '@/components/ui/label';
+import {
+  Phone,
+  CheckCircle,
+  Star,
+  ArrowUp,
+  MapPin,
+  ArrowRight
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { LocalAreaContent } from '@/components/LocalAreaContent';
-import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
-import { AuthorityBar } from '@/components/AuthorityBar';
+import { LeadFormWizard } from '@/components/LeadFormWizard';
+import { trackQuoteRequest, trackPhoneClick, getGclid } from '@/lib/tracking';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export default function OfferSandbachPage() {
   const [mounted, setMounted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    phone: '',
-    postcode: '',
-    roofType: '',
-    serviceNeeded: '',
-    sameDayCallback: false
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [honeypot, setHoneypot] = useState('');
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
 
   useEffect(() => {
     setMounted(true);
@@ -49,27 +31,7 @@ export default function OfferSandbachPage() {
 
   useEffect(() => {
     if (!mounted) return;
-    
-    const targetDate = new Date('2026-07-31T23:59:59');
-    
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate.getTime() - now;
-      
-      setTimeLeft({
-        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-        minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-        seconds: Math.floor((distance % (1000 * 60)) / 1000)
-      });
-    }, 1000);
 
-    return () => clearInterval(timer);
-  }, [mounted]);
-
-  useEffect(() => {
-    if (!mounted) return;
-    
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
     };
@@ -81,37 +43,41 @@ export default function OfferSandbachPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    
-    try {
-      const response = await fetch('/api/send-special-offer', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...formData, location: 'Sandbach', gclid: getGclid(), website: honeypot }),
-      });
+  const handleSubmit = async (values: Record<string, string>, extra: { turnstileToken: string; honeypot: string }) => {
+    const formData = {
+      name: values.name,
+      phone: values.phone,
+      postcode: values.postcode,
+      email: values.email,
+      roofType: values.roofType,
+      serviceNeeded: values.serviceNeeded,
+      message: values.message,
+      sameDayCallback: values.sameDayCallback === 'yes',
+    };
 
-      const result = await response.json();
+    const response = await fetch('/api/send-special-offer', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...formData, location: 'Sandbach', gclid: getGclid(), turnstileToken: extra.turnstileToken, website: extra.honeypot }),
+    });
 
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to submit form');
-      }
+    const result = await response.json();
 
-      // Track only after confirmed success
-      trackQuoteRequest({
-        service_type: formData.serviceNeeded || formData.roofType,
-        postcode: formData.postcode,
-      });
-
-      window.location.href = '/thank-you';
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      alert('Failed to submit form. Please try again or call us directly at 01270 897606');
-      setIsSubmitting(false);
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to submit form');
     }
+
+    // Track only after confirmed success
+    trackQuoteRequest({
+      service_type: formData.serviceNeeded || formData.roofType,
+      postcode: formData.postcode,
+    });
+
+    window.location.href = '/thank-you';
+  };
+
+  const handlePhoneClick = () => {
+    trackPhoneClick('offer_sandbach');
   };
 
   return (
@@ -133,216 +99,83 @@ export default function OfferSandbachPage() {
         <div className="container-custom relative z-10 py-4 md:py-6">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left Column - Headlines */}
-            <div className="text-white space-y-4">
-              <HeroKicker light>Limited Time Offer · Sandbach</HeroKicker>
-              
-              <div className="space-y-4">
-                <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                  <span className="text-brand-orange">CALL NOW</span><br />
-                  for Your FREE Roof Inspection in Sandbach!
-                </h1>
-                
-                <div className="bg-white/10 backdrop-blur-sm border border-brand-orange/40 border-l-4 border-l-brand-orange p-8 text-center">
-                  <div className="text-4xl md:text-5xl font-bold text-brand-orange mb-3">
-                    📞 01270 897606
-                  </div>
-                  <div className="text-xl font-semibold">
-                    We Answer in 30 Seconds!
-                  </div>
-                </div>
-              </div>
-              
-              <div className="space-y-3">
-                <p className="text-xl font-semibold text-brand-orange">
-                  Emergency Roof Repairs • Leak Fixes • New Roofs
-                </p>
-                <p className="text-lg text-white">
-                  25+ Years Experience • FREE Same-Day Quotes
-                </p>
-                <p className="text-lg text-white">
-                  Serving Sandbach & Surrounding Areas
-                </p>
-              </div>
+            <div className="text-white space-y-6">
+              <HeroKicker light>Est. Sandbach, Cheshire</HeroKicker>
 
-              {/* Call-First CTAs */}
-              <div className="space-y-3 pt-2">
-                <a
-                  href="tel:01270897606"
-                  onClick={() => trackPhoneClick('offer_sandbach_hero')}
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-6 text-2xl rounded-xl border-l-4 border-l-brand-navy flex items-center justify-center gap-3 transition-colors"
-                >
-                  <Phone className="w-8 h-8" />
-                  <span className="!text-white">CALL NOW: 01270 897606</span>
-                </a>
-                
-                <div className="grid grid-cols-2 gap-4">
-                  <a
-                    href="https://wa.me/447379440583"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackWhatsAppClick('offer_sandbach_hero')}
-                    className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-colors"
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    <span className="!text-white">WhatsApp</span>
-                  </a>
-                  <button
-                    onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold py-4 rounded-xl transition-colors"
-                  >
-                    <span className="!text-white">📝 Quick Form</span>
-                  </button>
-                </div>
-              </div>
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight text-balance">
+                Get Your{' '}
+                <span className="text-brand-orange">Free Roof Inspection</span>
+                <br />
+                in Sandbach
+              </h1>
 
-              {/* Trust Indicators */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20">
-                <div className="text-center">
-                  <Shield className="w-8 h-8 text-brand-orange mx-auto mb-2" />
-                  <div className="text-sm font-semibold">Fully Insured</div>
-                </div>
-                <div className="text-center">
-                  <Star className="w-8 h-8 text-yellow-400 fill-current mx-auto mb-2" />
-                  <div className="text-sm font-semibold">5★ Google Rating</div>
-                </div>
-                <div className="text-center">
-                  <Clock className="w-8 h-8 text-brand-orange mx-auto mb-2" />
-                  <div className="text-sm font-semibold">Same Day Response</div>
-                </div>
-              </div>
+              <p className="text-lg md:text-xl font-semibold text-brand-orange leading-snug">
+                We call you back within 10 minutes
+                <br />
+                <span className="text-white">guaranteed</span>
+              </p>
             </div>
 
             {/* Right Column - Clean Form */}
             <div className="bg-white p-8 border border-gray-200 border-l-4 border-l-brand-navy">
               <div className="text-center mb-8">
-                <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 mb-6 border-l-4 border-l-brand-navy">
-                  <div className="text-2xl font-bold mb-2">
-                    📞 FASTEST: Call 01270 897606
-                  </div>
-                  <div className="text-lg font-semibold">
-                    Instant quote in 2 minutes!
-                  </div>
-                </div>
-                
+                <a
+                  href="tel:01270897606"
+                  onClick={handlePhoneClick}
+                  className="block w-full border-2 border-brand-navy p-5 mb-6 text-center hover:border-brand-orange transition-colors"
+                >
+                  <span className="block text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+                    Call us direct
+                  </span>
+                  <span className="block mt-1 text-2xl font-bold text-brand-navy">
+                    01270 897 606
+                  </span>
+                  <span className="block mt-1 text-sm text-gray-600">
+                    We answer straight away
+                  </span>
+                </a>
+
                 <div className="space-y-2">
                   <h3 className="text-2xl font-bold text-brand-navy">
-                    Or Request a Callback
+                    Book Your Free Roof Inspection
                   </h3>
                   <p className="text-gray-600">
-                    We'll call you within 10 minutes
+                    Leave your details and we'll call you back within 10 minutes
                   </p>
                 </div>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="name" className="text-brand-navy font-semibold text-sm">Name *</Label>
-                    <Input
-                      id="name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      placeholder="John Smith"
-                      required
-                      className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="phone" className="text-brand-navy font-semibold text-sm">Phone *</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      placeholder="Your phone number"
-                      required
-                      className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
-                    />
-                  </div>
-                </div>
+              <LeadFormWizard
+                config={{
+                  onSubmit: handleSubmit,
+                  submitLabel: 'Request Callback',
+                  headingStep1: 'Project & Contact Basics',
+                  subStep1: 'Tell us what you need and how to reach you.',
+                  headingStep2: 'Location & Final Confirmation',
+                  subStep2: 'Add your postcode and any project details.',
+                  extraStep2: (values, update) => (
+                    <div className="flex items-center gap-3 p-4 bg-gray-50 border border-gray-300 border-l-4 border-l-brand-orange rounded-md">
+                      <Checkbox
+                        checked={values.sameDayCallback === 'yes'}
+                        onCheckedChange={(checked) => update('sameDayCallback', checked ? 'yes' : '')}
+                      />
+                      <Label className="text-brand-navy font-medium">
+                        I'd like a same-day callback
+                      </Label>
+                    </div>
+                  ),
+                  validate: (values) => {
+                    const email = values.email?.trim() ?? '';
+                    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Please enter a valid email address.';
+                    return null;
+                  },
+                }}
+              />
 
-                <div>
-                  <Label htmlFor="postcode" className="text-brand-navy font-semibold text-sm">Postcode *</Label>
-                  <Input
-                    id="postcode"
-                    value={formData.postcode}
-                    onChange={(e) => setFormData({...formData, postcode: e.target.value})}
-                    placeholder="CW11 1AA"
-                    required
-                    className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <Label htmlFor="roofType" className="text-brand-navy font-semibold text-sm">Roof Type</Label>
-                    <Select value={formData.roofType} onValueChange={(value) => setFormData({...formData, roofType: value})}>
-                      <SelectTrigger className="mt-2 h-12 text-base border-2 rounded-xl">
-                        <SelectValue placeholder="Select type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="tile">Tile Roof</SelectItem>
-                        <SelectItem value="slate">Slate Roof</SelectItem>
-                        <SelectItem value="flat">Flat Roof</SelectItem>
-                        <SelectItem value="other">Other/Not Sure</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label htmlFor="serviceNeeded" className="text-brand-navy font-semibold text-sm">Service Needed</Label>
-                    <Select value={formData.serviceNeeded} onValueChange={(value) => setFormData({...formData, serviceNeeded: value})}>
-                      <SelectTrigger className="mt-2 h-12 text-base border-2 rounded-xl">
-                        <SelectValue placeholder="What you need" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="leak-repair">Leak Repair</SelectItem>
-                        <SelectItem value="new-roof">New Roof</SelectItem>
-                        <SelectItem value="flat-roof">Flat Roof</SelectItem>
-                        <SelectItem value="tile-replacement">Tile Replacement</SelectItem>
-                        <SelectItem value="guttering">Guttering/Fascias</SelectItem>
-                        <SelectItem value="general">General Inspection</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="flex items-center space-x-3 p-4 bg-blue-50 rounded-xl">
-                  <Checkbox 
-                    id="callback"
-                    checked={formData.sameDayCallback}
-                    onCheckedChange={(checked) => setFormData({...formData, sameDayCallback: !!checked})}
-                  />
-                  <Label htmlFor="callback" className="text-brand-navy font-medium">
-                    I'd like a same-day callback
-                  </Label>
-                </div>
-
-                {/* Honeypot field · hidden from humans, visible to bots */}
-                <div className="hidden" aria-hidden="true">
-                  <Label htmlFor="sandbach-website">Website</Label>
-                  <Input
-                    id="sandbach-website"
-                    type="text"
-                    value={honeypot}
-                    onChange={(e) => setHoneypot(e.target.value)}
-                    tabIndex={-1}
-                    autoComplete="off"
-                  />
-                </div>
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold py-4 text-xl h-16 rounded-xl border-l-4 border-l-brand-navy"
-                >
-                  <span className="!text-white">{isSubmitting ? 'Submitting...' : 'Request Callback'}</span>
-                </Button>
-
-                <p className="text-xs text-gray-600 text-center leading-relaxed">
-                  By submitting, you agree to be contacted about our services.<br />
-                  No spam, unsubscribe anytime.
-                </p>
-              </form>
+              <p className="mt-6 text-xs text-gray-500 text-center leading-relaxed">
+                By submitting, you agree to be contacted about our services.<br />
+                No spam, unsubscribe anytime.
+              </p>
 
               {/* Review snippet under form */}
               <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 border-l-4 border-l-brand-navy">
@@ -354,15 +187,65 @@ export default function OfferSandbachPage() {
                 <p className="text-center text-gray-700 italic font-medium mb-2">
                   "Excellent service from start to finish. Very professional team who completed our roof repair quickly and efficiently."
                 </p>
-                <p className="text-center text-sm text-gray-600 font-semibold">– Sarah T., Sandbach</p>
+                <p className="text-center text-sm text-gray-600 font-semibold">Sarah T., Sandbach</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Trust Badges */}
-      <AuthorityBar />
+      {/* Trust Badges · matches homepage accreditation section */}
+      <section className="border-b border-gray-200 bg-white">
+        <div className="container-custom">
+          <div className="py-10 sm:py-12">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-3 mb-4">
+                <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Accredited &amp; Insured</span>
+                <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
+                Trusted &amp; Approved
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
+                Recognised by leading industry bodies and trusted by thousands of customers
+              </p>
+            </div>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 items-center">
+              {[
+                { src: '/images/corc_logo-1024x549.webp', alt: 'CORC certified member logo', width: 1024, height: 549, label: 'CORC Certified', meta: 'Approved member', priority: true },
+                { src: '/images/badge-light@2x.png', alt: 'MyApproved verified member badge', width: 760, height: 284, label: '£10M Insured', meta: 'Public liability cover', priority: false },
+                { src: '/images/badge-light@2x.png', alt: 'Insurance Backed Guarantee badge', width: 760, height: 284, label: 'IBG Guarantee', meta: 'Insurance-backed work', priority: false },
+                { src: '/images/Google-Review-Emblem-500x281.png', alt: 'Google reviews emblem with 5 star rating', width: 500, height: 281, label: '5-Star Rated', meta: 'Google · MyApproved verified', priority: false },
+              ].map((item, index) => (
+                <div key={index} className="group flex flex-col items-center text-center">
+                  <div className="relative w-full max-w-[190px] h-24 flex items-center justify-center bg-white border border-gray-200 rounded-lg shadow-sm p-3 transition-transform duration-300 group-hover:scale-105">
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      width={item.width}
+                      height={item.height}
+                      className="w-full h-full object-contain"
+                      priority={item.priority}
+                    />
+                  </div>
+                  <p className="mt-5 text-sm sm:text-base font-bold text-brand-navy tracking-wide">{item.label}</p>
+                  <p className="text-xs text-gray-500 mt-1 leading-snug">{item.meta}</p>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <a
+                href="tel:01270897606"
+                onClick={() => trackPhoneClick('offer_sandbach_trust_badges')}
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base"
+              >
+                Get a Free Quote
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Mid-Page Section */}
       <section className="section-padding bg-brand-grey">
@@ -373,44 +256,17 @@ export default function OfferSandbachPage() {
               title="Got a Leak or Need a New Roof in Sandbach? We Identify the Problem Fast."
               subtitle="Whether it's a small leak or a full roof replacement, our Sandbach team provides a detailed condition report and a no-obligation repair plan tailored for your home. We've been serving Sandbach homeowners for over 25 years."
             />
-            <Button
-              size="lg"
-              className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4"
-              onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <span className="!text-white">Book My Free Roof Check</span>
-            </Button>
+            <div className="flex flex-col items-center gap-2">
+              <Button
+                size="lg"
+                className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4"
+                onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <span className="!text-white">Book My Free Roof Check</span>
+              </Button>
+              <CtaSubMessage />
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Scarcity & Urgency */}
-      <section className="py-12 bg-gradient-to-r from-red-600 to-brand-orange text-white">
-        <div className="container-custom text-center">
-          <SectionHeader
-            dark
-            kicker="Limited Time Offer"
-            title="⏰ Limited Time Offer Act Fast!"
-            subtitle="Only 5 free inspections left this week for Sandbach. Offer ends Sunday"
-          />
-
-          {/* Countdown Timer */}
-          <div className="flex justify-center gap-4 mb-8">
-            {Object.entries(timeLeft).map(([unit, value]) => (
-              <div key={unit} className="bg-white/20 rounded-lg p-4 min-w-[80px]">
-                <div className="text-2xl font-bold">{value.toString().padStart(2, '0')}</div>
-                <div className="text-sm capitalize">{unit}</div>
-              </div>
-            ))}
-          </div>
-
-          <Button 
-            size="lg" 
-            className="bg-white !text-brand-orange hover:bg-gray-100 font-bold px-8 py-4 text-lg"
-            onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            <span className="!text-brand-orange">Claim Your Spot Now</span>
-          </Button>
         </div>
       </section>
 
@@ -425,8 +281,8 @@ export default function OfferSandbachPage() {
           />
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4 text-lg"
               onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
             >
@@ -484,65 +340,69 @@ export default function OfferSandbachPage() {
         ]}
       />
 
-      {/* Service Area Links */}
-      <section className="py-8 bg-brand-grey border-t">
+      {/* Local Service Areas · Internal Linking Hub (matches homepage) */}
+      <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <h3 className="text-lg font-semibold text-brand-navy mb-4 text-center">We Also Serve</h3>
-          <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-sm">
-            <Link href="/roofers-sandbach" className="text-brand-orange font-semibold">Sandbach</Link>
-            <span className="text-gray-400">·</span>
-            <Link href="/roofers-crewe" className="text-gray-600 hover:text-brand-orange transition-colors">Crewe</Link>
-            <span className="text-gray-400">·</span>
-            <Link href="/roofers-middlewich" className="text-gray-600 hover:text-brand-orange transition-colors">Middlewich</Link>
-            <span className="text-gray-400">·</span>
-            <Link href="/roofers-congleton" className="text-gray-600 hover:text-brand-orange transition-colors">Congleton</Link>
-            <span className="text-gray-400">·</span>
-            <Link href="/roofers-alsager" className="text-gray-600 hover:text-brand-orange transition-colors">Alsager</Link>
-            <span className="text-gray-400">·</span>
-            <Link href="/roofers-nantwich" className="text-gray-600 hover:text-brand-orange transition-colors">Nantwich</Link>
-            <span className="text-gray-400">·</span>
-            <Link href="/roofers-holmes-chapel" className="text-gray-600 hover:text-brand-orange transition-colors">Holmes Chapel</Link>
-            <span className="text-gray-400">·</span>
-            <Link href="/service-areas" className="text-gray-600 hover:text-brand-orange transition-colors">All Service Areas</Link>
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-3 mb-4">
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+              <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Where We Work</span>
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-3">
+              Roofing Services Across <span className="text-brand-orange">Cheshire</span>
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto mb-6">
+              Based in Sandbach, we serve homeowners and businesses throughout south and mid-Cheshire.
+            </p>
+            <div className="inline-flex items-center gap-3 px-6 py-4 bg-white border border-gray-300 border-t-2 border-t-brand-orange">
+              <MapPin className="w-5 h-5 text-brand-orange" />
+              <span className="text-sm font-semibold text-brand-navy">
+                Looking for{' '}
+                <Link href="/roofers-sandbach" className="text-brand-orange hover:underline font-bold">
+                  roofers in Sandbach
+                </Link>
+                ? We're based on Crewe Road, CW11 4NE
+              </span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+            {[
+              { name: 'Roofers Sandbach', href: '/roofers-sandbach' },
+              { name: 'Roofers Crewe', href: '/roofers-crewe' },
+              { name: 'Roofers Middlewich', href: '/roofers-middlewich' },
+              { name: 'Roofers Congleton', href: '/roofers-congleton' },
+              { name: 'Roofers Nantwich', href: '/roofers-nantwich' },
+              { name: 'Roofers Alsager', href: '/roofers-alsager' },
+              { name: 'Roofers Holmes Chapel', href: '/roofers-holmes-chapel' },
+              { name: 'All Service Areas', href: '/service-areas' },
+            ].map((area) => (
+              <Link key={area.href} href={area.href} className="group flex items-center gap-2 p-4 bg-white border border-gray-300 hover:border-brand-navy transition-colors">
+                <MapPin className="w-4 h-4 text-brand-orange flex-shrink-0" />
+                <span className="text-sm font-semibold text-brand-navy group-hover:text-brand-orange transition-colors">{area.name}</span>
+              </Link>
+            ))}
+          </div>
+          <div className="text-center">
+            <Button
+              size="lg"
+              className="group bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 inline-flex items-center gap-2.5"
+              asChild
+            >
+              <Link href="/service-areas" className="flex items-center justify-center gap-2.5">
+                View all service areas
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
-
-      {/* Mobile Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t p-3">
-        <div className="flex gap-2">
-          <a
-            href="tel:01270897606"
-            onClick={() => trackPhoneClick('offer_sandbach_mobile_sticky')}
-            className="flex-1 bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold text-sm py-4 px-3 rounded-md text-center animate-pulse flex items-center justify-center"
-          >
-            📞 CALL NOW
-          </a>
-          <a
-            href="https://wa.me/447379440583"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => trackWhatsAppClick('offer_sandbach_mobile_sticky')}
-            className="bg-green-500 hover:bg-green-600 !text-white font-bold px-3 py-4 text-xs whitespace-nowrap rounded-md flex items-center justify-center gap-1"
-          >
-            <span>💬</span>
-            <span className="!text-white">WhatsApp</span>
-          </a>
-          <button
-            onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-blue-500 hover:bg-blue-600 !text-white font-bold px-3 py-4 text-xs whitespace-nowrap rounded-md flex items-center justify-center gap-1"
-          >
-            <span>📝</span>
-            <span className="!text-white">Quick Form</span>
-          </button>
-        </div>
-      </div>
 
       {/* Scroll to Top */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-20 right-4 z-40 bg-brand-navy text-white p-3 rounded-full hover:bg-brand-navy/90 transition-all"
+          className="fixed bottom-20 right-4 z-40 bg-brand-navy text-white p-3 rounded hover:bg-brand-navy/90 transition-all"
         >
           <ArrowUp className="w-5 h-5" />
         </button>

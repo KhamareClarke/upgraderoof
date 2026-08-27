@@ -68,21 +68,13 @@ export default function RoofRepairsPage() {
               <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl">
                 Fast, reliable roof repairs from our Sandbach base. Leaks, storm damage, missing tiles, ridge work · we fix it right the first time. Serving Sandbach and all of Cheshire.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="flex flex-col items-center sm:items-start gap-2">
-                  <QuoteForm trigger={
-                    <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
-                      Get Free Quote
-                    </Button>
-                  } />
-                  <CtaSubMessage dark />
-                </div>
-                <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14" asChild>
-                  <TrackedPhoneLink href="tel:01270897606" placement="roof_repairs_hero">
-                    <Phone className="w-5 h-5 mr-2" />
-                    01270 897 606
-                  </TrackedPhoneLink>
-                </Button>
+              <div className="flex flex-col items-center sm:items-start gap-2">
+                <QuoteForm trigger={
+                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
+                    Get Free Quote
+                  </Button>
+                } />
+                <CtaSubMessage dark />
               </div>
             </div>
           </div>
@@ -260,21 +252,14 @@ export default function RoofRepairsPage() {
               title="Need a Roof Repair in Sandbach?"
               subtitle="Call us now for same-day roof repairs in Sandbach and across Cheshire"
             />
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col items-center gap-2">
               <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14" asChild>
                 <TrackedPhoneLink href="tel:01270897606" placement="roof_repairs_bottom_cta">
                   <Phone className="w-5 h-5 mr-2" />
                   Call 01270 897 606
                 </TrackedPhoneLink>
               </Button>
-              <div className="flex flex-col items-center gap-2">
-                <QuoteForm trigger={
-                  <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14">
-                    Get Free Quote
-                  </Button>
-                } />
-                <CtaSubMessage dark />
-              </div>
+              <CtaSubMessage dark />
             </div>
           </div>
         </section>

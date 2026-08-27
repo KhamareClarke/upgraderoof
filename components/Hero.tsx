@@ -1,9 +1,8 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { PhoneCall, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { QuoteForm } from '@/components/QuoteForm';
-import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { HeroKicker } from '@/components/HeroKicker';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
 
@@ -42,19 +41,6 @@ export function Hero() {
               } />
               <CtaSubMessage dark />
             </div>
-            <TrackedPhoneLink
-              href="tel:01270897606"
-              placement="homepage_hero"
-              className="group inline-flex items-center justify-center gap-2.5 h-12 sm:h-14 md:h-16 px-6 text-white font-semibold text-sm sm:text-base tracking-wide transition-colors duration-300"
-            >
-              <span className="flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/30 text-white group-hover:border-brand-orange group-hover:text-brand-orange transition-colors duration-300">
-                <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5" />
-              </span>
-              <span className="text-left leading-tight">
-                <span className="block text-xs text-white/60 group-hover:text-white/80 transition-colors">Call us direct</span>
-                <span className="block">01270 897 606</span>
-              </span>
-            </TrackedPhoneLink>
           </div>
         </div>
       </div>

@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
-import { MapPin, Phone, Clock, CheckCircle, ArrowRight } from 'lucide-react';
+import { MapPin, Clock, CheckCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
-import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
@@ -172,21 +171,13 @@ export default function ServiceAreasPage() {
             <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
               Based in Sandbach, Upgrade Roofs serves 15 towns across Cheshire, Staffordshire, and the Pennine fringe · from Wilmslow and Knutsford in the north to Newcastle-under-Lyme in the south. Over 25 years of local experience, CORC certified, £10M insured.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <div className="flex flex-col items-center gap-2">
-                <QuoteForm trigger={
-                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
-                    Get a Free Quote
-                  </Button>
-                } />
-                <CtaSubMessage dark />
-              </div>
-              <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14" asChild>
-                <TrackedPhoneLink href="tel:01270897606" placement="service_areas_hero">
-                  <Phone className="w-5 h-5 mr-2" />
-                  01270 897 606
-                </TrackedPhoneLink>
-              </Button>
+            <div className="flex flex-col items-center gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
+                  Get a Free Quote
+                </Button>
+              } />
+              <CtaSubMessage dark />
             </div>
           </div>
         </div>
@@ -281,18 +272,13 @@ export default function ServiceAreasPage() {
               title="Not Sure If We Cover Your Area?"
               subtitle="Based in Sandbach, we serve most of Cheshire and surrounding areas. Give us a call and we'll confirm we can help."
             />
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <div className="flex flex-col items-center gap-2">
-                <QuoteForm trigger={
-                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
-                    Get Your Free Quote
-                  </Button>
-                } />
-                <CtaSubMessage dark />
-              </div>
-              <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14" asChild>
-                <TrackedPhoneLink href="tel:01270897606" placement="service_areas_bottom_cta"><Phone className="w-5 h-5 mr-2" />01270 897 606</TrackedPhoneLink>
-              </Button>
+            <div className="flex flex-col items-center gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
+                  Get Your Free Quote
+                </Button>
+              } />
+              <CtaSubMessage dark />
             </div>
           </div>
         </div>

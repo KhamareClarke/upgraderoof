@@ -2,24 +2,11 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardDescription, CardTitle } from '@/components/ui/card';
-// import { supabase, type ContactMessage } from '@/lib/supabase';
-
-type ContactMessage = {
-  name: string;
-  email: string;
-  phone?: string;
-  subject: string;
-  message: string;
-};
 import { trackContactForm, trackPhoneClick, trackWhatsAppClick, trackEmailClick, getGclid } from '@/lib/tracking';
+import { LeadFormWizard } from '@/components/LeadFormWizard';
 import {
-  Loader2,
   CheckCircle2,
-  AlertCircle,
   PhoneCall,
   Send,
   MapPin,
@@ -27,116 +14,62 @@ import {
   MessageSquareMore
 } from 'lucide-react';
 
+const SERVICE_LABELS: Record<string, string> = {
+  'leak-repair': 'Leak repair enquiry',
+  'new-roof': 'New roof enquiry',
+  'flat-roof': 'Flat roof enquiry',
+  'tile-replacement': 'Tile replacement enquiry',
+  'guttering': 'Guttering / fascias enquiry',
+  'general': 'General roofing enquiry',
+};
+
 export function EnhancedContactSection() {
-  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
-  const [formData, setFormData] = useState<ContactMessage>({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-  });
 
-  const validateForm = () => {
-    const errors: Record<string, string> = {};
-    
-    if (!formData.name.trim()) {
-      errors.name = 'Name is required';
-    }
-    
-    if (!formData.email.trim()) {
-      errors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = 'Please enter a valid email address';
-    }
-    
-    if (!formData.subject.trim()) {
-      errors.subject = 'Subject is required';
-    }
-    
-    if (!formData.message.trim()) {
-      errors.message = 'Message is required';
-    } else if (formData.message.trim().length < 10) {
-      errors.message = 'Message must be at least 10 characters long';
-    }
-    
-    if (formData.phone && !/^[\d\s\-\+\(\)]+$/.test(formData.phone)) {
-      errors.phone = 'Please enter a valid phone number';
-    }
-    
-    setValidationErrors(errors);
-    return Object.keys(errors).length === 0;
-  };
+  const handleSubmit = async (values: Record<string, string>, extra: { turnstileToken: string; honeypot: string }) => {
+    // This section's backend keeps `subject` free-text; under the standardized
+    // two-step flow we derive it from the service selection so it stays populated.
+    const subject = SERVICE_LABELS[values.service_needed] || 'General roofing enquiry';
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (!validateForm()) {
-      return;
+    // The contact backend has no postcode column; fold it into the message.
+    const postcode = values.postcode?.trim();
+    const messageParts = [values.message || ''];
+    if (postcode) messageParts.unshift(`Postcode: ${postcode}`);
+    const message = messageParts.filter(Boolean).join('\n\n');
+
+    const formData = {
+      name: values.name,
+      email: values.email,
+      phone: values.phone,
+      subject,
+      message,
+      roof_type: values.roof_type,
+      service_needed: values.service_needed,
+    };
+
+    const response = await fetch('/api/send-contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...formData, gclid: getGclid(), turnstileToken: extra.turnstileToken, website: extra.honeypot }),
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to send email');
     }
-    
-    setLoading(true);
-    setError(null);
 
     try {
-      // Call the API route to send email
-      const response = await fetch('/api/send-contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...formData, gclid: getGclid() }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to send email');
-      }
-
-      // Also save to Supabase for backup (optional, won't fail if Supabase is down)
-      try {
-        const { supabase } = await import('@/lib/supabase');
-        await supabase
-          .from('contact_messages')
-          .insert([formData]);
-      } catch (supabaseError) {
-        console.warn('Failed to save to Supabase, but email was sent:', supabaseError);
-      }
-
-      // Track successful submission
-      trackContactForm({ subject: formData.subject });
-
-      setSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-      });
-      setValidationErrors({});
-
-      setTimeout(() => {
-        setSuccess(false);
-      }, 8000);
-    } catch (err: any) {
-      setError(err.message || 'Failed to send message. Please try again or call us directly at 01270 897606');
-      console.error('Error submitting contact message:', err);
-    } finally {
-      setLoading(false);
+      const { supabase } = await import('@/lib/supabase');
+      await supabase.from('contact_messages').insert([formData]);
+    } catch (supabaseError) {
+      console.warn('Failed to save to Supabase, but email was sent:', supabaseError);
     }
-  };
 
-  const handleChange = (field: keyof ContactMessage, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-    // Clear validation error when user starts typing
-    if (validationErrors[field]) {
-      setValidationErrors(prev => ({ ...prev, [field]: '' }));
-    }
+    trackContactForm({ subject });
+
+    setSuccess(true);
+    setTimeout(() => setSuccess(false), 8000);
   };
 
   return (
@@ -191,126 +124,32 @@ export function EnhancedContactSection() {
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="contact-name" className="text-sm font-medium">
-                        Full Name *
-                      </Label>
-                      <Input
-                        id="contact-name"
-                        value={formData.name}
-                        onChange={(e) => handleChange('name', e.target.value)}
-                        placeholder="John Smith"
-                        className={`transition-colors ${
-                          validationErrors.name ? 'border-red-500 focus:ring-red-500' : ''
-                        }`}
-                      />
-                      {validationErrors.name && (
-                        <p className="text-sm text-red-600">{validationErrors.name}</p>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="contact-email" className="text-sm font-medium">
-                        Email Address *
-                      </Label>
-                      <Input
-                        id="contact-email"
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => handleChange('email', e.target.value)}
-                        placeholder="john@example.com"
-                        className={`transition-colors ${
-                          validationErrors.email ? 'border-red-500 focus:ring-red-500' : ''
-                        }`}
-                      />
-                      {validationErrors.email && (
-                        <p className="text-sm text-red-600">{validationErrors.email}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="contact-phone" className="text-sm font-medium">
-                        Phone Number
-                      </Label>
-                      <Input
-                        id="contact-phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => handleChange('phone', e.target.value)}
-                        placeholder="01270 123456"
-                        className={`transition-colors ${
-                          validationErrors.phone ? 'border-red-500 focus:ring-red-500' : ''
-                        }`}
-                      />
-                      {validationErrors.phone && (
-                        <p className="text-sm text-red-600">{validationErrors.phone}</p>
-                      )}
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="contact-subject" className="text-sm font-medium">
-                        Subject *
-                      </Label>
-                      <Input
-                        id="contact-subject"
-                        value={formData.subject}
-                        onChange={(e) => handleChange('subject', e.target.value)}
-                        placeholder="Roof repair enquiry"
-                        className={`transition-colors ${
-                          validationErrors.subject ? 'border-red-500 focus:ring-red-500' : ''
-                        }`}
-                      />
-                      {validationErrors.subject && (
-                        <p className="text-sm text-red-600">{validationErrors.subject}</p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="contact-message" className="text-sm font-medium">
-                      Your Message *
-                    </Label>
-                    <Textarea
-                      id="contact-message"
-                      value={formData.message}
-                      onChange={(e) => handleChange('message', e.target.value)}
-                      placeholder="Tell us about your roofing project, including property type, approximate size, and any specific requirements..."
-                      rows={5}
-                      className={`resize-none transition-colors ${
-                        validationErrors.message ? 'border-red-500 focus:ring-red-500' : ''
-                      }`}
-                    />
-                    {validationErrors.message && (
-                      <p className="text-sm text-red-600">{validationErrors.message}</p>
-                    )}
-                  </div>
-
-                  {error && (
-                    <div className="flex items-start space-x-3 p-4 bg-red-50 border border-red-200 rounded-lg">
-                      <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
-                      <p className="text-sm text-red-800">{error}</p>
-                    </div>
-                  )}
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold h-12 transition-all duration-300 hover:scale-105"
-                    disabled={loading}
-                  >
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Sending Message...
-                      </>
-                    ) : (
-                      'Send Message'
-                    )}
-                  </Button>
-                </form>
+                <LeadFormWizard
+                  config={{
+                    onSubmit: handleSubmit,
+                    submitLabel: 'Send Message',
+                    headingStep1: 'Project & Contact Basics',
+                    subStep1: 'Tell us what you need and how to reach you.',
+                    headingStep2: 'Location & Final Confirmation',
+                    subStep2: 'Add your postcode and a short message.',
+                    fieldKeys: {
+                      serviceNeeded: 'service_needed',
+                      roofType: 'roof_type',
+                      message: 'message',
+                    },
+                    validate: (values) => {
+                      const email = values.email?.trim() ?? '';
+                      if (!email) return 'An email address is required so we can reply.';
+                      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Please enter a valid email address.';
+                      const phone = values.phone?.trim() ?? '';
+                      if (phone && !/^[\d\s\-\+\(\)]+$/.test(phone)) return 'Please enter a valid phone number.';
+                      const message = values.message?.trim() ?? '';
+                      if (!message) return 'Please add a short message about your project.';
+                      if (message.length < 10) return 'Please add a little more detail (at least 10 characters).';
+                      return null;
+                    },
+                  }}
+                />
               )}
             </div>
 

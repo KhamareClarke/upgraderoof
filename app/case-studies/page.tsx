@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 const caseStudies = [
   {
@@ -311,18 +312,14 @@ export default function CaseStudiesPage() {
                 Join hundreds of satisfied customers across Cheshire. Get a free, no-obligation 
                 quote and see how we can help with your roofing project.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col items-center gap-2">
                 <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
                   <Link href="/special-offer">
                     Get Free Quote
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
-                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10" asChild>
-                  <Link href="/gallery">
-                    View Full Gallery
-                  </Link>
-                </Button>
+                <CtaSubMessage dark />
               </div>
               <div className="mt-6 flex flex-wrap justify-center gap-3 text-sm">
                 <Link href="/roofers-sandbach" className="text-white/70 hover:text-white transition-colors">Sandbach</Link>

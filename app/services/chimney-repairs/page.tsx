@@ -190,14 +190,14 @@ export default function ChimneyRepairsPage() {
               ))}
             </div>
             <div className="mt-8 text-center">
-              <p className="text-sm text-gray-600 mb-3">Still have questions?</p>
               <TrackedPhoneLink
                 href="tel:01270897606"
                 placement="faq_section"
                 className="inline-flex items-center justify-center px-6 py-2.5 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm"
               >
-                Call Us: 01270 897 606
+                Still have questions? Call Us: 01270 897 606
               </TrackedPhoneLink>
+              <CtaSubMessage className="mt-3" />
             </div>
           </div>
         </div>
@@ -221,11 +221,6 @@ export default function ChimneyRepairsPage() {
               } />
               <CtaSubMessage />
             </div>
-            <Button size="lg" variant="outline" className="border-2 border-brand-navy text-brand-navy hover:bg-brand-navy hover:text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto" asChild>
-              <Link href="/services" className="flex items-center justify-center">
-                View All Services
-              </Link>
-            </Button>
           </div>
         </div>
       </section>

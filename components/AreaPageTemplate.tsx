@@ -1,11 +1,10 @@
 import Link from 'next/link';
-import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
+import { PHONE_DISPLAY } from '@/lib/contact';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { InlineLeadForm } from '@/components/InlineLeadForm';
 import { StickyMobileCta } from '@/components/StickyMobileCta';
-import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { CheckCircle, PhoneCall, MapPin, ShieldCheck, Medal, CalendarClock, Star, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer, Clock, Phone } from 'lucide-react';
+import { CheckCircle, MapPin, ShieldCheck, Medal, CalendarClock, Star, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer, Clock } from 'lucide-react';
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { AuthorityBar } from '@/components/AuthorityBar';
@@ -95,12 +94,6 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
                 <li>✓ 10-year workmanship guarantee on all work</li>
                 <li>✓ Free written quote · no obligation, no pressure</li>
               </ul>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14 text-lg rounded-xl transition-colors" asChild>
-                  <TrackedPhoneLink href={PHONE_TEL} placement="area_page_hero"><PhoneCall className="w-5 h-5 mr-2" /><span className="!text-white">{PHONE_DISPLAY}</span></TrackedPhoneLink>
-                </Button>
-              </div>
 
               {/* Trust indicators */}
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20 max-w-md">
@@ -362,9 +355,6 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
               } />
               <CtaSubMessage dark />
             </div>
-            <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14 text-lg rounded-xl transition-colors" asChild>
-              <TrackedPhoneLink href={PHONE_TEL} placement="area_page_cta"><Phone className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span></TrackedPhoneLink>
-            </Button>
           </div>
           <p className="text-white/60 text-sm mt-6">
             Based in Sandbach · Serving {town} & all of Cheshire · Call: {PHONE_DISPLAY}

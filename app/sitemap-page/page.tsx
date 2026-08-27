@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { SectionHeader } from '@/components/SectionHeader';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 export const metadata: Metadata = {
   title: 'Sitemap | Upgrade Roofs - All Pages',
   description: 'Complete sitemap of all pages on Upgrade Roofs website. Easy navigation to all our roofing services, areas, and information.',
@@ -251,13 +252,11 @@ export default function SitemapPage() {
                   <p className="text-gray-600 mb-4">
                     For urgent roofing issues or to speak with our team directly, contact us immediately.
                   </p>
-                  <div className="flex gap-2">
+                  <div className="flex flex-col items-center gap-2">
                     <Button className="bg-green-500 hover:bg-green-600 text-white" asChild>
                       <TrackedPhoneLink href="tel:01270897606" placement="sitemap_page">Call Now</TrackedPhoneLink>
                     </Button>
-                    <Button variant="outline" className="border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white" asChild>
-                      <Link href="/contact">Contact Form</Link>
-                    </Button>
+                    <CtaSubMessage dark={false} />
                   </div>
                 </CardContent>
               </Card>
@@ -275,12 +274,15 @@ export default function SitemapPage() {
             title="Ready to Get Started?"
             subtitle="Don't wait - get your free roof inspection today and protect your home."
           />
-          <Button size="lg" className="bg-white text-brand-orange hover:bg-gray-100 font-bold px-8 py-4" asChild>
-            <Link href="/special-offer">
-              <Star className="w-5 h-5 mr-2" />
-              Get FREE Inspection
-            </Link>
-          </Button>
+          <div className="flex flex-col items-center gap-2">
+            <Button size="lg" className="bg-white text-brand-orange hover:bg-gray-100 font-bold px-8 py-4" asChild>
+              <Link href="/special-offer">
+                <Star className="w-5 h-5 mr-2" />
+                Get FREE Inspection
+              </Link>
+            </Button>
+            <CtaSubMessage dark />
+          </div>
         </div>
       </section>
     </div>

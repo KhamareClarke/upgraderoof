@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, X, ZoomIn, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 interface GalleryImage {
   src: string;
@@ -148,11 +149,6 @@ export function GallerySlider() {
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
             From leaks to full roof replacements, see why locals across Cheshire trust Upgrade Roofs.
           </p>
-          <div className="mt-6">
-            <Link href="/#contact" className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base">
-              Get a free quote for your project <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
 
         <div 
@@ -253,6 +249,7 @@ export function GallerySlider() {
         <Link href="/#contact" className="inline-flex items-center gap-2.5 px-6 sm:px-8 py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base">
           Get a free quote for your project <ArrowRight className="w-4 h-4" />
         </Link>
+        <CtaSubMessage className="mt-3" />
       </div>
 
       {/* Lightbox Modal */}

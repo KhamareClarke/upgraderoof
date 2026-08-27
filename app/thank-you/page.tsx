@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { CheckCircle, Phone, MessageCircle, Clock, ArrowRight } from 'lucide-react';
+import { CheckCircle, Phone, Clock, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { TrackedWhatsAppLink } from '@/components/TrackedWhatsAppLink';
 import { ThankYouConversion } from '@/components/ThankYouConversion';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
@@ -72,19 +72,14 @@ export default function ThankYouPage() {
               <p className="text-sm text-gray-600 mb-4">
                 Need to speak to us immediately? Contact us directly:
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="flex flex-col items-center gap-2">
                 <Button className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold" asChild>
                   <TrackedPhoneLink href="tel:01270897606" placement="thank_you_page">
                     <Phone className="w-4 h-4 mr-2" />
                     Call 01270 897 606
                   </TrackedPhoneLink>
                 </Button>
-                <Button variant="outline" className="border-brand-orange text-brand-orange hover:bg-brand-orange hover:text-white" asChild>
-                  <TrackedWhatsAppLink href="https://wa.me/447379440583" placement="thank_you_page" target="_blank" rel="noopener noreferrer">
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    WhatsApp Us
-                  </TrackedWhatsAppLink>
-                </Button>
+                <CtaSubMessage dark={false} />
               </div>
             </div>
           </div>

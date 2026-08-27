@@ -1,9 +1,8 @@
 import Link from 'next/link';
-import { PHONE_DISPLAY, PHONE_TEL } from '@/lib/contact';
+import { PHONE_DISPLAY } from '@/lib/contact';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
-import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { CheckCircle, PhoneCall, MapPin, ShieldCheck, CalendarClock, Star, ArrowRight } from 'lucide-react';
+import { CheckCircle, MapPin, ShieldCheck, CalendarClock, Star, ArrowRight } from 'lucide-react';
 import type { ServiceData } from '@/lib/service-data';
 import type { TownData } from '@/lib/town-data';
 import { services } from '@/lib/service-data';
@@ -124,11 +123,6 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
                 } />
                 <CtaSubMessage dark />
               </div>
-              <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14 text-lg rounded-xl transition-colors" asChild>
-                <TrackedPhoneLink href={PHONE_TEL} placement="service_location_hero">
-                  <PhoneCall className="w-5 h-5 mr-2" /><span className="!text-white">{PHONE_DISPLAY}</span>
-                </TrackedPhoneLink>
-              </Button>
             </div>
 
             {/* Trust indicators */}
@@ -344,11 +338,6 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
               } />
               <CtaSubMessage dark />
             </div>
-            <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14 text-lg rounded-xl transition-colors" asChild>
-              <TrackedPhoneLink href={PHONE_TEL} placement="service_location_cta">
-                <PhoneCall className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span>
-              </TrackedPhoneLink>
-            </Button>
           </div>
           <p className="text-white/60 text-sm mt-6">
             Based in Sandbach · Serving {town.town} & all of Cheshire · Call: {PHONE_DISPLAY}
