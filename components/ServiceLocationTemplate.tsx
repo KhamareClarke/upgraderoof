@@ -12,6 +12,7 @@ import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
+import { TrustBadgeGrid } from '@/components/SpecialOfferSections';
 
 interface ServiceLocationTemplateProps {
   service: ServiceData;
@@ -158,6 +159,8 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
 
       {/* Trust Bar */}
       <AuthorityBar />
+
+      <TrustBadgeGrid />
 
       {/* Main Content */}
       <section className="section-padding">
