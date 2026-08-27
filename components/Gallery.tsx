@@ -133,7 +133,7 @@ export function Gallery() {
             See the Quality for Yourself
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-            From leaks to full roof replacements — see why locals across Cheshire trust Upgrade Roofs.
+            From leaks to full roof replacements · see why locals across Cheshire trust Upgrade Roofs.
           </p>
         </div>
 

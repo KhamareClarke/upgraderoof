@@ -1,20 +1,21 @@
 import type { Metadata } from 'next';
-import { MapPin, Phone, Clock, CheckCircle, ArrowRight, Shield, Award } from 'lucide-react';
+import { MapPin, Phone, Clock, CheckCircle, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
+import { AuthorityBar } from '@/components/AuthorityBar';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
 
 export const metadata: Metadata = {
   title: 'Roofing Service Areas Cheshire | Sandbach, Crewe, Congleton, Wilmslow & More',
-  description: 'Professional roofers serving 15 towns across Cheshire — Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, Holmes Chapel, Winsford, Northwich, Macclesfield, Knutsford, Tarporley, Biddulph, Newcastle-under-Lyme & Wilmslow. CORC certified. Free quotes.',
+  description: 'Professional roofers serving 15 towns across Cheshire · Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, Holmes Chapel, Winsford, Northwich, Macclesfield, Knutsford, Tarporley, Biddulph, Newcastle-under-Lyme & Wilmslow. CORC certified. Free quotes.',
   keywords: 'roofers Cheshire, roofing service areas, roofers Sandbach, roofers Crewe, roofers Congleton, roofers Middlewich, roofers Nantwich, roofers Macclesfield, roofers Knutsford, roofers Wilmslow',
   openGraph: {
     title: 'Roofing Service Areas | 15 Towns Across Cheshire & Beyond',
-    description: 'Professional roofing across 15 towns — Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, Holmes Chapel, Winsford, Northwich, Macclesfield, Knutsford, Tarporley, Biddulph, Newcastle-under-Lyme & Wilmslow.',
+    description: 'Professional roofing across 15 towns · Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, Holmes Chapel, Winsford, Northwich, Macclesfield, Knutsford, Tarporley, Biddulph, Newcastle-under-Lyme & Wilmslow.',
     url: 'https://www.upgraderoofs.co.uk/service-areas',
     siteName: 'Upgrade Roofs',
     type: 'website',
@@ -169,7 +170,7 @@ export default function ServiceAreasPage() {
               Roofing Service Areas Across <span className="text-brand-orange">Cheshire & Beyond</span>
             </h1>
             <p className="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
-              Based in Sandbach, Upgrade Roofs serves 15 towns across Cheshire, Staffordshire, and the Pennine fringe — from Wilmslow and Knutsford in the north to Newcastle-under-Lyme in the south. Over 25 years of local experience, CORC certified, £10M insured.
+              Based in Sandbach, Upgrade Roofs serves 15 towns across Cheshire, Staffordshire, and the Pennine fringe · from Wilmslow and Knutsford in the north to Newcastle-under-Lyme in the south. Over 25 years of local experience, CORC certified, £10M insured.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <QuoteForm trigger={
@@ -189,23 +190,14 @@ export default function ServiceAreasPage() {
       </section>
 
       {/* Trust Strip */}
-      <section className="bg-gray-50 py-6 border-b">
-        <div className="container-custom">
-          <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-700">
-            <div className="flex items-center gap-2"><Award className="w-5 h-5 text-brand-orange" /><span className="font-semibold">25+ Years Experience</span></div>
-            <div className="flex items-center gap-2"><Shield className="w-5 h-5 text-brand-orange" /><span className="font-semibold">£10M Insured</span></div>
-            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-brand-orange" /><span className="font-semibold">CORC Certified</span></div>
-            <div className="flex items-center gap-2"><Clock className="w-5 h-5 text-brand-orange" /><span className="font-semibold">24/7 Emergency Line</span></div>
-          </div>
-        </div>
-      </section>
+      <AuthorityBar />
 
       {/* Map + Coverage Info */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="aspect-video rounded-2xl overflow-hidden shadow-xl">
+              <div className="aspect-video overflow-hidden border border-gray-200 border-l-4 border-l-brand-navy">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d76832.89194948935!2d-2.3679!3d53.1461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487a5d28e86e4263%3A0x38c19e53b2954d45!2sSandbach!5e0!3m2!1sen!2suk!4v1699000000000!5m2!1sen!2suk"
                   width="100%"
@@ -221,12 +213,12 @@ export default function ServiceAreasPage() {
             <div>
               <h2 className="text-3xl font-bold text-brand-navy mb-4">Based in Sandbach, Covering Cheshire</h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Our office at 20 Crewe Road, Sandbach puts us within reach of 15 towns across Cheshire, Staffordshire, and the Pennine fringe. From Winsford and Holmes Chapel on the doorstep to Wilmslow, Knutsford, and Macclesfield further north — and Newcastle-under-Lyme and Biddulph to the south — we cover a wide service area while keeping response times fast.
+                Our office at 20 Crewe Road, Sandbach puts us within reach of 15 towns across Cheshire, Staffordshire, and the Pennine fringe. From Winsford and Holmes Chapel on the doorstep to Wilmslow, Knutsford, and Macclesfield further north · and Newcastle-under-Lyme and Biddulph to the south · we cover a wide service area while keeping response times fast.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-brand-orange mt-1 flex-shrink-0" />
-                  <p className="text-gray-600"><strong className="text-brand-navy">20 Crewe Rd, Sandbach, CW11 4NE</strong> — centrally located for all of south Cheshire.</p>
+                  <p className="text-gray-600"><strong className="text-brand-navy">20 Crewe Rd, Sandbach, CW11 4NE</strong> · centrally located for all of south Cheshire.</p>
                 </div>
                 <div className="flex items-start gap-3">
                   <Clock className="w-5 h-5 text-brand-orange mt-1 flex-shrink-0" />
@@ -251,7 +243,7 @@ export default function ServiceAreasPage() {
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {serviceAreas.map((area, i) => (
-              <Link key={i} href={area.href} className={`group bg-white rounded-2xl p-6 border hover:shadow-lg transition-all ${area.featured ? 'border-brand-orange ring-1 ring-brand-orange/30' : 'border-gray-200 hover:border-brand-orange/50'}`}>
+              <Link key={i} href={area.href} className={`group bg-white p-6 border border-l-4 transition-colors ${area.featured ? 'border-brand-orange ring-1 ring-brand-orange/30' : 'border-gray-200 border-l-brand-navy hover:border-brand-orange/50'}`}>
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-xl font-bold text-brand-navy group-hover:text-brand-orange transition-colors">{area.name}</h3>
                   {area.featured && <span className="px-2 py-1 bg-brand-orange text-white text-xs font-semibold rounded-full">Home Base</span>}
@@ -273,7 +265,7 @@ export default function ServiceAreasPage() {
       {/* CTA */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="bg-brand-navy rounded-3xl p-8 md:p-12 text-center text-white">
+          <div className="bg-brand-navy border-l-4 border-l-brand-orange p-8 md:p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Not Sure If We Cover Your Area?</h2>
             <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
               Based in Sandbach, we serve most of Cheshire and surrounding areas. Give us a call and we'll confirm we can help.

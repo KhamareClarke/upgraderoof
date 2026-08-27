@@ -78,7 +78,7 @@ export default function RoofMaintenanceChecklistPost() {
                 After winter storms, spring is the perfect time to assess and repair any damage:
               </p>
 
-              <div className="bg-green-50 p-6 rounded-xl mb-8">
+              <div className="bg-green-50 p-6 border border-gray-200 border-l-4 border-l-green-500 mb-8">
                 <h3 className="font-semibold text-green-800 mb-4">Spring Tasks</h3>
                 <div className="grid md:grid-cols-2 gap-3">
                   {springTasks.map((task, index) => (
@@ -98,7 +98,7 @@ export default function RoofMaintenanceChecklistPost() {
                 Prepare your roof for the harsh Cheshire winter with these essential tasks:
               </p>
 
-              <div className="bg-orange-50 p-6 rounded-xl mb-8">
+              <div className="bg-orange-50 p-6 border border-gray-200 border-l-4 border-l-orange-400 mb-8">
                 <h3 className="font-semibold text-orange-800 mb-4">Autumn Tasks</h3>
                 <div className="grid md:grid-cols-2 gap-3">
                   {autumnTasks.map((task, index) => (
@@ -142,7 +142,7 @@ export default function RoofMaintenanceChecklistPost() {
                 <li>Annual comprehensive inspections</li>
               </ul>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">Free Professional Roof Inspection</h3>
                 <p className="mb-4">
                   Let our experienced team conduct a thorough inspection of your roof. We serve all of Cheshire 
@@ -200,7 +200,7 @@ export default function RoofMaintenanceChecklistPost() {
             </div>
 
             {/* Money Page Links */}
-            <div className="bg-brand-navy/5 border border-brand-navy/10 rounded-xl p-6 mb-8">
+            <div className="bg-brand-navy/5 border border-brand-navy/10 border-l-4 border-l-brand-navy p-6 mb-8">
               <h3 className="font-bold text-brand-navy mb-3">Spotted Something During Your Inspection?</h3>
               <p className="text-gray-600 text-sm mb-3">
                 If you've found damage during your maintenance check, our <Link href="/roof-repairs" className="text-brand-orange hover:underline font-medium">roof repair team</Link> can 
@@ -213,7 +213,7 @@ export default function RoofMaintenanceChecklistPost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/roof-damage-signs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       How to Spot Roof Damage Before It Gets Expensive
                     </h4>
@@ -223,7 +223,7 @@ export default function RoofMaintenanceChecklistPost() {
                   </div>
                 </Link>
                 <Link href="/blog/gutter-maintenance-guide" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       Complete Guide to Gutter Maintenance
                     </h4>

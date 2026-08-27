@@ -123,7 +123,7 @@ export default function ServicesPage() {
               return (
                 <div
                   key={index}
-                  className="group bg-white rounded-2xl sm:rounded-3xl border border-gray-200 overflow-hidden hover:shadow-2xl hover:border-brand-orange/50 transition-all duration-300 hover:-translate-y-2"
+                  className="group bg-white border border-gray-200 border-l-4 border-l-brand-navy overflow-hidden hover:border-brand-orange/50 transition-all duration-300 hover:-translate-y-2"
                 >
                   <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
                     <Image

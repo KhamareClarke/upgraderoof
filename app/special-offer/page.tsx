@@ -20,6 +20,7 @@ import {
 import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
 import Image from 'next/image';
 import { TurnstileWidget } from '@/components/TurnstileWidget';
+import { AuthorityBar } from '@/components/AuthorityBar';
 
 export default function SpecialOfferPage() {
   const [mounted, setMounted] = useState(false);
@@ -150,7 +151,7 @@ export default function SpecialOfferPage() {
             <div className="text-white space-y-4">
               <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-orange text-white font-bold animate-pulse">
                 <Award className="w-5 h-5" />
-                <span className="text-lg">FREE ROOF INSPECTION — SANDBACH & CHESHIRE</span>
+                <span className="text-lg">FREE ROOF INSPECTION · SANDBACH & CHESHIRE</span>
               </div>
 
               <div className="space-y-4">
@@ -161,7 +162,7 @@ export default function SpecialOfferPage() {
                   <span className="text-3xl md:text-4xl">We'll Inspect It Free.</span>
                 </h1>
                 
-                <div className="bg-white/10 backdrop-blur-sm border-2 border-brand-orange rounded-2xl p-8 text-center">
+                <div className="bg-white/10 backdrop-blur-sm border border-brand-orange/40 border-l-4 border-l-brand-orange p-8 text-center">
                   <div className="text-4xl md:text-5xl font-bold text-brand-orange mb-3">
                     📞 01270 897606
                   </div>
@@ -176,11 +177,11 @@ export default function SpecialOfferPage() {
                   Emergency Repairs • Leaks • New Roofs • Flat Roofs
                 </p>
                 <ul className="text-base text-white/90 space-y-1">
-                  <li>✓ CORC certified — properly qualified roofers</li>
+                  <li>✓ CORC certified · properly qualified roofers</li>
                   <li>✓ £10M public liability insurance</li>
                   <li>✓ 10-year workmanship guarantee on all work</li>
-                  <li>✓ Free written quote — no obligation, no pressure</li>
-                  <li>✓ Based in Sandbach — fast across all of Cheshire</li>
+                  <li>✓ Free written quote · no obligation, no pressure</li>
+                  <li>✓ Based in Sandbach · fast across all of Cheshire</li>
                 </ul>
               </div>
 
@@ -189,7 +190,7 @@ export default function SpecialOfferPage() {
                 <a
                   href="tel:01270897606"
                   onClick={handlePhoneClick}
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-6 text-2xl rounded-xl shadow-2xl flex items-center justify-center gap-3 transition-colors"
+                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-6 text-2xl rounded-xl border-l-4 border-l-brand-navy flex items-center justify-center gap-3 transition-colors"
                 >
                   <Phone className="w-8 h-8" />
                   <span className="!text-white">CALL NOW: 01270 897606</span>
@@ -233,14 +234,14 @@ export default function SpecialOfferPage() {
             </div>
 
             {/* Right Column - Clean Form */}
-            <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-200">
+            <div className="bg-white p-8 border border-gray-200 border-l-4 border-l-brand-navy">
               <div className="text-center mb-8">
-                <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl p-6 mb-6">
+                <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 mb-6 border-l-4 border-l-brand-navy">
                   <div className="text-2xl font-bold mb-2">
                     📞 Call Now: 01270 897606
                   </div>
                   <div className="text-lg opacity-90">
-                    We answer in 30 seconds — instant quote
+                    We answer in 30 seconds · instant quote
                   </div>
                 </div>
 
@@ -362,7 +363,7 @@ export default function SpecialOfferPage() {
                   </Label>
                 </div>
 
-                {/* Honeypot field — hidden from humans, visible to bots */}
+                {/* Honeypot field · hidden from humans, visible to bots */}
                 <div className="hidden" aria-hidden="true">
                   <Label htmlFor="offer-website">Website</Label>
                   <Input
@@ -380,7 +381,7 @@ export default function SpecialOfferPage() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold py-4 text-xl h-16 rounded-xl shadow-lg"
+                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold py-4 text-xl h-16 rounded-xl border-l-4 border-l-brand-navy"
                 >
                   <span className="!text-white">{isSubmitting ? 'Submitting...' : 'Request Callback'}</span>
                 </Button>
@@ -392,7 +393,7 @@ export default function SpecialOfferPage() {
               </form>
 
               {/* Review snippet under form */}
-              <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-2xl">
+              <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 border-l-4 border-l-brand-navy">
                 <div className="flex items-center justify-center gap-1 mb-3">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -409,43 +410,9 @@ export default function SpecialOfferPage() {
       </section>
 
       {/* Trust Badges */}
-      <section className="py-8 bg-white border-b">
-        <div className="container-custom">
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-70">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <CheckCircle className="w-8 h-8 text-green-600" />
-              </div>
-              <p className="text-sm font-semibold">Checkatrade</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Award className="w-8 h-8 text-blue-600" />
-              </div>
-              <p className="text-sm font-semibold">CORC Certified</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Star className="w-8 h-8 text-yellow-600" />
-              </div>
-              <p className="text-sm font-semibold">Google 5★</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Shield className="w-8 h-8 text-purple-600" />
-              </div>
-              <p className="text-sm font-semibold">£10M Insured</p>
-            </div>
-          </div>
-          <div className="text-center mt-6">
-            <p className="text-sm text-gray-600 font-medium">
-              Fully insured up to £10M | CORC Certified | Over 25 Years Experience
-            </p>
-          </div>
-        </div>
-      </section>
+      <AuthorityBar />
 
-      {/* Areas We Cover — matches every local keyword in the ad campaign */}
+      {/* Areas We Cover · matches every local keyword in the ad campaign */}
       <section className="py-10 bg-white border-b">
         <div className="container-custom">
           <div className="text-center mb-6">
@@ -453,7 +420,7 @@ export default function SpecialOfferPage() {
               Serving Sandbach & All Surrounding Areas
             </h2>
             <p className="text-gray-600 mt-2">
-              Based in Sandbach CW11 — covering every corner of Cheshire within 30 minutes
+              Based in Sandbach CW11 · covering every corner of Cheshire within 30 minutes
             </p>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-w-4xl mx-auto">
@@ -483,7 +450,7 @@ export default function SpecialOfferPage() {
             ))}
           </div>
           <p className="text-center text-sm text-gray-500 mt-5">
-            Don't see your area? <a href="tel:01270897606" onClick={handlePhoneClick} className="text-brand-orange font-semibold hover:underline">Call 01270 897606</a> — we likely cover you.
+            Don't see your area? <a href="tel:01270897606" onClick={handlePhoneClick} className="text-brand-orange font-semibold hover:underline">Call 01270 897606</a> · we likely cover you.
           </p>
         </div>
       </section>
@@ -497,7 +464,7 @@ export default function SpecialOfferPage() {
             </h2>
             <div className="grid sm:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-8">
               {[
-                'Full roof structure check — tiles, slates, ridges',
+                'Full roof structure check · tiles, slates, ridges',
                 'Lead flashing & valley condition',
                 'Gutters, fascias & soffits',
                 'Chimney pointing & flashings',
@@ -525,10 +492,10 @@ export default function SpecialOfferPage() {
       <section className="py-12 bg-gradient-to-r from-red-600 to-brand-orange text-white">
         <div className="container-custom text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            Free Roof Inspection — Offer Ends 31st July 2026
+            Free Roof Inspection · Offer Ends 31st July 2026
           </h2>
           <p className="text-lg mb-6">
-            Book before the deadline. No cost, no obligation — just an expert roof check and honest advice.
+            Book before the deadline. No cost, no obligation · just an expert roof check and honest advice.
           </p>
           
           {/* Countdown Timer */}
@@ -585,7 +552,7 @@ export default function SpecialOfferPage() {
       </section>
 
       {/* Mobile Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t shadow-lg p-3">
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t p-3">
         <div className="flex gap-2">
           <a
             href="tel:01270897606"
@@ -618,7 +585,7 @@ export default function SpecialOfferPage() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-20 right-4 z-40 bg-brand-navy text-white p-3 rounded-full shadow-lg hover:bg-brand-navy/90 transition-all"
+          className="fixed bottom-20 right-4 z-40 bg-brand-navy text-white p-3 rounded-full hover:bg-brand-navy/90 transition-all"
         >
           <ArrowUp className="w-5 h-5" />
         </button>

@@ -50,7 +50,7 @@ export default function Home() {
         <Hero />
       </section>
 
-      {/* Trust & Credibility — official accreditation badges */}
+      {/* Trust & Credibility · official accreditation badges */}
       <section className="border-b border-gray-200 bg-white">
         <div className="container-custom">
           <div className="py-10 sm:py-12">
@@ -110,7 +110,7 @@ export default function Home() {
         <WhyChooseUs />
       </section>
 
-      {/* Live Google Reviews — real customer reviews from the Google Business Profile API */}
+      {/* Live Google Reviews · real customer reviews from the Google Business Profile API */}
       <section id="reviews" className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-8">
@@ -161,7 +161,7 @@ export default function Home() {
       </div>
       <CTABanner />
 
-      {/* Local Service Areas — Internal Linking Hub */}
+      {/* Local Service Areas · Internal Linking Hub */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-8">
@@ -237,7 +237,7 @@ export default function Home() {
         }}
       />
 
-      {/* Speakable Schema — key sections for AI/voice assistants */}
+      {/* Speakable Schema · key sections for AI/voice assistants */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

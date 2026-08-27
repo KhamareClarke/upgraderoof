@@ -94,7 +94,7 @@ export function GoogleGbpReviews() {
   const rating = data?.rating;
   const reviews = (data?.reviews ?? []).filter((r) => r.comment);
 
-  // A live average + count is the whole point — fall back quietly if unavailable.
+  // A live average + count is the whole point · fall back quietly if unavailable.
   const average = rating?.average != null ? rating.average : null;
   const total = rating?.totalReviews ?? 0;
 
@@ -127,7 +127,7 @@ export function GoogleGbpReviews() {
           {[...Array(2)].map((_, i) => (
             <div
               key={i}
-              className="h-72 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm animate-pulse"
+              className="h-72 border border-gray-200 border-l-4 border-l-brand-navy bg-white p-6 animate-pulse"
             >
               <div className="flex items-center gap-3 mb-5">
                 <div className="w-11 h-11 rounded-full bg-gray-200" />
@@ -149,7 +149,7 @@ export function GoogleGbpReviews() {
           {reviews.map((review) => (
             <figure
               key={review.id ?? review.createTime ?? `${review.reviewer}-${review.comment?.slice(0, 12)}`}
-              className="flex flex-col bg-white border border-gray-200 rounded-2xl p-7 shadow-sm"
+              className="flex flex-col bg-white border border-gray-200 border-l-4 border-l-brand-navy p-7"
             >
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-11 h-11 rounded-full bg-brand-navy text-white flex items-center justify-center font-bold text-sm flex-shrink-0">
@@ -183,16 +183,16 @@ export function GoogleGbpReviews() {
           ))}
         </div>
       ) : (
-        /* No error state shown to users — an empty/degraded API result renders a
+        /* No error state shown to users · an empty/degraded API result renders a
            single, dignified empty state that holds the section's height so the
            page layout never collapses. */
-        <div className="flex flex-col items-center justify-center text-center py-10 border border-gray-200 rounded-2xl bg-white/60">
+        <div className="flex flex-col items-center justify-center text-center py-10 border border-gray-200 border-l-4 border-l-brand-navy bg-white/60">
           <StarRow value={5} className="[&_svg]:w-6 [&_svg]:h-6 mb-3" />
           <p className="text-gray-600 font-medium">
             Rated 5★ by homeowners across Cheshire
           </p>
           <p className="text-gray-400 text-sm mt-1">
-            Fresh reviews are on their way — check back shortly.
+            Fresh reviews are on their way · check back shortly.
           </p>
           <a
             href={GOOGLE_REVIEW_URL}

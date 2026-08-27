@@ -65,7 +65,7 @@ export default function SkylightInstallationGuidePost() {
                 Benefits of Skylights
               </h2>
 
-              <div className="bg-yellow-50 p-6 rounded-xl mb-8">
+              <div className="bg-yellow-50 p-6 border border-gray-200 border-l-4 border-l-yellow-400 mb-8">
                 <div className="flex items-start gap-3 mb-4">
                   <Sun className="w-6 h-6 text-yellow-600 flex-shrink-0" />
                   <h3 className="font-semibold text-yellow-800">Why Install Skylights?</h3>
@@ -85,7 +85,7 @@ export default function SkylightInstallationGuidePost() {
               </h2>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Fixed Skylights</h3>
                   <ul className="text-sm space-y-2">
                     <li>• Non-opening, light only</li>
@@ -95,7 +95,7 @@ export default function SkylightInstallationGuidePost() {
                   </ul>
                   <p className="text-sm text-gray-600 mt-3">From £300 installed</p>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Opening Skylights</h3>
                   <ul className="text-sm space-y-2">
                     <li>• Manual or electric opening</li>
@@ -105,7 +105,7 @@ export default function SkylightInstallationGuidePost() {
                   </ul>
                   <p className="text-sm text-gray-600 mt-3">From £500 installed</p>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Sun Tunnels</h3>
                   <ul className="text-sm space-y-2">
                     <li>• For spaces far from roof</li>
@@ -115,7 +115,7 @@ export default function SkylightInstallationGuidePost() {
                   </ul>
                   <p className="text-sm text-gray-600 mt-3">From £400 installed</p>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Flat Roof Skylights</h3>
                   <ul className="text-sm space-y-2">
                     <li>• For flat roof extensions</li>
@@ -247,7 +247,7 @@ export default function SkylightInstallationGuidePost() {
                 </table>
               </div>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">Professional Skylight Installation</h3>
                 <p className="mb-4">
                   Transform your home with natural light. Our experienced team installs all types 
@@ -264,7 +264,7 @@ export default function SkylightInstallationGuidePost() {
               <p className="mb-8">
                 Ready to brighten your home? <Link href="/contact" className="text-brand-orange hover:underline">Contact us</Link> for 
                 a free skylight consultation and quote. Skylights are often installed as part of a <Link href="/new-roofs" className="text-brand-orange hover:underline">new roof</Link> or 
-                re-roofing project — the ideal time to add natural light. We also handle all related <Link href="/roof-repairs" className="text-brand-orange hover:underline">roof repairs</Link> if 
+                re-roofing project · the ideal time to add natural light. We also handle all related <Link href="/roof-repairs" className="text-brand-orange hover:underline">roof repairs</Link> if 
                 your existing roof needs attention first.
               </p>
             </div>
@@ -273,7 +273,7 @@ export default function SkylightInstallationGuidePost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/flat-vs-tile-roofs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       Flat vs Tile Roofs Compared
                     </h4>
@@ -283,7 +283,7 @@ export default function SkylightInstallationGuidePost() {
                   </div>
                 </Link>
                 <Link href="/blog/how-long-does-roof-last" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       How Long Does a Roof Last?
                     </h4>

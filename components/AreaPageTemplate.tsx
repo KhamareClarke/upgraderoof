@@ -8,6 +8,7 @@ import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { CheckCircle, PhoneCall, MapPin, ShieldCheck, Medal, CalendarClock, Star, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer, Clock, Phone } from 'lucide-react';
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
+import { AuthorityBar } from '@/components/AuthorityBar';
 
 interface AreaFAQ {
   q: string;
@@ -64,18 +65,18 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero — two-column, inline lead form (matches special-offer design) */}
+      {/* Hero · two-column, inline lead form (matches special-offer design) */}
       <section className="relative py-10 sm:py-14 md:py-16 overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/6.jpeg)' }}>
           <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/90 via-brand-navy/80 to-brand-navy/70" />
         </div>
         <div className="container-custom relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left column — headlines & trust */}
+            {/* Left column · headlines & trust */}
             <div className="text-white space-y-5">
               <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-orange text-white font-bold">
                 <MapPin className="w-4 h-4" />
-                <span className="text-sm tracking-wide">FREE ROOF INSPECTION — {town.toUpperCase()}</span>
+                <span className="text-sm tracking-wide">FREE ROOF INSPECTION · {town.toUpperCase()}</span>
               </div>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
                 Roofers in <span className="text-brand-orange">{town}</span>
@@ -83,16 +84,16 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
               <p className="text-lg sm:text-xl text-white/90 leading-relaxed">{intro}</p>
 
               {/* Call-first highlight box */}
-              <div className="bg-white/10 backdrop-blur-sm border-2 border-brand-orange rounded-2xl p-6 text-center max-w-md">
-                <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">📞 {PHONE_DISPLAY}</div>
+              <div className="bg-white/10 backdrop-blur-sm border-l-4 border-brand-orange p-6 text-left max-w-md">
+                <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">{PHONE_DISPLAY}</div>
                 <div className="text-lg font-semibold">We Answer in 30 Seconds!</div>
               </div>
 
               <ul className="text-base text-white/90 space-y-1">
-                <li>✓ CORC certified — properly qualified roofers</li>
+                <li>✓ CORC certified · properly qualified roofers</li>
                 <li>✓ £10M public liability insurance</li>
                 <li>✓ 10-year workmanship guarantee on all work</li>
-                <li>✓ Free written quote — no obligation, no pressure</li>
+                <li>✓ Free written quote · no obligation, no pressure</li>
               </ul>
 
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
@@ -118,7 +119,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
               </div>
             </div>
 
-            {/* Right column — inline lead form */}
+            {/* Right column · inline lead form */}
             <InlineLeadForm town={town} />
           </div>
         </div>
@@ -130,36 +131,36 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
           <div className="max-w-3xl mx-auto">
             <p className="text-base font-semibold text-brand-navy leading-relaxed">
               <strong>Upgrade Roofs provides expert roofing services in {town}, Cheshire.</strong>{' '}
-              Our CORC-certified team covers roof repairs, new roofs, flat roofing, chimney repairs, gutters, skylights, and 24/7 emergency call-outs across the {town} area. Based in Sandbach — {distanceFromBase || 'within 8 miles'} — with {QA_ANGLE[pickQaAngle(town)]} and a 10-year workmanship guarantee.
+              Our CORC-certified team covers roof repairs, new roofs, flat roofing, chimney repairs, gutters, skylights, and 24/7 emergency call-outs across the {town} area. Based in Sandbach · {distanceFromBase || 'within 8 miles'} · with {QA_ANGLE[pickQaAngle(town)]} and a 10-year workmanship guarantee.
             </p>
           </div>
         </div>
       </section>
 
-      {/* GEO Entity Citation — dense, quotable business entity for AI answer engines */}
+      {/* GEO Entity Citation · dense, quotable business entity for AI answer engines */}
       <GeoEntityCitation town={town} postcode={postcode} />
 
-      {/* AEO Quick-Answer Block — direct answers to high-intent voice/AI questions */}
+      {/* AEO Quick-Answer Block · direct answers to high-intent voice/AI questions */}
       <section id="quick-answers" className="bg-white border-b border-gray-100 py-8">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-xl font-bold text-brand-navy mb-5 text-center">
-              Roofing in {town} — Quick Answers
+              Roofing in {town} · Quick Answers
             </h2>
             <dl className="space-y-4">
-              <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
+              <div className="bg-gray-50 p-5 border-l-4 border-brand-navy">
                 <dt className="font-semibold text-brand-navy mb-1">How much does a roof repair cost in {town}?</dt>
                 <dd className="text-sm text-gray-600 leading-relaxed">
                   Minor roof repairs in {town} (slipped tiles, ridge repointing) typically cost £150–£500. Larger repairs involving leadwork or valleys range from £500–£2,000. Upgrade Roofs provides a free, no-obligation written quote after a roof inspection.
                 </dd>
               </div>
-              <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
+              <div className="bg-gray-50 p-5 border-l-4 border-brand-navy">
                 <dt className="font-semibold text-brand-navy mb-1">Who is the best rated emergency roofer in {town}?</dt>
                 <dd className="text-sm text-gray-600 leading-relaxed">
                   Upgrade Roofs is a 5-star rated, CORC-certified emergency roofer serving {town}, with 127+ five-star Google reviews. Based {distanceFromBase || 'nearby in Sandbach'}, the team offers 24/7 emergency call-outs{emergencyResponseTime ? ` and typically reaches ${town} within ${emergencyResponseTime}` : ''}. Call {PHONE_DISPLAY} for emergencies.
                 </dd>
               </div>
-              <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
+              <div className="bg-gray-50 p-5 border-l-4 border-brand-navy">
                 <dt className="font-semibold text-brand-navy mb-1">How long does a flat roof replacement take?</dt>
                 <dd className="text-sm text-gray-600 leading-relaxed">
                   Most flat roof replacements in {town} (garage or extension) are completed in 1–2 days using EPDM rubber or GRP fibreglass, both backed by a 20-year waterproof guarantee. Larger or more complex flat roofs may take 2–4 days.
@@ -171,17 +172,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       </section>
 
       {/* Trust Bar */}
-      <section className="bg-gray-50 py-6 border-b border-gray-200">
-        <div className="container-custom">
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-10 text-sm text-gray-700">
-            <div className="flex items-center gap-2"><Medal className="w-5 h-5 text-brand-orange" /><span className="font-semibold">25+ Years</span></div>
-            <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-brand-orange" /><span className="font-semibold">£10M Insured</span></div>
-            <div className="flex items-center gap-2"><CheckCircle className="w-5 h-5 text-brand-orange" /><span className="font-semibold">CORC Certified</span></div>
-            <div className="flex items-center gap-2"><ShieldCheck className="w-5 h-5 text-brand-orange" /><span className="font-semibold">10-Year Workmanship Guarantee</span></div>
-            <div className="flex items-center gap-2"><Star className="w-5 h-5 text-brand-orange" /><span className="font-semibold">5-Star Reviews</span></div>
-          </div>
-        </div>
-      </section>
+      <AuthorityBar />
 
       {/* Local Proof Bar */}
       {(postcode || distanceFromBase || proofPoint) && (
@@ -224,7 +215,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
             {(landmarks?.length || propertyTypes?.length) && (
               <div className="grid sm:grid-cols-2 gap-6 mt-8">
                 {landmarks && landmarks.length > 0 && (
-                  <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                  <div className="bg-gray-50 p-6 border-l-4 border-brand-orange">
                     <h3 className="text-lg font-bold text-brand-navy mb-3">Areas We Cover in {town}</h3>
                     <ul className="space-y-2">
                       {landmarks.map((l, i) => (
@@ -236,7 +227,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
                   </div>
                 )}
                 {propertyTypes && propertyTypes.length > 0 && (
-                  <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                  <div className="bg-gray-50 p-6 border-l-4 border-brand-orange">
                     <h3 className="text-lg font-bold text-brand-navy mb-3">Property Types in {town}</h3>
                     <ul className="space-y-2">
                       {propertyTypes.map((p, i) => (
@@ -263,7 +254,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
               </h2>
               <div className="space-y-6">
                 {commonProblems.map((cp, i) => (
-                  <div key={i} className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                  <div key={i} className="bg-gray-50 p-6 border-l-4 border-brand-navy">
                     <h3 className="text-lg font-bold text-brand-navy mb-2">{cp.problem}</h3>
                     <p className="text-gray-600 text-sm">{cp.solution}</p>
                   </div>
@@ -297,8 +288,8 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
           </h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s, i) => (
-              <Link key={i} href={s.href} className="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-brand-orange/50 hover:shadow-lg transition-all">
-                <div className="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center mb-4">
+              <Link key={i} href={s.href} className="group bg-white p-6 border border-gray-300 hover:border-brand-navy transition-colors">
+                <div className="w-12 h-12 bg-brand-orange/10 flex items-center justify-center mb-4">
                   <s.icon className="w-6 h-6 text-brand-orange" />
                 </div>
                 <h3 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-orange transition-colors">{s.title}</h3>
@@ -317,11 +308,11 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-brand-navy mb-8 text-center">
-              Roofing Questions — {town}
+              Roofing Questions · {town}
             </h2>
             <div className="space-y-4">
               {faqs.map((faq, i) => (
-                <details key={i} className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                <details key={i} className="bg-white border border-gray-300 border-l-4 border-l-brand-orange">
                   <summary className="p-5 cursor-pointer font-semibold text-brand-navy hover:text-brand-orange transition-colors flex items-center justify-between">
                     {faq.q}
                     <span className="text-brand-orange ml-2 flex-shrink-0">+</span>
@@ -339,11 +330,11 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
         <div className="container-custom">
           <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">Nearby Areas We Serve</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            <Link href="/roofers-sandbach" className="flex items-center justify-center gap-2 p-4 bg-white rounded-xl border border-gray-200 hover:border-brand-orange/50 hover:shadow-md transition-all text-brand-navy font-semibold hover:text-brand-orange">
+            <Link href="/roofers-sandbach" className="flex items-center justify-center gap-2 p-4 bg-white border border-gray-300 hover:border-brand-navy transition-colors text-brand-navy font-semibold hover:text-brand-orange">
               <MapPin className="w-4 h-4 text-brand-orange" />Sandbach
             </Link>
             {nearbyAreas.map((area, i) => (
-              <Link key={i} href={area.href} className="flex items-center justify-center gap-2 p-4 bg-white rounded-xl border border-gray-200 hover:border-brand-orange/50 hover:shadow-md transition-all text-brand-navy font-semibold hover:text-brand-orange">
+              <Link key={i} href={area.href} className="flex items-center justify-center gap-2 p-4 bg-white border border-gray-300 hover:border-brand-navy transition-colors text-brand-navy font-semibold hover:text-brand-orange">
                 <MapPin className="w-4 h-4 text-brand-orange" />{area.name}
               </Link>
             ))}
@@ -419,7 +410,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
           })
         }}
       />
-      {/* FAQ Schema — town FAQs + the 3 above-the-fold quick answers */}
+      {/* FAQ Schema · town FAQs + the 3 above-the-fold quick answers */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -467,7 +458,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
         }}
       />
 
-      {/* Sticky mobile CTA — Call / WhatsApp / Quick Form */}
+      {/* Sticky mobile CTA · Call / WhatsApp / Quick Form */}
       <StickyMobileCta placement={`area_page_${town.toLowerCase().replace(/\s+/g, '_')}`} />
     </div>
   );

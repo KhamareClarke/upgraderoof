@@ -39,7 +39,7 @@ const faqData = {
       name: 'How much does a new roof cost in Cheshire?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Every roof is different, so costs vary depending on size, materials, and the scope of work involved. We provide free, no-obligation quotes with transparent, itemised pricing — no hidden costs, no surprises.',
+        text: 'Every roof is different, so costs vary depending on size, materials, and the scope of work involved. We provide free, no-obligation quotes with transparent, itemised pricing · no hidden costs, no surprises.',
       },
     },
     {

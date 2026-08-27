@@ -97,7 +97,7 @@ export default function HowLongDoesRoofLastPost() {
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-blue-50 p-6 rounded-lg">
+                <div className="bg-blue-50 p-6 border border-gray-200 border-l-4 border-l-blue-500">
                   <h3 className="font-semibold text-blue-800 mb-3">Weather Factors</h3>
                   <ul className="text-sm space-y-2">
                     <li>• Heavy rainfall and persistent dampness</li>
@@ -106,7 +106,7 @@ export default function HowLongDoesRoofLastPost() {
                     <li>• Occasional severe storms</li>
                   </ul>
                 </div>
-                <div className="bg-green-50 p-6 rounded-lg">
+                <div className="bg-green-50 p-6 border border-gray-200 border-l-4 border-l-green-500">
                   <h3 className="font-semibold text-green-800 mb-3">Positive Factors</h3>
                   <ul className="text-sm space-y-2">
                     <li>• Quality installation by professionals</li>
@@ -159,7 +159,7 @@ export default function HowLongDoesRoofLastPost() {
                 <li>Address minor repairs immediately</li>
               </ol>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">Free Roof Assessment</h3>
                 <p className="mb-4">
                   Wondering how much life your roof has left? Our experienced team provides free, 
@@ -196,10 +196,10 @@ export default function HowLongDoesRoofLastPost() {
             </div>
 
             {/* Money Page Links */}
-            <div className="bg-brand-navy/5 border border-brand-navy/10 rounded-xl p-6 mb-8">
+            <div className="bg-brand-navy/5 border border-brand-navy/10 border-l-4 border-l-brand-navy p-6 mb-8">
               <h3 className="font-bold text-brand-navy mb-3">Thinking About a New Roof?</h3>
               <p className="text-gray-600 text-sm mb-3">
-                If your roof is nearing the end of its lifespan, explore our <Link href="/new-roofs" className="text-brand-orange hover:underline font-medium">new roof installation service</Link> — 
+                If your roof is nearing the end of its lifespan, explore our <Link href="/new-roofs" className="text-brand-orange hover:underline font-medium">new roof installation service</Link> · 
                 we offer tile, slate, and flat roofing with 10-year workmanship guarantees. For minor issues, our 
                 <Link href="/roof-repairs" className="text-brand-orange hover:underline font-medium"> roof repair service</Link> can extend your roof's life. 
                 See <Link href="/roofers-sandbach" className="text-brand-orange hover:underline font-medium">roofers in Sandbach</Link> for local project examples.
@@ -210,7 +210,7 @@ export default function HowLongDoesRoofLastPost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/flat-vs-tile-roofs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       Flat vs Tile Roofs: Which is Best?
                     </h4>
@@ -220,7 +220,7 @@ export default function HowLongDoesRoofLastPost() {
                   </div>
                 </Link>
                 <Link href="/blog/roof-maintenance-checklist" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       Complete Roof Maintenance Checklist
                     </h4>

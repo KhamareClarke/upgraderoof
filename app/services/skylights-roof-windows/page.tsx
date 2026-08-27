@@ -72,7 +72,7 @@ export default function SkylightsRoofWindowsPage() {
               </div>
             </div>
 
-            <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
+            <div className="overflow-hidden border border-brand-navy border-l-4 border-l-brand-orange order-1 lg:order-2">
               <img
                 src="/images/10.jpeg"
                 alt="VELUX skylight installation in a Cheshire loft conversion by Upgrade Roofs"
@@ -81,7 +81,7 @@ export default function SkylightsRoofWindowsPage() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
+          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white border-l-4 border-l-brand-orange p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
             <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center px-2">Our Skylight Services</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {[
@@ -137,11 +137,11 @@ export default function SkylightsRoofWindowsPage() {
 
       <ServiceAreaLinks serviceName="Skylights & Roof Windows" />
 
-      {/* FAQ Section — visible details/summary accordions + matching FAQPage JSON-LD */}
+      {/* FAQ Section · visible details/summary accordions + matching FAQPage JSON-LD */}
       <section className="section-padding bg-white">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": [\n    {\n      \"@type\": \"Question\",\n      \"name\": \"How much does skylight installation cost in Cheshire?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Skylight and roof window installation in Cheshire typically ranges from £700 to £2,500 per unit, including the window and full waterproof flashing. VELUX windows cost more than budget alternatives but last longer and hold their value. We provide a free, itemised quote so there are no surprises.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Will my new skylight leak?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"No — as VELUX approved installers we fit fully watertight manufacturer flashing kits as standard, and every installation is weatherproofed and tested before we leave. Correct flashing is the single most important factor in preventing leaks, and it is included in every quote.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"What warranty do you offer on skylight installation?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Every skylight and roof window installation is backed by a 10-year workmanship guarantee, on top of VELUX's own manufacturer warranty on the unit. We are CORC certified and £10M insured, serving Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.\"\n      }\n    }\n  ]\n}" }}
+          dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": [\n    {\n      \"@type\": \"Question\",\n      \"name\": \"How much does skylight installation cost in Cheshire?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Skylight and roof window installation in Cheshire typically ranges from £700 to £2,500 per unit, including the window and full waterproof flashing. VELUX windows cost more than budget alternatives but last longer and hold their value. We provide a free, itemised quote so there are no surprises.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Will my new skylight leak?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"No · as VELUX approved installers we fit fully watertight manufacturer flashing kits as standard, and every installation is weatherproofed and tested before we leave. Correct flashing is the single most important factor in preventing leaks, and it is included in every quote.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"What warranty do you offer on skylight installation?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Every skylight and roof window installation is backed by a 10-year workmanship guarantee, on top of VELUX's own manufacturer warranty on the unit. We are CORC certified and £10M insured, serving Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.\"\n      }\n    }\n  ]\n}" }}
         />
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
@@ -161,7 +161,7 @@ export default function SkylightsRoofWindowsPage() {
                 },
                 {
                   question: "Will my new skylight leak?",
-                  answer: "No — as VELUX approved installers we fit fully watertight manufacturer flashing kits as standard, and every installation is weatherproofed and tested before we leave. Correct flashing is the single most important factor in preventing leaks, and it is included in every quote.",
+                  answer: "No · as VELUX approved installers we fit fully watertight manufacturer flashing kits as standard, and every installation is weatherproofed and tested before we leave. Correct flashing is the single most important factor in preventing leaks, and it is included in every quote.",
                 },
                 {
                   question: "What warranty do you offer on skylight installation?",
@@ -170,7 +170,7 @@ export default function SkylightsRoofWindowsPage() {
               ].map((faq, index) => (
                 <details
                   key={index}
-                  className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+                  className="group bg-white border border-gray-200 border-l-4 border-l-brand-navy overflow-hidden hover:border-brand-orange/50 transition-colors"
                   open={index === 0}
                 >
                   <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4">

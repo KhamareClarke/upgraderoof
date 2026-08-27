@@ -58,7 +58,7 @@ export function ContactForm() {
         console.warn('Failed to save to Supabase, but email was sent:', supabaseError);
       }
 
-      // Track only after confirmed success — capture subject before reset
+      // Track only after confirmed success · capture subject before reset
       trackContactForm({ subject: formData.subject });
 
       setSuccess(true);
@@ -201,7 +201,7 @@ export function ContactForm() {
                       />
                     </div>
 
-                    {/* Honeypot field — hidden from humans, visible to bots */}
+                    {/* Honeypot field · hidden from humans, visible to bots */}
                     <div className="hidden" aria-hidden="true">
                       <Label htmlFor="contact-website">Website</Label>
                       <Input

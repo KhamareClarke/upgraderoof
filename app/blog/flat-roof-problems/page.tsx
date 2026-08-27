@@ -213,7 +213,7 @@ export default function FlatRoofProblemsPost() {
                 <li><strong>Large flat roof:</strong> £60-£100 per m²</li>
               </ul>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">Expert Flat Roof Services</h3>
                 <p className="mb-4">
                   From repairs to complete replacements, our team specializes in all flat roofing 
@@ -239,7 +239,7 @@ export default function FlatRoofProblemsPost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/flat-vs-tile-roofs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       Flat vs Tile Roofs Compared
                     </h4>
@@ -249,7 +249,7 @@ export default function FlatRoofProblemsPost() {
                   </div>
                 </Link>
                 <Link href="/blog/how-long-does-roof-last" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       How Long Does a Roof Last?
                     </h4>

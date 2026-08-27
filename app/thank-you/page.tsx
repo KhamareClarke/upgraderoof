@@ -31,7 +31,7 @@ export default function ThankYouPage() {
             Thank You!
           </h1>
           
-          <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
+          <div className="bg-white border border-gray-200 border-l-4 border-l-brand-navy p-8 mb-8">
             <h2 className="text-2xl font-bold text-brand-navy mb-4">
               Your Free Roof Inspection is Booked!
             </h2>
@@ -91,17 +91,17 @@ export default function ThankYouPage() {
 
           {/* Additional Information */}
           <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-white p-6 rounded-xl shadow-sm">
+            <div className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy">
               <Clock className="w-8 h-8 text-brand-orange mx-auto mb-3" />
               <h3 className="font-bold text-brand-navy mb-2">Quick Response</h3>
               <p className="text-sm text-gray-600">We'll call you within 10 minutes during business hours</p>
             </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm">
+            <div className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy">
               <CheckCircle className="w-8 h-8 text-green-600 mx-auto mb-3" />
               <h3 className="font-bold text-brand-navy mb-2">No Obligation</h3>
               <p className="text-sm text-gray-600">Free inspection with no pressure to buy anything</p>
             </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm">
+            <div className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy">
               <CheckCircle className="w-8 h-8 text-blue-600 mx-auto mb-3" />
               <h3 className="font-bold text-brand-navy mb-2">Expert Service</h3>
               <p className="text-sm text-gray-600">25+ years experience with fully insured professionals</p>
@@ -109,7 +109,7 @@ export default function ThankYouPage() {
           </div>
 
           {/* Social Proof */}
-          <div className="bg-brand-navy text-white p-6 rounded-xl mb-8">
+          <div className="bg-brand-navy text-white p-6 border-l-4 border-l-brand-orange mb-8">
             <h3 className="font-bold mb-4">Join 1,000+ Happy Customers</h3>
             <div className="flex justify-center items-center gap-1 mb-2">
               {[...Array(5)].map((_, i) => (

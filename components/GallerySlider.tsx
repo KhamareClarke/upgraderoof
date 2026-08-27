@@ -196,7 +196,7 @@ export function GallerySlider() {
                   style={{ width: `${100 / slidesPerView}%` }}
                 >
                   <article
-                    className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
+                    className="group relative overflow-hidden border border-gray-200 border-l-4 border-l-brand-navy transition-colors duration-300 cursor-pointer"
                     onClick={() => setLightboxImage(image)}
                     itemScope
                     itemType="https://schema.org/ImageObject"
@@ -269,8 +269,8 @@ export function GallerySlider() {
             <X className="w-8 h-8" />
           </button>
           
-          <div 
-            className="max-w-5xl w-full bg-white rounded-xl overflow-hidden shadow-2xl"
+          <div
+            className="max-w-5xl w-full bg-white border border-brand-navy border-l-4 border-l-brand-orange overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative w-full h-[70vh]">

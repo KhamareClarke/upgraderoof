@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Analytics — TAG INITIALIZATION ONLY
+ * Analytics · TAG INITIALIZATION ONLY
  *
  * Loads: Google Consent Mode V2 → GTM → GA4 (direct) → Google Ads global site tag
  *
@@ -22,7 +22,7 @@ const GA4_ID         = process.env.NEXT_PUBLIC_GA4_ID         || 'G-7V452FMYFY';
 const GADS_ID        = process.env.NEXT_PUBLIC_GADS_ID        || 'AW-7693225904';
 const GADS_CONV_ID   = process.env.NEXT_PUBLIC_GADS_CONV_ID   || 'AW-7693225904';
 // Dedicated conversion action for low-value phone/WhatsApp taps. Must be a real
-// conversion action ID in Google Ads. Deliberately null when unset — do NOT fall
+// conversion action ID in Google Ads. Deliberately null when unset · do NOT fall
 // back to the lead-form ID, else taps get mislabelled as full lead-form conversions.
 const GADS_CLICK_CONV_ID = process.env.NEXT_PUBLIC_GADS_CLICK_CONV_ID || null;
 
@@ -97,14 +97,14 @@ export function Analytics() {
       {/* ── 4. Google Ads global site tag ────────────────────────────────
           Two configs:
           - AW-7693225904 : account-level lead-form conversion container
-            ("Submit lead form") — the GADS_ID/GADS_CONV_ID fallback.
+            ("Submit lead form") · the GADS_ID/GADS_CONV_ID fallback.
           - GADS_CONV_ID  : live lead-form action (NEXT_PUBLIC_GADS_CONV_ID).
           - GADS_CLICK_CONV_ID : phone/WhatsApp tap action, only when set. */}
       <Script id="google-ads-config" strategy="afterInteractive">
         {`
           gtag('config', '${GADS_ID}');
           gtag('config', '${GADS_CONV_ID}');
-          ${GADS_CLICK_CONV_ID ? `gtag('config', '${GADS_CLICK_CONV_ID}');` : `// no dedicated click-conversion ID configured — tap conversions disabled`}
+          ${GADS_CLICK_CONV_ID ? `gtag('config', '${GADS_CLICK_CONV_ID}');` : `// no dedicated click-conversion ID configured · tap conversions disabled`}
         `}
       </Script>
     </>

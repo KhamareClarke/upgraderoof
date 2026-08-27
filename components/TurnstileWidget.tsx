@@ -11,7 +11,7 @@ import { useEffect, useRef } from 'react';
  *
  * The `<TurnstileProvider>` below loads the shared script exactly once; this
  * component renders an individual widget and reports the token back via
- * `onToken`. The token is one-shot — after the token is consumed (or the form
+ * `onToken`. The token is one-shot · after the token is consumed (or the form
  * resets), the parent should call `reset()` via the `widgetId`.
  */
 
@@ -40,7 +40,7 @@ function loadScript(): Promise<void> {
       script.async = true;
       script.defer = true;
       script.onload = () => resolve();
-      script.onerror = () => resolve(); // degrade gracefully — no CAPTCHA
+      script.onerror = () => resolve(); // degrade gracefully · no CAPTCHA
       document.head.appendChild(script);
     });
   }

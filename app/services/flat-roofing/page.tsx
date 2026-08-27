@@ -49,7 +49,7 @@ export default function FlatRoofingPage() {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             <p className="text-base font-semibold text-brand-navy leading-relaxed">
-              <strong>Upgrade Roofs provides expert flat roofing in Cheshire</strong> using EPDM rubber, GRP fibreglass, and felt systems — suitable for extensions, garages, and commercial buildings. 20-year waterproof warranty on EPDM and GRP installations plus 10-year workmanship guarantee. CORC certified, £10M insured, free written quotes. Serving Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.
+              <strong>Upgrade Roofs provides expert flat roofing in Cheshire</strong> using EPDM rubber, GRP fibreglass, and felt systems · suitable for extensions, garages, and commercial buildings. 20-year waterproof warranty on EPDM and GRP installations plus 10-year workmanship guarantee. CORC certified, £10M insured, free written quotes. Serving Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.
             </p>
           </div>
         </div>
@@ -69,7 +69,7 @@ export default function FlatRoofingPage() {
               </div>
             </div>
 
-            <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
+            <div className="overflow-hidden border border-brand-navy border-l-4 border-l-brand-orange order-1 lg:order-2">
               <img
                 src="/images/3.jpeg"
                 alt="EPDM rubber flat roof installation on a garage extension in Cheshire by Upgrade Roofs"
@@ -78,7 +78,7 @@ export default function FlatRoofingPage() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
+          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white border-l-4 border-l-brand-orange p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
             <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center px-2">Our Flat Roofing Services</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {[
@@ -134,7 +134,7 @@ export default function FlatRoofingPage() {
 
       <ServiceAreaLinks serviceName="Flat Roofing" />
 
-      {/* FAQ Section — visible details/summary accordions + matching FAQPage JSON-LD */}
+      {/* FAQ Section · visible details/summary accordions + matching FAQPage JSON-LD */}
       <section className="section-padding bg-white">
         <script
           type="application/ld+json"
@@ -167,7 +167,7 @@ export default function FlatRoofingPage() {
               ].map((faq, index) => (
                 <details
                   key={index}
-                  className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+                  className="group bg-white border border-gray-200 border-l-4 border-l-brand-navy overflow-hidden hover:border-brand-orange/50 transition-colors"
                   open={index === 0}
                 >
                   <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4">

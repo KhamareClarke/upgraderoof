@@ -144,7 +144,7 @@ export default function BlogPage() {
               {staticPosts.map((post) => (
                 <article
                   key={post.slug}
-                  className="group bg-white rounded-xl sm:rounded-2xl border border-gray-200 overflow-hidden hover:shadow-xl hover:border-brand-orange/50 transition-all duration-300"
+                  className="group bg-white border border-gray-200 border-l-4 border-l-brand-navy overflow-hidden hover:border-brand-orange/50 hover:border-l-brand-orange transition-all duration-300"
                 >
                   <div className="relative h-40 sm:h-48 md:h-56 overflow-hidden bg-gray-200">
                     <img

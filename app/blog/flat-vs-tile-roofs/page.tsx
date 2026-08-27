@@ -72,7 +72,7 @@ export default function FlatVsTileRoofsPost() {
                 Traditional tile roofing systems are renowned for their longevity:
               </p>
 
-              <div className="bg-green-50 border border-green-200 p-6 rounded-lg mb-6">
+              <div className="bg-green-50 border border-green-200 border-l-4 border-l-green-500 p-6 mb-6">
                 <h3 className="font-semibold text-green-800 mb-3 flex items-center">
                   <CheckCircle className="w-5 h-5 mr-2" />
                   Tile Roof Advantages
@@ -106,7 +106,7 @@ export default function FlatVsTileRoofsPost() {
                 Modern flat roofing systems have significantly improved in recent decades:
               </p>
 
-              <div className="bg-blue-50 border border-blue-200 p-6 rounded-lg mb-6">
+              <div className="bg-blue-50 border border-blue-200 border-l-4 border-l-blue-500 p-6 mb-6">
                 <h3 className="font-semibold text-blue-800 mb-3 flex items-center">
                   <CheckCircle className="w-5 h-5 mr-2" />
                   Modern Flat Roof Lifespans
@@ -186,7 +186,7 @@ export default function FlatVsTileRoofsPost() {
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Tile Roofs in UK Weather</h3>
                   <div className="space-y-3">
                     <div className="flex items-start gap-2">
@@ -207,7 +207,7 @@ export default function FlatVsTileRoofsPost() {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Flat Roofs in UK Weather</h3>
                   <div className="space-y-3">
                     <div className="flex items-start gap-2">
@@ -238,7 +238,7 @@ export default function FlatVsTileRoofsPost() {
                 When considering total cost of ownership over the roof's lifetime:
               </p>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">Cost Per Year Analysis</h3>
                 <div className="grid md:grid-cols-3 gap-6">
                   <div className="text-center">
@@ -268,7 +268,7 @@ export default function FlatVsTileRoofsPost() {
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="border border-green-200 p-6 rounded-lg">
+                <div className="border border-green-200 border-l-4 border-l-green-500 p-6">
                   <h3 className="font-semibold text-green-800 mb-3">Choose Tile Roofing If:</h3>
                   <ul className="space-y-2 text-sm">
                     <li>• You want maximum longevity (50+ years)</li>
@@ -278,7 +278,7 @@ export default function FlatVsTileRoofsPost() {
                     <li>• You want low maintenance requirements</li>
                   </ul>
                 </div>
-                <div className="border border-blue-200 p-6 rounded-lg">
+                <div className="border border-blue-200 border-l-4 border-l-blue-500 p-6">
                   <h3 className="font-semibold text-blue-800 mb-3">Choose Flat Roofing If:</h3>
                   <ul className="space-y-2 text-sm">
                     <li>• You have a low-pitch or flat roof</li>
@@ -305,7 +305,7 @@ export default function FlatVsTileRoofsPost() {
                 Sandbach and Cheshire.
               </p>
 
-              <div className="bg-brand-orange/10 border border-brand-orange p-8 rounded-xl mb-8">
+              <div className="bg-brand-orange/10 border border-brand-orange border-l-4 border-l-brand-orange p-8 mb-8">
                 <h3 className="text-xl font-bold text-brand-navy mb-4">Get Expert Advice</h3>
                 <p className="mb-4">
                   Unsure which roofing system is best for your property? Our experienced team provides free consultations 
@@ -343,7 +343,7 @@ export default function FlatVsTileRoofsPost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/roof-damage-signs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       How to Spot Roof Damage Before It Gets Expensive
                     </h4>
@@ -353,7 +353,7 @@ export default function FlatVsTileRoofsPost() {
                   </div>
                 </Link>
                 <Link href="/blog/gutter-repair-costs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       The Real Cost of Ignoring Gutter Repairs
                     </h4>

@@ -15,7 +15,7 @@ export function GhlReviewsWidget() {
   return (
     <div className="w-full">
       <iframe
-        className="lc_reviews_widget block w-full min-w-full h-[500px] sm:h-[520px] rounded-2xl border border-gray-200 bg-white shadow-sm"
+        className="lc_reviews_widget block w-full min-w-full h-[500px] sm:h-[520px] border border-gray-200 border-l-4 border-l-brand-navy bg-white"
         src={WIDGET_SRC}
         frameBorder="0"
         scrolling="no"

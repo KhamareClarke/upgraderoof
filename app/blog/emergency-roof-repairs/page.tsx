@@ -100,7 +100,7 @@ export default function EmergencyRoofRepairsPost() {
               </h2>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">1. Ensure Safety First</h3>
                   <ul className="text-sm space-y-2">
                     <li>• Move family members away from affected areas</li>
@@ -109,7 +109,7 @@ export default function EmergencyRoofRepairsPost() {
                     <li>• Move valuable items to safety</li>
                   </ul>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">2. Document the Damage</h3>
                   <ul className="text-sm space-y-2">
                     <li>• Take photos and videos of all damage</li>
@@ -153,7 +153,7 @@ export default function EmergencyRoofRepairsPost() {
                 ))}
               </div>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">24/7 Emergency Roof Repairs</h3>
                 <p className="mb-4">
                   Don't wait for minor damage to become a major problem. Our experienced team is ready 
@@ -195,7 +195,7 @@ export default function EmergencyRoofRepairsPost() {
             </div>
 
             {/* Money Page Links */}
-            <div className="bg-brand-navy/5 border border-brand-navy/10 rounded-xl p-6 mb-8">
+            <div className="bg-brand-navy/5 border border-brand-navy/10 border-l-4 border-l-brand-navy p-6 mb-8">
               <h3 className="font-bold text-brand-navy mb-3">Need Emergency Help Now?</h3>
               <p className="text-gray-600 text-sm mb-3">
                 Visit our <Link href="/emergency-roofing" className="text-brand-orange hover:underline font-medium">24/7 emergency roofing page</Link> for 
@@ -210,7 +210,7 @@ export default function EmergencyRoofRepairsPost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/roof-damage-signs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       How to Spot Roof Damage Before It Gets Expensive
                     </h4>
@@ -220,7 +220,7 @@ export default function EmergencyRoofRepairsPost() {
                   </div>
                 </Link>
                 <Link href="/blog/roof-damage-signs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       How to Spot Roof Damage Early
                     </h4>

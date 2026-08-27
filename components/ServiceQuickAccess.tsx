@@ -82,7 +82,7 @@ export function ServiceQuickAccess({
   
   if (variant === 'compact') {
     return (
-      <div className="bg-brand-grey p-6 rounded-xl">
+      <div className="bg-brand-grey p-6 border border-gray-200 border-l-4 border-l-brand-navy">
         <h3 className="font-bold text-brand-navy mb-4">{title}</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
           {quickServices.map((service) => (

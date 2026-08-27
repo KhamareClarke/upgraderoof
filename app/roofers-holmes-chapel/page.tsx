@@ -9,7 +9,7 @@ const data = townData['holmes-chapel'];
 
 export const metadata: Metadata = {
   title: 'Roofers Holmes Chapel | CW4 Local Roofing | Upgrade Roofs',
-  description: 'Trusted roofers in Holmes Chapel, CW4. Just 4 miles from our Sandbach base — emergency response within 20–30 minutes. Roof repairs, period property specialists, free quotes. 01270 897606.',
+  description: 'Trusted roofers in Holmes Chapel, CW4. Just 4 miles from our Sandbach base · emergency response within 20–30 minutes. Roof repairs, period property specialists, free quotes. 01270 897606.',
   keywords: 'roofers holmes chapel, roofing company holmes chapel, roof repair holmes chapel, new roof holmes chapel CW4, emergency roofer holmes chapel',
   openGraph: {
     title: 'Roofers Holmes Chapel | CW4 Roofing Experts | Upgrade Roofs',

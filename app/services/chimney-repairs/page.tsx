@@ -72,7 +72,7 @@ export default function ChimneyRepairsPage() {
               </div>
             </div>
 
-            <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
+            <div className="overflow-hidden border border-brand-navy border-l-4 border-l-brand-orange order-1 lg:order-2">
               <img
                 src="/images/1.jpeg"
                 alt="Professional chimney stack repointing and repair in Cheshire by Upgrade Roofs"
@@ -81,7 +81,7 @@ export default function ChimneyRepairsPage() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
+          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white border-l-4 border-l-brand-orange p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
             <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center px-2">Our Chimney Services</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {[
@@ -137,11 +137,11 @@ export default function ChimneyRepairsPage() {
 
       <ServiceAreaLinks serviceName="Chimney Repairs" />
 
-      {/* FAQ Section — visible details/summary accordions + matching FAQPage JSON-LD */}
+      {/* FAQ Section · visible details/summary accordions + matching FAQPage JSON-LD */}
       <section className="section-padding bg-white">
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": [\n    {\n      \"@type\": \"Question\",\n      \"name\": \"How much do chimney repairs cost in Cheshire?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Chimney repairs in Cheshire typically start from around £150 for minor repointing and rise to £1,500 or more for a full chimney stack rebuild. The price depends on height, access, and the extent of the damage. We provide a free, no-obligation inspection and written quote before any work begins.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"How do I know if my chimney needs repointing or rebuilding?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Crumbling mortar, loose or missing bricks, damp patches around the chimney breast, and leaning stacks all point to repointing or a rebuild. We inspect the flaunching, flashing, and brickwork, then recommend the most cost-effective fix — repointing where the mortar is sound, a rebuild where the stack is structurally unsafe.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Is your chimney repair work guaranteed?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Yes. All our chimney repairs are backed by a 10-year workmanship guarantee, and we are CORC certified and £10M insured. We serve Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel, so your chimney is covered long after the work is done.\"\n      }\n    }\n  ]\n}" }}
+          dangerouslySetInnerHTML={{ __html: "{\n  \"@context\": \"https://schema.org\",\n  \"@type\": \"FAQPage\",\n  \"mainEntity\": [\n    {\n      \"@type\": \"Question\",\n      \"name\": \"How much do chimney repairs cost in Cheshire?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Chimney repairs in Cheshire typically start from around £150 for minor repointing and rise to £1,500 or more for a full chimney stack rebuild. The price depends on height, access, and the extent of the damage. We provide a free, no-obligation inspection and written quote before any work begins.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"How do I know if my chimney needs repointing or rebuilding?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Crumbling mortar, loose or missing bricks, damp patches around the chimney breast, and leaning stacks all point to repointing or a rebuild. We inspect the flaunching, flashing, and brickwork, then recommend the most cost-effective fix · repointing where the mortar is sound, a rebuild where the stack is structurally unsafe.\"\n      }\n    },\n    {\n      \"@type\": \"Question\",\n      \"name\": \"Is your chimney repair work guaranteed?\",\n      \"acceptedAnswer\": {\n        \"@type\": \"Answer\",\n        \"text\": \"Yes. All our chimney repairs are backed by a 10-year workmanship guarantee, and we are CORC certified and £10M insured. We serve Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel, so your chimney is covered long after the work is done.\"\n      }\n    }\n  ]\n}" }}
         />
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
@@ -161,7 +161,7 @@ export default function ChimneyRepairsPage() {
                 },
                 {
                   question: "How do I know if my chimney needs repointing or rebuilding?",
-                  answer: "Crumbling mortar, loose or missing bricks, damp patches around the chimney breast, and leaning stacks all point to repointing or a rebuild. We inspect the flaunching, flashing, and brickwork, then recommend the most cost-effective fix — repointing where the mortar is sound, a rebuild where the stack is structurally unsafe.",
+                  answer: "Crumbling mortar, loose or missing bricks, damp patches around the chimney breast, and leaning stacks all point to repointing or a rebuild. We inspect the flaunching, flashing, and brickwork, then recommend the most cost-effective fix · repointing where the mortar is sound, a rebuild where the stack is structurally unsafe.",
                 },
                 {
                   question: "Is your chimney repair work guaranteed?",
@@ -170,7 +170,7 @@ export default function ChimneyRepairsPage() {
               ].map((faq, index) => (
                 <details
                   key={index}
-                  className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+                  className="group bg-white border border-gray-200 border-l-4 border-l-brand-navy overflow-hidden hover:border-brand-orange/50 transition-colors"
                   open={index === 0}
                 >
                   <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4">

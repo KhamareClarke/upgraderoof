@@ -31,7 +31,7 @@ export function WhyChooseUs() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 lg:gap-16 items-center">
-          <div className="relative rounded-2xl overflow-hidden shadow-lg bg-gray-900">
+          <div className="relative overflow-hidden border border-brand-navy/40 border-l-4 border-l-brand-orange bg-gray-900">
             <video
               className="w-full h-full object-cover aspect-video"
               controls

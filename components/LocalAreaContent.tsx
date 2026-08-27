@@ -42,7 +42,7 @@ export function LocalAreaContent({
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gray-50 p-6 rounded-xl">
+            <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-brand-orange/10 rounded-lg flex items-center justify-center">
                   <MapPinned className="w-5 h-5 text-brand-orange" />
@@ -61,7 +61,7 @@ export function LocalAreaContent({
               </p>
             </div>
 
-            <div className="bg-gray-50 p-6 rounded-xl">
+            <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-orange">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 bg-brand-orange/10 rounded-lg flex items-center justify-center">
                   <CloudRain className="w-5 h-5 text-brand-orange" />
@@ -79,7 +79,7 @@ export function LocalAreaContent({
             </div>
           </div>
 
-          <div className="bg-brand-navy/5 p-6 rounded-xl mb-12">
+          <div className="bg-brand-navy/5 p-6 border border-gray-200 border-l-4 border-l-brand-navy mb-12">
             <h3 className="text-xl font-bold text-brand-navy mb-4">Common Roof Types in {town}</h3>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {commonRoofTypes.map((type, index) => (

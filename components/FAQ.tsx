@@ -52,7 +52,7 @@ const faqData = {
 export function FAQ() {
   return (
     <section className="section-padding">
-      {/* FAQPage JSON-LD — mirrors the visible details/summary Q&As verbatim */}
+      {/* FAQPage JSON-LD · mirrors the visible details/summary Q&As verbatim */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData) }}
@@ -77,7 +77,7 @@ export function FAQ() {
             {faqs.map((faq, index) => (
               <details
                 key={index}
-                className="group bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+                className="group bg-white border border-gray-200 border-l-4 border-l-brand-navy overflow-hidden hover:border-brand-orange/50 transition-colors"
                 open={index === 0}
               >
                 <summary className="cursor-pointer list-none px-4 py-4 sm:px-5 sm:py-5 md:px-6 flex items-center justify-between gap-3 sm:gap-4">

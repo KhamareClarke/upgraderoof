@@ -83,7 +83,7 @@ export default function ChimneyRepairGuidePost() {
               </h2>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Minor Repairs</h3>
                   <ul className="text-sm space-y-2">
                     <li>• Repointing mortar joints</li>
@@ -94,7 +94,7 @@ export default function ChimneyRepairGuidePost() {
                   </ul>
                   <p className="text-sm text-gray-600 mt-3">Typical cost: £150-£500</p>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Major Repairs</h3>
                   <ul className="text-sm space-y-2">
                     <li>• Partial chimney rebuild</li>
@@ -160,7 +160,7 @@ export default function ChimneyRepairGuidePost() {
                 <li>Address small repairs before they become major problems</li>
               </ul>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">Professional Chimney Repairs</h3>
                 <p className="mb-4">
                   Our experienced team handles all chimney repairs across Cheshire. From simple 
@@ -219,7 +219,7 @@ export default function ChimneyRepairGuidePost() {
 
               <p className="mb-8">
                 For a free chimney inspection and quote, <Link href="/contact" className="text-brand-orange hover:underline">contact our team</Link> today. 
-                Chimney issues often coincide with other roofing problems — see our <Link href="/roof-repairs" className="text-brand-orange hover:underline">roof repair services</Link> for 
+                Chimney issues often coincide with other roofing problems · see our <Link href="/roof-repairs" className="text-brand-orange hover:underline">roof repair services</Link> for 
                 a full assessment. If your chimney has suffered storm damage, our <Link href="/emergency-roofing" className="text-brand-orange hover:underline">24/7 emergency roofing</Link> team 
                 can make it safe immediately. We serve all of Cheshire including Sandbach, Crewe, Middlewich, Congleton, and surrounding areas.
               </p>
@@ -229,7 +229,7 @@ export default function ChimneyRepairGuidePost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/roof-damage-signs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       How to Spot Roof Damage Early
                     </h4>
@@ -239,7 +239,7 @@ export default function ChimneyRepairGuidePost() {
                   </div>
                 </Link>
                 <Link href="/blog/emergency-roof-repairs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       Emergency Roof Repairs Guide
                     </h4>

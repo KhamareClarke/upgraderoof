@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: 'https://www.upgraderoofs.co.uk/images/6.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Contact Upgrade Roofs — Free Quotes',
+        alt: 'Contact Upgrade Roofs · Free Quotes',
       },
     ],
     locale: 'en_GB',
@@ -142,7 +142,7 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-brand-grey p-4 sm:p-6 rounded-2xl">
+              <div className="bg-brand-grey p-4 sm:p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                 <h4 className="font-semibold text-sm sm:text-base text-brand-navy mb-3 sm:mb-4">Areas We Serve</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-gray-600 text-xs sm:text-sm">
                   {[
@@ -172,25 +172,25 @@ export default function ContactPage() {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-6 text-center">Why Choose Upgrade Roofs?</h2>
             <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-brand-grey p-6 rounded-xl">
+              <div className="bg-brand-grey p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                 <h3 className="text-lg font-semibold text-brand-navy mb-3">25+ Years of Experience</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   Our team brings over two decades of roofing expertise to every project. We've completed thousands of roofing jobs across Cheshire, from simple repairs to complete roof replacements. Our experience means we can handle any roofing challenge efficiently and professionally.
                 </p>
               </div>
-              <div className="bg-brand-grey p-6 rounded-xl">
+              <div className="bg-brand-grey p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                 <h3 className="text-lg font-semibold text-brand-navy mb-3">Fully Insured & CORC Certified</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   We carry £10 million public liability insurance for your complete peace of mind. As CORC (Confederation of Roofing Contractors) certified professionals, we adhere to the highest industry standards and best practices in all our roofing work.
                 </p>
               </div>
-              <div className="bg-brand-grey p-6 rounded-xl">
+              <div className="bg-brand-grey p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                 <h3 className="text-lg font-semibold text-brand-navy mb-3">Free No-Obligation Quotes</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   We provide detailed, transparent quotes at no cost to you. Our estimates include a full breakdown of materials, labour, and timescales. There's never any pressure to proceed - we believe in letting our quality work and fair pricing speak for themselves.
                 </p>
               </div>
-              <div className="bg-brand-grey p-6 rounded-xl">
+              <div className="bg-brand-grey p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                 <h3 className="text-lg font-semibold text-brand-navy mb-3">Local Cheshire Roofers</h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   Based in Sandbach, we serve homeowners and businesses throughout Cheshire. Being local means faster response times, knowledge of local building regulations, and a reputation we're proud to maintain in our community.
@@ -198,7 +198,7 @@ export default function ContactPage() {
               </div>
             </div>
             
-            <div className="bg-brand-navy/5 p-6 rounded-xl mb-8">
+            <div className="bg-brand-navy/5 p-6 border border-gray-200 border-l-4 border-l-brand-navy mb-8">
               <h3 className="text-lg font-semibold text-brand-navy mb-3">Our Roofing Services</h3>
               <p className="text-gray-600 text-sm leading-relaxed mb-4">
                 Upgrade Roofs offers a comprehensive range of roofing services to meet all your needs. Whether you require emergency roof repairs, a complete roof replacement, or routine maintenance, our skilled team is ready to help.
@@ -241,7 +241,7 @@ export default function ContactPage() {
 
       <section className="section-padding bg-brand-grey">
         <div className="container-custom">
-          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 text-center">
+          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white border-l-4 border-l-brand-orange p-6 sm:p-8 md:p-12 text-center">
             <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Emergency Roofing Services</h2>
             <p className="text-sm sm:text-base md:text-lg text-white/90 mb-4 sm:mb-6 max-w-2xl mx-auto px-2">
               Storm damage? Leak? We offer 24/7 emergency roofing services across Cheshire. Our emergency team can be with you within hours to secure your property and prevent further damage. Don't wait - water damage can quickly escalate and cause structural issues.

@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 const caseStudiesSchema = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Roofing Case Studies — Upgrade Roofs',
+  name: 'Roofing Case Studies · Upgrade Roofs',
   description: 'Real roofing projects completed across Sandbach, Crewe, Middlewich and Cheshire with before and after photographs.',
   url: 'https://www.upgraderoofs.co.uk/case-studies',
   numberOfItems: 6,
@@ -38,7 +38,7 @@ const caseStudiesSchema = {
     {
       '@type': 'ListItem',
       position: 1,
-      name: 'Full Re-Roof in Sandbach — Welsh Slate',
+      name: 'Full Re-Roof in Sandbach · Welsh Slate',
       url: 'https://www.upgraderoofs.co.uk/case-studies',
       image: {
         '@type': 'ImageObject',
@@ -49,7 +49,7 @@ const caseStudiesSchema = {
     {
       '@type': 'ListItem',
       position: 2,
-      name: 'EPDM Flat Roof Replacement — Garage Extension',
+      name: 'EPDM Flat Roof Replacement · Garage Extension',
       url: 'https://www.upgraderoofs.co.uk/case-studies',
       image: {
         '@type': 'ImageObject',
@@ -60,7 +60,7 @@ const caseStudiesSchema = {
     {
       '@type': 'ListItem',
       position: 3,
-      name: 'Chimney Rebuild and Repointing — Nantwich',
+      name: 'Chimney Rebuild and Repointing · Nantwich',
       url: 'https://www.upgraderoofs.co.uk/case-studies',
       image: {
         '@type': 'ImageObject',
@@ -71,7 +71,7 @@ const caseStudiesSchema = {
     {
       '@type': 'ListItem',
       position: 4,
-      name: 'Emergency Storm Damage Repair — Crewe',
+      name: 'Emergency Storm Damage Repair · Crewe',
       url: 'https://www.upgraderoofs.co.uk/case-studies',
       image: {
         '@type': 'ImageObject',
@@ -82,7 +82,7 @@ const caseStudiesSchema = {
     {
       '@type': 'ListItem',
       position: 5,
-      name: 'Velux Skylight Installation — Holmes Chapel',
+      name: 'Velux Skylight Installation · Holmes Chapel',
       url: 'https://www.upgraderoofs.co.uk/case-studies',
       image: {
         '@type': 'ImageObject',
@@ -93,7 +93,7 @@ const caseStudiesSchema = {
     {
       '@type': 'ListItem',
       position: 6,
-      name: 'Gutters and Fascias Replacement — Alsager',
+      name: 'Gutters and Fascias Replacement · Alsager',
       url: 'https://www.upgraderoofs.co.uk/case-studies',
       image: {
         '@type': 'ImageObject',

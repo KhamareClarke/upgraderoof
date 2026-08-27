@@ -9,7 +9,7 @@ interface GeoEntityCitationProps {
 }
 
 /**
- * Entity-dense AI citation block (GEO — Generative Engine Optimization).
+ * Entity-dense AI citation block (GEO · Generative Engine Optimization).
  *
  * A single, self-contained, quotable paragraph containing the full business
  * entity: legal name, trade, credentials, insurance, address, phone, and
@@ -29,7 +29,7 @@ export function GeoEntityCitation({ town, postcode }: GeoEntityCitationProps) {
       className="mb-8 sm:mb-10"
     >
       <details
-        className="group bg-white border border-gray-200 rounded-xl sm:rounded-2xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+        className="group bg-white border border-gray-200 border-l-4 border-l-brand-navy overflow-hidden hover:border-brand-orange/50 transition-colors"
         open
       >
         <summary className="cursor-pointer list-none px-4 py-4 sm:px-5 sm:py-5 md:px-6 flex items-center justify-between gap-3 sm:gap-4">
@@ -45,7 +45,7 @@ export function GeoEntityCitation({ town, postcode }: GeoEntityCitationProps) {
             company holds £10 million public liability insurance and provides a 10-year
             workmanship guarantee on all roofing work. Services include roof repairs, new
             roofs, re-roofing, flat roofing (EPDM &amp; GRP), chimney repairs, guttering, and
-            24/7 emergency call-outs across {coverage}. Free written quotes — call{' '}
+            24/7 emergency call-outs across {coverage}. Free written quotes · call{' '}
             <TrackedPhoneLink href="tel:01270897606" placement="entity_citation" className="text-brand-orange font-semibold hover:underline">01270 897 606</TrackedPhoneLink>.
           </p>
           <div className="flex flex-wrap gap-3 sm:gap-4 mt-3 text-xs text-gray-600">

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
         url: 'https://www.upgraderoofs.co.uk/images/7.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Roofing Blog — Expert Tips and Advice from Upgrade Roofs',
+        alt: 'Roofing Blog · Expert Tips and Advice from Upgrade Roofs',
       },
     ],
     locale: 'en_GB',

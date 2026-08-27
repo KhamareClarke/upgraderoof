@@ -157,7 +157,7 @@ export function EnhancedContactSection() {
         </div>
 
         {/* Single Contact Us card */}
-        <Card className="w-full max-w-5xl mx-auto shadow-xl border-0 hover-lift">
+        <Card className="w-full max-w-5xl mx-auto border border-brand-navy/30 border-l-4 border-l-brand-orange">
           <div className="grid lg:grid-cols-3">
             {/* Contact Form (2 of 3 columns) */}
             <div className="lg:col-span-2 p-6 sm:p-8">

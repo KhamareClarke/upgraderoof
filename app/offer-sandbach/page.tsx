@@ -20,6 +20,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { LocalAreaContent } from '@/components/LocalAreaContent';
 import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
+import { AuthorityBar } from '@/components/AuthorityBar';
 
 export default function OfferSandbachPage() {
   const [mounted, setMounted] = useState(false);
@@ -143,7 +144,7 @@ export default function OfferSandbachPage() {
                   for Your FREE Roof Inspection in Sandbach!
                 </h1>
                 
-                <div className="bg-white/10 backdrop-blur-sm border-2 border-brand-orange rounded-2xl p-8 text-center">
+                <div className="bg-white/10 backdrop-blur-sm border border-brand-orange/40 border-l-4 border-l-brand-orange p-8 text-center">
                   <div className="text-4xl md:text-5xl font-bold text-brand-orange mb-3">
                     📞 01270 897606
                   </div>
@@ -170,7 +171,7 @@ export default function OfferSandbachPage() {
                 <a
                   href="tel:01270897606"
                   onClick={() => trackPhoneClick('offer_sandbach_hero')}
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-6 text-2xl rounded-xl shadow-2xl flex items-center justify-center gap-3 transition-colors"
+                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-6 text-2xl rounded-xl border-l-4 border-l-brand-navy flex items-center justify-center gap-3 transition-colors"
                 >
                   <Phone className="w-8 h-8" />
                   <span className="!text-white">CALL NOW: 01270 897606</span>
@@ -214,9 +215,9 @@ export default function OfferSandbachPage() {
             </div>
 
             {/* Right Column - Clean Form */}
-            <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-200">
+            <div className="bg-white p-8 border border-gray-200 border-l-4 border-l-brand-navy">
               <div className="text-center mb-8">
-                <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl p-6 mb-6">
+                <div className="bg-gradient-to-r from-green-500 to-green-600 text-white p-6 mb-6 border-l-4 border-l-brand-navy">
                   <div className="text-2xl font-bold mb-2">
                     📞 FASTEST: Call 01270 897606
                   </div>
@@ -318,7 +319,7 @@ export default function OfferSandbachPage() {
                   </Label>
                 </div>
 
-                {/* Honeypot field — hidden from humans, visible to bots */}
+                {/* Honeypot field · hidden from humans, visible to bots */}
                 <div className="hidden" aria-hidden="true">
                   <Label htmlFor="sandbach-website">Website</Label>
                   <Input
@@ -334,7 +335,7 @@ export default function OfferSandbachPage() {
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold py-4 text-xl h-16 rounded-xl shadow-lg"
+                  className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold py-4 text-xl h-16 rounded-xl border-l-4 border-l-brand-navy"
                 >
                   <span className="!text-white">{isSubmitting ? 'Submitting...' : 'Request Callback'}</span>
                 </Button>
@@ -346,7 +347,7 @@ export default function OfferSandbachPage() {
               </form>
 
               {/* Review snippet under form */}
-              <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-2xl">
+              <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 border-l-4 border-l-brand-navy">
                 <div className="flex items-center justify-center gap-1 mb-3">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -363,41 +364,7 @@ export default function OfferSandbachPage() {
       </section>
 
       {/* Trust Badges */}
-      <section className="py-8 bg-white border-b">
-        <div className="container-custom">
-          <div className="flex flex-wrap justify-center items-center gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <CheckCircle className="w-8 h-8 text-green-600" />
-              </div>
-              <p className="text-sm font-semibold">Checkatrade</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Award className="w-8 h-8 text-blue-600" />
-              </div>
-              <p className="text-sm font-semibold">CORC Certified</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Star className="w-8 h-8 text-yellow-600" />
-              </div>
-              <p className="text-sm font-semibold">Google 5★</p>
-            </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Shield className="w-8 h-8 text-purple-600" />
-              </div>
-              <p className="text-sm font-semibold">£10M Insured</p>
-            </div>
-          </div>
-          <div className="text-center mt-6">
-            <p className="text-sm text-gray-600 font-medium">
-              Fully insured up to £10M | CORC Certified | Over 25 Years Experience
-            </p>
-          </div>
-        </div>
-      </section>
+      <AuthorityBar />
 
       {/* Mid-Page Section */}
       <section className="section-padding bg-brand-grey">
@@ -549,7 +516,7 @@ export default function OfferSandbachPage() {
       </section>
 
       {/* Mobile Sticky CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t shadow-lg p-3">
+      <div className="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-white border-t p-3">
         <div className="flex gap-2">
           <a
             href="tel:01270897606"
@@ -582,7 +549,7 @@ export default function OfferSandbachPage() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-20 right-4 z-40 bg-brand-navy text-white p-3 rounded-full shadow-lg hover:bg-brand-navy/90 transition-all"
+          className="fixed bottom-20 right-4 z-40 bg-brand-navy text-white p-3 rounded-full hover:bg-brand-navy/90 transition-all"
         >
           <ArrowUp className="w-5 h-5" />
         </button>

@@ -80,7 +80,7 @@ export default function RoofersSandbachPage() {
         </div>
       </section>
 
-      {/* Main Content — Why Sandbach Trusts Us */}
+      {/* Main Content · Why Sandbach Trusts Us */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
@@ -91,7 +91,7 @@ export default function RoofersSandbachPage() {
               <p>
                 Based at 20 Crewe Road in the heart of Sandbach (CW11 4NE), Upgrade Roofs is a family-run roofing company 
                 with deep roots in the local community. We've completed hundreds of roofing projects across 
-                Sandbach — from period properties on the High Street and Hightown to modern estates around Elworth, 
+                Sandbach · from period properties on the High Street and Hightown to modern estates around Elworth, 
                 Wheelock, and the Abbeyfields development off Middlewich Road.
               </p>
               <p>
@@ -102,7 +102,7 @@ export default function RoofersSandbachPage() {
                 same standard of care.
               </p>
               <p>
-                As Sandbach locals ourselves, we understand the specific roofing challenges in this area — 
+                As Sandbach locals ourselves, we understand the specific roofing challenges in this area · 
                 from the exposed conditions along the A534 corridor to the older rooflines around Sandbach 
                 Heath and Ettiley Heath, and the conservation considerations near the town centre's listed buildings. 
                 We also handle <Link href="/services/flat-roofing" className="text-brand-orange hover:underline font-medium">flat roofing</Link> on 
@@ -135,7 +135,7 @@ export default function RoofersSandbachPage() {
               { icon: Droplets, title: 'Guttering & Fascias', desc: 'uPVC guttering, fascias, soffits, and downpipes. Repairs, cleaning, and full replacements.', href: '/services/gutters-fascias' },
               { icon: Zap, title: 'Emergency Roofing', desc: '24/7 emergency call-outs across Sandbach. Storm damage, sudden leaks, and urgent make-safe work.', href: '/emergency-roofing' },
             ].map((service, i) => (
-              <Link key={i} href={service.href} className="group bg-white rounded-2xl p-6 border border-gray-200 hover:border-brand-orange/50 hover:shadow-lg transition-all">
+              <Link key={i} href={service.href} className="group bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                 <div className="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center mb-4">
                   <service.icon className="w-6 h-6 text-brand-orange" />
                 </div>
@@ -177,7 +177,7 @@ export default function RoofersSandbachPage() {
                   service: 'Emergency Roof Repair',
                   location: 'Warmingham Lane, Elworth, CW11',
                   issue: 'Urgent call-out after Storm Ciarán caused wind damage, lifting ridge tiles and allowing water to pour into the upstairs hallway. Homeowner called at 7pm on a Friday evening.',
-                  solution: 'Same-evening make-safe visit. Temporary tarpaulin secured within 90 minutes. Full repair completed the following Monday — re-bedded ridge tiles with a modern dry ridge system, replaced 8 slipped tiles, and re-sealed the lead valley.',
+                  solution: 'Same-evening make-safe visit. Temporary tarpaulin secured within 90 minutes. Full repair completed the following Monday · re-bedded ridge tiles with a modern dry ridge system, replaced 8 slipped tiles, and re-sealed the lead valley.',
                   result: 'No further water ingress. Dry ridge system eliminates future mortar deterioration. Insurance claim documentation provided.',
                   href: '/emergency-roofing',
                   serviceLabel: 'Emergency Roofing',
@@ -196,14 +196,14 @@ export default function RoofersSandbachPage() {
                   title: 'Chimney Rebuild & Lead Work on Wheelock',
                   service: 'Chimney Repairs',
                   location: 'Crewe Road, Wheelock, CW11',
-                  issue: 'A Victorian end-terrace with a chimney stack that had deteriorated badly — crumbling mortar joints, cracked pots, and failed lead flashings causing damp on the party wall.',
+                  issue: 'A Victorian end-terrace with a chimney stack that had deteriorated badly · crumbling mortar joints, cracked pots, and failed lead flashings causing damp on the party wall.',
                   solution: 'Scaffolded and rebuilt the top 6 courses of the chimney stack using matching reclaimed bricks. Installed new clay pots and cowls, re-pointed with lime mortar, and fitted new code 4 lead stepped and back-gutter flashings.',
                   result: 'Chimney structurally sound and weathertight. Damp issue resolved within weeks of completion. 10-year guarantee on all work.',
                   href: '/services/chimney-repairs',
                   serviceLabel: 'Chimney Repairs',
                 },
               ].map((study, i) => (
-                <div key={i} className="bg-white rounded-2xl border border-gray-200 p-6 sm:p-8 hover:shadow-lg transition-shadow">
+                <div key={i} className="bg-white border border-gray-200 border-l-4 border-l-brand-orange p-6 sm:p-8 hover:border-brand-orange/70 transition-colors">
                   <div className="flex flex-wrap items-center gap-3 mb-4">
                     <span className="px-3 py-1 bg-brand-orange/10 text-brand-orange font-semibold text-sm rounded-full">{study.service}</span>
                     <span className="flex items-center gap-1 text-sm text-gray-500">
@@ -288,7 +288,7 @@ export default function RoofersSandbachPage() {
                 service: 'Roof Repair',
               },
             ].map((review, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+              <div key={i} className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                 <div className="flex gap-1 mb-3">
                   {[...Array(5)].map((_, j) => (
                     <Star key={j} className="w-4 h-4 text-yellow-400 fill-current" />
@@ -337,7 +337,7 @@ export default function RoofersSandbachPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-brand-navy mb-1">Same-Day Response</h3>
-                    <p className="text-gray-600 text-sm">Being local means we can often inspect your roof within hours of your call — not days.</p>
+                    <p className="text-gray-600 text-sm">Being local means we can often inspect your roof within hours of your call · not days.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -360,7 +360,7 @@ export default function RoofersSandbachPage() {
                 </div>
               </div>
             </div>
-            <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 rounded-2xl p-8 text-white">
+            <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 border-l-4 border-l-brand-orange p-8 text-white">
               <h3 className="text-2xl font-bold mb-6">Sandbach Roofing at a Glance</h3>
               <div className="space-y-5">
                 {[
@@ -413,10 +413,10 @@ export default function RoofersSandbachPage() {
                 },
                 {
                   q: 'Do you repair flat roofs in Sandbach?',
-                  a: 'Yes. We specialise in EPDM rubber and GRP fibreglass flat roofing — ideal for garages, extensions, and dormer roofs common in Sandbach. We offer up to 20-year waterproof guarantees on flat roof installations.'
+                  a: 'Yes. We specialise in EPDM rubber and GRP fibreglass flat roofing · ideal for garages, extensions, and dormer roofs common in Sandbach. We offer up to 20-year waterproof guarantees on flat roof installations.'
                 },
               ].map((faq, i) => (
-                <details key={i} className="bg-white rounded-xl border border-gray-200 overflow-hidden group">
+                <details key={i} className="bg-white border border-gray-200 border-l-4 border-l-brand-navy overflow-hidden group">
                   <summary className="p-5 cursor-pointer font-semibold text-brand-navy hover:text-brand-orange transition-colors flex items-center justify-between">
                     {faq.q}
                     <span className="text-brand-orange ml-2 flex-shrink-0">+</span>
@@ -449,7 +449,7 @@ export default function RoofersSandbachPage() {
               { name: 'Alsager', href: '/roofers-alsager' },
               { name: 'Holmes Chapel', href: '/roofers-holmes-chapel' },
             ].map((area, i) => (
-              <Link key={i} href={area.href} className="flex items-center justify-center gap-2 p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-brand-orange/50 hover:shadow-md transition-all text-brand-navy font-semibold hover:text-brand-orange">
+              <Link key={i} href={area.href} className="flex items-center justify-center gap-2 p-4 bg-gray-50 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all text-brand-navy font-semibold hover:text-brand-orange">
                 <MapPin className="w-4 h-4 text-brand-orange" />
                 {area.name}
               </Link>
@@ -523,7 +523,7 @@ export default function RoofersSandbachPage() {
               {
                 '@type': 'Question',
                 name: 'Do you repair flat roofs in Sandbach?',
-                acceptedAnswer: { '@type': 'Answer', text: 'Yes. We specialise in EPDM rubber and GRP fibreglass flat roofing — ideal for garages, extensions, and dormer roofs common in Sandbach. We offer up to 20-year waterproof guarantees on flat roof installations.' }
+                acceptedAnswer: { '@type': 'Answer', text: 'Yes. We specialise in EPDM rubber and GRP fibreglass flat roofing · ideal for garages, extensions, and dormer roofs common in Sandbach. We offer up to 20-year waterproof guarantees on flat roof installations.' }
               },
             ]
           })

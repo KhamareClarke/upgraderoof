@@ -9,7 +9,7 @@ const data = townData.alsager;
 
 export const metadata: Metadata = {
   title: 'Roofers Alsager | ST7 Roofing Company | Upgrade Roofs',
-  description: 'Professional roofers in Alsager, ST7. Based 5 miles away in Sandbach — emergency response within 25–35 minutes. Roof repairs, re-roofing, chimney repairs, flat roofing. Free quotes. 01270 897606.',
+  description: 'Professional roofers in Alsager, ST7. Based 5 miles away in Sandbach · emergency response within 25–35 minutes. Roof repairs, re-roofing, chimney repairs, flat roofing. Free quotes. 01270 897606.',
   keywords: 'roofers alsager, roofing company alsager, roof repair alsager, new roof alsager, flat roofing alsager, emergency roofer alsager ST7',
   openGraph: {
     title: 'Roofers Alsager | ST7 Roofing Experts | Upgrade Roofs',

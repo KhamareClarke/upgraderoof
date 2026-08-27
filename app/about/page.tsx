@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
-import { Shield, Award, Users, Clock, CheckCircle, Target, Heart, Zap } from 'lucide-react';
+import { Shield, Award, Users, CheckCircle, Heart, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         url: 'https://www.upgraderoofs.co.uk/images/1.jpeg',
         width: 1200,
         height: 630,
-        alt: 'About Upgrade Roofs — Professional Roofers in Cheshire',
+        alt: 'About Upgrade Roofs · Professional Roofers in Cheshire',
       },
     ],
     locale: 'en_GB',
@@ -129,7 +129,7 @@ export default function AboutPage() {
             </div>
 
             <div className="relative order-1 lg:order-2">
-              <div className="aspect-square rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl bg-gray-200">
+              <div className="aspect-square overflow-hidden border border-brand-navy border-l-4 border-l-brand-orange bg-gray-200">
                 <img
                   src="https://images.pexels.com/photos/1249611/pexels-photo-1249611.jpeg?auto=compress&cs=tinysrgb&w=800"
                   alt="Roofing team at work"
@@ -137,7 +137,7 @@ export default function AboutPage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-brand-orange text-white p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-xl max-w-[150px] sm:max-w-[200px]">
+              <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-brand-orange text-white p-4 sm:p-5 md:p-6 border-l-4 border-l-brand-navy max-w-[150px] sm:max-w-[200px]">
                 <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1">25+</div>
                 <div className="text-xs sm:text-sm font-medium">Years of Excellence</div>
               </div>
@@ -161,7 +161,7 @@ export default function AboutPage() {
               return (
                 <div
                   key={index}
-                  className="bg-white p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                  className="bg-white p-4 sm:p-5 md:p-6 border border-gray-200 border-l-4 border-l-brand-navy transition-colors duration-300 hover:border-brand-orange/50"
                 >
                   <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl bg-${value.color}-500/10 flex items-center justify-center mb-3 sm:mb-4`}>
                     <Icon className={`w-6 h-6 sm:w-7 sm:h-7 text-${value.color}-500`} />
@@ -177,7 +177,7 @@ export default function AboutPage() {
             {achievements.map((achievement, index) => (
               <div
                 key={index}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl text-center shadow-md hover:shadow-lg transition-shadow"
+                className="bg-white p-4 sm:p-5 md:p-6 text-center border border-gray-200 border-l-4 border-l-brand-orange transition-colors"
               >
                 <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-brand-orange mb-1 sm:mb-2">
                   {achievement.number}
@@ -210,7 +210,7 @@ export default function AboutPage() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 sm:gap-4 order-1 lg:order-2">
-              <div className="aspect-square rounded-xl sm:rounded-2xl overflow-hidden shadow-lg bg-gray-200">
+              <div className="aspect-square overflow-hidden border border-gray-200 border-l-4 border-l-brand-navy bg-gray-200">
                 <img
                   src="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=600"
                   alt="Roofing work in progress"
@@ -218,7 +218,7 @@ export default function AboutPage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="aspect-square rounded-xl sm:rounded-2xl overflow-hidden shadow-lg mt-4 sm:mt-6 md:mt-8 bg-gray-200">
+              <div className="aspect-square overflow-hidden border border-gray-200 border-l-4 border-l-brand-navy mt-4 sm:mt-6 md:mt-8 bg-gray-200">
                 <img
                   src="https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=600"
                   alt="Quality roofing materials"

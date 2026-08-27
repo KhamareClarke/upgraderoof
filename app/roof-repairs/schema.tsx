@@ -67,7 +67,7 @@ const reviewData = [
     '@context': 'https://schema.org',
     '@type': 'Review',
     author: { '@type': 'Person', name: 'Karen W.' },
-    reviewBody: "Had a leak above the bathroom that two other roofers couldn't fix. Upgrade Roofs found the problem in 20 minutes — a failed lead flashing behind the soil pipe. Fixed properly, no more damp.",
+    reviewBody: "Had a leak above the bathroom that two other roofers couldn't fix. Upgrade Roofs found the problem in 20 minutes · a failed lead flashing behind the soil pipe. Fixed properly, no more damp.",
     reviewRating: { '@type': 'Rating', ratingValue: 5 },
     publisher: { '@id': 'https://www.upgraderoofs.co.uk/#organization' },
   },

@@ -12,7 +12,7 @@ export function TownLocalBusinessSchema({ town, postcode, slug, lat, lng, addres
     '@context': 'https://schema.org',
     '@type': ['LocalBusiness', 'RoofingContractor'],
     '@id': `https://www.upgraderoofs.co.uk/${slug}#localbusiness`,
-    name: `Upgrade Roofs — Roofers in ${town}`,
+    name: `Upgrade Roofs · Roofers in ${town}`,
     url: `https://www.upgraderoofs.co.uk/${slug}`,
     telephone: '+441270897606',
     email: 'upgraderoofs@yahoo.com',

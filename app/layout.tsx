@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     default: 'Trusted Roofers in Sandbach & Cheshire | Upgrade Roofs',
     template: '%s | Upgrade Roofs',
   },
-  description: 'Upgrade Roofs — trusted roofers based in Sandbach, serving all of Cheshire. 25+ years experience, CORC certified, £10M insured. Call for a free quote!',
+  description: 'Upgrade Roofs · trusted roofers based in Sandbach, serving all of Cheshire. 25+ years experience, CORC certified, £10M insured. Call for a free quote!',
   viewport: {
     width: 'device-width',
     initialScale: 1,
@@ -82,7 +82,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://images.pexels.com" />
-        {/* Google Ads global site tag — rendered inline in <head> so the AW
+        {/* Google Ads global site tag · rendered inline in <head> so the AW
             conversion id is present in the initial HTML for attribution. */}
         <script
           async

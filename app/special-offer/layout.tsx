@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         url: 'https://www.upgraderoofs.co.uk/images/6.jpeg',
         width: 1200,
         height: 630,
-        alt: 'Free Roof Inspection Offer — Upgrade Roofs',
+        alt: 'Free Roof Inspection Offer · Upgrade Roofs',
       },
     ],
     locale: 'en_GB',

@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * CookieBanner — Google Consent Mode V2
+ * CookieBanner · Google Consent Mode V2
  *
  * The Analytics component sets every storage signal to 'denied' by default.
  * Until the visitor makes a choice here, GA4/Ads stay blind. On accept we
@@ -61,7 +61,7 @@ export function CookieBanner() {
     } else if (choice === 'denied') {
       applyConsent(false);
     } else {
-      // No prior choice — show the banner
+      // No prior choice · show the banner
       setVisible(true);
     }
   }, []);
@@ -70,7 +70,7 @@ export function CookieBanner() {
     try {
       window.localStorage.setItem(CONSENT_KEY, granted ? 'granted' : 'denied');
     } catch {
-      // storage unavailable (private mode) — still apply consent for this session
+      // storage unavailable (private mode) · still apply consent for this session
     }
     applyConsent(granted);
     setVisible(false);

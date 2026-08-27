@@ -115,7 +115,7 @@ export default function TileSlateRoofingPage() {
 
             <div className="grid grid-cols-2 gap-3 sm:gap-4 order-1 lg:order-2">
               <div className="space-y-3 sm:space-y-4">
-                <div className="aspect-square rounded-xl sm:rounded-2xl overflow-hidden shadow-lg">
+                <div className="aspect-square overflow-hidden border border-brand-navy border-l-4 border-l-brand-orange">
                   <img
                     src="/images/6.jpeg"
                     alt="Natural clay tile roof installation on a Cheshire property by Upgrade Roofs"
@@ -124,7 +124,7 @@ export default function TileSlateRoofingPage() {
                 </div>
               </div>
               <div className="space-y-3 sm:space-y-4 pt-4 sm:pt-6 md:pt-8">
-                <div className="aspect-square rounded-xl sm:rounded-2xl overflow-hidden shadow-lg">
+                <div className="aspect-square overflow-hidden border border-brand-navy border-l-4 border-l-brand-orange">
                   <img
                     src="/images/7.jpeg"
                     alt="Welsh slate roof restoration on a period home in Sandbach by Upgrade Roofs"
@@ -135,7 +135,7 @@ export default function TileSlateRoofingPage() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
+          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white border-l-4 border-l-brand-orange p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
             <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center px-2">What We Offer</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {[
@@ -205,7 +205,7 @@ export default function TileSlateRoofingPage() {
             <div className="grid md:grid-cols-2 gap-8 mb-8">
               <div className="space-y-4">
                 <h3 className="text-xl font-semibold text-gray-800">Before</h3>
-                <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+                <div className="aspect-video overflow-hidden border border-brand-navy border-l-4 border-l-brand-orange">
                   <img
                     src={beforeAfterImages[currentGalleryImage].before}
                     alt="Damaged roof before restoration by Upgrade Roofs in Cheshire"
@@ -215,7 +215,7 @@ export default function TileSlateRoofingPage() {
               </div>
               <div className="space-y-4">
                 <h3 className="text-xl font-semibold text-brand-orange">After</h3>
-                <div className="aspect-video rounded-xl overflow-hidden shadow-lg">
+                <div className="aspect-video overflow-hidden border border-brand-navy border-l-4 border-l-brand-orange">
                   <img
                     src={beforeAfterImages[currentGalleryImage].after}
                     alt="Completed tile roof restoration by Upgrade Roofs in Cheshire"
@@ -265,7 +265,7 @@ export default function TileSlateRoofingPage() {
 
           <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100">
+              <div key={index} className="bg-white border border-gray-200 border-l-4 border-l-brand-navy">
                 <button
                   onClick={() => setOpenFAQ(openFAQ === index ? null : index)}
                   className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors"

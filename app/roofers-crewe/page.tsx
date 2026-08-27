@@ -9,7 +9,7 @@ const data = townData.crewe;
 
 export const metadata: Metadata = {
   title: 'Roofers Crewe | Local Roofing Company CW1 & CW2 | Upgrade Roofs',
-  description: 'Expert roofers in Crewe serving CW1 & CW2. Based just 4 miles away in Sandbach — same-day inspections available. Roof repairs, new roofs, flat roofing. CORC certified, £10M insured. Free quotes.',
+  description: 'Expert roofers in Crewe serving CW1 & CW2. Based just 4 miles away in Sandbach · same-day inspections available. Roof repairs, new roofs, flat roofing. CORC certified, £10M insured. Free quotes.',
   keywords: 'roofers crewe, roofing company crewe, roof repair crewe, new roof crewe, flat roofing crewe, emergency roofer crewe, CW1 CW2 roofer',
   openGraph: {
     title: 'Roofers Crewe | Local Roofing Experts | Upgrade Roofs',

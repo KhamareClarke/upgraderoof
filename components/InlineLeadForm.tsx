@@ -73,7 +73,7 @@ export function InlineLeadForm({ town }: { town: string }) {
       <div className="text-center mb-8">
         <div className="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-2xl p-6 mb-6">
           <div className="text-2xl font-bold mb-2">📞 Call Now: 01270 897606</div>
-          <div className="text-lg opacity-90">We answer in 30 seconds — instant quote</div>
+          <div className="text-lg opacity-90">We answer in 30 seconds · instant quote</div>
         </div>
         <div className="space-y-2">
           <h3 className="text-2xl font-bold text-brand-navy">Book Your Free Roof Inspection</h3>
@@ -167,7 +167,7 @@ export function InlineLeadForm({ town }: { town: string }) {
           </Label>
         </div>
 
-        {/* Honeypot field — hidden from humans, visible to bots */}
+        {/* Honeypot field · hidden from humans, visible to bots */}
         <div className="hidden" aria-hidden="true">
           <Label htmlFor={`ilf-website-${town}`}>Website</Label>
           <Input

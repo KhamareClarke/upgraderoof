@@ -230,7 +230,7 @@ export function StructuredData() {
     // Google treats embedded ratings/reviews on a LocalBusiness as a manual-action
     // risk unless they are visible on-page and backed by a verified source. Real
     // reviews are rendered on the homepage via <GhlReviewsWidget /> and audited
-    // through the Google Business Profile — page-level review markup belongs with
+    // through the Google Business Profile · page-level review markup belongs with
     // those widgets, not in the site-wide organization schema.
     potentialAction: {
       '@type': 'RequestQuote',

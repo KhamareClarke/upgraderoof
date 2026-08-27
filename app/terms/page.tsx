@@ -30,7 +30,7 @@ export default function TermsPage() {
             </p>
           </div>
 
-          <div className="bg-white rounded-3xl shadow-xl border border-gray-200 p-8 md:p-12 space-y-8">
+          <div className="bg-white border border-gray-200 border-l-4 border-l-brand-navy p-8 md:p-12 space-y-8">
             <section>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-brand-orange/10 flex items-center justify-center">

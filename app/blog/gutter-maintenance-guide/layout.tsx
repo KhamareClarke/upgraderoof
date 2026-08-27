@@ -37,7 +37,7 @@ const howToSchema = {
       '@type': 'HowToSection',
       name: 'Autumn Gutter Maintenance (October–November)',
       itemListElement: [
-        { '@type': 'HowToStep', position: 1, name: 'Clear fallen leaves and debris', text: 'After the main leaf fall, clear all gutters by hand or with a scoop. This is the most critical maintenance task of the year — blocked gutters in winter can cause serious water damage to fascias and walls.' },
+        { '@type': 'HowToStep', position: 1, name: 'Clear fallen leaves and debris', text: 'After the main leaf fall, clear all gutters by hand or with a scoop. This is the most critical maintenance task of the year · blocked gutters in winter can cause serious water damage to fascias and walls.' },
         { '@type': 'HowToStep', position: 2, name: 'Check downspout flow', text: 'Pour water into each gutter section and confirm it flows freely to the downspout and away from the property. Slow drainage indicates a blockage below that needs clearing.' },
         { '@type': 'HowToStep', position: 3, name: 'Inspect for damage before winter', text: 'Check for sagging sections, leaking joints, cracks, or brackets that have pulled away from the fascia. Make any repairs before winter to prevent escalating damage.' },
       ],

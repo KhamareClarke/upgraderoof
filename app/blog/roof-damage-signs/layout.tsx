@@ -10,7 +10,7 @@ const howToSchema = {
   totalTime: 'PT30M',
   step: [
     { '@type': 'HowToStep', position: 1, name: 'Inspect from ground level', text: 'Stand back and look at the roof from each side of the property. Look for missing tiles, sagging sections, displaced ridge tiles, and debris in gutters or on the roof surface. Use binoculars for a closer view without climbing.' },
-    { '@type': 'HowToStep', position: 2, name: 'Check gutters and downspouts', text: 'Blocked gutters are the most visible sign of roof maintenance being overdue. Also look for granule deposits from deteriorating roof tiles collecting in gutters — a sign tiles are nearing end of life.' },
+    { '@type': 'HowToStep', position: 2, name: 'Check gutters and downspouts', text: 'Blocked gutters are the most visible sign of roof maintenance being overdue. Also look for granule deposits from deteriorating roof tiles collecting in gutters · a sign tiles are nearing end of life.' },
     { '@type': 'HowToStep', position: 3, name: 'Inspect the loft after heavy rain', text: 'After a rain event, access your loft with a torch. Look for daylight entering through the roof, water staining on rafters, wet insulation, or active drips. These confirm active water ingress.' },
     { '@type': 'HowToStep', position: 4, name: 'Look for water stains on ceilings', text: 'Brown rings or damp patches on upstairs ceilings are often the first sign homeowners notice. These indicate water has been entering the roof structure and needs prompt investigation.' },
     { '@type': 'HowToStep', position: 5, name: 'Check chimney and flashing areas', text: 'If you have a chimney, inspect the lead flashing where the chimney meets the roof. Lifted, cracked, or missing flashing is among the most common causes of roof leaks.' },

@@ -216,7 +216,7 @@ export function QuoteForm({ trigger }: { trigger?: React.ReactNode }) {
                 />
               </div>
 
-              {/* Honeypot field — hidden from humans, visible to bots */}
+              {/* Honeypot field · hidden from humans, visible to bots */}
               <div className="hidden" aria-hidden="true">
                 <Label htmlFor="website">Website</Label>
                 <Input

@@ -64,10 +64,10 @@ export default function EmergencyRoofingPage() {
               <span>24/7 Emergency Service</span>
             </div>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
-              Emergency Roofer in <span className="text-brand-orange">Sandbach</span> — 24/7
+              Emergency Roofer in <span className="text-brand-orange">Sandbach</span> · 24/7
             </h1>
             <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-2xl">
-              Storm damage? Sudden leak? Based in Sandbach, we respond fast — usually on-site within 30 minutes. 24/7 emergency cover across Sandbach and all of Cheshire.
+              Storm damage? Sudden leak? Based in Sandbach, we respond fast · usually on-site within 30 minutes. 24/7 emergency cover across Sandbach and all of Cheshire.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14 animate-pulse" asChild>
@@ -90,12 +90,12 @@ export default function EmergencyRoofingPage() {
       {/* --- AEO: Answer-First Content Block --- */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto bg-red-50 border-2 border-red-200 rounded-2xl p-8">
+          <div className="max-w-3xl mx-auto bg-red-50 border-l-4 border-l-red-500 p-8">
             <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
               24/7 Emergency Roofing in Sandbach &amp; Cheshire
             </h2>
             <p className="text-lg text-gray-800 mb-4">
-              <strong>Upgrade Roofs provides fast, round-the-clock emergency roofing across Sandbach and Cheshire.</strong> Storm damage, sudden leaks, or missing tiles — our local team responds the same day to make your roof safe and watertight, with a permanent fix to follow.
+              <strong>Upgrade Roofs provides fast, round-the-clock emergency roofing across Sandbach and Cheshire.</strong> Storm damage, sudden leaks, or missing tiles · our local team responds the same day to make your roof safe and watertight, with a permanent fix to follow.
             </p>
             <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-gray-700">
               <li className="flex items-center gap-2"><CheckCircle className="w-4 h-4 text-red-600" /> Storm Damage Make-Safe</li>
@@ -127,7 +127,7 @@ export default function EmergencyRoofingPage() {
               { title: 'Chimney Damage', desc: 'Fallen chimney pots, damaged stacks. Urgent repairs to prevent further damage.' },
               { title: 'Flat Roof Leaks', desc: 'Emergency flat roof repairs. Temporary waterproofing until permanent fix.' },
             ].map((service, i) => (
-              <div key={i} className="bg-red-50 rounded-xl p-6 border-2 border-red-200">
+              <div key={i} className="bg-red-50 p-6 border border-gray-200 border-l-4 border-l-red-500">
                 <Zap className="w-8 h-8 text-red-600 mb-3" />
                 <h3 className="text-xl font-bold text-brand-navy mb-2">{service.title}</h3>
                 <p className="text-gray-600 text-sm">{service.desc}</p>
@@ -147,7 +147,7 @@ export default function EmergencyRoofingPage() {
               </h2>
               <div className="space-y-4">
                 {[
-                  { icon: Clock, title: 'Fast Response', desc: 'Based in Sandbach, we cover all of south and mid-Cheshire — typically on-site within 30 minutes of your call.' },
+                  { icon: Clock, title: 'Fast Response', desc: 'Based in Sandbach, we cover all of south and mid-Cheshire · typically on-site within 30 minutes of your call.' },
                   { icon: Shield, title: 'Make-Safe Guarantee', desc: 'We secure your property immediately to prevent further damage.' },
                   { icon: MapPin, title: 'Local Knowledge', desc: '25+ years serving Sandbach and Cheshire. We know local property types and common roofing issues.' },
                 ].map((item, i) => (
@@ -162,7 +162,7 @@ export default function EmergencyRoofingPage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-8 p-6 bg-red-50 border-2 border-red-200 rounded-xl">
+              <div className="mt-8 p-6 bg-red-50 border border-gray-200 border-l-4 border-l-red-500">
                 <h3 className="text-lg font-bold text-brand-navy mb-2">What to Do Before We Arrive</h3>
                 <ul className="space-y-2 text-sm text-gray-600">
                   <li>• Move valuables away from the leak area</li>
@@ -172,7 +172,7 @@ export default function EmergencyRoofingPage() {
                 </ul>
               </div>
             </div>
-            <div className="bg-white rounded-2xl p-8 shadow-lg border-2 border-red-200">
+            <div className="bg-white p-8 border border-gray-200 border-l-4 border-l-red-500">
               <h3 className="text-2xl font-bold text-brand-navy mb-4">Emergency Call-Out</h3>
               <p className="text-gray-600 mb-6">
                 For immediate emergency assistance in Sandbach or anywhere in Cheshire, call our emergency line now.
@@ -212,7 +212,7 @@ export default function EmergencyRoofingPage() {
               { text: 'Tree branch came through our roof in the storm. Upgrade Roofs made it safe that evening and handled everything with our insurance. Couldn\'t have asked for better service in a crisis.', name: 'Lisa & Pete C.', location: 'Wheelock, Sandbach' },
               { text: 'Woke up to a puddle in the hallway. Called the emergency line and they diagnosed a slipped valley tile within the hour. Quick fix, reasonable price, and proper follow-up visit a week later.', name: 'Tom B.', location: 'Crewe' },
             ].map((r, i) => (
-              <div key={i} className="bg-gray-50 rounded-xl p-5 border border-gray-200">
+              <div key={i} className="bg-gray-50 p-5 border border-gray-200 border-l-4 border-l-brand-navy">
                 <div className="flex gap-1 mb-2">{[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 text-yellow-400 fill-current" />)}</div>
                 <p className="text-sm text-gray-700 italic mb-3">"{r.text}"</p>
                 <p className="text-sm font-semibold text-brand-navy">{r.name}</p>
@@ -223,24 +223,24 @@ export default function EmergencyRoofingPage() {
         </div>
       </section>
 
-      {/* FAQ — rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
+      {/* FAQ · rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
       <section className="py-12 bg-gray-50">
         <div className="container-custom">
           <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">Emergency Roofing FAQs</h2>
           <div className="max-w-3xl mx-auto space-y-4">
-            <details className="bg-white rounded-xl p-6 border border-gray-200" open>
+            <details className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy" open>
               <summary className="font-semibold text-brand-navy cursor-pointer">How fast can you respond to a roofing emergency?</summary>
               <p className="mt-3 text-gray-600">
                 We offer a 24/7 emergency call-out service across Cheshire and the North West. Being based in Sandbach allows us to reach most locations quickly, often getting on-site within 30-45 minutes for urgent repairs.
               </p>
             </details>
-            <details className="bg-white rounded-xl p-6 border border-gray-200">
+            <details className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy">
               <summary className="font-semibold text-brand-navy cursor-pointer">Do you offer emergency roofing services?</summary>
               <p className="mt-3 text-gray-600">
                 Yes. We offer a 24/7 emergency call-out service across Cheshire and the North West. If you have an urgent leak or storm damage, call us now on 01270 897 606.
               </p>
             </details>
-            <details className="bg-white rounded-xl p-6 border border-gray-200">
+            <details className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy">
               <summary className="font-semibold text-brand-navy cursor-pointer">What should I do while waiting for an emergency roofer?</summary>
               <p className="mt-3 text-gray-600">
                 Move furniture away from the affected area, place a bucket under active leaks, and avoid climbing onto the roof yourself. Our team will make the roof safe and watertight as quickly as possible before arranging a permanent fix.
@@ -272,7 +272,7 @@ export default function EmergencyRoofingPage() {
           <AlertTriangle className="w-16 h-16 text-brand-orange mx-auto mb-6 animate-pulse" />
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Roofing Emergency in Sandbach?</h2>
           <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Don't wait — call us now for immediate assistance in Sandbach and across Cheshire
+            Don't wait · call us now for immediate assistance in Sandbach and across Cheshire
           </p>
           <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg animate-pulse" asChild>
             <TrackedPhoneLink href="tel:01270897606" placement="emergency_bottom_cta">

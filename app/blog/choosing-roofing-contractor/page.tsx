@@ -91,7 +91,7 @@ export default function ChoosingRoofingContractorPost() {
                 Green Flags: Signs of a Reputable Roofer
               </h2>
 
-              <div className="bg-green-50 p-6 rounded-xl mb-8">
+              <div className="bg-green-50 p-6 border border-gray-200 border-l-4 border-l-green-500 mb-8">
                 <div className="grid md:grid-cols-2 gap-3">
                   {greenFlags.map((flag, index) => (
                     <div key={index} className="flex items-start gap-2">
@@ -106,7 +106,7 @@ export default function ChoosingRoofingContractorPost() {
                 Red Flags: Warning Signs to Watch For
               </h2>
 
-              <div className="bg-red-50 p-6 rounded-xl mb-8">
+              <div className="bg-red-50 p-6 border border-gray-200 border-l-4 border-l-red-500 mb-8">
                 <div className="grid md:grid-cols-2 gap-3">
                   {redFlags.map((flag, index) => (
                     <div key={index} className="flex items-start gap-2">
@@ -190,7 +190,7 @@ export default function ChoosingRoofingContractorPost() {
               </h2>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Our Credentials</h3>
                   <ul className="text-sm space-y-2">
                     <li>✓ CORC Approved Member</li>
@@ -200,7 +200,7 @@ export default function ChoosingRoofingContractorPost() {
                     <li>✓ Insurance Backed Guarantees</li>
                   </ul>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Our Promise</h3>
                   <ul className="text-sm space-y-2">
                     <li>✓ Free written quotes</li>
@@ -212,7 +212,7 @@ export default function ChoosingRoofingContractorPost() {
                 </div>
               </div>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">Get a Free, No-Obligation Quote</h3>
                 <p className="mb-4">
                   See the Upgrade Roofs difference. We provide detailed written quotes, 
@@ -234,7 +234,7 @@ export default function ChoosingRoofingContractorPost() {
             </div>
 
             {/* Money Page Links */}
-            <div className="bg-brand-navy/5 border border-brand-navy/10 rounded-xl p-6 mb-8">
+            <div className="bg-brand-navy/5 border border-brand-navy/10 border-l-4 border-l-brand-navy p-6 mb-8">
               <h3 className="font-bold text-brand-navy mb-3">Ready to Get Quotes?</h3>
               <p className="text-gray-600 text-sm mb-3">
                 Whether you need <Link href="/roof-repairs" className="text-brand-orange hover:underline font-medium">roof repairs</Link>, a 
@@ -249,7 +249,7 @@ export default function ChoosingRoofingContractorPost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/roof-damage-signs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       How to Spot Roof Damage Early
                     </h4>
@@ -259,7 +259,7 @@ export default function ChoosingRoofingContractorPost() {
                   </div>
                 </Link>
                 <Link href="/blog/how-long-does-roof-last" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       How Long Does a Roof Last?
                     </h4>

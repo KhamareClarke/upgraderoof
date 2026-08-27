@@ -72,7 +72,7 @@ export default function CladdingPage() {
               </div>
             </div>
 
-            <div className="rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl order-1 lg:order-2">
+            <div className="overflow-hidden border border-brand-navy border-l-4 border-l-brand-orange order-1 lg:order-2">
               <img
                 src="/images/4.jpeg"
                 alt="uPVC cladding installation on a residential property in Cheshire by Upgrade Roofs"
@@ -81,7 +81,7 @@ export default function CladdingPage() {
             </div>
           </div>
 
-          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
+          <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white border-l-4 border-l-brand-orange p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
             <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center px-2">Our Cladding Services</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {[
@@ -137,7 +137,7 @@ export default function CladdingPage() {
 
       <ServiceAreaLinks serviceName="Cladding" />
 
-      {/* FAQ Section — visible details/summary accordions + matching FAQPage JSON-LD */}
+      {/* FAQ Section · visible details/summary accordions + matching FAQPage JSON-LD */}
       <section className="section-padding bg-white">
         <script
           type="application/ld+json"
@@ -170,7 +170,7 @@ export default function CladdingPage() {
               ].map((faq, index) => (
                 <details
                   key={index}
-                  className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:border-brand-orange/50 transition-colors"
+                  className="group bg-white border border-gray-200 border-l-4 border-l-brand-navy overflow-hidden hover:border-brand-orange/50 transition-colors"
                   open={index === 0}
                 >
                   <summary className="cursor-pointer list-none px-5 py-4 flex items-center justify-between gap-4">

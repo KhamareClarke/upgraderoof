@@ -176,7 +176,7 @@ export default function CaseStudiesPage() {
         <div className="container-custom">
           <div className="space-y-16">
             {caseStudies.map((study, index) => (
-              <article key={study.id} className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+              <article key={study.id} className="bg-white border border-gray-100 border-l-4 border-l-brand-navy overflow-hidden">
                 <div className="grid lg:grid-cols-2 gap-0">
                   <div className="relative">
                     <div className="grid grid-cols-2 h-full">
@@ -253,10 +253,10 @@ export default function CaseStudiesPage() {
                       </div>
                     </div>
 
-                    <div className="bg-gray-50 p-4 rounded-lg mb-4">
+                    <div className="bg-gray-50 p-4 border border-gray-200 border-l-4 border-l-brand-navy mb-4">
                       <p className="text-gray-700 italic text-sm mb-2">"{study.testimonial.text}"</p>
                       <p className="text-brand-navy font-semibold text-sm">
-                        — {study.testimonial.author}, {study.testimonial.location}
+                        · {study.testimonial.author}, {study.testimonial.location}
                       </p>
                     </div>
 
@@ -305,7 +305,7 @@ export default function CaseStudiesPage() {
           </div>
 
           <div className="mt-16 text-center">
-            <div className="bg-brand-navy text-white p-8 md:p-12 rounded-2xl max-w-4xl mx-auto">
+            <div className="bg-brand-navy text-white p-8 md:p-12 border-l-4 border-l-brand-orange max-w-4xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold mb-4">
                 Ready to Transform Your Roof?
               </h2>

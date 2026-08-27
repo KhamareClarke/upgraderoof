@@ -81,7 +81,7 @@ export default function ReviewsPage() {
             {reviews.map((review, index) => (
               <div
                 key={index}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
+                className="bg-white p-4 sm:p-5 md:p-6 border border-gray-200 border-l-4 border-l-brand-navy transition-colors"
               >
                 <div className="flex items-center gap-0.5 sm:gap-1 mb-2 sm:mb-3">
                   {[...Array(review.rating)].map((_, i) => (

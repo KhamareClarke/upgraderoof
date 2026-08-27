@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Roofers Sandbach | 5★ Rated | Upgrade Roofs',
-    description: 'Trusted roofers in Sandbach. 127 five-star reviews, 25+ years. Free quotes — 01270 897606.',
+    description: 'Trusted roofers in Sandbach. 127 five-star reviews, 25+ years. Free quotes · 01270 897606.',
     images: ['https://www.upgraderoofs.co.uk/images/6.jpeg'],
   },
   alternates: {

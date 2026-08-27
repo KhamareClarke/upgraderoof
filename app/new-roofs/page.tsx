@@ -89,7 +89,7 @@ export default function NewRoofsPage() {
       {/* --- AEO: Answer-First Content Block --- */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto bg-gray-50 border-2 border-brand-orange/20 rounded-2xl p-8">
+          <div className="max-w-3xl mx-auto bg-gray-50 border-l-4 border-l-brand-orange p-8">
             <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
               New Roof Installations in Sandbach &amp; Cheshire
             </h2>
@@ -135,7 +135,7 @@ export default function NewRoofsPage() {
                 features: ['20 year guarantee', 'Seamless finish', 'Quick installation']
               },
             ].map((type, i) => (
-              <div key={i} className="bg-gray-50 rounded-2xl p-8 border border-gray-200 hover:border-brand-orange/50 hover:shadow-lg transition-all">
+              <div key={i} className="bg-gray-50 p-8 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                 <h3 className="text-2xl font-bold text-brand-navy mb-3">{type.title}</h3>
                 <p className="text-gray-600 mb-6">{type.desc}</p>
                 <ul className="space-y-2">
@@ -170,7 +170,7 @@ export default function NewRoofsPage() {
               { step: '3', title: 'Install New Roof', desc: 'Premium materials installed by experienced roofers. All work to building regulations.' },
               { step: '4', title: 'Clean & Inspect', desc: 'Site cleaned, final inspection, 10-year guarantee certificate issued.' },
             ].map((item, i) => (
-              <div key={i} className="bg-white rounded-xl p-6 border border-gray-200">
+              <div key={i} className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                 <div className="w-12 h-12 bg-brand-orange text-white rounded-full flex items-center justify-center text-xl font-bold mb-4">
                   {item.step}
                 </div>
@@ -214,7 +214,7 @@ export default function NewRoofsPage() {
                 </Link>
               </div>
             </div>
-            <div className="bg-gray-50 rounded-2xl p-8 shadow-lg border border-gray-200">
+            <div className="bg-gray-50 p-8 border border-gray-200 border-l-4 border-l-brand-orange">
               <h3 className="text-2xl font-bold text-brand-navy mb-6">Get Your Free Quote</h3>
               <QuoteForm />
             </div>
@@ -228,11 +228,11 @@ export default function NewRoofsPage() {
           <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">What Customers Say About Our New Roofs</h2>
           <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
-              { text: 'Complete re-roof on our 1930s semi. New Marley tiles, new felt, new battens — the lot. Team were brilliant, tidy, and finished in 4 days. Our house looks brand new from the street.', name: 'Sarah & David P.', location: 'Elworth, Sandbach' },
-              { text: 'Had three quotes for a full re-roof. Upgrade Roofs were the most detailed — they explained everything, showed us tile samples, and the final result is outstanding. 10-year guarantee too.', name: 'Graham T.', location: 'Congleton Road, Sandbach' },
+              { text: 'Complete re-roof on our 1930s semi. New Marley tiles, new felt, new battens · the lot. Team were brilliant, tidy, and finished in 4 days. Our house looks brand new from the street.', name: 'Sarah & David P.', location: 'Elworth, Sandbach' },
+              { text: 'Had three quotes for a full re-roof. Upgrade Roofs were the most detailed · they explained everything, showed us tile samples, and the final result is outstanding. 10-year guarantee too.', name: 'Graham T.', location: 'Congleton Road, Sandbach' },
               { text: 'New slate roof on our Victorian terrace. They matched the original Welsh slate perfectly. Neighbours have been asking who did the work. Very happy with the result.', name: 'Helen & James M.', location: 'Middlewich' },
             ].map((r, i) => (
-              <div key={i} className="bg-white rounded-xl p-5 border border-gray-200">
+              <div key={i} className="bg-white p-5 border border-gray-200 border-l-4 border-l-brand-navy">
                 <div className="flex gap-1 mb-2">{[...Array(5)].map((_, j) => <Star key={j} className="w-4 h-4 text-yellow-400 fill-current" />)}</div>
                 <p className="text-sm text-gray-700 italic mb-3">"{r.text}"</p>
                 <p className="text-sm font-semibold text-brand-navy">{r.name}</p>
@@ -243,24 +243,24 @@ export default function NewRoofsPage() {
         </div>
       </section>
 
-      {/* FAQ — rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
+      {/* FAQ · rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
       <section className="py-12 bg-gray-50">
         <div className="container-custom">
           <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">New Roof FAQs</h2>
           <div className="max-w-3xl mx-auto space-y-4">
-            <details className="bg-white rounded-xl p-6 border border-gray-200" open>
+            <details className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy" open>
               <summary className="font-semibold text-brand-navy cursor-pointer">How much does a new roof cost in Cheshire?</summary>
               <p className="mt-3 text-gray-600">
-                Every roof is different, so costs vary depending on size, materials, and the scope of work involved. We provide free, no-obligation quotes with transparent, itemised pricing — no hidden costs, no surprises.
+                Every roof is different, so costs vary depending on size, materials, and the scope of work involved. We provide free, no-obligation quotes with transparent, itemised pricing · no hidden costs, no surprises.
               </p>
             </details>
-            <details className="bg-white rounded-xl p-6 border border-gray-200">
+            <details className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy">
               <summary className="font-semibold text-brand-navy cursor-pointer">How long does a new roof take to install?</summary>
               <p className="mt-3 text-gray-600">
                 Most new roof installations in Sandbach and Cheshire are completed within a few days, depending on the size and complexity of your roof. We'll give you a clear schedule before any work begins and keep you informed throughout the project.
               </p>
             </details>
-            <details className="bg-white rounded-xl p-6 border border-gray-200">
+            <details className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy">
               <summary className="font-semibold text-brand-navy cursor-pointer">Is my new roof guaranteed?</summary>
               <p className="mt-3 text-gray-600">
                 Yes. All our new roofs are backed by a comprehensive 10-year workmanship guarantee, giving you complete peace of mind.

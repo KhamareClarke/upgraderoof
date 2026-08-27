@@ -83,7 +83,7 @@ export default function GutterMaintenanceGuidePost() {
               </h2>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-amber-50 p-6 rounded-lg">
+                <div className="bg-amber-50 p-6 border border-gray-200 border-l-4 border-l-amber-500">
                   <h3 className="font-semibold text-amber-800 mb-3">Autumn (October-November)</h3>
                   <p className="text-sm text-gray-700 mb-3">Most critical time for gutter maintenance:</p>
                   <ul className="text-sm space-y-1">
@@ -93,7 +93,7 @@ export default function GutterMaintenanceGuidePost() {
                     <li>• Consider leaf guards</li>
                   </ul>
                 </div>
-                <div className="bg-green-50 p-6 rounded-lg">
+                <div className="bg-green-50 p-6 border border-gray-200 border-l-4 border-l-green-500">
                   <h3 className="font-semibold text-green-800 mb-3">Spring (March-April)</h3>
                   <p className="text-sm text-gray-700 mb-3">Post-winter check and clean:</p>
                   <ul className="text-sm space-y-1">
@@ -114,7 +114,7 @@ export default function GutterMaintenanceGuidePost() {
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">DIY Considerations</h3>
                   <ul className="text-sm space-y-2">
                     <li>✓ Suitable for single-storey properties</li>
@@ -123,7 +123,7 @@ export default function GutterMaintenanceGuidePost() {
                     <li>✗ May miss underlying problems</li>
                   </ul>
                 </div>
-                <div className="bg-brand-orange/10 p-6 rounded-lg">
+                <div className="bg-brand-orange/10 border border-brand-orange border-l-4 border-l-brand-orange p-6">
                   <h3 className="font-semibold text-brand-navy mb-3">Professional Service</h3>
                   <ul className="text-sm space-y-2">
                     <li>✓ Safe access equipment</li>
@@ -180,7 +180,7 @@ export default function GutterMaintenanceGuidePost() {
                 </table>
               </div>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">Professional Gutter Services</h3>
                 <p className="mb-4">
                   From cleaning to complete replacement, our team handles all gutter and fascia work 
@@ -208,7 +208,7 @@ export default function GutterMaintenanceGuidePost() {
 
               <p className="mb-8">
                 For a free quote on gutter services, <Link href="/contact" className="text-brand-orange hover:underline">contact our team</Link> today. 
-                Gutter problems often signal wider roof issues — our <Link href="/roof-repairs" className="text-brand-orange hover:underline">roof repair team</Link> can 
+                Gutter problems often signal wider roof issues · our <Link href="/roof-repairs" className="text-brand-orange hover:underline">roof repair team</Link> can 
                 carry out a full assessment. If water is actively entering your home, call our <Link href="/emergency-roofing" className="text-brand-orange hover:underline">24/7 emergency line</Link> on 01270 897 606.
               </p>
             </div>
@@ -217,7 +217,7 @@ export default function GutterMaintenanceGuidePost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/roof-maintenance-checklist" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       Complete Roof Maintenance Checklist
                     </h4>
@@ -227,7 +227,7 @@ export default function GutterMaintenanceGuidePost() {
                   </div>
                 </Link>
                 <Link href="/blog/fascia-soffit-guide" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       Fascias and Soffits Explained
                     </h4>

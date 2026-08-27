@@ -112,7 +112,7 @@ export default function RoofDamageSignsPost() {
               </p>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Winter Damage</h3>
                   <ul className="text-sm space-y-1">
                     <li>• Ice dam formation</li>
@@ -121,7 +121,7 @@ export default function RoofDamageSignsPost() {
                     <li>• Gutter ice damage</li>
                   </ul>
                 </div>
-                <div className="bg-gray-50 p-6 rounded-lg">
+                <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                   <h3 className="font-semibold text-brand-navy mb-3">Storm Damage</h3>
                   <ul className="text-sm space-y-1">
                     <li>• Wind-lifted tiles</li>
@@ -147,7 +147,7 @@ export default function RoofDamageSignsPost() {
                 <li>Preventive maintenance planning</li>
               </ul>
 
-              <div className="bg-brand-navy text-white p-8 rounded-xl mb-8">
+              <div className="bg-brand-navy text-white p-8 border-l-4 border-l-brand-orange mb-8">
                 <h3 className="text-xl font-bold mb-4">Free Professional Roof Inspection</h3>
                 <p className="mb-4">
                   Our experienced team provides comprehensive roof inspections throughout Sandbach and Cheshire. 
@@ -221,7 +221,7 @@ export default function RoofDamageSignsPost() {
               <h3 className="text-xl font-bold text-brand-navy mb-6">Related Articles</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <Link href="/blog/flat-vs-tile-roofs" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       Flat vs. Tile Roofs – Which Lasts Longer in the UK?
                     </h4>
@@ -231,7 +231,7 @@ export default function RoofDamageSignsPost() {
                   </div>
                 </Link>
                 <Link href="/blog/roof-inspection-guide" className="group">
-                  <div className="bg-gray-50 p-6 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all">
                     <h4 className="font-semibold text-brand-navy group-hover:text-brand-orange mb-2">
                       What to Expect from a Professional Roof Inspection
                     </h4>
