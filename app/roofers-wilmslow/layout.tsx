@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Roofers Wilmslow | 5★ Rated | Free Quotes in 24hrs | Upgrade Roofs',
   description: 'Trusted roofers in Wilmslow (SK9) with 127 five-star reviews. Roof repairs, new roofs & flat roofing from a local CORC-certified team. 25+ yrs, £10M insured. Call 01270 897606 for a free no-obligation quote.',
   alternates: { canonical: 'https://www.upgraderoofs.co.uk/roofers-wilmslow' },
+  robots: { index: true, follow: true },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

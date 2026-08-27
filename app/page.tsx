@@ -5,6 +5,7 @@ import { WhyChooseUs } from '@/components/WhyChooseUs';
 import { CTABanner } from '@/components/CTABanner';
 import { GalleryBlock, FAQBlock, ContactBlock } from '@/components/HomepageSections';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 import { Button } from '@/components/ui/button';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { MapPin, ArrowRight } from 'lucide-react';
@@ -98,6 +99,7 @@ export default function Home() {
               >
                 Get a Free Quote
               </TrackedPhoneLink>
+              <CtaSubMessage className="mt-2" />
             </div>
           </div>
         </div>

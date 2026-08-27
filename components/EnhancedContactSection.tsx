@@ -85,7 +85,7 @@ export function EnhancedContactSection() {
             Ready to Start Your Roofing Project?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Contact us for a free, no-obligation quote. Fill in the form and we'll get back to you within 24 hours.
+            Contact us for a free, no-obligation quote. Fill in the form and we'll get back to you within 10 minutes.
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export function EnhancedContactSection() {
             <div className="lg:col-span-2 p-6 sm:p-8">
               <CardTitle className="text-2xl text-brand-navy mb-2">Send Us a Message</CardTitle>
               <CardDescription className="text-base mb-6">
-                Fill out the form below and we'll get back to you within 24 hours.
+                Fill out the form below and we'll get back to you within 10 minutes.
               </CardDescription>
               {success ? (
                 <div className="py-8 text-center">
@@ -105,7 +105,7 @@ export function EnhancedContactSection() {
                   </div>
                   <h3 className="text-xl font-semibold text-brand-navy mb-2">Message Sent Successfully!</h3>
                   <p className="text-gray-600 mb-4">
-                    Thank you for contacting us. We'll review your message and get back to you within 24 hours.
+                    Thank you for contacting us. We'll review your message and get back to you within 10 minutes.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-3 justify-center">
                     <Button

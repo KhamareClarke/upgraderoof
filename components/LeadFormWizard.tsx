@@ -116,13 +116,15 @@ export function LeadFormWizard({ config }: { config: LeadFormWizardConfig }) {
   const step1FieldsValid = () => {
     const name = values[nameKey]?.trim();
     const phone = values[phoneKey]?.trim();
-    // Name + phone are the hard minimums across all four forms.
-    return Boolean(name && phone);
+    const service = values[serviceKey]?.trim();
+    const roof = values[roofKey]?.trim();
+    // Name, phone, service-needed, and roof-type are the hard minimums for step 1.
+    return Boolean(name && phone && service && roof);
   };
 
   const goToStep2 = () => {
     if (!step1FieldsValid()) {
-      setError('Please add your name and phone number to continue.');
+      setError('Please fill in your name, phone number, and select the service you need and your roof type.');
       return;
     }
     setError(null);

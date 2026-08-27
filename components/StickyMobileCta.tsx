@@ -2,6 +2,7 @@
 
 import { PhoneCall, ClipboardList } from 'lucide-react';
 import { trackPhoneClick, trackWhatsAppClick } from '@/lib/tracking';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 /**
  * Fixed bottom Call / WhatsApp / Quick Form bar shown only on mobile, matching
@@ -55,6 +56,7 @@ export function StickyMobileCta({ placement }: { placement: string }) {
           <span className="text-xs font-medium">Quick Form</span>
         </button>
       </div>
+      <CtaSubMessage className="pb-2 -mt-1 text-[11px]" />
     </div>
   );
 }

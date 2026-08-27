@@ -9,6 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { CheckCircle, Star } from 'lucide-react';
 import { trackQuoteRequest, getGclid } from '@/lib/tracking';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
+import { TurnstileWidget } from '@/components/TurnstileWidget';
 
 /**
  * Inline lead-capture form styled on the special-offer page's right-column
@@ -20,12 +21,14 @@ export function InlineLeadForm({ town }: { town: string }) {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
+    email: '',
     postcode: '',
     roofType: '',
     serviceNeeded: '',
     sameDayCallback: false,
   });
   const [honeypot, setHoneypot] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,6 +42,7 @@ export function InlineLeadForm({ town }: { town: string }) {
         body: JSON.stringify({
           name: formData.name,
           phone: formData.phone,
+          email: formData.email,
           postcode: formData.postcode,
           service_type: formData.serviceNeeded || formData.roofType || undefined,
           message: [
@@ -47,6 +51,7 @@ export function InlineLeadForm({ town }: { town: string }) {
             `Source: roofers-${town.toLowerCase()} page`,
           ].filter(Boolean).join('\n'),
           gclid: getGclid(),
+          turnstileToken,
           website: honeypot,
         }),
       });
@@ -109,6 +114,20 @@ export function InlineLeadForm({ town }: { town: string }) {
               className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
             />
           </div>
+        </div>
+
+        <div>
+          <Label htmlFor={`ilf-email-${town}`} className="text-brand-navy font-semibold text-sm">Email *</Label>
+          <Input
+            id={`ilf-email-${town}`}
+            type="email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            placeholder="you@example.com"
+            required
+            autoComplete="email"
+            className="mt-2 h-12 text-base border-2 focus:border-brand-orange rounded-xl"
+          />
         </div>
 
         <div>
@@ -180,6 +199,8 @@ export function InlineLeadForm({ town }: { town: string }) {
             autoComplete="off"
           />
         </div>
+
+        <TurnstileWidget onToken={setTurnstileToken} />
 
         <Button
           type="submit"

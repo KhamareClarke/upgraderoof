@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -340,6 +341,7 @@ export function Header() {
                 Get a Free Quote
               </Button>
             } />
+            <CtaSubMessage />
           </div>
         )}
       </nav>

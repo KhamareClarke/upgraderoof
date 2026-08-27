@@ -1,3 +1,10 @@
+/**
+ * Build memory note: the production build can exceed V8's default ~2 GB heap and
+ * throw "JavaScript heap out of memory". If you hit this, rebuild with
+ *   (POSIX)  NODE_OPTIONS=--max-old-space-size=4096 npm run build
+ *   (Win PS) $env:NODE_OPTIONS="--max-old-space-size=4096"; npm run build
+ * The `build` script itself stays plain `next build` so it works cross-platform.
+ */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {

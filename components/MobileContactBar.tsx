@@ -4,6 +4,7 @@ import { PhoneCall, Mail } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { trackPhoneClick, trackWhatsAppClick } from '@/lib/tracking';
 import { QuoteForm } from '@/components/QuoteForm';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export function MobileContactBar() {
   const pathname = usePathname();
@@ -59,6 +60,7 @@ export function MobileContactBar() {
           }
         />
       </div>
+      <CtaSubMessage className="pb-2 -mt-1 text-[11px]" />
     </div>
   );
 }

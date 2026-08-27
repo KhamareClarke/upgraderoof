@@ -45,6 +45,8 @@ export function QuoteForm({ trigger }: { trigger?: ReactNode }) {
       postcode: formData.postcode,
     });
 
+    setSuccess(true);
+
     setTimeout(() => {
       setOpen(false);
       setTimeout(() => setSuccess(false), 500);
