@@ -226,7 +226,7 @@ export default function SpecialOfferPage() {
                 </div>
               ))}
             </div>
-            <div className="text-center mt-10">
+            <div className="text-center mt-10 flex flex-col items-center gap-2">
               <QuoteForm
                 trigger={
                   <span className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3 bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold rounded-lg transition-colors text-sm sm:text-base cursor-pointer">
@@ -234,6 +234,7 @@ export default function SpecialOfferPage() {
                   </span>
                 }
               />
+              <CtaSubMessage />
             </div>
           </div>
         </div>
@@ -282,7 +283,7 @@ export default function SpecialOfferPage() {
               </Link>
             ))}
           </div>
-          <div className="text-center">
+          <div className="text-center flex flex-col items-center gap-2">
             <QuoteForm
               trigger={
                 <span className="inline-flex items-center justify-center gap-2.5 bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 cursor-pointer">
@@ -291,6 +292,7 @@ export default function SpecialOfferPage() {
                 </span>
               }
             />
+            <CtaSubMessage />
           </div>
         </div>
       </section>
