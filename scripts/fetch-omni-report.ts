@@ -407,26 +407,49 @@ async function fetchGhl(allMissed: string[]): Promise<{
     warn(`GHL conversations failed — ${err?.message || err}`);
   }
 
-  // 3. Call logs — GHL has no first-class "calls" list endpoint on this token.
-  //    Calls are surfaced as contacts with an inbound-call tag OR as
-  //    conversation entries. Best-effort: flag form contacts whose notes
-  //    indicate an inbound call (already captured above via service/dir), and
-  //    count conversation messages flagged as call.
-  //    NOTE: if a dedicated calls endpoint is later granted (e.g.
-  //    /contacts/search with tags=['inbound-call']), swap this block.
-  const contactsWithCallTag = raw.filter((c) => (c.tags || []).some((t) => /call/i.test(t)));
+  // 3. Call logs — calls arrive via the call-tracking webhook, which upserts an
+  //    inbound-call-tagged contact and attaches a note of the form:
+  //      "Inbound call: {duration}s, source {paid|organic}, destination {num}"
+  //    (plus a gclid on the contact when the call resolved to an ads click).
+  //    We surface those contacts as `phone` interactions and parse duration +
+  //    paid/organic attribution from the note so the report shows total inbound
+  //    calls + caller attribution alongside forms.
+  const CALL_TAG_RE = /(inbound-call|call-tracking)/i;
+  const contactsWithCallTag = raw.filter((c) => (c.tags || []).some((t) => CALL_TAG_RE.test(t)));
   for (const c of contactsWithCallTag) {
     const ts = contactTs(c);
     const tsMs = ts ? Date.parse(ts) : Number.NaN;
     if (Number.isNaN(tsMs) || !(tsMs >= START_EPOCH && tsMs < START_EPOCH + 5 * 24 * 60 * 60 * 1000)) continue;
     const name = (c.name || `${c.firstName || ''} ${c.lastName || ''}`.trim() || '(no name)').slice(0, 40);
     if (communications.some((m) => m.channel === 'phone' && m.name === name)) continue;
+
+    // Attribute the call paid/organic: a gclid (native field or ads tag) wins,
+    // else fall back to the "source paid|organic" token in the call note.
+    let attributed = hasGclid(c);
+    let service: string | undefined;
+    if (c.id || c.contactId) {
+      try {
+        const notesRes = await ghlGet(`/contacts/${c.id || c.contactId}/notes`);
+        const notes: Array<{ body?: string; bodyText?: string }> =
+          Array.isArray(notesRes.body?.notes) ? notesRes.body.notes : [];
+        const text = notes.map((n) => n.body || n.bodyText || '').join('\n');
+        if (!attributed && /source\s+paid\b/i.test(text)) attributed = true;
+        const dur = text.match(/Inbound call:\s*([^,]+)/i)?.[1]?.trim();
+        if (dur && /\d/.test(dur)) service = undefined; // duration is not a service
+        // Duration is informational; keep service extraction separate so we
+        // don't miscount it as a roof-type. No service label expected on calls.
+      } catch {
+        /* notes fetch non-fatal */
+      }
+    }
+
     communications.push({
       channel: 'phone',
       ts,
       name,
-      source: sourceOf(c),
-      attributed: hasGclid(c),
+      source: sourceOf(c) === 'unknown' ? 'phone_call' : sourceOf(c),
+      attributed,
+      service,
     });
   }
 
