@@ -61,9 +61,14 @@ export default function HowLongDoesRoofLastPost() {
                 quality, maintenance, and local weather conditions.
               </p>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Roof Lifespan by Material Type
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">By Material</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Roof Lifespan by Material Type</h2>
+              </div>
 
               <div className="overflow-x-auto mb-8">
                 <table className="w-full border-collapse border border-gray-300">
@@ -88,9 +93,14 @@ export default function HowLongDoesRoofLastPost() {
                 </table>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Factors That Affect Roof Lifespan in Cheshire
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Key Factors</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Factors That Affect Roof Lifespan in Cheshire</h2>
+              </div>
 
               <p className="mb-4">
                 The Cheshire climate presents unique challenges for roofing systems:
@@ -117,9 +127,14 @@ export default function HowLongDoesRoofLastPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Signs Your Roof Needs Replacing
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Warning Signs</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Signs Your Roof Needs Replacing</h2>
+              </div>
 
               <p className="mb-4">
                 Even before reaching its expected lifespan, watch for these warning signs:
@@ -142,9 +157,14 @@ export default function HowLongDoesRoofLastPost() {
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Extending Your Roof's Lifespan
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Extending Life</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Extending Your Roof's Lifespan</h2>
+              </div>
 
               <p className="mb-4">
                 Maximize your roof's longevity with these practices:
@@ -174,9 +194,14 @@ export default function HowLongDoesRoofLastPost() {
                 </Button>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Roof Replacement Costs in Cheshire
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Costs</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Roof Replacement Costs in Cheshire</h2>
+              </div>
 
               <p className="mb-4">
                 When replacement becomes necessary, here are typical costs:

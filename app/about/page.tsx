@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
-import { Shield, Award, Users, CheckCircle, Heart, Zap } from 'lucide-react';
+import { Shield, Users, CheckCircle, Heart, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const metadata: Metadata = {
   title: 'About Us | Upgrade Roofs | 25+ Years Experience',
@@ -108,13 +109,11 @@ export default function AboutPage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
             <div className="order-2 lg:order-1">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-xs sm:text-sm font-medium">
-                <Award className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span>Our Story</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-4 sm:mb-6">
-                Building Trust, One Roof at a Time
-              </h2>
+              <SectionHeader
+                align="left"
+                kicker="Our Story"
+                title="Building Trust, One Roof at a Time"
+              />
               <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700 leading-relaxed">
                 <p>
                   Founded in 1999, Upgrade Roofs has grown from a small family business to become one of the most trusted roofing companies in the region. Our journey has been built on a simple principle: deliver exceptional quality and service on every single project.
@@ -149,10 +148,11 @@ export default function AboutPage() {
       <section className="section-padding bg-brand-grey">
         <div className="container-custom">
           <div className="text-center mb-8 sm:mb-10 md:mb-12 px-2">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3 sm:mb-4">Why Choose Us?</h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              We're committed to delivering exceptional roofing services that stand the test of time
-            </p>
+            <SectionHeader
+              kicker="Why Choose Us"
+              title="Why Choose Us?"
+              subtitle="We're committed to delivering exceptional roofing services that stand the test of time"
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6 mb-10 sm:mb-12 md:mb-16">
@@ -193,7 +193,11 @@ export default function AboutPage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center">
             <div className="space-y-4 sm:space-y-5 md:space-y-6 order-2 lg:order-1">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy">Our Accreditations</h2>
+              <SectionHeader
+                align="left"
+                kicker="Accreditations"
+                title="Our Accreditations"
+              />
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
                 We maintain the highest industry standards through continuous training and certification. Our team is fully qualified, insured, and committed to delivering work that exceeds expectations.
               </p>
@@ -233,10 +237,12 @@ export default function AboutPage() {
 
       <section className="section-padding bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center px-2">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Ready to Work With Us?</h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-            Get a free, no-obligation quote for your roofing project today
-          </p>
+          <SectionHeader
+            dark
+            kicker="Get Started"
+            title="Ready to Work With Us?"
+            subtitle="Get a free, no-obligation quote for your roofing project today"
+          />
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
             <QuoteForm trigger={
               <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-13 md:h-14 text-base sm:text-lg w-full sm:w-auto">

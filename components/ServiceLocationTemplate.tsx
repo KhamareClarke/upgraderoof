@@ -10,6 +10,7 @@ import { services } from '@/lib/service-data';
 import { generateServiceLocationFaqs, buildServiceTownSolution } from '@/lib/service-location-helpers';
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 import { AuthorityBar } from '@/components/AuthorityBar';
+import { SectionHeader } from '@/components/SectionHeader';
 
 interface ServiceLocationTemplateProps {
   service: ServiceData;
@@ -132,11 +133,11 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
             <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20 max-w-md">
               <div className="text-center">
                 <ShieldCheck className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
-                <div className="text-xs font-semibold">Fully Insured</div>
+                <div className="text-xs font-semibold">£10M Public Liability Insured</div>
               </div>
               <div className="text-center">
                 <Star className="w-7 h-7 text-yellow-400 fill-current mx-auto mb-1.5" />
-                <div className="text-xs font-semibold">5★ Google Rating</div>
+                <div className="text-xs font-semibold">5-Star Google · MyApproved Verified</div>
               </div>
               <div className="text-center">
                 <CalendarClock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
@@ -168,9 +169,12 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left: service + local description */}
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-6">
-                {service.name} in <span className="text-brand-orange">{town.town}</span>
-              </h2>
+              <SectionHeader
+                align="left"
+                kicker={`${service.name} · ${town.town}`}
+                title={<>{service.name} in <span className="text-brand-orange">{town.town}</span></>}
+                className="mb-6"
+              />
               <div className="text-gray-600 leading-relaxed space-y-4 text-lg">
                 <p>{buildServiceTownSolution(service, town)}</p>
                 <p>
@@ -227,9 +231,10 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-navy mb-8 text-center">
-              {service.name} Questions · {town.town}
-            </h2>
+            <SectionHeader
+              kicker="Frequently Asked Questions"
+              title={<>{service.name} Questions · {town.town}</>}
+            />
             <div className="space-y-4">
               {faqs.map((faq, i) => (
                 <details key={i} className="bg-white border border-gray-300 border-l-4 border-l-brand-orange">
@@ -248,9 +253,10 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
       {/* Other Services in This Town */}
       <section className="section-padding">
         <div className="container-custom">
-          <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">
-            Other Roofing Services in {town.town}
-          </h2>
+          <SectionHeader
+            kicker="More From Us"
+            title={<>Other Roofing Services in {town.town}</>}
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {otherServices.map((s) => (
               <Link
@@ -276,7 +282,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
       {/* Nearby Areas */}
       <section className="py-8 bg-gray-50">
         <div className="container-custom">
-          <h2 className="text-xl font-bold text-brand-navy mb-4 text-center">Nearby Areas We Also Serve</h2>
+          <SectionHeader kicker="Coverage" title="Nearby Areas We Also Serve" />
           <div className="flex flex-wrap justify-center gap-3">
             {town.nearbyAreas.map((area) => (
               <Link
@@ -295,19 +301,17 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
       {/* Google Reviews */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center gap-1 mb-3">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
-              ))}
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-2">
-              What {town.town} Homeowners Say
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              5★ rated on Google with hundreds of verified customer reviews
-            </p>
-          </div>
+          <SectionHeader
+            kicker="Reviews"
+            title={<>What {town.town} Homeowners Say</>}
+            subtitle={<>
+              <span className="inline-flex items-center justify-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                ))}
+              </span>{' '}5★ rated on Google with hundreds of verified customer reviews
+            </>}
+          />
           <div className="max-w-5xl mx-auto">
             <GhlReviewsWidget />
           </div>
@@ -317,9 +321,11 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
       {/* CTA */}
       <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Need {service.name} in {town.town}?
-          </h2>
+          <SectionHeader
+            dark
+            kicker="Free Inspection"
+            title={<>Need {service.name} in {town.town}?</>}
+          />
           <p className="text-xl mb-2 max-w-2xl mx-auto">
             {town.ctaLine || `Get a free, no-obligation quote. We'll inspect and provide a clear written price.`}
           </p>

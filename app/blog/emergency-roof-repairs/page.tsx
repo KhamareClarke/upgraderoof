@@ -78,10 +78,15 @@ export default function EmergencyRoofRepairsPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                What Counts as a Roofing Emergency?
-              </h2>
-              
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Emergency Guide</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">What Counts as a Roofing Emergency?</h2>
+              </div>
+
               <p className="mb-4">
                 Not every roof problem requires immediate attention, but these situations demand urgent professional help:
               </p>
@@ -95,9 +100,14 @@ export default function EmergencyRoofRepairsPost() {
                 <li><strong>Sagging roof sections</strong> indicating structural failure</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Immediate Steps to Take
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">First Response</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Immediate Steps to Take</h2>
+              </div>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
@@ -120,9 +130,14 @@ export default function EmergencyRoofRepairsPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Our Emergency Response Process
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">How We Respond</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Our Emergency Response Process</h2>
+              </div>
 
               <p className="mb-4">
                 When you call Upgrade Roofs for an emergency in Cheshire, here's what happens:
@@ -137,9 +152,14 @@ export default function EmergencyRoofRepairsPost() {
                 <li><strong>Permanent repairs</strong> scheduled at your convenience</li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Areas We Cover for Emergency Repairs
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Coverage Area</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Areas We Cover for Emergency Repairs</h2>
+              </div>
 
               <p className="mb-4">
                 Our emergency roofing team covers all of Cheshire and surrounding areas:
@@ -171,9 +191,14 @@ export default function EmergencyRoofRepairsPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Preventing Future Emergencies
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Prevention</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Preventing Future Emergencies</h2>
+              </div>
 
               <p className="mb-4">
                 The best way to avoid emergency repairs is regular maintenance:

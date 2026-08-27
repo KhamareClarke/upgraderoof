@@ -4,6 +4,7 @@ import { Calendar, MapPin, ArrowRight, CheckCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import Image from 'next/image';
+import { SectionHeader } from '@/components/SectionHeader';
 
 const caseStudies = [
   {
@@ -306,9 +307,7 @@ export default function CaseStudiesPage() {
 
           <div className="mt-16 text-center">
             <div className="bg-brand-navy text-white p-8 md:p-12 border-l-4 border-l-brand-orange max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4">
-                Ready to Transform Your Roof?
-              </h2>
+              <SectionHeader dark kicker="Get Started" title="Ready to Transform Your Roof?" />
               <p className="text-white/80 mb-6 max-w-2xl mx-auto">
                 Join hundreds of satisfied customers across Cheshire. Get a free, no-obligation 
                 quote and see how we can help with your roofing project.

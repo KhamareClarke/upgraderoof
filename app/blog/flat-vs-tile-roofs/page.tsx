@@ -64,10 +64,15 @@ export default function FlatVsTileRoofsPost() {
                 we're frequently asked: "Which lasts longer – flat roofs or tile roofs?" The answer depends on several factors.
               </p>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Tile Roofing Lifespan in the UK
-              </h2>
-              
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Tile Roofs</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Tile Roofing Lifespan in the UK</h2>
+              </div>
+
               <p className="mb-4">
                 Traditional tile roofing systems are renowned for their longevity:
               </p>
@@ -98,9 +103,14 @@ export default function FlatVsTileRoofsPost() {
                 <li><strong>Local weather</strong> - Cheshire's freeze-thaw cycles can affect some materials</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Flat Roofing Lifespan in the UK
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Flat Roofs</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Flat Roofing Lifespan in the UK</h2>
+              </div>
 
               <p className="mb-4">
                 Modern flat roofing systems have significantly improved in recent decades:
@@ -128,9 +138,14 @@ export default function FlatVsTileRoofsPost() {
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Direct Comparison: Longevity Analysis
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Comparison</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Direct Comparison: Longevity Analysis</h2>
+              </div>
 
               <div className="overflow-x-auto mb-8">
                 <table className="w-full border-collapse border border-gray-300">
@@ -177,9 +192,14 @@ export default function FlatVsTileRoofsPost() {
                 </table>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                UK Climate Considerations
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">UK Climate</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">UK Climate Considerations</h2>
+              </div>
 
               <p className="mb-4">
                 Cheshire's climate presents unique challenges for both roofing types:
@@ -230,9 +250,14 @@ export default function FlatVsTileRoofsPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Cost vs. Longevity Analysis
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Cost Analysis</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Cost vs. Longevity Analysis</h2>
+              </div>
 
               <p className="mb-4">
                 When considering total cost of ownership over the roof's lifetime:
@@ -259,9 +284,14 @@ export default function FlatVsTileRoofsPost() {
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Which Should You Choose?
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Your Choice</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Which Should You Choose?</h2>
+              </div>
 
               <p className="mb-4">
                 The best choice depends on your specific situation:
@@ -290,9 +320,14 @@ export default function FlatVsTileRoofsPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Professional Installation is Key
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Installation</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Professional Installation is Key</h2>
+              </div>
 
               <p className="mb-6">
                 Regardless of which system you choose, professional installation is crucial for achieving maximum lifespan. 
@@ -319,9 +354,14 @@ export default function FlatVsTileRoofsPost() {
                 </Button>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Conclusion
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Summary</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Conclusion</h2>
+              </div>
 
               <p className="mb-6">
                 While tile roofing systems generally offer superior longevity (50-100+ years vs 20-30 years for flat roofs), 

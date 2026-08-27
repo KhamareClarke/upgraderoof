@@ -4,6 +4,7 @@ import { Home, Layers, Flame, Droplets, Sun, Square, ArrowRight, CheckCircle } f
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -108,14 +109,11 @@ export default function ServicesPage() {
 
       <section className="section-padding">
         <div className="container-custom">
-          <div className="text-center mb-8 sm:mb-10 md:mb-12 px-2">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3 sm:mb-4">
-              Professional Roofing <span className="text-brand-orange">Services</span>
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              From installation to repairs, we provide expert roofing services tailored to your needs
-            </p>
-          </div>
+          <SectionHeader
+            kicker="Our Services"
+            title={<>Professional Roofing <span className="text-brand-orange">Services</span></>}
+            subtitle="From installation to repairs, we provide expert roofing services tailored to your needs"
+          />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {services.map((service, index) => {
@@ -179,10 +177,12 @@ export default function ServicesPage() {
 
       <section className="section-padding bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center px-2">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Need a Custom Solution?</h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-            Contact us for a free consultation and quote tailored to your specific requirements
-          </p>
+          <SectionHeader
+            dark
+            kicker="Bespoke Roofing"
+            title="Need a Custom Solution?"
+            subtitle="Contact us for a free consultation and quote tailored to your specific requirements"
+          />
           <QuoteForm trigger={
             <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
               Get Free Quote

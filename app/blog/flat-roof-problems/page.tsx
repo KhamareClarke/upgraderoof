@@ -53,9 +53,14 @@ export default function FlatRoofProblemsPost() {
                 in Cheshire</strong>, here's our guide to common issues and solutions.
               </p>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                1. Ponding Water
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Problem 1</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Ponding Water</h2>
+              </div>
 
               <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mb-6">
                 <p className="text-blue-800 font-semibold mb-2">The Problem:</p>
@@ -74,9 +79,14 @@ export default function FlatRoofProblemsPost() {
 
               <p className="mb-6"><strong>Solutions:</strong> Install tapered insulation to create falls, improve drainage, or in severe cases, rebuild with correct falls.</p>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                2. Blistering and Bubbling
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Problem 2</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Blistering and Bubbling</h2>
+              </div>
 
               <div className="bg-orange-50 border-l-4 border-orange-500 p-6 mb-6">
                 <p className="text-orange-800 font-semibold mb-2">The Problem:</p>
@@ -95,9 +105,14 @@ export default function FlatRoofProblemsPost() {
 
               <p className="mb-6"><strong>Solutions:</strong> Small blisters can be cut, dried, and patched. Widespread blistering usually requires overlay or replacement.</p>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                3. Cracking and Splitting
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Problem 3</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Cracking and Splitting</h2>
+              </div>
 
               <div className="bg-red-50 border-l-4 border-red-500 p-6 mb-6">
                 <div className="flex items-start gap-3">
@@ -121,9 +136,14 @@ export default function FlatRoofProblemsPost() {
 
               <p className="mb-6"><strong>Solutions:</strong> Patch repairs for isolated cracks. Multiple cracks indicate the membrane is failing and needs replacement.</p>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                4. Flashing Failures
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Problem 4</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Flashing Failures</h2>
+              </div>
 
               <p className="mb-4">
                 Where the flat roof meets walls, parapets, or other structures, flashing creates a 
@@ -137,9 +157,14 @@ export default function FlatRoofProblemsPost() {
                 <li><strong>Incorrect installation</strong> without proper upstand</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Flat Roof Types: Repair vs Replace
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Repair vs Replace</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Flat Roof Types: Repair vs Replace</h2>
+              </div>
 
               <div className="overflow-x-auto mb-8">
                 <table className="w-full border-collapse border border-gray-300">
@@ -175,9 +200,14 @@ export default function FlatRoofProblemsPost() {
                 </table>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                When to Replace Your Flat Roof
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Replace or Repair</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">When to Replace Your Flat Roof</h2>
+              </div>
 
               <p className="mb-4">
                 Consider full replacement when:
@@ -201,9 +231,14 @@ export default function FlatRoofProblemsPost() {
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Flat Roof Costs in Cheshire
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Pricing</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Flat Roof Costs in Cheshire</h2>
+              </div>
 
               <ul className="list-disc pl-6 mb-6 space-y-2">
                 <li><strong>Patch repair:</strong> £100-£300</li>

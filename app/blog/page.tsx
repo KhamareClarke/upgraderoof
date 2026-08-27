@@ -1,6 +1,7 @@
 import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { SectionHeader } from '@/components/SectionHeader';
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-GB', {
@@ -138,7 +139,11 @@ export default function BlogPage() {
       <section className="section-padding">
         <div className="container-custom">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-6 sm:mb-8 px-2">All Articles</h2>
+            <SectionHeader
+              align="left"
+              kicker="Expert Insights"
+              title="All Articles"
+            />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {staticPosts.map((post) => (
@@ -199,12 +204,11 @@ export default function BlogPage() {
       <section className="section-padding bg-brand-grey">
         <div className="container-custom">
           <div className="text-center mb-8 sm:mb-10">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3 sm:mb-4">
-              See Our Work in Action
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto">
-              Browse our portfolio of 40+ completed roofing projects across Cheshire
-            </p>
+            <SectionHeader
+              kicker="Our Work"
+              title="See Our Work in Action"
+              subtitle="Browse our portfolio of 40+ completed roofing projects across Cheshire"
+            />
           </div>
           
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
@@ -294,10 +298,12 @@ export default function BlogPage() {
 
       <section className="section-padding bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center px-2">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Need Expert Roofing Advice?</h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-            Our team is here to help with all your roofing questions
-          </p>
+          <SectionHeader
+            dark
+            kicker="Get Started"
+            title="Need Expert Roofing Advice?"
+            subtitle="Our team is here to help with all your roofing questions"
+          />
           <Link href="/contact">
             <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
               Contact Us Today

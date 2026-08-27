@@ -21,6 +21,7 @@ import Link from 'next/link';
 import { LocalAreaContent } from '@/components/LocalAreaContent';
 import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
 import { AuthorityBar } from '@/components/AuthorityBar';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export default function OfferSandbachPage() {
   const [mounted, setMounted] = useState(false);
@@ -370,15 +371,13 @@ export default function OfferSandbachPage() {
       <section className="section-padding bg-brand-grey">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6">
-              Got a Leak or Need a New Roof in Sandbach? We Identify the Problem Fast.
-            </h2>
-            <p className="text-lg text-gray-700 mb-8 max-w-3xl mx-auto">
-              Whether it's a small leak or a full roof replacement, our Sandbach team provides a detailed condition report 
-              and a no-obligation repair plan tailored for your home. We've been serving Sandbach homeowners for over 25 years.
-            </p>
-            <Button 
-              size="lg" 
+            <SectionHeader
+              kicker="Sandbach Roofing"
+              title="Got a Leak or Need a New Roof in Sandbach? We Identify the Problem Fast."
+              subtitle="Whether it's a small leak or a full roof replacement, our Sandbach team provides a detailed condition report and a no-obligation repair plan tailored for your home. We've been serving Sandbach homeowners for over 25 years."
+            />
+            <Button
+              size="lg"
               className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 py-4"
               onClick={() => document.querySelector('form')?.scrollIntoView({ behavior: 'smooth' })}
             >
@@ -391,13 +390,13 @@ export default function OfferSandbachPage() {
       {/* Scarcity & Urgency */}
       <section className="py-12 bg-gradient-to-r from-red-600 to-brand-orange text-white">
         <div className="container-custom text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            ⏰ Limited Time Offer Act Fast!
-          </h2>
-          <p className="text-lg mb-6">
-            Only 5 free inspections left this week for Sandbach. Offer ends Sunday
-          </p>
-          
+          <SectionHeader
+            dark
+            kicker="Limited Time Offer"
+            title="⏰ Limited Time Offer Act Fast!"
+            subtitle="Only 5 free inspections left this week for Sandbach. Offer ends Sunday"
+          />
+
           {/* Countdown Timer */}
           <div className="flex justify-center gap-4 mb-8">
             {Object.entries(timeLeft).map(([unit, value]) => (
@@ -421,16 +420,13 @@ export default function OfferSandbachPage() {
       {/* Final CTA */}
       <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Get Your Sandbach Roof Checked for Free?
-          </h2>
-          <p className="text-xl mb-2 max-w-2xl mx-auto">
-            Don't wait until leaks become damage.
-          </p>
-          <p className="text-lg mb-8 max-w-2xl mx-auto text-white">
-            We'll call you within 10 minutes to confirm your booking.
-          </p>
-          
+          <SectionHeader
+            dark
+            kicker="Free Inspection"
+            title="Ready to Get Your Sandbach Roof Checked for Free?"
+            subtitle="Don't wait until leaks become damage. We'll call you within 10 minutes to confirm your booking."
+          />
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 

@@ -18,9 +18,10 @@ export default function PrivacyPage() {
       <div className="container-custom section-padding">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 rounded-full bg-brand-orange/10 border border-brand-orange/20 text-brand-orange text-sm font-medium">
-              <Shield className="w-4 h-4" />
-              <span>Your Privacy Matters</span>
+            <div className="inline-flex items-center gap-3 mb-4 justify-center">
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+              <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Your Privacy Matters</span>
+              <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-brand-navy mb-6">
               Privacy Policy

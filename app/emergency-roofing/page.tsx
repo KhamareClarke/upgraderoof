@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { EmergencyRoofingSchema } from './schema';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -91,9 +92,11 @@ export default function EmergencyRoofingPage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto bg-red-50 border-l-4 border-l-red-500 p-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
-              24/7 Emergency Roofing in Sandbach &amp; Cheshire
-            </h2>
+            <SectionHeader
+              align="left"
+              kicker="24/7 Emergency Roofing"
+              title="24/7 Emergency Roofing in Sandbach &amp; Cheshire"
+            />
             <p className="text-lg text-gray-800 mb-4">
               <strong>Upgrade Roofs provides fast, round-the-clock emergency roofing across Sandbach and Cheshire.</strong> Storm damage, sudden leaks, or missing tiles · our local team responds the same day to make your roof safe and watertight, with a permanent fix to follow.
             </p>
@@ -110,14 +113,11 @@ export default function EmergencyRoofingPage() {
       {/* Emergency Services */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-4">
-              24/7 Emergency Roofing Services
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              When disaster strikes, we're ready. Based in Sandbach, we cover Crewe, Congleton, Middlewich, Nantwich, and all of Cheshire.
-            </p>
-          </div>
+          <SectionHeader
+            kicker="Emergency Services"
+            title="24/7 Emergency Roofing Services"
+            subtitle="When disaster strikes, we're ready. Based in Sandbach, we cover Crewe, Congleton, Middlewich, Nantwich, and all of Cheshire."
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { title: 'Storm Damage', desc: 'High winds, fallen trees, damaged tiles. We make your property safe and watertight fast.' },
@@ -142,9 +142,11 @@ export default function EmergencyRoofingPage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-6">
-                Why Call Upgrade Roofs in an Emergency?
-              </h2>
+              <SectionHeader
+                align="left"
+                kicker="Why Call Us"
+                title="Why Call Upgrade Roofs in an Emergency?"
+              />
               <div className="space-y-4">
                 {[
                   { icon: Clock, title: 'Fast Response', desc: 'Based in Sandbach, we cover all of south and mid-Cheshire · typically on-site within 30 minutes of your call.' },
@@ -205,7 +207,10 @@ export default function EmergencyRoofingPage() {
       {/* Emergency Reviews */}
       <section className="py-12 bg-white">
         <div className="container-custom">
-          <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">Emergency Call-Out Reviews</h2>
+          <SectionHeader
+            kicker="Reviews"
+            title="Emergency Call-Out Reviews"
+          />
           <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               { text: 'Called at 7pm on a Friday with water pouring through the ceiling. They were at our house within 40 minutes, had a tarp on before dark, and came back Monday to do the full repair. Absolute lifesavers.', name: 'James H.', location: 'Middlewich Road, Sandbach' },
@@ -226,7 +231,10 @@ export default function EmergencyRoofingPage() {
       {/* FAQ · rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
       <section className="py-12 bg-gray-50">
         <div className="container-custom">
-          <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">Emergency Roofing FAQs</h2>
+          <SectionHeader
+            kicker="FAQs"
+            title="Frequently Asked Questions"
+          />
           <div className="max-w-3xl mx-auto space-y-4">
             <details className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy" open>
               <summary className="font-semibold text-brand-navy cursor-pointer">How fast can you respond to a roofing emergency?</summary>
@@ -270,10 +278,12 @@ export default function EmergencyRoofingPage() {
       <section className="section-padding bg-red-900 text-white">
         <div className="container-custom text-center">
           <AlertTriangle className="w-16 h-16 text-brand-orange mx-auto mb-6 animate-pulse" />
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Roofing Emergency in Sandbach?</h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Don't wait · call us now for immediate assistance in Sandbach and across Cheshire
-          </p>
+          <SectionHeader
+            dark
+            kicker="Get Started"
+            title="Roofing Emergency in Sandbach?"
+            subtitle="Don't wait · call us now for immediate assistance in Sandbach and across Cheshire"
+          />
           <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg animate-pulse" asChild>
             <TrackedPhoneLink href="tel:01270897606" placement="emergency_bottom_cta">
               <Phone className="w-5 h-5 mr-2" />

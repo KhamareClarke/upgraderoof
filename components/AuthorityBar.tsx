@@ -1,11 +1,10 @@
-import { Medal, ShieldCheck, CheckCircle, Star, CalendarClock } from 'lucide-react';
+import { Medal, ShieldCheck, CheckCircle, Star } from 'lucide-react';
 
 const AUTHORITY = [
-  { icon: Medal, label: '25+ Years' },
-  { icon: ShieldCheck, label: '£10M Insured' },
-  { icon: CheckCircle, label: 'CORC Certified' },
-  { icon: ShieldCheck, label: '10-Year Guarantee' },
-  { icon: Star, label: '5-Star Rated' },
+  { icon: Medal, label: 'CORC Certified' },
+  { icon: ShieldCheck, label: '£10M Public Liability Insured' },
+  { icon: CheckCircle, label: 'IBG Insurance-Backed Guarantee' },
+  { icon: Star, label: '5-Star Google · MyApproved Verified' },
 ] as const;
 
 /**

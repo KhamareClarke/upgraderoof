@@ -1,7 +1,8 @@
 'use client';
 
-import { MapPin, MapPinned, CloudRain, CheckCircle } from 'lucide-react';
+import { MapPinned, CloudRain, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { SectionHeader } from '@/components/SectionHeader';
 
 interface LocalAreaContentProps {
   town: string;
@@ -28,18 +29,11 @@ export function LocalAreaContent({
     <section className="section-padding bg-white">
       <div className="container-custom">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-4 rounded-full bg-brand-orange/10 text-brand-orange text-sm font-medium">
-              <MapPin className="w-4 h-4" />
-              <span>Local Roofing Experts</span>
-            </div>
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Professional Roofing Services in {town}
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              {description}
-            </p>
-          </div>
+          <SectionHeader
+            kicker="Local Roofing Experts"
+            title={<>Professional Roofing Services in {town}</>}
+            subtitle={description}
+          />
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">

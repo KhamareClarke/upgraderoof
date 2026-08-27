@@ -70,10 +70,15 @@ export default function RoofMaintenanceChecklistPost() {
                 to help homeowners in Sandbach, Crewe, Middlewich, and surrounding areas keep their roofs in excellent condition.
               </p>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Spring Maintenance Checklist
-              </h2>
-              
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Spring</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Spring Maintenance Checklist</h2>
+              </div>
+
               <p className="mb-4">
                 After winter storms, spring is the perfect time to assess and repair any damage:
               </p>
@@ -90,9 +95,14 @@ export default function RoofMaintenanceChecklistPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Autumn Maintenance Checklist
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Autumn</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Autumn Maintenance Checklist</h2>
+              </div>
 
               <p className="mb-4">
                 Prepare your roof for the harsh Cheshire winter with these essential tasks:
@@ -110,9 +120,14 @@ export default function RoofMaintenanceChecklistPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Monthly Quick Checks
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Every Month</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Monthly Quick Checks</h2>
+              </div>
 
               <p className="mb-4">
                 These simple visual inspections take just 5 minutes and can catch problems early:
@@ -125,9 +140,14 @@ export default function RoofMaintenanceChecklistPost() {
                 <li>Look for debris accumulation in valleys</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                When to Call a Professional
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Call Us</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">When to Call a Professional</h2>
+              </div>
 
               <p className="mb-4">
                 While homeowners can handle basic inspections, professional help is needed for:
@@ -156,9 +176,14 @@ export default function RoofMaintenanceChecklistPost() {
                 </Button>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Cost Savings from Regular Maintenance
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Value</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Cost Savings from Regular Maintenance</h2>
+              </div>
 
               <p className="mb-4">
                 Investing in regular maintenance saves money long-term:

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { NewRoofsSchema } from './schema';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -90,9 +91,11 @@ export default function NewRoofsPage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto bg-gray-50 border-l-4 border-l-brand-orange p-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
-              New Roof Installations in Sandbach &amp; Cheshire
-            </h2>
+            <SectionHeader
+              align="left"
+              kicker="New Roof Installations"
+              title="New Roof Installations in Sandbach &amp; Cheshire"
+            />
             <p className="text-lg text-gray-800 mb-4">
               <strong>Upgrade Roofs designs and installs new tile, slate, and flat roofs across Sandbach and Cheshire.</strong> From complete re-roofing to extensions and new builds, we deliver a weathertight, guaranteed roof built to last with a full 10-year workmanship guarantee.
             </p>
@@ -109,14 +112,11 @@ export default function NewRoofsPage() {
       {/* Roof Types */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-4">
-              New Roof Options for Sandbach &amp; Cheshire Homes
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We've installed hundreds of new roofs in Sandbach and across Cheshire. Tile, slate, and modern flat roofing systems for every property type.
-            </p>
-          </div>
+          <SectionHeader
+            kicker="Roofing Options"
+            title="New Roof Options for Sandbach &amp; Cheshire Homes"
+            subtitle="We've installed hundreds of new roofs in Sandbach and across Cheshire. Tile, slate, and modern flat roofing systems for every property type."
+          />
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { 
@@ -155,14 +155,11 @@ export default function NewRoofsPage() {
       {/* Process */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-4">
-              Our Re-Roofing Process
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              From initial survey to final inspection, we manage every step professionally.
-            </p>
-          </div>
+          <SectionHeader
+            kicker="How We Work"
+            title="Our Re-Roofing Process"
+            subtitle="From initial survey to final inspection, we manage every step professionally."
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { step: '1', title: 'Free Survey', desc: 'We visit your property in Sandbach or anywhere in Cheshire, assess the roof, and provide a detailed written quote.' },
@@ -187,14 +184,16 @@ export default function NewRoofsPage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-6">
-                Why Choose Upgrade Roofs for Your New Roof?
-              </h2>
+              <SectionHeader
+                align="left"
+                kicker="Why Choose Us"
+                title="Why Choose Upgrade Roofs for Your New Roof?"
+              />
               <div className="space-y-4">
                 {[
                   { icon: Award, title: 'CORC Certified', desc: 'Competent Roofer Scheme member. Independently assessed and approved.' },
-                  { icon: Shield, title: '£10M Insurance', desc: 'Full public liability insurance. Your property is protected throughout the project.' },
-                  { icon: CheckCircle, title: '10-Year Guarantee', desc: 'Comprehensive workmanship guarantee on all new roof installations.' },
+                  { icon: Shield, title: '£10M Public Liability Insured', desc: 'Full public liability insurance. Your property is protected throughout the project.' },
+                  { icon: CheckCircle, title: 'IBG Insurance-Backed Guarantee', desc: 'Insurance-backed protection on all new roof installations.' },
                 ].map((item, i) => (
                   <div key={i} className="flex gap-4">
                     <div className="w-12 h-12 bg-brand-orange/10 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -225,7 +224,10 @@ export default function NewRoofsPage() {
       {/* New Roof Reviews */}
       <section className="py-12 bg-gray-50">
         <div className="container-custom">
-          <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">What Customers Say About Our New Roofs</h2>
+          <SectionHeader
+            kicker="Reviews"
+            title="What Customers Say About Our New Roofs"
+          />
           <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               { text: 'Complete re-roof on our 1930s semi. New Marley tiles, new felt, new battens · the lot. Team were brilliant, tidy, and finished in 4 days. Our house looks brand new from the street.', name: 'Sarah & David P.', location: 'Elworth, Sandbach' },
@@ -246,7 +248,10 @@ export default function NewRoofsPage() {
       {/* FAQ · rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
       <section className="py-12 bg-gray-50">
         <div className="container-custom">
-          <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">New Roof FAQs</h2>
+          <SectionHeader
+            kicker="FAQs"
+            title="Frequently Asked Questions"
+          />
           <div className="max-w-3xl mx-auto space-y-4">
             <details className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy" open>
               <summary className="font-semibold text-brand-navy cursor-pointer">How much does a new roof cost in Cheshire?</summary>
@@ -289,10 +294,12 @@ export default function NewRoofsPage() {
       {/* CTA */}
       <section className="section-padding bg-brand-navy text-white">
         <div className="container-custom text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready for a New Roof in Sandbach?</h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Get a free, no-obligation quote for your complete roof replacement in Sandbach or across Cheshire
-          </p>
+          <SectionHeader
+            dark
+            kicker="Get Started"
+            title="Ready for a New Roof in Sandbach?"
+            subtitle="Get a free, no-obligation quote for your complete roof replacement in Sandbach or across Cheshire"
+          />
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14" asChild>
               <TrackedPhoneLink href="tel:01270897606" placement="new_roofs_bottom_cta">

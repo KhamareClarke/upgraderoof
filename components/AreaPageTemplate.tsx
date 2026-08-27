@@ -9,6 +9,7 @@ import { CheckCircle, PhoneCall, MapPin, ShieldCheck, Medal, CalendarClock, Star
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 import { AuthorityBar } from '@/components/AuthorityBar';
+import { SectionHeader } from '@/components/SectionHeader';
 
 interface AreaFAQ {
   q: string;
@@ -106,11 +107,11 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20 max-w-md">
                 <div className="text-center">
                   <ShieldCheck className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
-                  <div className="text-xs font-semibold">Fully Insured</div>
+                  <div className="text-xs font-semibold">£10M Public Liability Insured</div>
                 </div>
                 <div className="text-center">
                   <Star className="w-7 h-7 text-yellow-400 fill-current mx-auto mb-1.5" />
-                  <div className="text-xs font-semibold">5★ Google Rating</div>
+                  <div className="text-xs font-semibold">5-Star Google · MyApproved Verified</div>
                 </div>
                 <div className="text-center">
                   <CalendarClock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
@@ -144,9 +145,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       <section id="quick-answers" className="bg-white border-b border-gray-100 py-8">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-xl font-bold text-brand-navy mb-5 text-center">
-              Roofing in {town} · Quick Answers
-            </h2>
+            <SectionHeader kicker="Quick Answers" title={<>Roofing in {town} · Quick Answers</>} />
             <dl className="space-y-4">
               <div className="bg-gray-50 p-5 border-l-4 border-brand-navy">
                 <dt className="font-semibold text-brand-navy mb-1">How much does a roof repair cost in {town}?</dt>
@@ -204,9 +203,12 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-6">
-              Professional Roofing in <span className="text-brand-orange">{town}</span>
-            </h2>
+            <SectionHeader
+              align="left"
+              kicker={`Roofing · ${town}`}
+              title={<>Professional Roofing in <span className="text-brand-orange">{town}</span></>}
+              className="mb-6"
+            />
             <div className="text-gray-600 leading-relaxed space-y-4 text-lg">
               <p>{localContext}</p>
               <p>{roofingChallenges}</p>
@@ -249,9 +251,10 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
         <section className="section-padding bg-white">
           <div className="container-custom">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-3xl font-bold text-brand-navy mb-8 text-center">
-                Common Roofing Problems in {town}
-              </h2>
+              <SectionHeader
+                kicker="Common Problems"
+                title={<>Common Roofing Problems in {town}</>}
+              />
               <div className="space-y-6">
                 {commonProblems.map((cp, i) => (
                   <div key={i} className="bg-gray-50 p-6 border-l-4 border-brand-navy">
@@ -283,9 +286,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       {/* Services */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <h2 className="text-3xl font-bold text-brand-navy mb-8 text-center">
-            Roofing Services in {town}
-          </h2>
+          <SectionHeader kicker="Our Services" title={<>Roofing Services in {town}</>} />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((s, i) => (
               <Link key={i} href={s.href} className="group bg-white p-6 border border-gray-300 hover:border-brand-navy transition-colors">
@@ -307,9 +308,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl font-bold text-brand-navy mb-8 text-center">
-              Roofing Questions · {town}
-            </h2>
+            <SectionHeader kicker="Frequently Asked Questions" title={<>Roofing Questions · {town}</>} />
             <div className="space-y-4">
               {faqs.map((faq, i) => (
                 <details key={i} className="bg-white border border-gray-300 border-l-4 border-l-brand-orange">
@@ -328,7 +327,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       {/* Nearby Areas */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">Nearby Areas We Serve</h2>
+          <SectionHeader kicker="Coverage" title="Nearby Areas We Serve" />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             <Link href="/roofers-sandbach" className="flex items-center justify-center gap-2 p-4 bg-white border border-gray-300 hover:border-brand-navy transition-colors text-brand-navy font-semibold hover:text-brand-orange">
               <MapPin className="w-4 h-4 text-brand-orange" />Sandbach
@@ -345,19 +344,17 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       {/* Google Reviews */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center gap-1 mb-3">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
-              ))}
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-2">
-              Why {town} Homeowners Choose Us
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              5★ rated on Google with hundreds of verified customer reviews
-            </p>
-          </div>
+          <SectionHeader
+            kicker="Reviews"
+            title={<>Why {town} Homeowners Choose Us</>}
+            subtitle={<>
+              <span className="inline-flex items-center justify-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                ))}
+              </span>{' '}5★ rated on Google with hundreds of verified customer reviews
+            </>}
+          />
           <div className="max-w-5xl mx-auto">
             <GhlReviewsWidget />
           </div>
@@ -372,7 +369,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       {/* CTA */}
       <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Need a Roofer in {town}?</h2>
+          <SectionHeader dark kicker="Free Inspection" title={<>Need a Roofer in {town}?</>} />
           <p className="text-xl mb-2 max-w-2xl mx-auto">
             {ctaLine || 'Get a free, no-obligation quote. We\'ll inspect your roof and provide a clear, written price.'}
           </p>

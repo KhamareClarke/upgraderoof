@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { VideoTestimonials } from '@/components/VideoTestimonials';
 import { supabase, type Testimonial } from '@/lib/supabase';
 import { ReviewCardSkeleton } from '@/components/LoadingSkeletons';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState<Testimonial[]>([]);
@@ -62,8 +63,11 @@ export default function ReviewsPage() {
                 <Star key={star} className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 fill-brand-orange text-brand-orange" />
               ))}
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-2">4.9 out of 5 Stars</h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600">Based on 127+ customer reviews</p>
+            <SectionHeader
+              kicker="Rated Excellent"
+              title="4.9 out of 5 Stars"
+              subtitle="Based on 127+ customer reviews"
+            />
           </div>
 
           {loading ? (
@@ -109,10 +113,12 @@ export default function ReviewsPage() {
 
       <section className="section-padding bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center px-2">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Join Our Happy Customers</h2>
-          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-            Experience the quality and service that earns us 5-star reviews
-          </p>
+          <SectionHeader
+            dark
+            kicker="Get Started"
+            title="Join Our Happy Customers"
+            subtitle="Experience the quality and service that earns us 5-star reviews"
+          />
           <a href="/#contact" className="inline-block w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
             <button className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg rounded-md transition-colors w-full sm:w-auto">
               Get Free Quote

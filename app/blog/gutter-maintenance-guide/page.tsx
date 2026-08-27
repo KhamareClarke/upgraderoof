@@ -65,9 +65,14 @@ export default function GutterMaintenanceGuidePost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Signs Your Gutters Need Attention
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Warning Signs</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Signs Your Gutters Need Attention</h2>
+              </div>
 
               <ul className="list-disc pl-6 mb-6 space-y-2">
                 <li><strong>Water overflowing</strong> during rainfall</li>
@@ -78,9 +83,14 @@ export default function GutterMaintenanceGuidePost() {
                 <li><strong>Damp patches</strong> inside near external walls</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Seasonal Gutter Maintenance Schedule
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Seasonal Care</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Seasonal Gutter Maintenance Schedule</h2>
+              </div>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-amber-50 p-6 border border-gray-200 border-l-4 border-l-amber-500">
@@ -105,9 +115,14 @@ export default function GutterMaintenanceGuidePost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                DIY vs Professional Gutter Cleaning
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">DIY vs Pro</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">DIY vs Professional Gutter Cleaning</h2>
+              </div>
 
               <p className="mb-4">
                 While some homeowners clean their own gutters, there are important safety considerations:
@@ -134,9 +149,14 @@ export default function GutterMaintenanceGuidePost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Common Gutter Problems We Fix
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Gutter Problems</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Common Gutter Problems We Fix</h2>
+              </div>
 
               <ul className="list-disc pl-6 mb-6 space-y-2">
                 <li><strong>Blocked gutters and downspouts</strong></li>
@@ -147,9 +167,14 @@ export default function GutterMaintenanceGuidePost() {
                 <li><strong>Incorrect fall</strong> preventing proper drainage</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Gutter Types We Install and Maintain
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Gutter Types</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Gutter Types We Install and Maintain</h2>
+              </div>
 
               <div className="overflow-x-auto mb-8">
                 <table className="w-full border-collapse border border-gray-300">
@@ -195,9 +220,14 @@ export default function GutterMaintenanceGuidePost() {
                 </Button>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Cost of Gutter Services in Cheshire
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Cost Guide</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Cost of Gutter Services in Cheshire</h2>
+              </div>
 
               <ul className="list-disc pl-6 mb-6 space-y-2">
                 <li><strong>Gutter cleaning:</strong> £60-£120 (typical house)</li>

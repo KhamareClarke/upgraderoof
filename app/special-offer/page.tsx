@@ -21,6 +21,7 @@ import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from
 import Image from 'next/image';
 import { TurnstileWidget } from '@/components/TurnstileWidget';
 import { AuthorityBar } from '@/components/AuthorityBar';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export default function SpecialOfferPage() {
   const [mounted, setMounted] = useState(false);
@@ -415,14 +416,11 @@ export default function SpecialOfferPage() {
       {/* Areas We Cover · matches every local keyword in the ad campaign */}
       <section className="py-10 bg-white border-b">
         <div className="container-custom">
-          <div className="text-center mb-6">
-            <h2 className="text-2xl md:text-3xl font-bold text-brand-navy">
-              Serving Sandbach & All Surrounding Areas
-            </h2>
-            <p className="text-gray-600 mt-2">
-              Based in Sandbach CW11 · covering every corner of Cheshire within 30 minutes
-            </p>
-          </div>
+          <SectionHeader
+            kicker="Coverage"
+            title={<>Serving Sandbach & <span className="text-brand-orange">All Surrounding Areas</span></>}
+            subtitle="Based in Sandbach CW11 · covering every corner of Cheshire within 30 minutes"
+          />
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 max-w-4xl mx-auto">
             {[
               { town: 'Sandbach', postcode: 'CW11', highlight: true },
@@ -459,9 +457,10 @@ export default function SpecialOfferPage() {
       <section className="section-padding bg-brand-grey">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-6">
-              What Your Free Inspection Covers
-            </h2>
+            <SectionHeader
+              kicker="Our Inspection"
+              title="What Your Free Inspection Covers"
+            />
             <div className="grid sm:grid-cols-2 gap-4 text-left max-w-2xl mx-auto mb-8">
               {[
                 'Full roof structure check · tiles, slates, ridges',
@@ -491,12 +490,12 @@ export default function SpecialOfferPage() {
       {/* Scarcity & Urgency */}
       <section className="py-12 bg-gradient-to-r from-red-600 to-brand-orange text-white">
         <div className="container-custom text-center">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            Free Roof Inspection · Offer Ends 31st July 2026
-          </h2>
-          <p className="text-lg mb-6">
-            Book before the deadline. No cost, no obligation · just an expert roof check and honest advice.
-          </p>
+          <SectionHeader
+            dark
+            kicker="Limited Time Offer"
+            title="Free Roof Inspection · Offer Ends 31st July 2026"
+            subtitle="Book before the deadline. No cost, no obligation · just an expert roof check and honest advice."
+          />
           
           {/* Countdown Timer */}
           <div className="flex justify-center gap-4 mb-8">
@@ -521,15 +520,12 @@ export default function SpecialOfferPage() {
       {/* Final CTA */}
       <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">
         <div className="container-custom text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to Get Your Roof Checked for Free?
-          </h2>
-          <p className="text-xl mb-2 max-w-2xl mx-auto">
-            Don't wait until leaks become damage.
-          </p>
-          <p className="text-lg mb-8 max-w-2xl mx-auto text-white/80">
-            We'll call you within 10 minutes to confirm your booking.
-          </p>
+          <SectionHeader
+            dark
+            kicker="Free Inspection"
+            title="Ready to Get Your Roof Checked for Free?"
+            subtitle="Don't wait until leaks become damage. We'll call you within 10 minutes to confirm your booking."
+          />
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 

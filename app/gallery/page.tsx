@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { Filter } from 'lucide-react';
 import { Gallery as GalleryComponent } from '@/components/Gallery';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const metadata: Metadata = {
   title: 'Roofing Gallery | Completed Projects Cheshire | Before & After',
@@ -61,14 +62,11 @@ export default function GalleryPage() {
 
       <section className="section-padding">
         <div className="container-custom">
-          <div className="text-center mb-8 sm:mb-10 md:mb-12 px-2">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3 sm:mb-4">
-              Our <span className="text-brand-orange">Portfolio</span>
-            </h2>
-            <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              Browse through our extensive portfolio of roofing projects showcasing quality craftsmanship
-            </p>
-          </div>
+          <SectionHeader
+            kicker="Our Work"
+            title={<>Our <span className="text-brand-orange">Portfolio</span></>}
+            subtitle="Browse through our extensive portfolio of roofing projects showcasing quality craftsmanship"
+          />
 
           <GalleryComponent />
         </div>

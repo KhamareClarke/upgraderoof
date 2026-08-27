@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Clock, MessageSquare } from 'lucide-react';
 import { ContactForm } from '@/components/ContactForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { TrackedEmailLink } from '@/components/TrackedEmailLink';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const metadata: Metadata = {
   title: 'Contact Us | Free Roofing Quote Cheshire | 01270 897606',
@@ -74,7 +75,11 @@ export default function ContactPage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12">
             <div className="order-2 lg:order-1">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-4 sm:mb-6">Get a Free Quote</h2>
+              <SectionHeader
+                align="left"
+                kicker="Free &amp; No-Obligation"
+                title="Get a Free Quote"
+              />
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-6 sm:mb-8">
                 Fill out the form below and we'll get back to you within 24 hours with a detailed quote for your roofing project. All quotes are completely free and come with no obligation.
               </p>
@@ -170,7 +175,10 @@ export default function ContactPage() {
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-6 text-center">Why Choose Upgrade Roofs?</h2>
+            <SectionHeader
+              kicker="Why Choose Us"
+              title="Why Choose Upgrade Roofs?"
+            />
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <div className="bg-brand-grey p-6 border border-gray-200 border-l-4 border-l-brand-navy">
                 <h3 className="text-lg font-semibold text-brand-navy mb-3">25+ Years of Experience</h3>
@@ -242,7 +250,11 @@ export default function ContactPage() {
       <section className="section-padding bg-brand-grey">
         <div className="container-custom">
           <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white border-l-4 border-l-brand-orange p-6 sm:p-8 md:p-12 text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">Emergency Roofing Services</h2>
+            <SectionHeader
+              dark
+              kicker="24/7 Emergency"
+              title="Emergency Roofing Services"
+            />
             <p className="text-sm sm:text-base md:text-lg text-white/90 mb-4 sm:mb-6 max-w-2xl mx-auto px-2">
               Storm damage? Leak? We offer 24/7 emergency roofing services across Cheshire. Our emergency team can be with you within hours to secure your property and prevent further damage. Don't wait - water damage can quickly escalate and cause structural issues.
             </p>

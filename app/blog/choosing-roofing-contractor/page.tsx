@@ -87,9 +87,14 @@ export default function ChoosingRoofingContractorPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Green Flags: Signs of a Reputable Roofer
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Green Flags</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Green Flags: Signs of a Reputable Roofer</h2>
+              </div>
 
               <div className="bg-green-50 p-6 border border-gray-200 border-l-4 border-l-green-500 mb-8">
                 <div className="grid md:grid-cols-2 gap-3">
@@ -102,9 +107,14 @@ export default function ChoosingRoofingContractorPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Red Flags: Warning Signs to Watch For
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Red Flags</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Red Flags: Warning Signs to Watch For</h2>
+              </div>
 
               <div className="bg-red-50 p-6 border border-gray-200 border-l-4 border-l-red-500 mb-8">
                 <div className="grid md:grid-cols-2 gap-3">
@@ -117,9 +127,14 @@ export default function ChoosingRoofingContractorPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Essential Questions to Ask
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Questions to Ask</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Essential Questions to Ask</h2>
+              </div>
 
               <p className="mb-4">
                 Before hiring any roofing contractor, ask these important questions:
@@ -148,9 +163,14 @@ export default function ChoosingRoofingContractorPost() {
                 </li>
               </ol>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Getting Quotes: Best Practice
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Getting Quotes</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Getting Quotes: Best Practice</h2>
+              </div>
 
               <ul className="list-disc pl-6 mb-6 space-y-2">
                 <li>Get at least 3 quotes from different contractors</li>
@@ -169,9 +189,14 @@ export default function ChoosingRoofingContractorPost() {
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Checking Credentials
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Credentials</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Checking Credentials</h2>
+              </div>
 
               <p className="mb-4">
                 Verify your contractor's claims:
@@ -185,9 +210,14 @@ export default function ChoosingRoofingContractorPost() {
                 <li><strong>Insurance:</strong> Ask to see certificate, not just claim</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Why Choose Upgrade Roofs
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Why Upgrade Roofs</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Why Choose Upgrade Roofs</h2>
+              </div>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">

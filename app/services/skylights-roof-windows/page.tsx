@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const metadata: Metadata = {
   title: 'Skylights & Roof Windows Cheshire | VELUX Installation | Upgrade Roofs',
@@ -59,9 +60,11 @@ export default function SkylightsRoofWindowsPage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center mb-10 sm:mb-12 md:mb-16">
             <div className="order-2 lg:order-1">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-4 sm:mb-6">
-                Expert Skylight Installation
-              </h2>
+              <SectionHeader
+                align="left"
+                kicker="Expert Skylight Installation"
+                title="Expert Skylight Installation"
+              />
               <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700 leading-relaxed">
                 <p>
                   Skylights and roof windows are an excellent way to bring natural light into your home while adding value and improving energy efficiency.
@@ -82,7 +85,7 @@ export default function SkylightsRoofWindowsPage() {
           </div>
 
           <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white border-l-4 border-l-brand-orange p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
-            <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center px-2">Our Skylight Services</h3>
+            <SectionHeader dark kicker="What We Do" title="Our Skylight Services" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {[
                 'VELUX window installation',
@@ -145,14 +148,11 @@ export default function SkylightsRoofWindowsPage() {
         />
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3">
-                Frequently Asked Questions
-              </h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-600">
-                Answers to common questions about our service across Cheshire.
-              </p>
-            </div>
+            <SectionHeader
+              kicker="FAQs"
+              title="Frequently Asked Questions"
+              subtitle="Answers to common questions about our service across Cheshire."
+            />
             <div className="space-y-3 sm:space-y-4">
               {[
                 {
@@ -205,10 +205,11 @@ export default function SkylightsRoofWindowsPage() {
 
       <section className="section-padding bg-brand-grey">
         <div className="container-custom text-center px-2">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3 sm:mb-4">Ready to Add Natural Light?</h2>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-            Get a free quote for your skylight or roof window project in Cheshire
-          </p>
+          <SectionHeader
+            kicker="Get Started"
+            title="Ready to Add Natural Light?"
+            subtitle="Get a free quote for your skylight or roof window project in Cheshire"
+          />
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
             <QuoteForm trigger={
               <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">

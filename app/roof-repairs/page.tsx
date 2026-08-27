@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { RoofRepairsSchema } from './schema';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -89,9 +90,11 @@ export default function RoofRepairsPage() {
         <section className="section-padding bg-white">
           <div className="container-custom">
             <div className="max-w-3xl mx-auto bg-gray-50 border-l-4 border-l-brand-orange p-8">
-              <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">
-                Your Local Roof Repair Specialists
-              </h2>
+              <SectionHeader
+                align="left"
+                kicker="Roof Repair Specialists"
+                title="Your Local Roof Repair Specialists"
+              />
               <p className="text-lg text-gray-800 mb-4">
                 <strong>Upgrade Roofs provides expert, guaranteed roof repair services in Sandbach and across Cheshire.</strong> We handle everything from minor leak repairs and tile replacements to significant storm damage, ensuring a fast, reliable, and permanent solution.
               </p>
@@ -109,12 +112,11 @@ export default function RoofRepairsPage() {
         <section className="section-padding bg-gray-100">
           <div className="container-custom">
             <div className="text-center mb-12">
-              <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-4">
-                Common Roof Repairs We Handle
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Based in Sandbach, we handle all types of roof repairs · from homes in CW11 to properties across Crewe, Congleton, Nantwich, and the wider Cheshire area.
-              </p>
+              <SectionHeader
+                kicker="Our Repairs"
+                title="Common Roof Repairs We Handle"
+                subtitle="Based in Sandbach, we handle all types of roof repairs · from homes in CW11 to properties across Crewe, Congleton, Nantwich, and the wider Cheshire area."
+              />
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
@@ -140,13 +142,15 @@ export default function RoofRepairsPage() {
           <div className="container-custom">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-6">
-                  Why Choose Upgrade Roofs for Repairs?
-                </h2>
+                <SectionHeader
+                  align="left"
+                  kicker="Why Choose Us"
+                  title="Why Choose Upgrade Roofs for Repairs?"
+                />
                 <div className="space-y-4">
                   {[
                     { icon: Clock, title: 'Same-Day Service', desc: 'Based in Sandbach, we cover all of south and mid-Cheshire · usually on-site within 30–45 minutes for urgent repairs.' },
-                    { icon: Shield, title: '10-Year Guarantee', desc: 'All repairs backed by our comprehensive workmanship guarantee.' },
+                    { icon: Shield, title: 'Insurance-Backed Guarantee', desc: 'All repairs backed by an IBG insurance-backed guarantee.' },
                     { icon: CheckCircle, title: 'No Hidden Costs', desc: 'Fixed-price quotes. No surprises, no call-out fees.' },
                   ].map((item, i) => (
                     <div key={i} className="flex gap-4">
@@ -178,7 +182,10 @@ export default function RoofRepairsPage() {
         {/* Roof Repair Reviews */}
         <section className="py-12 bg-white">
           <div className="container-custom">
-            <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">What Customers Say About Our Repairs</h2>
+            <SectionHeader
+              kicker="Reviews"
+              title="What Customers Say About Our Repairs"
+            />
             <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {[
                 { text: 'Had a leak above the bathroom that two other roofers couldn\'t fix. Upgrade Roofs found the problem in 20 minutes · a failed lead flashing behind the soil pipe. Fixed properly, no more damp.', name: 'Karen W.', location: 'Elworth, Sandbach' },
@@ -199,7 +206,10 @@ export default function RoofRepairsPage() {
         {/* FAQ · rendered visibly so the FAQPage schema in ./schema.tsx has on-page parity */}
         <section className="py-12 bg-gray-50">
           <div className="container-custom">
-            <h2 className="text-2xl font-bold text-brand-navy mb-6 text-center">Roof Repair FAQs</h2>
+            <SectionHeader
+              kicker="FAQs"
+              title="Frequently Asked Questions"
+            />
             <div className="max-w-3xl mx-auto space-y-4">
               <details className="bg-white p-6 border border-gray-200 border-l-4 border-l-brand-navy" open>
                 <summary className="font-semibold text-brand-navy cursor-pointer">Do you offer same-day service for urgent roof repairs?</summary>
@@ -242,10 +252,12 @@ export default function RoofRepairsPage() {
         {/* CTA */}
         <section className="section-padding bg-brand-navy text-white">
           <div className="container-custom text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Need a Roof Repair in Sandbach?</h2>
-            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-              Call us now for same-day roof repairs in Sandbach and across Cheshire
-            </p>
+            <SectionHeader
+              dark
+              kicker="Get Started"
+              title="Need a Roof Repair in Sandbach?"
+              subtitle="Call us now for same-day roof repairs in Sandbach and across Cheshire"
+            />
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14" asChild>
                 <TrackedPhoneLink href="tel:01270897606" placement="roof_repairs_bottom_cta">

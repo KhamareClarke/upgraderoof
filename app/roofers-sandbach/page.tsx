@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { CheckCircle, Phone, MapPin, Shield, Award, Clock, Star, ArrowRight, Home, Layers, Flame, Droplets, Zap, Wrench } from 'lucide-react';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -84,9 +85,11 @@ export default function RoofersSandbachPage() {
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-6">
-              Why Sandbach Homeowners Choose <span className="text-brand-orange">Upgrade Roofs</span>
-            </h2>
+            <SectionHeader
+              align="left"
+              kicker="Our Local Reputation"
+              title={<>Why Sandbach Homeowners Choose <span className="text-brand-orange">Upgrade Roofs</span></>}
+            />
             <div className="prose prose-lg max-w-none text-gray-600 leading-relaxed space-y-4">
               <p>
                 Based at 20 Crewe Road in the heart of Sandbach (CW11 4NE), Upgrade Roofs is a family-run roofing company 
@@ -119,12 +122,11 @@ export default function RoofersSandbachPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-4">
-              Roofing Services We Offer in Sandbach
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Every roofing service you need, delivered by experienced local tradesmen.
-            </p>
+            <SectionHeader
+              kicker="Our Services"
+              title="Roofing Services We Offer in Sandbach"
+              subtitle="Every roofing service you need, delivered by experienced local tradesmen."
+            />
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
@@ -154,12 +156,11 @@ export default function RoofersSandbachPage() {
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-4 text-center">
-              Recent Roofing Projects in <span className="text-brand-orange">Sandbach</span>
-            </h2>
-            <p className="text-lg text-gray-600 text-center mb-10 max-w-2xl mx-auto">
-              Real jobs we've completed for Sandbach homeowners. Every project backed by our 10-year guarantee.
-            </p>
+            <SectionHeader
+              kicker="Case Studies"
+              title={<>Recent Roofing Projects in <span className="text-brand-orange">Sandbach</span></>}
+              subtitle="Real jobs we've completed for Sandbach homeowners. Every project backed by our 10-year guarantee."
+            />
             <div className="space-y-8">
               {[
                 {
@@ -239,9 +240,10 @@ export default function RoofersSandbachPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="text-center mb-10">
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-4">
-              What Sandbach Customers Say
-            </h2>
+            <SectionHeader
+              kicker="Reviews"
+              title="What Sandbach Customers Say"
+            />
             <div className="flex items-center justify-center gap-2 mb-2">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
@@ -318,9 +320,11 @@ export default function RoofersSandbachPage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-6">
-                Roofing Experts Who Know <span className="text-brand-orange">Sandbach</span>
-              </h2>
+              <SectionHeader
+                align="left"
+                kicker="Local Experts"
+                title={<>Roofing Experts Who Know <span className="text-brand-orange">Sandbach</span></>}
+              />
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-10 h-10 bg-brand-orange/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
@@ -386,9 +390,10 @@ export default function RoofersSandbachPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-brand-navy mb-8 text-center">
-              Common Roofing Questions in Sandbach
-            </h2>
+            <SectionHeader
+              kicker="FAQs"
+              title="Common Roofing Questions in Sandbach"
+            />
             <div className="space-y-4">
               {[
                 {
@@ -434,12 +439,11 @@ export default function RoofersSandbachPage() {
       {/* Areas We Serve from Sandbach */}
       <section className="section-padding">
         <div className="container-custom">
-          <h2 className="text-3xl font-bold text-brand-navy mb-4 text-center">
-            We Also Serve These Nearby Areas
-          </h2>
-          <p className="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
-            Based in Sandbach, we provide the same professional roofing service to neighbouring towns across Cheshire.
-          </p>
+          <SectionHeader
+            kicker="Service Area"
+            title="We Also Serve These Nearby Areas"
+            subtitle="Based in Sandbach, we provide the same professional roofing service to neighbouring towns across Cheshire."
+          />
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
               { name: 'Crewe', href: '/roofers-crewe' },
@@ -461,13 +465,12 @@ export default function RoofersSandbachPage() {
       {/* CTA Section */}
       <section className="section-padding bg-brand-navy text-white">
         <div className="container-custom text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Need a Roofer in Sandbach?
-          </h2>
-          <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-            Get a free, no-obligation quote from Sandbach's most trusted roofing company. 
-            We'll inspect your roof, explain your options clearly, and give you a fair, written price.
-          </p>
+          <SectionHeader
+            dark
+            kicker="Get Started"
+            title="Need a Roofer in Sandbach?"
+            subtitle="Get a free, no-obligation quote from Sandbach's most trusted roofing company. We'll inspect your roof, explain your options clearly, and give you a fair, written price."
+          />
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <QuoteForm trigger={
               <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-10 h-14 text-base">

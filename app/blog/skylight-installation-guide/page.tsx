@@ -61,9 +61,14 @@ export default function SkylightInstallationGuidePost() {
                 helped hundreds of homeowners bring natural light into their homes.
               </p>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Benefits of Skylights
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">The Benefits</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Benefits of Skylights</h2>
+              </div>
 
               <div className="bg-yellow-50 p-6 border border-gray-200 border-l-4 border-l-yellow-400 mb-8">
                 <div className="flex items-start gap-3 mb-4">
@@ -80,9 +85,14 @@ export default function SkylightInstallationGuidePost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Types of Skylights
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Types</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Types of Skylights</h2>
+              </div>
 
               <div className="grid md:grid-cols-2 gap-6 mb-8">
                 <div className="bg-gray-50 p-6 border border-gray-200 border-l-4 border-l-brand-navy">
@@ -127,9 +137,14 @@ export default function SkylightInstallationGuidePost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Velux vs Other Brands
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Brands Compared</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Velux vs Other Brands</h2>
+              </div>
 
               <p className="mb-4">
                 Velux is the most recognized skylight brand, but there are quality alternatives:
@@ -164,9 +179,14 @@ export default function SkylightInstallationGuidePost() {
                 </table>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Installation Process
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">The Process</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Installation Process</h2>
+              </div>
 
               <ol className="list-decimal pl-6 mb-6 space-y-3">
                 <li>
@@ -204,9 +224,14 @@ export default function SkylightInstallationGuidePost() {
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Skylight Costs in Cheshire
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Costs</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Skylight Costs in Cheshire</h2>
+              </div>
 
               <div className="overflow-x-auto mb-8">
                 <table className="w-full border-collapse border border-gray-300">

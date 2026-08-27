@@ -16,7 +16,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import Link from 'next/link';
-
+import { SectionHeader } from '@/components/SectionHeader';
 export const metadata: Metadata = {
   title: 'Sitemap | Upgrade Roofs - All Pages',
   description: 'Complete sitemap of all pages on Upgrade Roofs website. Easy navigation to all our roofing services, areas, and information.',
@@ -132,10 +132,11 @@ export default function SitemapPage() {
       {/* Quick Actions */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-navy mb-4">Quick Actions</h2>
-            <p className="text-lg text-gray-600">Most popular pages and actions</p>
-          </div>
+          <SectionHeader
+            kicker="Quick Actions"
+            title="Quick Actions"
+            subtitle="Most popular pages and actions"
+          />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
             {quickActions.map((action, index) => (
@@ -169,10 +170,11 @@ export default function SitemapPage() {
       {/* All Pages */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-brand-navy mb-4">All Website Pages</h2>
-            <p className="text-lg text-gray-600">Complete directory organized by category</p>
-          </div>
+          <SectionHeader
+            kicker="Site Directory"
+            title="All Website Pages"
+            subtitle="Complete directory organized by category"
+          />
 
           <div className="space-y-12">
             {sitePages.map((section, index) => (
@@ -217,12 +219,11 @@ export default function SitemapPage() {
       <section className="section-padding bg-brand-grey">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-brand-navy mb-4">Need Help Finding Something?</h2>
-              <p className="text-lg text-gray-600">
-                Can't find what you're looking for? Here are some helpful suggestions.
-              </p>
-            </div>
+            <SectionHeader
+              kicker="Help"
+              title="Need Help Finding Something?"
+              subtitle="Can't find what you're looking for? Here are some helpful suggestions."
+            />
 
             <div className="grid md:grid-cols-2 gap-8">
               <Card>
@@ -268,10 +269,12 @@ export default function SitemapPage() {
       {/* Footer CTA */}
       <section className="section-padding bg-gradient-to-r from-brand-orange to-brand-orange/90 text-white">
         <div className="container-custom text-center">
-          <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Don't wait - get your free roof inspection today and protect your home.
-          </p>
+          <SectionHeader
+            dark
+            kicker="Get Started"
+            title="Ready to Get Started?"
+            subtitle="Don't wait - get your free roof inspection today and protect your home."
+          />
           <Button size="lg" className="bg-white text-brand-orange hover:bg-gray-100 font-bold px-8 py-4" asChild>
             <Link href="/special-offer">
               <Star className="w-5 h-5 mr-2" />

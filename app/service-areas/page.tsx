@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { AuthorityBar } from '@/components/AuthorityBar';
+import { SectionHeader } from '@/components/SectionHeader';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -211,7 +212,12 @@ export default function ServiceAreasPage() {
               </div>
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-brand-navy mb-4">Based in Sandbach, Covering Cheshire</h2>
+              <SectionHeader
+                align="left"
+                kicker="Our Coverage"
+                title="Based in Sandbach, Covering Cheshire"
+                className="mb-4"
+              />
               <p className="text-gray-600 mb-6 leading-relaxed">
                 Our office at 20 Crewe Road, Sandbach puts us within reach of 15 towns across Cheshire, Staffordshire, and the Pennine fringe. From Winsford and Holmes Chapel on the doorstep to Wilmslow, Knutsford, and Macclesfield further north · and Newcastle-under-Lyme and Biddulph to the south · we cover a wide service area while keeping response times fast.
               </p>
@@ -237,10 +243,11 @@ export default function ServiceAreasPage() {
       {/* Area Cards */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4 text-center">15 Towns & Areas We Serve</h2>
-          <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
-            Click any area to see our full range of local roofing services, pricing guidance, and FAQs for that town.
-          </p>
+          <SectionHeader
+            kicker="Service Areas"
+            title={<>15 Towns & Areas We <span className="text-brand-orange">Serve</span></>}
+            subtitle="Click any area to see our full range of local roofing services, pricing guidance, and FAQs for that town."
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {serviceAreas.map((area, i) => (
               <Link key={i} href={area.href} className={`group bg-white p-6 border border-l-4 transition-colors ${area.featured ? 'border-brand-orange ring-1 ring-brand-orange/30' : 'border-gray-200 border-l-brand-navy hover:border-brand-orange/50'}`}>
@@ -266,10 +273,12 @@ export default function ServiceAreasPage() {
       <section className="section-padding">
         <div className="container-custom">
           <div className="bg-brand-navy border-l-4 border-l-brand-orange p-8 md:p-12 text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Not Sure If We Cover Your Area?</h2>
-            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
-              Based in Sandbach, we serve most of Cheshire and surrounding areas. Give us a call and we'll confirm we can help.
-            </p>
+            <SectionHeader
+              dark
+              kicker="Check Coverage"
+              title="Not Sure If We Cover Your Area?"
+              subtitle="Based in Sandbach, we serve most of Cheshire and surrounding areas. Give us a call and we'll confirm we can help."
+            />
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <QuoteForm trigger={
                 <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">

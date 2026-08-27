@@ -64,9 +64,14 @@ export default function RoofDamageSignsPost() {
                 to look for and when to call in the experts.
               </p>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                1. Interior Warning Signs
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Indoors</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">1. Interior Warning Signs</h2>
+              </div>
               
               <p className="mb-4">
                 The first signs of roof damage often appear inside your home. Here's what to watch for:
@@ -87,9 +92,14 @@ export default function RoofDamageSignsPost() {
                 </p>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                2. Exterior Roof Inspection Points
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Outdoors</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">2. Exterior Roof Inspection Points</h2>
+              </div>
 
               <p className="mb-4">
                 Regular visual inspections from ground level can reveal many problems:
@@ -103,9 +113,14 @@ export default function RoofDamageSignsPost() {
                 <li><strong>Granules in gutters</strong> - Sign of aging roof tiles needing replacement</li>
               </ul>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                3. Seasonal Damage in Cheshire
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Seasonal</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">3. Seasonal Damage in Cheshire</h2>
+              </div>
 
               <p className="mb-4">
                 Our local climate presents unique challenges for roofing systems:
@@ -132,9 +147,14 @@ export default function RoofDamageSignsPost() {
                 </div>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                4. When to Call Professional Roofers
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Call a Pro</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">4. When to Call Professional Roofers</h2>
+              </div>
 
               <p className="mb-4">
                 While homeowners can spot many warning signs, professional inspection is crucial for:
@@ -161,9 +181,14 @@ export default function RoofDamageSignsPost() {
                 </Button>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                5. Cost of Delayed Repairs
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">The Cost</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">5. Cost of Delayed Repairs</h2>
+              </div>
 
               <p className="mb-4">
                 Ignoring early warning signs can lead to:
@@ -198,9 +223,14 @@ export default function RoofDamageSignsPost() {
                 </table>
               </div>
 
-              <h2 className="text-2xl font-bold text-brand-navy mb-4">
-                Conclusion
-              </h2>
+              <div className="text-center max-w-2xl mx-auto mt-12 mb-8">
+                <div className="inline-flex items-center gap-3 mb-4">
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                  <span className="text-brand-orange text-xs sm:text-sm font-semibold uppercase tracking-[0.2em]">Summary</span>
+                  <span className="h-px w-8 sm:w-12 bg-brand-orange" aria-hidden="true" />
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-brand-navy mb-4">Conclusion</h2>
+              </div>
 
               <p className="mb-6">
                 Regular roof inspections and early intervention are the keys to maintaining your property's value and avoiding 

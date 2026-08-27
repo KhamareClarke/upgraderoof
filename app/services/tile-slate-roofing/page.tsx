@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
+import { SectionHeader } from '@/components/SectionHeader';
 import { useState } from 'react';
 
 export default function TileSlateRoofingPage() {
@@ -97,9 +98,11 @@ export default function TileSlateRoofingPage() {
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center mb-10 sm:mb-12 md:mb-16">
             <div className="order-2 lg:order-1">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-4 sm:mb-6">
-                Expert Tile & Slate Installation
-              </h2>
+              <SectionHeader
+                align="left"
+                kicker="Expert Tile & Slate Installation"
+                title="Expert Tile & Slate Installation"
+              />
               <div className="space-y-3 sm:space-y-4 text-sm sm:text-base text-gray-700 leading-relaxed">
                 <p>
                   Tile and slate roofing represents the pinnacle of traditional roofing craftsmanship. With proper installation and maintenance, these beautiful roofing materials can last 50-100 years, making them an excellent long-term investment for your property.
@@ -136,7 +139,7 @@ export default function TileSlateRoofingPage() {
           </div>
 
           <div className="bg-gradient-to-br from-brand-navy to-brand-navy/90 text-white border-l-4 border-l-brand-orange p-6 sm:p-8 md:p-12 mb-10 sm:mb-12 md:mb-16">
-            <h3 className="text-2xl sm:text-3xl font-bold mb-6 sm:mb-8 text-center px-2">What We Offer</h3>
+            <SectionHeader dark kicker="What We Do" title="What We Offer" />
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {[
                 'New tile and slate roof installations',
@@ -165,8 +168,8 @@ export default function TileSlateRoofingPage() {
               },
               {
                 icon: Shield,
-                title: '10-Year Guarantee',
-                description: 'All workmanship backed by our comprehensive warranty',
+                title: 'Insurance-Backed Guarantee',
+                description: 'All workmanship backed by an IBG insurance-backed guarantee',
               },
               {
                 icon: Clock,
@@ -192,14 +195,11 @@ export default function TileSlateRoofingPage() {
       {/* Before/After Gallery */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Before & After Gallery
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              See the transformation we bring to homes across Cheshire with our expert tile and slate roofing services.
-            </p>
-          </div>
+          <SectionHeader
+            kicker="Our Work"
+            title="Before & After Gallery"
+            subtitle="See the transformation we bring to homes across Cheshire with our expert tile and slate roofing services."
+          />
 
           <div className="relative max-w-4xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8 mb-8">
@@ -254,14 +254,11 @@ export default function TileSlateRoofingPage() {
       {/* FAQ Section */}
       <section className="section-padding bg-brand-grey">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Get answers to common questions about our tile and slate roofing services.
-            </p>
-          </div>
+          <SectionHeader
+            kicker="FAQs"
+            title="Frequently Asked Questions"
+            subtitle="Get answers to common questions about our tile and slate roofing services."
+          />
 
           <div className="max-w-3xl mx-auto space-y-4">
             {faqs.map((faq, index) => (
@@ -292,12 +289,11 @@ export default function TileSlateRoofingPage() {
 
       <section className="section-padding bg-white">
         <div className="container-custom text-center px-2">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-brand-navy mb-3 sm:mb-4">
-            Ready to Start Your Roofing Project?
-          </h2>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 mb-6 sm:mb-8 max-w-2xl mx-auto px-2">
-            Get a free, no-obligation quote for your tile or slate roofing project
-          </p>
+          <SectionHeader
+            kicker="Get Started"
+            title="Ready to Start Your Roofing Project?"
+            subtitle="Get a free, no-obligation quote for your tile or slate roofing project"
+          />
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
             <QuoteForm trigger={
               <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">
