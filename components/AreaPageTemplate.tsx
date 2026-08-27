@@ -1,9 +1,7 @@
 import Link from 'next/link';
 import { StickyMobileCta } from '@/components/StickyMobileCta';
-import { CheckCircle, MapPin } from 'lucide-react';
-import { GeoEntityCitation } from '@/components/GeoEntityCitation';
+import { MapPin } from 'lucide-react';
 import { ReviewsSection } from '@/components/ReviewsSection';
-import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
 import { AreaHero } from '@/components/AreaHero';
 import { TrustBadgeGrid, InspectionChecklist, FinalCta } from '@/components/SpecialOfferSections';
@@ -36,6 +34,37 @@ interface AreaPageProps {
 }
 
 export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyResponseTime, intro, localContext, roofingChallenges, landmarks, propertyTypes, commonProblems, proofPoint, ctaLine, faqs, nearbyAreas }: AreaPageProps) {
+  // Migrate long-form local prose into structured FAQ items so the page body
+  // carries no redundant text duplication (directive #2). These derived FAQs
+  // also flow into the FAQPage JSON-LD below.
+  const allFaqs: AreaFAQ[] = [...faqs];
+
+  if (propertyTypes && propertyTypes.length > 0) {
+    allFaqs.push({
+      q: `What types of roofs do you work on in ${town}?`,
+      a: `We cover every property type in ${town}, including ${propertyTypes.join(', ').toLowerCase()}.`,
+    });
+  }
+
+  if (roofingChallenges) {
+    allFaqs.push({
+      q: `How do local weather conditions affect roofs in ${town}?`,
+      a: `${roofingChallenges}`,
+    });
+  }
+
+  if (landmarks && landmarks.length > 0) {
+    allFaqs.push({
+      q: `Which parts of ${town} do you cover?`,
+      a: `We cover the whole of ${town} and the surrounding area, including ${landmarks.join(', ')}.`,
+    });
+  }
+
+  allFaqs.push({
+    q: 'Are you insured and guaranteed?',
+    a: 'Yes. Upgrade Roofs is CORC certified and holds £10 million public liability insurance. Every job is covered by a 10-year workmanship guarantee. We are based at 20 Crewe Road, Sandbach CW11 4NE, and cover Cheshire and the surrounding area.',
+  });
+
   return (
     <div className="min-h-screen bg-white">
       {/* 1. Hero + LeadFormWizard */}
@@ -43,59 +72,6 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
 
       {/* 2. Trust Badge Grid */}
       <TrustBadgeGrid />
-
-      {/* GEO Entity Citation · dense, quotable business entity for AI answer engines */}
-      <GeoEntityCitation town={town} postcode={postcode} />
-
-      {/* Trust Bar */}
-      <AuthorityBar />
-
-      {/* 3. Prose & postcodes · bespoke local context, landmarks, property types, common problems */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="max-w-4xl mx-auto">
-            <SectionHeader
-              align="left"
-              kicker={`Roofing · ${town}`}
-              title={<>Professional Roofing in <span className="text-brand-orange">{town}</span></>}
-              className="mb-6"
-            />
-            <div className="text-gray-600 leading-relaxed space-y-4 text-lg">
-              <p>{localContext}</p>
-              <p>{roofingChallenges}</p>
-            </div>
-            {/* Landmarks & Property Types */}
-            {(landmarks?.length || propertyTypes?.length) && (
-              <div className="grid sm:grid-cols-2 gap-6 mt-8">
-                {landmarks && landmarks.length > 0 && (
-                  <div className="bg-gray-50 p-6 border-l-4 border-brand-orange">
-                    <h3 className="text-lg font-bold text-brand-navy mb-3">Areas We Cover in {town}</h3>
-                    <ul className="space-y-2">
-                      {landmarks.map((l, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                          <MapPin className="w-4 h-4 text-brand-orange flex-shrink-0 mt-0.5" />{l}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {propertyTypes && propertyTypes.length > 0 && (
-                  <div className="bg-gray-50 p-6 border-l-4 border-brand-orange">
-                    <h3 className="text-lg font-bold text-brand-navy mb-3">Property Types in {town}</h3>
-                    <ul className="space-y-2">
-                      {propertyTypes.map((p, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                          <CheckCircle className="w-4 h-4 text-brand-orange flex-shrink-0 mt-0.5" />{p}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
 
       {/* Common Local Roofing Problems */}
       {commonProblems && commonProblems.length > 0 && (
@@ -128,7 +104,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
           <div className="max-w-3xl mx-auto">
             <SectionHeader kicker="Frequently Asked Questions" title={<>Roofing Questions · {town}</>} />
             <div className="space-y-4">
-              {faqs.map((faq, i) => (
+              {allFaqs.map((faq, i) => (
                 <details key={i} className="bg-white border border-gray-300 border-l-4 border-l-brand-orange">
                   <summary className="p-5 cursor-pointer font-semibold text-brand-navy hover:text-brand-orange transition-colors flex items-center justify-between">
                     {faq.q}
@@ -191,7 +167,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
-            mainEntity: faqs.map(faq => ({
+            mainEntity: allFaqs.map(faq => ({
               '@type': 'Question',
               name: faq.q,
               acceptedAnswer: { '@type': 'Answer', text: faq.a }
@@ -208,7 +184,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
             '@type': 'WebPage',
             speakable: {
               '@type': 'SpeakableSpecification',
-              cssSelector: ['#entity-citation', 'h1'],
+              cssSelector: ['h1'],
             },
             isPartOf: { '@id': 'https://www.upgraderoofs.co.uk/#website' },
           })

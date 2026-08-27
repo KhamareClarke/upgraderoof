@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { CheckCircle, Award, Clock, Shield } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { QuoteForm } from '@/components/QuoteForm';
+import { ServiceLeadForm } from '@/components/ServiceLeadForm';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { SectionHeader } from '@/components/SectionHeader';
@@ -36,24 +35,9 @@ export default function SkylightsRoofWindowsPage() {
               Transform your home with natural light and expert installation
             </p>
             <div className="flex flex-col items-center sm:items-start gap-2">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto">
-                  Get Free Quote
-                </Button>
-              } />
+              <ServiceLeadForm serviceName="Skylights & Roof Windows" />
               <CtaSubMessage dark />
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* AEO Answer Block */}
-      <section id="answer" className="bg-gray-50 border-b-2 border-brand-orange/20 py-6">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-base font-semibold text-brand-navy leading-relaxed">
-              <strong>Upgrade Roofs installs skylights and roof windows across Cheshire</strong> including Velux, fixed, and opening units on both pitched and flat roofs. VELUX-approved installers with fully watertight manufacturer flashing fitted. 10-year workmanship guarantee plus manufacturer warranty, free written quotes. Serving Sandbach, Crewe, Middlewich, Congleton, Nantwich, Alsager, and Holmes Chapel.
-            </p>
           </div>
         </div>
       </section>

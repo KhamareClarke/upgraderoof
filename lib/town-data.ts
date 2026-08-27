@@ -48,7 +48,7 @@ export const townData: Record<string, TownData> = {
     distanceFromBase: '4 miles from our Sandbach base',
     emergencyResponseTime: '30\u201345 minutes',
     intro:
-      `Upgrade Roofs provides professional roofing services across Crewe and the surrounding area. Based just 4 miles away in Sandbach, we\u2019re one of the closest qualified roofing contractors serving Crewe \u2014 with same-day inspections available for most enquiries.`,
+      `Upgrade Roofs covers Crewe and the surrounding area from our base just 4 miles away in Sandbach. Same-day inspections available on most enquiries.`,
     localContext:
       'Crewe has a diverse mix of property types, from Victorian terraces around Nantwich Road and Edleston Road to post-war council housing and newer developments at Leighton West and Sydney. Each property style brings different roofing requirements, and our team has extensive experience working on all of them. We regularly carry out roof repairs, re-roofing, and flat roof replacements across the CW1 and CW2 postcode areas.',
     roofingChallenges:
@@ -84,7 +84,7 @@ export const townData: Record<string, TownData> = {
     distanceFromBase: '3 miles from our Sandbach base',
     emergencyResponseTime: '20\u201330 minutes',
     intro:
-      `Upgrade Roofs is one of the closest professional roofing contractors to Middlewich \u2014 based just minutes away in Sandbach. We\u2019ve been looking after roofs across Middlewich for over 25 years, from the older properties around Wheelock Street to newer builds on the outskirts of town.`,
+      `Upgrade Roofs is one of the closest roofers to Middlewich, based minutes away in Sandbach. We've covered roofs here for over 25 years.`,
     localContext:
       'Middlewich sits at the junction of three canals and has a rich history reflected in its housing stock. The town centre features a mix of period properties requiring careful roofing attention, while estates around Cledford and Kinderton offer more modern roofing requirements. Our team works across all CW10 postcodes and regularly completes re-roofing, repair, and flat roof projects throughout the town.',
     roofingChallenges:
@@ -120,7 +120,7 @@ export const townData: Record<string, TownData> = {
     distanceFromBase: '6 miles from our Sandbach base',
     emergencyResponseTime: '30\u201345 minutes',
     intro:
-      `Upgrade Roofs provides expert roofing across Congleton and the surrounding villages. Based in nearby Sandbach, we\u2019ve been working on Congleton properties for over 25 years \u2014 from the historic town centre to modern developments along the A534 and A536 corridors.`,
+      `Upgrade Roofs covers Congleton and the surrounding villages from our base in nearby Sandbach. We've worked on Congleton properties for over 25 years.`,
     localContext:
       `Congleton\u2019s position on the edge of the Cheshire Plain, where it meets the foothills of the Pennines, gives the town a unique housing character. The older centre around High Street and Lawton Street features period properties with traditional slate and tile roofs, while estates at Mossley, West Heath, and Buglawton present a mix of 20th-century housing styles. We work across all CW12 postcodes and understand the roofing needs specific to each part of town.`,
     roofingChallenges:
@@ -156,7 +156,7 @@ export const townData: Record<string, TownData> = {
     distanceFromBase: '8 miles from our Sandbach base',
     emergencyResponseTime: '30\u201345 minutes',
     intro:
-      'Upgrade Roofs delivers expert roofing services to homeowners across Nantwich and the surrounding countryside. Based in Sandbach, just 8 miles away, we combine fast local response times with over 25 years of professional roofing experience.',
+      'Upgrade Roofs covers Nantwich and the surrounding countryside from Sandbach, just 8 miles away. Over 25 years of roofing experience across Cheshire.',
     localContext:
       `Nantwich is one of Cheshire\u2019s most architecturally distinctive towns. The centre is home to over 150 listed buildings, many with original timber-frame construction and period roofing. Beyond the historic core, areas like Stapeley, Willaston, and the Barony estate feature a range of housing from Georgian through to modern builds. We work across all CW5 postcodes and have completed roofing projects on properties of every age and style in the Nantwich area.`,
     roofingChallenges:
@@ -192,7 +192,7 @@ export const townData: Record<string, TownData> = {
     distanceFromBase: '5 miles from our Sandbach base',
     emergencyResponseTime: '25\u201335 minutes',
     intro:
-      'Upgrade Roofs provides reliable, professional roofing services to homeowners across Alsager. Based in Sandbach \u2014 just 5 miles away \u2014 we offer fast response times and over 25 years of hands-on roofing experience in this part of Cheshire.',
+      'Upgrade Roofs covers Alsager from Sandbach, just 5 miles away. Fast response times and over 25 years of roofing experience.',
     localContext:
       `Alsager is a well-established residential town with a housing stock that ranges from pre-war semis around Crewe Road and Sandbach Road to modern family estates at Radway Green and Oakhanger. The town\u2019s popularity with families and retirees means roofing standards here matter \u2014 people invest in their properties and expect quality workmanship. We\u2019ve completed hundreds of projects across the ST7 postcode area, including full re-roofs, flat roof replacements, chimney repairs, and emergency call-outs.`,
     roofingChallenges:
@@ -227,7 +227,7 @@ export const townData: Record<string, TownData> = {
     postcode: 'CW7',
     distanceFromBase: '8 miles from our Sandbach base',
     emergencyResponseTime: '20–35 minutes',
-    intro: 'Upgrade Roofs provides professional roofing services across Winsford and the CW7 postcode area. Based in Sandbach, just 8 miles away, we offer fast response times and over 25 years of roofing experience across Cheshire.',
+    intro: 'Upgrade Roofs covers Winsford and the CW7 postcode area from Sandbach, just 8 miles away. Over 25 years of roofing experience across Cheshire.',
     localContext: "Winsford is one of Cheshire's largest towns, with a significant proportion of post-war and 1970s–1980s housing. The Swanlow, Dene, and Grange estates are home to large numbers of semi-detached and terraced properties, many of which now have roofs approaching the end of their serviceable life. More recently developed areas around Wharton and the Dingle also feature newer housing stock. We regularly complete re-roofs, flat roof replacements, and repair work across the CW7 postcode.",
     roofingChallenges: "Winsford's former salt mining heritage can cause ground movement that affects roof structures and alignment in some parts of the town. Many 1970s and 1980s properties have concrete interlocking tiles that are now deteriorating — showing signs of cracking, moss growth, and broken fixings. We assess these issues on every visit and recommend the most cost-effective solution, whether that is targeted repair or full re-roofing with modern materials.",
     landmarks: ['Swanlow', 'Dene Drive', 'Wharton', 'The Grange', 'Winsford town centre'],
@@ -260,7 +260,7 @@ export const townData: Record<string, TownData> = {
     postcode: 'CW8 / CW9',
     distanceFromBase: '13 miles from our Sandbach base',
     emergencyResponseTime: '30–45 minutes',
-    intro: 'Upgrade Roofs delivers expert roofing services across Northwich and the surrounding CW8 and CW9 postcode areas. Based in Sandbach, 13 miles away, our CORC-certified team offers professional roofing for all property types across the Northwich area.',
+    intro: 'Upgrade Roofs covers Northwich and the CW8 and CW9 postcode areas from Sandbach, 13 miles away. CORC-certified roofing for all property types.',
     localContext: "Northwich has a rich architectural heritage shaped by its salt mining past. The town centre and areas such as Witton, Castle, and Hartford feature Victorian and Edwardian terraces alongside newer developments. Winnington and Barnton to the north include more post-war housing stock, while the riverside areas around the Weaver Navigation have a mix of period and converted properties. We work across all CW8 and CW9 postcodes and regularly complete roof repairs, re-roofing projects, and flat roof installations across the town.",
     roofingChallenges: "Like much of mid-Cheshire, Northwich has a subsidence risk from historic brine extraction — one of the most significant in England. Properties in certain areas can experience gradual settlement that affects roof structures and flashings over time. We inspect for these issues and specify materials and fixings that accommodate movement. Older properties in Northwich also frequently have original slate roofs that require specialist knowledge to maintain or replace sensitively.",
     landmarks: ['Hartford', 'Winnington', 'Barnton', 'Witton', 'Northwich town centre', 'Anderton Boat Lift area'],
@@ -293,7 +293,7 @@ export const townData: Record<string, TownData> = {
     postcode: 'SK10 / SK11',
     distanceFromBase: '15 miles from our Sandbach base',
     emergencyResponseTime: '35–50 minutes',
-    intro: "Upgrade Roofs provides professional roofing services across Macclesfield and the surrounding SK10 and SK11 postcode areas. A former silk industry town set on the edge of the Pennines, Macclesfield's diverse housing stock — from Victorian terraces to modern estates — presents a wide range of roofing requirements that our experienced team handles with care.",
+    intro: "Upgrade Roofs covers Macclesfield and the SK10 and SK11 postcode areas. We handle the town's mix of Victorian terraces and modern estates.",
     localContext: "Macclesfield sits at the foot of the Pennines at an elevation of 150–200 metres, making it one of the more exposed towns in Cheshire. The town centre and areas such as Hurdsfield, Moss Rose, and Tytherington feature Victorian and Edwardian terraces alongside mid-20th-century estates. The affluent areas of Prestbury and Bollington on the outskirts have higher-value properties with period and listed buildings requiring specialist attention. We work across all SK10 and SK11 postcodes and regularly complete re-roofs, storm damage repairs, and slate restorations across the Macclesfield area.",
     roofingChallenges: "Macclesfield's elevated position and proximity to the Pennines means properties here experience significantly more wind and rainfall than lower-lying Cheshire towns. Exposed ridge tiles, verge pointing, and lead flashings take a heavy weathering load, particularly on east- and north-facing roof slopes. We specify fixings rated for higher wind loads, dry ridge and verge systems where appropriate, and robust flashing details to ensure Macclesfield roofs perform long-term against the local conditions.",
     landmarks: ['Hurdsfield', 'Moss Rose', 'Tytherington', 'Prestbury', 'Bollington', 'Macclesfield town centre'],
@@ -326,7 +326,7 @@ export const townData: Record<string, TownData> = {
     postcode: 'WA16',
     distanceFromBase: '17 miles from our Sandbach base',
     emergencyResponseTime: '40–55 minutes',
-    intro: "Upgrade Roofs provides expert roofing services to homeowners across Knutsford and the WA16 postcode area. One of Cheshire's most prestigious towns, Knutsford combines Georgian architecture, conservation area properties, and substantial modern homes — all requiring high-quality, care-focused roofing from an experienced contractor.",
+    intro: "Upgrade Roofs covers Knutsford and the WA16 postcode area. From Georgian homes to modern properties, we match the standard of the town's architecture.",
     localContext: "Knutsford is renowned for its Georgian and Victorian architecture, with a well-preserved town centre that contains numerous listed buildings and conservation area properties. Areas such as the King Street conservation zone, Legh Road, and the surrounding residential roads feature high-value detached and semi-detached properties. Nearby Toft and Ollerton have larger estate properties. Tatton Park borders the town to the east. Our team has experience working on high-value properties and understands the care required when working on Knutsford's most distinctive homes.",
     roofingChallenges: "Working in Knutsford often means meeting strict planning and conservation requirements. Many properties in the town centre are listed or sit within a conservation area, requiring specialist materials — natural Welsh slate, handmade clay tiles, and lime-based mortars — and sensitive working methods. We always advise on the correct materials and can liaise with planning departments where required. For modern properties, the flat agricultural plain around Knutsford also means roofs face unobstructed wind-driven rain from the west.",
     landmarks: ['King Street', 'Legh Road', 'Toft', 'Ollerton', 'Tatton Park area', 'Knutsford town centre'],
@@ -359,7 +359,7 @@ export const townData: Record<string, TownData> = {
     postcode: 'CW6',
     distanceFromBase: '15 miles from our Sandbach base',
     emergencyResponseTime: '35–50 minutes',
-    intro: "Upgrade Roofs provides expert roofing services to homeowners and businesses in Tarporley and the CW6 postcode area. This affluent Cheshire market town is home to a range of period and listed properties alongside substantial modern homes — all requiring skilled, respectful roofing that matches the character of the area.",
+    intro: "Upgrade Roofs covers Tarporley and the CW6 postcode area. We match period and listed properties with respectful roofing.",
     localContext: "Tarporley is a well-preserved Cheshire market town with a Georgian and Victorian heritage. High Street and its surrounding streets include listed and period buildings, while the wider CW6 area encompasses villages such as Bunbury, Beeston, and Peckforton, many of which have older farmhouses, cottages, and barns. The rural landscape around Tarporley means many properties are fully exposed to weather from the west. Our team works across the full CW6 postcode area and has completed roofing projects on properties ranging from straightforward repairs to full heritage re-roofs.",
     roofingChallenges: "Many Tarporley properties are in conservation areas or are listed, requiring careful selection of materials and methods. We regularly work with natural slate, traditional clay tiles, and lime mortars to ensure repairs and re-roofs are appropriate for their surroundings. The rural and exposed setting around Tarporley also means roofs need to be robustly weatherproofed, particularly on western-facing elevations where wind-driven rain is most intense.",
     landmarks: ['Tarporley High Street', 'Bunbury', 'Beeston', 'Peckforton', 'Tarporley town centre'],
@@ -392,7 +392,7 @@ export const townData: Record<string, TownData> = {
     postcode: 'ST8',
     distanceFromBase: '12 miles from our Sandbach base',
     emergencyResponseTime: '30–40 minutes',
-    intro: "Upgrade Roofs provides professional roofing services across Biddulph and the ST8 postcode area. Set on the Staffordshire Moorlands at around 200 metres above sea level, Biddulph is one of the more exposed towns in the area — and one where a reliable, locally-based roofer makes a real difference.",
+    intro: "Upgrade Roofs covers Biddulph and the ST8 postcode area. A reliable local roofer matters in these exposed Moorlands conditions.",
     localContext: "Biddulph is a former coal and textile town that retains a strong community and a predominantly Victorian and Edwardian housing stock, particularly around the town centre and Biddulph Moor. Newer estates extend across the lower flanks of the valley. The town's elevated position means roofs here experience higher wind speeds and heavier rainfall than the Cheshire Plain below. We work across the ST8 postcode and regularly complete re-roofs, storm damage repairs, and preventive maintenance work across Biddulph.",
     roofingChallenges: "Biddulph's position on the Staffordshire Moorlands means roofs here are among the most exposed in our service area. Strong winds accelerate the deterioration of ridge and hip tiles, mortar joints, and lead flashings. Frost action also creates more movement in pointing and tile fixings than at lower elevations. We always specify fixings and systems rated for the conditions at Biddulph, and we use dry ridge systems wherever possible to eliminate the mortar failure that is so common on exposed moorland properties.",
     landmarks: ['Biddulph Moor', 'Gillow Heath', 'Brown Lees', 'Biddulph town centre', 'Knypersley'],
@@ -425,7 +425,7 @@ export const townData: Record<string, TownData> = {
     postcode: 'ST5',
     distanceFromBase: '14 miles from our Sandbach base',
     emergencyResponseTime: '30–45 minutes',
-    intro: 'Upgrade Roofs provides expert roofing services to homeowners and businesses across Newcastle-under-Lyme and the ST5 postcode area. This large Staffordshire town has a diverse range of housing from Victorian terraces to post-war estates and modern developments, and our team has the experience to work on all of them.',
+    intro: 'Upgrade Roofs covers Newcastle-under-Lyme and the ST5 postcode area. We work on every property type, from Victorian terraces to modern developments.',
     localContext: "Newcastle-under-Lyme is a large town with a long history as a market and commercial centre. The town features Victorian and Edwardian terraces around the town centre, substantial post-war housing across areas such as Porthill, Westlands, and Silverdale, and more modern developments on the outskirts. The town is adjacent to Stoke-on-Trent and serves a substantial residential and commercial market. We cover all ST5 postcodes and regularly carry out roof repairs, re-roofing projects, and flat roof work across Newcastle-under-Lyme.",
     roofingChallenges: "Newcastle-under-Lyme has a mix of properties from different eras, each with its own roofing characteristics. The older Victorian stock often has original slate that is reaching the end of its life; post-war properties typically have concrete interlocking tiles that are also ageing. The town has a slightly higher elevation and rainfall than the Cheshire Plain, meaning roofs require robust detailing. We assess every property individually and specify materials and methods appropriate for the age and condition of each roof.",
     landmarks: ['Porthill', 'Westlands', 'Silverdale', 'Keele', 'Newcastle-under-Lyme town centre'],
@@ -458,7 +458,7 @@ export const townData: Record<string, TownData> = {
     postcode: 'SK9',
     distanceFromBase: '18 miles from our Sandbach base',
     emergencyResponseTime: '40–55 minutes',
-    intro: "Upgrade Roofs delivers expert roofing services to homeowners across Wilmslow and the SK9 postcode area. One of Cheshire’s most sought-after addresses, Wilmslow is home to substantial detached properties and high-quality homes where craftsmanship and material quality are rightly expected to match the standard of the properties themselves.",
+    intro: "Upgrade Roofs covers Wilmslow and the SK9 postcode area. Craftsmanship and materials matched to the town's high-quality homes.",
     localContext: "Wilmslow is a prosperous Cheshire town known for its executive housing, tree-lined roads, and proximity to Manchester Airport. Areas such as Alderley Edge (adjacent), Hale, and the roads around the town centre feature large detached and semi-detached properties, often with more complex roof geometry than standard housing estates. Conservation areas exist around the older parts of the town. We work across the SK9 postcode and bring the same standards of workmanship and material quality to Wilmslow that the town's homeowners expect from every tradesperson they employ.",
     roofingChallenges: "Wilmslow's large detached properties often have complex roof geometry — multiple hips, valleys, dormers, and roof windows — which creates more potential leak points and demands higher levels of craft skill. Many properties also have large flat roof sections over extensions and garages. The relatively high value of these properties means the cost of a poor-quality roof job, or a delay in addressing problems, is disproportionately high. We take a thorough, detail-oriented approach to every Wilmslow project.",
     landmarks: ['Alderley Edge', 'Hale', 'Handforth', 'Dean Row', 'Wilmslow town centre'],
@@ -492,7 +492,7 @@ export const townData: Record<string, TownData> = {
     distanceFromBase: '4 miles from our Sandbach base',
     emergencyResponseTime: '20\u201330 minutes',
     intro:
-      `Upgrade Roofs serves Holmes Chapel with the same professional roofing standard we\u2019ve delivered across Cheshire for over 25 years. Based just 4 miles away in Sandbach, we\u2019re ideally placed to provide fast, reliable roofing services to this thriving village community.`,
+      `Upgrade Roofs covers Holmes Chapel from Sandbach, just 4 miles away. Fast, reliable roofing for this thriving village.`,
     localContext:
       `Holmes Chapel is one of south Cheshire\u2019s most desirable villages, with a strong community and well-maintained housing stock. The village features attractive period cottages along Station Road and London Road, substantial family homes around Macclesfield Road and Middlewich Road, and newer developments on the village outskirts. We regularly carry out roofing work across the CW4 postcode area, from straightforward repairs to complete re-roofing projects on larger detached properties.`,
     roofingChallenges:
@@ -528,7 +528,7 @@ export const townData: Record<string, TownData> = {
     distanceFromBase: 'our home town — based in Sandbach',
     emergencyResponseTime: '15–20 minutes',
     intro:
-      'Upgrade Roofs is based right here in Sandbach. As your local roofer we know the area, the properties, and the conditions that affect roofs in CW11 better than anyone. From the historic cobbles of the town centre to the newer estates at Sandbach Heath, we look after roofs across the whole town.',
+      'Upgrade Roofs is based right here in Sandbach. We know CW11 roofs better than anyone, from the town centre to Sandbach Heath.',
     localContext:
       'Sandbach is a market town with a proud heritage, and its housing stock reflects that — from Georgian and Victorian properties in the town centre to 1960s–80s estates and modern new-builds on the edges of town. The market square, Saxon Crosses, and surrounding farmland are all landmarks we pass on the way to jobs every day. Our team has completed hundreds of roofing projects across CW11, giving us unmatched knowledge of the local stock.',
     roofingChallenges:

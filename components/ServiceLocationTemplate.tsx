@@ -1,8 +1,5 @@
 import Link from 'next/link';
-import { PHONE_DISPLAY } from '@/lib/contact';
-import { Button } from '@/components/ui/button';
-import { QuoteForm } from '@/components/QuoteForm';
-import { CheckCircle, MapPin, ShieldCheck, CalendarClock, Star, ArrowRight } from 'lucide-react';
+import { CheckCircle, MapPin, Star, ArrowRight } from 'lucide-react';
 import type { ServiceData } from '@/lib/service-data';
 import type { TownData } from '@/lib/town-data';
 import { services } from '@/lib/service-data';
@@ -10,9 +7,8 @@ import { generateServiceLocationFaqs, buildServiceTownSolution } from '@/lib/ser
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
-import { HeroKicker } from '@/components/HeroKicker';
-import { CtaSubMessage } from '@/components/CtaSubMessage';
-import { TrustBadgeGrid } from '@/components/SpecialOfferSections';
+import { ServiceHero } from '@/components/ServiceHero';
+import { TrustBadgeGrid, InspectionChecklist, FinalCta } from '@/components/SpecialOfferSections';
 
 interface ServiceLocationTemplateProps {
   service: ServiceData;
@@ -94,73 +90,14 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero */}
-      <section className="relative py-16 sm:py-20 md:py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/images/6.jpeg)' }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-navy/90 via-brand-navy/80 to-brand-navy/70" />
-        </div>
-        <div className="container-custom relative z-10">
-          <div className="max-w-3xl text-white space-y-5">
-            <HeroKicker light>Free Roof Inspection · {town.town}</HeroKicker>
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
-              {service.name} in <span className="text-brand-orange">{town.town}</span>
-            </h1>
-            <p className="text-lg sm:text-xl text-white/90 max-w-2xl leading-relaxed">
-              Expert {service.name.toLowerCase()} from your local Cheshire roofers. {town.distanceFromBase} · fast response, free quotes, 10-year guarantee.
-            </p>
+      {/* 1. Hero + LeadFormWizard */}
+      <ServiceHero service={service} town={town} />
 
-            {/* Call-first highlight box */}
-            <div className="bg-white/10 backdrop-blur-sm border-l-4 border-brand-orange p-6 text-left max-w-md">
-              <div className="text-3xl sm:text-4xl font-bold text-brand-orange mb-1">{PHONE_DISPLAY}</div>
-              <div className="text-lg font-semibold">We Answer in 30 Seconds!</div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <div className="flex flex-col items-center sm:items-start gap-2">
-                <QuoteForm trigger={
-                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14 text-lg rounded-xl">
-                    <span className="!text-white">Get Your Free Inspection</span>
-                  </Button>
-                } />
-                <CtaSubMessage dark />
-              </div>
-            </div>
-
-            {/* Trust indicators */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-white/20 max-w-md">
-              <div className="text-center">
-                <ShieldCheck className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
-                <div className="text-xs font-semibold">£10M Public Liability Insured</div>
-              </div>
-              <div className="text-center">
-                <Star className="w-7 h-7 text-yellow-400 fill-current mx-auto mb-1.5" />
-                <div className="text-xs font-semibold">5-Star Google · MyApproved Verified</div>
-              </div>
-              <div className="text-center">
-                <CalendarClock className="w-7 h-7 text-brand-orange mx-auto mb-1.5" />
-                <div className="text-xs font-semibold">Same Day Response</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* AEO Answer Block */}
-      <section id="answer" className="bg-gray-50 border-b-2 border-brand-orange/20 py-6">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-base font-semibold text-brand-navy leading-relaxed">
-              <strong>Upgrade Roofs provides expert {service.name.toLowerCase()} in {town.town} ({town.postcode}).</strong>{' '}
-              {buildServiceTownSolution(service, town).split('.')[0]}. {town.distanceFromBase} · emergency response within {town.emergencyResponseTime}. CORC certified, £10M insured, 10-year workmanship guarantee, free written quotes.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* 2. Trust Badge Grid */}
+      <TrustBadgeGrid />
 
       {/* Trust Bar */}
       <AuthorityBar />
-
-      <TrustBadgeGrid />
 
       {/* Main Content */}
       <section className="section-padding">
@@ -214,18 +151,13 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
                   <span className="text-gray-700 text-sm">{TRUST_ANGLE[(pickTrustAngle(town.slug) + 2) % TRUST_ANGLE.length]}</span>
                 </li>
               </ul>
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <QuoteForm trigger={
-                  <Button className="w-full bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold h-12 text-base rounded-xl">
-                    <span className="!text-white">Get Free {service.name} Quote</span>
-                  </Button>
-                } />
-                <CtaSubMessage className="mt-2.5" />
-              </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* 4. Inspection Checklist */}
+      <InspectionChecklist />
 
       {/* FAQs */}
       <section className="section-padding bg-gray-50">
@@ -318,35 +250,12 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">
-        <div className="container-custom text-center">
-          <SectionHeader
-            dark
-            kicker="Free Inspection"
-            title={<>Need {service.name} in {town.town}?</>}
-          />
-          <p className="text-xl mb-2 max-w-2xl mx-auto">
-            {town.ctaLine || `Get a free, no-obligation quote. We'll inspect and provide a clear written price.`}
-          </p>
-          <p className="text-lg mb-8 max-w-2xl mx-auto text-white/80">
-            We'll call you within 10 minutes to confirm your booking.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <div className="flex flex-col items-center gap-2">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-xl">
-                  <span className="!text-white">Get Your Free Inspection</span>
-                </Button>
-              } />
-              <CtaSubMessage dark />
-            </div>
-          </div>
-          <p className="text-white/60 text-sm mt-6">
-            Based in Sandbach · Serving {town.town} & all of Cheshire · Call: {PHONE_DISPLAY}
-          </p>
-        </div>
-      </section>
+      {/* 5. Final CTA */}
+      <FinalCta
+        kicker="Free Inspection"
+        title={<>Need {service.name} in {town.town}?</>}
+        subtitle={town.ctaLine || `Get a free, no-obligation quote. We'll inspect and provide a clear written price.`}
+      />
 
       {/* Schema */}
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }} />
