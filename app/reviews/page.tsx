@@ -7,6 +7,7 @@ import { VideoTestimonials } from '@/components/VideoTestimonials';
 import { supabase, type Testimonial } from '@/lib/supabase';
 import { ReviewCardSkeleton } from '@/components/LoadingSkeletons';
 import { SectionHeader } from '@/components/SectionHeader';
+import { HeroKicker } from '@/components/HeroKicker';
 
 export default function ReviewsPage() {
   const [reviews, setReviews] = useState<Testimonial[]>([]);
@@ -44,10 +45,7 @@ export default function ReviewsPage() {
         </div>
 
         <div className="container-custom relative z-10 text-center px-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium">
-            <Star className="w-3 h-3 sm:w-4 sm:h-4 fill-current" />
-            <span>5 Star Rated</span>
-          </div>
+          <HeroKicker light align="center" className="mb-3 sm:mb-4">5 Star Rated</HeroKicker>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 px-2">Customer Reviews</h1>
           <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto px-2">
             See what our customers say about our roofing services

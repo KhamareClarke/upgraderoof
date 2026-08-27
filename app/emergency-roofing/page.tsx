@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { Zap, Phone, CheckCircle, Clock, Shield, AlertTriangle, MapPin, ArrowRight, Star } from 'lucide-react';
+import { HeroKicker } from '@/components/HeroKicker';
 import Link from 'next/link';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
@@ -60,10 +61,7 @@ export default function EmergencyRoofingPage() {
       <section className="relative py-20 bg-gradient-to-r from-red-900 via-red-800 to-brand-navy">
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
-              <AlertTriangle className="w-4 h-4 text-brand-orange animate-pulse" />
-              <span>24/7 Emergency Service</span>
-            </div>
+            <HeroKicker light className="mb-6">24/7 Emergency Service</HeroKicker>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
               Emergency Roofer in <span className="text-brand-orange">Sandbach</span> · 24/7
             </h1>

@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { SectionHeader } from '@/components/SectionHeader';
-
-export const dynamic = 'force-static';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 export const revalidate = false;
 
 export const metadata: Metadata = {
@@ -183,11 +182,14 @@ export default function ServicesPage() {
             title="Need a Custom Solution?"
             subtitle="Contact us for a free consultation and quote tailored to your specific requirements"
           />
-          <QuoteForm trigger={
-            <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
-              Get Free Quote
-            </Button>
-          } />
+          <div className="flex flex-col items-center gap-2">
+            <QuoteForm trigger={
+              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-14 text-base sm:text-lg w-full sm:w-auto max-w-xs sm:max-w-none mx-auto">
+                Get Free Quote
+              </Button>
+            } />
+            <CtaSubMessage dark />
+          </div>
         </div>
       </section>
     </div>

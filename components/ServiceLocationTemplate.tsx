@@ -11,6 +11,8 @@ import { generateServiceLocationFaqs, buildServiceTownSolution } from '@/lib/ser
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
+import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 interface ServiceLocationTemplateProps {
   service: ServiceData;
@@ -99,10 +101,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
         </div>
         <div className="container-custom relative z-10">
           <div className="max-w-3xl text-white space-y-5">
-            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-orange text-white font-bold">
-              <MapPin className="w-4 h-4" />
-              <span className="text-sm tracking-wide">FREE ROOF INSPECTION · {town.town.toUpperCase()}</span>
-            </div>
+            <HeroKicker light>Free Roof Inspection · {town.town}</HeroKicker>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
               {service.name} in <span className="text-brand-orange">{town.town}</span>
             </h1>
@@ -117,11 +116,14 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 pt-2">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14 text-lg rounded-xl">
-                  <span className="!text-white">Get Your Free Inspection</span>
-                </Button>
-              } />
+              <div className="flex flex-col items-center sm:items-start gap-2">
+                <QuoteForm trigger={
+                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14 text-lg rounded-xl">
+                    <span className="!text-white">Get Your Free Inspection</span>
+                  </Button>
+                } />
+                <CtaSubMessage dark />
+              </div>
               <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14 text-lg rounded-xl transition-colors" asChild>
                 <TrackedPhoneLink href={PHONE_TEL} placement="service_location_hero">
                   <PhoneCall className="w-5 h-5 mr-2" /><span className="!text-white">{PHONE_DISPLAY}</span>
@@ -221,6 +223,7 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
                     <span className="!text-white">Get Free {service.name} Quote</span>
                   </Button>
                 } />
+                <CtaSubMessage className="mt-2.5" />
               </div>
             </div>
           </div>
@@ -333,11 +336,14 @@ export function ServiceLocationTemplate({ service, town }: ServiceLocationTempla
             We'll call you within 10 minutes to confirm your booking.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <QuoteForm trigger={
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-xl">
-                <span className="!text-white">Get Your Free Inspection</span>
-              </Button>
-            } />
+            <div className="flex flex-col items-center gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-xl">
+                  <span className="!text-white">Get Your Free Inspection</span>
+                </Button>
+              } />
+              <CtaSubMessage dark />
+            </div>
             <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14 text-lg rounded-xl transition-colors" asChild>
               <TrackedPhoneLink href={PHONE_TEL} placement="service_location_cta">
                 <PhoneCall className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span>

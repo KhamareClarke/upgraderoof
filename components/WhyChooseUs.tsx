@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Check, ArrowRight } from 'lucide-react';
 import { QuoteForm } from '@/components/QuoteForm';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export function WhyChooseUs() {
   const benefits = [
@@ -55,7 +56,7 @@ export function WhyChooseUs() {
               ))}
             </div>
 
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center gap-2">
               <QuoteForm trigger={
                 <Button
                   size="lg"
@@ -65,6 +66,7 @@ export function WhyChooseUs() {
                   <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               } />
+              <CtaSubMessage dark />
             </div>
           </div>
         </div>

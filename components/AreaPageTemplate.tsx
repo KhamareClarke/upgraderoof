@@ -10,6 +10,8 @@ import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { GhlReviewsWidget } from '@/components/GhlReviewsWidget';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
+import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 interface AreaFAQ {
   q: string;
@@ -75,10 +77,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left column · headlines & trust */}
             <div className="text-white space-y-5">
-              <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-brand-orange text-white font-bold">
-                <MapPin className="w-4 h-4" />
-                <span className="text-sm tracking-wide">FREE ROOF INSPECTION · {town.toUpperCase()}</span>
-              </div>
+              <HeroKicker light>Free Roof Inspection · {town}</HeroKicker>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight">
                 Roofers in <span className="text-brand-orange">{town}</span>
               </h1>
@@ -377,11 +376,14 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
             We'll call you within 10 minutes to confirm your booking.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <QuoteForm trigger={
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-xl shadow-lg">
-                <span className="!text-white">Get Your Free Inspection</span>
-              </Button>
-            } />
+            <div className="flex flex-col items-center gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-xl shadow-lg">
+                  <span className="!text-white">Get Your Free Inspection</span>
+                </Button>
+              } />
+              <CtaSubMessage dark />
+            </div>
             <Button size="lg" variant="outline" className="!bg-transparent border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14 text-lg rounded-xl transition-colors" asChild>
               <TrackedPhoneLink href={PHONE_TEL} placement="area_page_cta"><Phone className="w-5 h-5 mr-2" /><span className="!text-white">Call Now</span></TrackedPhoneLink>
             </Button>

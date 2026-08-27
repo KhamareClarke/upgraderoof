@@ -2,12 +2,14 @@ import type { Metadata } from 'next';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
-import { Home, CheckCircle, Clock, Shield, Award, MapPin, ArrowRight, Phone, Star } from 'lucide-react';
+import { CheckCircle, Clock, Shield, Award, MapPin, ArrowRight, Phone, Star } from 'lucide-react';
+import { HeroKicker } from '@/components/HeroKicker';
 import Link from 'next/link';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
 import { NewRoofsSchema } from './schema';
 import { SectionHeader } from '@/components/SectionHeader';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -60,10 +62,7 @@ export default function NewRoofsPage() {
       <section className="relative py-20 bg-gradient-to-r from-brand-navy via-brand-navy/95 to-brand-navy/90">
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
-              <Home className="w-4 h-4 text-brand-orange" />
-              <span>Complete Installations</span>
-            </div>
+            <HeroKicker light className="mb-6">Complete Installations</HeroKicker>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6">
               New Roofs &amp; Re-Roofing in <span className="text-brand-orange">Sandbach</span>
             </h1>
@@ -71,11 +70,14 @@ export default function NewRoofsPage() {
               Complete roof replacements from our Sandbach base. Premium materials, expert craftsmanship, and a 10-year guarantee on every installation. Serving Sandbach and all of Cheshire.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
-                  Get Free Quote
-                </Button>
-              } />
+              <div className="flex flex-col items-center sm:items-start gap-2">
+                <QuoteForm trigger={
+                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
+                    Get Free Quote
+                  </Button>
+                } />
+                <CtaSubMessage dark />
+              </div>
               <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14" asChild>
                 <TrackedPhoneLink href="tel:01270897606" placement="new_roofs_hero">
                   <Phone className="w-5 h-5 mr-2" />
@@ -307,11 +309,14 @@ export default function NewRoofsPage() {
                 Call 01270 897 606
               </TrackedPhoneLink>
             </Button>
-            <QuoteForm trigger={
-              <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14">
-                Get Free Quote
-              </Button>
-            } />
+            <div className="flex flex-col items-center gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-10 h-14">
+                  Get Free Quote
+                </Button>
+              } />
+              <CtaSubMessage dark />
+            </div>
           </div>
         </div>
       </section>

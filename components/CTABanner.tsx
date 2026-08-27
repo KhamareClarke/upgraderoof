@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { ArrowRight } from 'lucide-react';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export function CTABanner() {
   return (
@@ -15,16 +16,19 @@ export function CTABanner() {
             Our team is on call around the clock. Fast, reliable roofing help across Cheshire and the North West, whenever you need it.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <Button
-              size="lg"
-              className="group bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 md:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 w-full sm:w-auto inline-flex items-center gap-2.5"
-              asChild
-            >
-              <TrackedPhoneLink href="tel:01270897606" placement="cta_banner_book" className="text-white flex items-center justify-center gap-2.5">
-                Call Now for a Free Quote
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
-              </TrackedPhoneLink>
-            </Button>
+            <div className="flex flex-col items-center gap-2">
+              <Button
+                size="lg"
+                className="group bg-brand-orange hover:bg-brand-navy-light text-white font-semibold px-7 sm:px-8 h-12 sm:h-14 md:h-14 rounded-lg shadow-lg shadow-black/20 ring-1 ring-white/10 transition-colors duration-300 w-full sm:w-auto inline-flex items-center gap-2.5"
+                asChild
+              >
+                <TrackedPhoneLink href="tel:01270897606" placement="cta_banner_book" className="text-white flex items-center justify-center gap-2.5">
+                  Call Now for a Free Quote
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </TrackedPhoneLink>
+              </Button>
+              <CtaSubMessage dark />
+            </div>
           </div>
 
           <div className="mt-6 sm:mt-7 md:mt-8 flex justify-center items-center text-white">

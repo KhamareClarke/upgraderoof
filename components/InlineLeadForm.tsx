@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { CheckCircle, Star } from 'lucide-react';
 import { trackQuoteRequest, getGclid } from '@/lib/tracking';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 /**
  * Inline lead-capture form styled on the special-offer page's right-column
@@ -187,6 +188,8 @@ export function InlineLeadForm({ town }: { town: string }) {
         >
           <span className="!text-white">{isSubmitting ? 'Submitting...' : 'Request Callback'}</span>
         </Button>
+
+        <CtaSubMessage className="!text-gray-600" />
 
         <p className="text-xs text-gray-500 text-center leading-relaxed">
           By submitting, you agree to be contacted about our services.<br />

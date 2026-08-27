@@ -6,6 +6,8 @@ import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
+import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -163,10 +165,7 @@ export default function ServiceAreasPage() {
       <section className="relative py-16 sm:py-20 bg-gradient-to-r from-brand-navy via-brand-navy/95 to-brand-navy/80">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-sm font-medium">
-              <MapPin className="w-4 h-4 text-brand-orange" />
-              <span>Based in Sandbach, Serving All of Cheshire</span>
-            </div>
+            <HeroKicker light align="center" className="mb-6">Based in Sandbach, Serving All of Cheshire</HeroKicker>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
               Roofing Service Areas Across <span className="text-brand-orange">Cheshire & Beyond</span>
             </h1>
@@ -174,11 +173,14 @@ export default function ServiceAreasPage() {
               Based in Sandbach, Upgrade Roofs serves 15 towns across Cheshire, Staffordshire, and the Pennine fringe · from Wilmslow and Knutsford in the north to Newcastle-under-Lyme in the south. Over 25 years of local experience, CORC certified, £10M insured.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
-                  Get a Free Quote
-                </Button>
-              } />
+              <div className="flex flex-col items-center gap-2">
+                <QuoteForm trigger={
+                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
+                    Get a Free Quote
+                  </Button>
+                } />
+                <CtaSubMessage dark />
+              </div>
               <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14" asChild>
                 <TrackedPhoneLink href="tel:01270897606" placement="service_areas_hero">
                   <Phone className="w-5 h-5 mr-2" />
@@ -280,11 +282,14 @@ export default function ServiceAreasPage() {
               subtitle="Based in Sandbach, we serve most of Cheshire and surrounding areas. Give us a call and we'll confirm we can help."
             />
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <QuoteForm trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
-                  Get Your Free Quote
-                </Button>
-              } />
+              <div className="flex flex-col items-center gap-2">
+                <QuoteForm trigger={
+                  <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-8 h-14">
+                    Get Your Free Quote
+                  </Button>
+                } />
+                <CtaSubMessage dark />
+              </div>
               <Button size="lg" variant="outline" className="border-2 border-white !text-white hover:bg-white/10 hover:border-brand-orange font-bold px-8 h-14" asChild>
                 <TrackedPhoneLink href="tel:01270897606" placement="service_areas_bottom_cta"><Phone className="w-5 h-5 mr-2" />01270 897 606</TrackedPhoneLink>
               </Button>

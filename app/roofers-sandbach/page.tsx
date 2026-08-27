@@ -4,6 +4,7 @@ import { QuoteForm } from '@/components/QuoteForm';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { CheckCircle, Phone, MapPin, Shield, Award, Clock, Star, ArrowRight, Home, Layers, Flame, Droplets, Zap, Wrench } from 'lucide-react';
 import { SectionHeader } from '@/components/SectionHeader';
+import { HeroKicker } from '@/components/HeroKicker';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -21,10 +22,7 @@ export default function RoofersSandbachPage() {
         </div>
         <div className="container-custom relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
-              <MapPin className="w-4 h-4 text-brand-orange" />
-              <span>Sandbach, Cheshire</span>
-            </div>
+            <HeroKicker className="mb-6">Sandbach, Cheshire</HeroKicker>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
               Trusted Roofers in <span className="text-brand-orange">Sandbach</span>
             </h1>

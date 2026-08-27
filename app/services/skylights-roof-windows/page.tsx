@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import { Sun, CheckCircle, Award, Clock, Shield } from 'lucide-react';
+import { CheckCircle, Award, Clock, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { ServiceAreaLinks } from '@/components/ServiceAreaLinks';
 import { TrackedPhoneLink } from '@/components/TrackedPhoneLink';
 import { SectionHeader } from '@/components/SectionHeader';
+import { HeroKicker } from '@/components/HeroKicker';
 
 export const metadata: Metadata = {
   title: 'Skylights & Roof Windows Cheshire | VELUX Installation | Upgrade Roofs',
@@ -28,10 +29,7 @@ export default function SkylightsRoofWindowsPage() {
 
         <div className="container-custom relative z-10 px-4">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium">
-              <Sun className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span>Natural Light</span>
-            </div>
+            <HeroKicker light className="mb-3 sm:mb-4">Natural Light</HeroKicker>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 px-2">Skylights & Roof Windows Cheshire</h1>
             <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 px-2">
               Transform your home with natural light and expert installation

@@ -11,8 +11,7 @@ import {
   MessageCircle, 
   CheckCircle, 
   Star, 
-  Shield, 
-  Award, 
+  Shield,
   Clock,
   ArrowUp
 } from 'lucide-react';
@@ -22,6 +21,7 @@ import { LocalAreaContent } from '@/components/LocalAreaContent';
 import { trackQuoteRequest, trackPhoneClick, trackWhatsAppClick, getGclid } from '@/lib/tracking';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
+import { HeroKicker } from '@/components/HeroKicker';
 
 export default function OfferSandbachPage() {
   const [mounted, setMounted] = useState(false);
@@ -134,10 +134,7 @@ export default function OfferSandbachPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-start">
             {/* Left Column - Headlines */}
             <div className="text-white space-y-4">
-              <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-orange text-white font-bold animate-pulse">
-                <Award className="w-5 h-5" />
-                <span className="text-lg">LIMITED TIME OFFER SANDBACH</span>
-              </div>
+              <HeroKicker light>Limited Time Offer · Sandbach</HeroKicker>
               
               <div className="space-y-4">
                 <h1 className="text-4xl md:text-5xl font-bold leading-tight">

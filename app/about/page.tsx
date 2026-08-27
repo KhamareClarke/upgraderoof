@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { BreadcrumbSchema } from '@/components/BreadcrumbSchema';
-import { Shield, Users, CheckCircle, Heart, Zap } from 'lucide-react';
+import { Shield, CheckCircle, Heart, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { QuoteForm } from '@/components/QuoteForm';
 import { SectionHeader } from '@/components/SectionHeader';
+import { HeroKicker } from '@/components/HeroKicker';
+import { CtaSubMessage } from '@/components/CtaSubMessage';
 
 export const metadata: Metadata = {
   title: 'About Us | Upgrade Roofs | 25+ Years Experience',
@@ -94,10 +96,7 @@ export default function AboutPage() {
         </div>
 
         <div className="container-custom relative z-10 text-center px-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium">
-            <Users className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span>Meet Our Team</span>
-          </div>
+          <HeroKicker light align="center" className="mb-3 sm:mb-4">Meet Our Team</HeroKicker>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 px-2">About Us</h1>
           <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto px-2">
             Your trusted roofing specialists in Cheshire for over 25 years
@@ -244,11 +243,14 @@ export default function AboutPage() {
             subtitle="Get a free, no-obligation quote for your roofing project today"
           />
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center max-w-md sm:max-w-none mx-auto">
-            <QuoteForm trigger={
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-13 md:h-14 text-base sm:text-lg w-full sm:w-auto">
-                Get Free Quote
-              </Button>
-            } />
+            <div className="flex flex-col items-center gap-2">
+              <QuoteForm trigger={
+                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-6 sm:px-8 md:px-10 h-12 sm:h-13 md:h-14 text-base sm:text-lg w-full sm:w-auto">
+                  Get Free Quote
+                </Button>
+              } />
+              <CtaSubMessage dark />
+            </div>
             <Button
               size="lg"
               variant="outline"

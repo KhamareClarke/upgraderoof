@@ -1,7 +1,8 @@
-import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
+import { Calendar, Clock, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { SectionHeader } from '@/components/SectionHeader';
+import { HeroKicker } from '@/components/HeroKicker';
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString('en-GB', {
@@ -125,10 +126,7 @@ export default function BlogPage() {
         </div>
 
         <div className="container-custom relative z-10 text-center px-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 mb-3 sm:mb-4 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-medium">
-            <BookOpen className="w-3 h-3 sm:w-4 sm:h-4" />
-            <span>Expert Insights</span>
-          </div>
+          <HeroKicker light align="center" className="mb-3 sm:mb-4">Expert Insights</HeroKicker>
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-4 px-2">Roofing Blog</h1>
           <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto px-2">
             Expert tips, advice, and insights from Cheshire&#39;s leading roofing specialists
