@@ -6,6 +6,7 @@ import { checkRateLimit, getClientIp, isTooFast } from '@/lib/rate-limit';
 import { invalidNameReason, invalidEmailReason } from '@/lib/lead-validation';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { logLeadSubmission } from '@/lib/lead-logger';
+import { isSpamSubmission } from '@/lib/spam-filter';
 
 const ghlOpps = require('@/lib/ghl/opportunities.js');
 
@@ -44,6 +45,16 @@ export async function POST(request: NextRequest) {
     // Honeypot check — if filled, silently return success to trick bots
     if (formData.website) {
       console.log('[spam] Honeypot triggered for contact form');
+      return NextResponse.json(
+        { success: true, message: 'Message received' },
+        { status: 200 }
+      );
+    }
+
+    // B2B / link spam filter — drop solicitation pitches and scraper artifacts
+    // silently so the sender doesn't loop, and never dispatch them to GHL/mail.
+    if (isSpamSubmission(formData)) {
+      console.log(`[spam] contact lead blocked by B2B/link filter — name="${formData.name}"`);
       return NextResponse.json(
         { success: true, message: 'Message received' },
         { status: 200 }

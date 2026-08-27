@@ -1,15 +1,12 @@
 import Link from 'next/link';
-import { PHONE_DISPLAY } from '@/lib/contact';
-import { Button } from '@/components/ui/button';
-import { QuoteForm } from '@/components/QuoteForm';
 import { StickyMobileCta } from '@/components/StickyMobileCta';
-import { CheckCircle, MapPin, ArrowRight, BrickWall, Layers, Flame, CloudRain, Zap, Hammer, Clock } from 'lucide-react';
+import { CheckCircle, MapPin } from 'lucide-react';
 import { GeoEntityCitation } from '@/components/GeoEntityCitation';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { AuthorityBar } from '@/components/AuthorityBar';
 import { SectionHeader } from '@/components/SectionHeader';
 import { AreaHero } from '@/components/AreaHero';
-import { CtaSubMessage } from '@/components/CtaSubMessage';
+import { TrustBadgeGrid, InspectionChecklist, FinalCta } from '@/components/SpecialOfferSections';
 
 interface AreaFAQ {
   q: string;
@@ -38,111 +35,22 @@ interface AreaPageProps {
   nearbyAreas: { name: string; href: string }[];
 }
 
-const QA_ANGLE = [
-  'a rapid, no-fuss solution',
-  'a reliable, long-lasting fix',
-  'a tidy, high-quality result',
-  'peace of mind backed by a written warranty',
-] as const;
-
-function pickQaAngle(town: string): number {
-  let h = 0x811c9dc5;
-  for (let i = 0; i < town.length; i += 1) {
-    h ^= town.charCodeAt(i);
-    h = Math.imul(h, 0x01000193);
-  }
-  return (h >>> 0) % QA_ANGLE.length;
-}
-
 export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyResponseTime, intro, localContext, roofingChallenges, landmarks, propertyTypes, commonProblems, proofPoint, ctaLine, faqs, nearbyAreas }: AreaPageProps) {
-  const services = [
-    { icon: BrickWall, title: 'Tile & Slate Roofing', desc: `Expert tile and slate roof installation and repair across ${town}. Traditional and modern options.`, href: '/services/tile-slate-roofing' },
-    { icon: Layers, title: 'Flat Roofing', desc: `EPDM rubber and GRP fibreglass flat roofing for ${town} properties. Up to 20-year guarantee.`, href: '/services/flat-roofing' },
-    { icon: Flame, title: 'Chimney Repairs', desc: `Chimney repointing, lead flashing, and stack repairs for ${town} homes.`, href: '/services/chimney-repairs' },
-    { icon: CloudRain, title: 'Guttering & Fascias', desc: `uPVC guttering, fascias, and soffits. Full replacements and repairs in ${town}.`, href: '/services/gutters-fascias' },
-    { icon: Hammer, title: 'Roof Repairs', desc: `Fast, reliable roof repairs for leaks, storm damage, and missing tiles in ${town}.`, href: '/roof-repairs' },
-    { icon: Zap, title: 'Emergency Roofing', desc: `24/7 emergency call-outs to ${town}. Storm damage, leaks, and urgent make-safe work.`, href: '/emergency-roofing' },
-  ];
-
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero · two-column, town-specific (mirrors special-offer hero) */}
+      {/* 1. Hero + LeadFormWizard */}
       <AreaHero town={town} intro={intro} />
 
-      {/* AEO Answer Block */}
-      <section id="answer" className="bg-gray-50 border-b-2 border-brand-orange/20 py-6">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-base font-semibold text-brand-navy leading-relaxed">
-              <strong>Upgrade Roofs provides expert roofing services in {town}, Cheshire.</strong>{' '}
-              Our CORC-certified team covers roof repairs, new roofs, flat roofing, chimney repairs, gutters, skylights, and 24/7 emergency call-outs across the {town} area. Based in Sandbach · {distanceFromBase || 'within 8 miles'} · with {QA_ANGLE[pickQaAngle(town)]} and a 10-year workmanship guarantee.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* 2. Trust Badge Grid */}
+      <TrustBadgeGrid />
 
       {/* GEO Entity Citation · dense, quotable business entity for AI answer engines */}
       <GeoEntityCitation town={town} postcode={postcode} />
 
-      {/* AEO Quick-Answer Block · direct answers to high-intent voice/AI questions */}
-      <section id="quick-answers" className="bg-white border-b border-gray-100 py-8">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto">
-            <SectionHeader kicker="Quick Answers" title={<>Roofing in {town} · Quick Answers</>} />
-            <dl className="space-y-4">
-              <div className="bg-gray-50 p-5 border-l-4 border-brand-navy">
-                <dt className="font-semibold text-brand-navy mb-1">How much does a roof repair cost in {town}?</dt>
-                <dd className="text-sm text-gray-600 leading-relaxed">
-                  Minor roof repairs in {town} (slipped tiles, ridge repointing) typically cost £150–£500. Larger repairs involving leadwork or valleys range from £500–£2,000. Upgrade Roofs provides a free, no-obligation written quote after a roof inspection.
-                </dd>
-              </div>
-              <div className="bg-gray-50 p-5 border-l-4 border-brand-navy">
-                <dt className="font-semibold text-brand-navy mb-1">Who is the best rated emergency roofer in {town}?</dt>
-                <dd className="text-sm text-gray-600 leading-relaxed">
-                  Upgrade Roofs is a 5-star rated, CORC-certified emergency roofer serving {town}, with 127+ five-star Google reviews. Based {distanceFromBase || 'nearby in Sandbach'}, the team offers 24/7 emergency call-outs{emergencyResponseTime ? ` and typically reaches ${town} within ${emergencyResponseTime}` : ''}. Call {PHONE_DISPLAY} for emergencies.
-                </dd>
-              </div>
-              <div className="bg-gray-50 p-5 border-l-4 border-brand-navy">
-                <dt className="font-semibold text-brand-navy mb-1">How long does a flat roof replacement take?</dt>
-                <dd className="text-sm text-gray-600 leading-relaxed">
-                  Most flat roof replacements in {town} (garage or extension) are completed in 1–2 days using EPDM rubber or GRP fibreglass, both backed by a 20-year waterproof guarantee. Larger or more complex flat roofs may take 2–4 days.
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </section>
-
       {/* Trust Bar */}
       <AuthorityBar />
 
-      {/* Local Proof Bar */}
-      {(postcode || distanceFromBase || proofPoint) && (
-        <section className="py-6 bg-brand-orange/5 border-b border-brand-orange/10">
-          <div className="container-custom">
-            <div className="flex flex-wrap justify-center gap-6 sm:gap-10 text-sm text-gray-700">
-              {postcode && (
-                <div className="flex items-center gap-2">
-                  <MapPin className="w-4 h-4 text-brand-orange" />
-                  <span className="font-semibold">Covering {postcode}</span>
-                </div>
-              )}
-              {distanceFromBase && (
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-brand-orange" />
-                  <span className="font-semibold">{distanceFromBase}</span>
-                  <span className="font-semibold">Emergency: {emergencyResponseTime}</span>
-                </div>
-              )}
-            </div>
-            {proofPoint && (
-              <p className="text-center text-sm font-medium text-brand-navy mt-3">{proofPoint}</p>
-            )}
-          </div>
-        </section>
-      )}
-
-      {/* Local Context */}
+      {/* 3. Prose & postcodes · bespoke local context, landmarks, property types, common problems */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-4xl mx-auto">
@@ -211,43 +119,10 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
         </section>
       )}
 
-      {/* Contextual Cross-Links */}
-      <section className="py-8 bg-white">
-        <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-gray-600 leading-relaxed text-lg">
-            <p>
-              We handle everything from <Link href="/roof-repairs" className="text-brand-orange hover:underline font-medium">urgent roof repairs</Link> and
-              <Link href="/emergency-roofing" className="text-brand-orange hover:underline font-medium"> emergency roofing</Link> call-outs to
-              complete <Link href="/new-roofs" className="text-brand-orange hover:underline font-medium">new roof installations</Link> across {town}.
-              Based in Sandbach, our team can usually reach {town} the same day. See our <Link href="/roofers-sandbach" className="text-brand-orange hover:underline font-medium">Sandbach roofing page</Link> for
-              local case studies, or browse our full <Link href="/services" className="text-brand-orange hover:underline font-medium">range of services</Link>.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* 4. Inspection Checklist */}
+      <InspectionChecklist />
 
-      {/* Services */}
-      <section className="section-padding bg-gray-50">
-        <div className="container-custom">
-          <SectionHeader kicker="Our Services" title={<>Roofing Services in {town}</>} />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((s, i) => (
-              <Link key={i} href={s.href} className="group bg-white p-6 border border-gray-300 hover:border-brand-navy transition-colors">
-                <div className="w-12 h-12 bg-brand-orange/10 flex items-center justify-center mb-4">
-                  <s.icon className="w-6 h-6 text-brand-orange" />
-                </div>
-                <h3 className="text-lg font-bold text-brand-navy mb-2 group-hover:text-brand-orange transition-colors">{s.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed mb-3">{s.desc}</p>
-                <span className="text-brand-orange font-semibold text-sm flex items-center gap-1">
-                  Learn more <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ */}
+      {/* 5. FAQs */}
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
@@ -287,28 +162,12 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
       {/* Customer Reviews */}
       <ReviewsSection reviewCta="quote" />
 
-      {/* CTA */}
-      <section className="section-padding bg-gradient-to-r from-brand-navy to-brand-navy/90 text-white">
-        <div className="container-custom text-center">
-          <SectionHeader dark kicker="Free Inspection" title={<>Need a Roofer in {town}?</>} />
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            {ctaLine || 'Get a free, no-obligation quote. We\'ll inspect your roof and provide a clear, written price.'}
-          </p>
-          <div className="flex flex-col items-center gap-2">
-            <QuoteForm
-              trigger={
-                <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 !text-white font-bold px-10 h-14 text-lg rounded-lg shadow-lg">
-                  <span className="!text-white">Get Your Free Inspection</span>
-                </Button>
-              }
-            />
-            <CtaSubMessage dark />
-          </div>
-          <p className="text-white/60 text-sm mt-6">
-            Based in Sandbach · Serving {town} & all of Cheshire · Call: {PHONE_DISPLAY}
-          </p>
-        </div>
-      </section>
+      {/* 5. Final CTA */}
+      <FinalCta
+        kicker="Free Inspection"
+        title={<>Need a Roofer in {town}?</>}
+        subtitle={ctaLine || 'Get a free, no-obligation quote. We\'ll inspect your roof and provide a clear, written price.'}
+      />
 
       {/* BreadcrumbList Schema */}
       <script
@@ -325,35 +184,18 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
           })
         }}
       />
-      {/* FAQ Schema · town FAQs + the 3 above-the-fold quick answers */}
+      {/* FAQ Schema · town FAQs only */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
-            mainEntity: [
-              {
-                '@type': 'Question',
-                name: `How much does a roof repair cost in ${town}?`,
-                acceptedAnswer: { '@type': 'Answer', text: `Minor roof repairs in ${town} (slipped tiles, ridge repointing) typically cost £150–£500. Larger repairs involving leadwork or valleys range from £500–£2,000. Upgrade Roofs provides a free, no-obligation written quote after a roof inspection.` }
-              },
-              {
-                '@type': 'Question',
-                name: `Who is the best rated emergency roofer in ${town}?`,
-                acceptedAnswer: { '@type': 'Answer', text: `Upgrade Roofs is a 5-star rated, CORC-certified emergency roofer serving ${town}, with 127+ five-star Google reviews. Based ${distanceFromBase || 'nearby in Sandbach'}, the team offers 24/7 emergency call-outs${emergencyResponseTime ? ` and typically reaches ${town} within ${emergencyResponseTime}` : ''}. Call ${PHONE_DISPLAY} for emergencies.` }
-              },
-              {
-                '@type': 'Question',
-                name: 'How long does a flat roof replacement take?',
-                acceptedAnswer: { '@type': 'Answer', text: `Most flat roof replacements in ${town} (garage or extension) are completed in 1–2 days using EPDM rubber or GRP fibreglass, both backed by a 20-year waterproof guarantee. Larger or more complex flat roofs may take 2–4 days.` }
-              },
-              ...faqs.map(faq => ({
-                '@type': 'Question',
-                name: faq.q,
-                acceptedAnswer: { '@type': 'Answer', text: faq.a }
-              }))
-            ]
+            mainEntity: faqs.map(faq => ({
+              '@type': 'Question',
+              name: faq.q,
+              acceptedAnswer: { '@type': 'Answer', text: faq.a }
+            }))
           })
         }}
       />
@@ -366,7 +208,7 @@ export function AreaPageTemplate({ town, postcode, distanceFromBase, emergencyRe
             '@type': 'WebPage',
             speakable: {
               '@type': 'SpeakableSpecification',
-              cssSelector: ['#entity-citation', '#answer', '#quick-answers', 'h1'],
+              cssSelector: ['#entity-citation', 'h1'],
             },
             isPartOf: { '@id': 'https://www.upgraderoofs.co.uk/#website' },
           })
