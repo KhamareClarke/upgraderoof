@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { QuoteForm } from '@/components/QuoteForm';
-import { CheckCircle, MapPin, Shield, Award, Clock, Star, ArrowRight, Home, Layers, Flame, Droplets, Zap, Wrench } from 'lucide-react';
+import { MapPin, Shield, Clock, Star, ArrowRight, Home, Layers, Flame, Droplets, Zap, Wrench } from 'lucide-react';
 import { SectionHeader } from '@/components/SectionHeader';
 import { HeroKicker } from '@/components/HeroKicker';
 import { CtaSubMessage } from '@/components/CtaSubMessage';
+import { TrustBadgeGrid, ServiceAreaHub, FinalCta } from '@/components/SpecialOfferSections';
 
 export const dynamic = 'force-static';
 export const revalidate = false;
@@ -42,37 +43,8 @@ export default function RoofersSandbachPage() {
         </div>
       </section>
 
-      {/* Trust Bar */}
-      <section className="bg-gray-50 py-6 border-b border-gray-200">
-        <div className="container-custom">
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-10 text-sm text-gray-700">
-            <div className="flex items-center gap-2">
-              <Award className="w-5 h-5 text-brand-orange" />
-              <span className="font-semibold">25+ Years Experience</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-brand-orange" />
-              <span className="font-semibold">£10M Insured</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-brand-orange" />
-              <span className="font-semibold">CORC Certified</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-brand-orange" />
-              <span className="font-semibold">10-Year Workmanship Guarantee</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-brand-orange" />
-              <span className="font-semibold">5-Star Google Reviews</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-5 h-5 text-brand-orange" />
-              <span className="font-semibold">24/7 Emergency Service</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Trust Bar · shared accreditation grid */}
+      <TrustBadgeGrid />
 
       {/* Main Content · Why Sandbach Trusts Us */}
       <section className="section-padding">
@@ -429,54 +401,27 @@ export default function RoofersSandbachPage() {
         </div>
       </section>
 
-      {/* Areas We Serve from Sandbach */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeader
-            kicker="Service Area"
-            title="We Also Serve These Nearby Areas"
-            subtitle="Based in Sandbach, we provide the same professional roofing service to neighbouring towns across Cheshire."
-          />
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-            {[
-              { name: 'Crewe', href: '/roofers-crewe' },
-              { name: 'Middlewich', href: '/roofers-middlewich' },
-              { name: 'Congleton', href: '/roofers-congleton' },
-              { name: 'Nantwich', href: '/roofers-nantwich' },
-              { name: 'Alsager', href: '/roofers-alsager' },
-              { name: 'Holmes Chapel', href: '/roofers-holmes-chapel' },
-            ].map((area, i) => (
-              <Link key={i} href={area.href} className="flex items-center justify-center gap-2 p-4 bg-gray-50 border border-gray-200 border-l-4 border-l-brand-navy hover:border-brand-orange/50 hover:border-l-brand-orange transition-all text-brand-navy font-semibold hover:text-brand-orange">
-                <MapPin className="w-4 h-4 text-brand-orange" />
-                {area.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Areas We Serve from Sandbach · shared internal-linking hub */}
+      <ServiceAreaHub
+        title={<>We Also Serve <span className="text-brand-orange">These Nearby Areas</span></>}
+        subtitle="Based in Sandbach, we provide the same professional roofing service to neighbouring towns across Cheshire."
+        areas={[
+          { name: 'Crewe', href: '/roofers-crewe' },
+          { name: 'Middlewich', href: '/roofers-middlewich' },
+          { name: 'Congleton', href: '/roofers-congleton' },
+          { name: 'Nantwich', href: '/roofers-nantwich' },
+          { name: 'Alsager', href: '/roofers-alsager' },
+          { name: 'Holmes Chapel', href: '/roofers-holmes-chapel' },
+        ]}
+      />
 
-      {/* CTA Section */}
-      <section className="section-padding bg-brand-navy text-white">
-        <div className="container-custom text-center">
-          <SectionHeader
-            dark
-            kicker="Get Started"
-            title="Need a Roofer in Sandbach?"
-            subtitle="Get a free, no-obligation quote from Sandbach's most trusted roofing company. We'll inspect your roof, explain your options clearly, and give you a fair, written price."
-          />
-          <div className="flex flex-col items-center gap-2">
-            <QuoteForm trigger={
-              <Button size="lg" className="bg-brand-orange hover:bg-brand-orange/90 text-white font-semibold px-10 h-14 text-base">
-                Get Your Free Quote
-              </Button>
-            } />
-            <CtaSubMessage dark />
-          </div>
-          <p className="text-white/60 text-sm mt-6">
-            20 Crewe Rd, Sandbach, CW11 4NE · Mon–Fri 8am–6pm, Sat 9am–4pm · Call: 01270 897 606
-          </p>
-        </div>
-      </section>
+      {/* CTA Section · shared conversion wrapper */}
+      <FinalCta
+        kicker="Get Started"
+        title="Need a Roofer in Sandbach?"
+        subtitle="Get a free, no-obligation quote from Sandbach's most trusted roofing company. We'll inspect your roof, explain your options clearly, and give you a fair, written price."
+        ctaLabel="Get Your Free Quote"
+      />
 
       {/* FAQ Schema */}
       <script

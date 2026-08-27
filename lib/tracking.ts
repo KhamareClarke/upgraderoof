@@ -256,3 +256,69 @@ export function trackQuoteFormOpen() {
     form_name: 'quote_request',
   });
 }
+
+// --------------- unified conversion facade ---------------
+
+/**
+ * The semantic touchpoint types this facade accepts. These map to the
+ * underlying, already-configured dataLayer events — the string here is a
+ * human-meaningful alias, NOT the raw dataLayer event name. See
+ * `dedicatedEventNames` below for the actual `event` values pushed.
+ */
+export type ConversionType =
+  | 'click_to_call'
+  | 'click_to_email'
+  | 'click_to_whatsapp'
+  | 'quote_request'
+  | 'contact_form_submit';
+
+export interface ConversionPayload {
+  /** Optional placement/context label (e.g. "footer_landline"). */
+  placement?: string;
+  /** Optional service type (used by quote_request). */
+  service_type?: string;
+  /** Optional postcode (used by quote_request). */
+  postcode?: string;
+  /** Optional contact-form subject. */
+  subject?: string;
+}
+
+/**
+ * Unified entry-point for conversion tracking. Maps a human-readable touchpoint
+ * type to the appropriate underlying tracker, firing BOTH the GA4/GTM dataLayer
+ * event AND (where the type represents a billable signal) the Google Ads
+ * conversion via gtag.
+ *
+ *   trackConversion('click_to_call', { placement: 'footer_landline' });
+ *   trackConversion('quote_request', { service_type: 'New Roof' });
+ *
+ * The dataLayer event names emitted by each type are unchanged from the legacy
+ * per-function trackers (phone_click / whatsapp_click / email_click /
+ * quote_request / contact_form_submit), so GTM/GA4 tags already configured to
+ * listen for those names continue to work with zero reconfiguration.
+ */
+export function trackConversion(
+  type: ConversionType,
+  payload: ConversionPayload = {},
+) {
+  switch (type) {
+    case 'click_to_call':
+      trackPhoneClick(payload.placement || 'unified');
+      break;
+    case 'click_to_email':
+      trackEmailClick(payload.placement || 'unified');
+      break;
+    case 'click_to_whatsapp':
+      trackWhatsAppClick(payload.placement || 'unified');
+      break;
+    case 'quote_request':
+      trackQuoteRequest({
+        service_type: payload.service_type,
+        postcode: payload.postcode,
+      });
+      break;
+    case 'contact_form_submit':
+      trackContactForm({ subject: payload.subject });
+      break;
+  }
+}
