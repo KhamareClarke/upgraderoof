@@ -39,6 +39,9 @@ gsc-export/
 # indexing resume runtime state (regenerated per-run, never commit)
 scripts/.indexing-state.json
 
+# local lead audit log (generated at runtime, contains PII — never commit)
+/data/leads-audit.jsonl
+
 # vercel
 .vercel
 

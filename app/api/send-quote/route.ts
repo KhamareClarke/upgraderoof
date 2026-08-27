@@ -5,6 +5,7 @@ import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 import { checkRateLimit, getClientIp, isTooFast } from '@/lib/rate-limit';
 import { invalidNameReason, invalidPhoneReason, invalidPostcodeReason, invalidEmailReason } from '@/lib/lead-validation';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { logLeadSubmission } from '@/lib/lead-logger';
 
 export async function POST(request: NextRequest) {
   try {
@@ -108,6 +109,9 @@ export async function POST(request: NextRequest) {
         ...(formData.roof_type ? { roof_type: formData.roof_type } : {}),
       },
     });
+
+    // Local audit log — fire-and-forget, never blocks the response path.
+    logLeadSubmission('send-quote', formData);
 
     try {
       const { transporter, from, to } = getMailConfig();

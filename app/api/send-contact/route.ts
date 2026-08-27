@@ -5,6 +5,7 @@ import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 import { checkRateLimit, getClientIp, isTooFast } from '@/lib/rate-limit';
 import { invalidNameReason, invalidEmailReason } from '@/lib/lead-validation';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { logLeadSubmission } from '@/lib/lead-logger';
 
 const ghlOpps = require('@/lib/ghl/opportunities.js');
 
@@ -134,6 +135,9 @@ export async function POST(request: NextRequest) {
     });
     createOpportunityForContact(ghlContactId, formData.name)
       .catch(err => console.warn('[ghl] contact follow-up error:', err));
+
+    // Local audit log — fire-and-forget, never blocks the response path.
+    logLeadSubmission('send-contact', formData);
 
     try {
       const { transporter, from, to } = getMailConfig();

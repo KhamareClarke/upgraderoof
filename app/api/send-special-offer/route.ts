@@ -3,6 +3,7 @@ import { emitFleetIngest } from '@/lib/fleet-ingest';
 import { pushLeadToGhl } from '@/lib/ghl';
 import { validateLead } from '@/lib/lead-validation';
 import { verifyTurnstile } from '@/lib/turnstile';
+import { logLeadSubmission } from '@/lib/lead-logger';
 import { getMailConfig, mailErrorResponseMessage } from '@/lib/mail';
 import { checkRateLimit, getClientIp, isTooFast } from '@/lib/rate-limit';
 
@@ -133,6 +134,9 @@ export async function POST(request: NextRequest) {
     });
     postLeadFollowUp(ghlContactId, formData.name)
       .catch(err => console.warn('[ghl] special-offer follow-up error:', err));
+
+    // Local audit log — fire-and-forget, never blocks the response path.
+    logLeadSubmission('send-special-offer', formData);
 
     try {
       const { transporter, from, to } = getMailConfig();
